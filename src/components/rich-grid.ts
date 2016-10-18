@@ -141,7 +141,7 @@ export class RichGrid {
   }
 
   private onCellFocused($event) {
-    console.log('onCellFocused: (' + $event.rowIndex + ',' + $event.colIndex + ')');
+    console.log('onCellFocused: (' + $event.rowIndex + ',' +  $event.column ? $event.column.colId : '' + ')');
   }
 
   private onRowSelected($event) {

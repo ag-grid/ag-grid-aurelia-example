@@ -130,14 +130,12 @@
           {
             "name": "ag-grid",
             "path": "../node_modules/ag-grid",
-            "main": "main",
-            "env": "dev"
+            "main": "main"
           },
           {
             "name": "ag-grid-aurelia",
             "path": "../node_modules/ag-grid-aurelia",
-            "main": "main",
-            "env": "dev"
+            "main": "main"
           }
 
         ]

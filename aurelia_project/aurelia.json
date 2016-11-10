@@ -134,7 +134,7 @@
           },
           {
             "name": "ag-grid-aurelia",
-            "path": "../node_modules/ag-grid-aurelia",
+            "path": "../../ag-grid-aurelia",
             "main": "main"
           }
 

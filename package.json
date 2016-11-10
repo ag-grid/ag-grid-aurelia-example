@@ -9,7 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "ag-grid": "6.2.x",
-    "ag-grid-aurelia": "6.2.x",
+    "ag-grid-aurelia":"file:../ag-grid-aurelia",
     "aurelia-bootstrapper": "^1.0.0-rc.1.0.0",
     "aurelia-fetch-client": "^1.0.0-rc.1.0.0",
     "aurelia-animator-css": "^1.0.0-rc.1.0.0",

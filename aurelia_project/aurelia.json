@@ -133,6 +133,11 @@
             "main": "main"
           },
           {
+            "name": "ag-grid-enterprise",
+            "path": "../node_modules/ag-grid-enterprise",
+            "main": "main"
+          },
+          {
             "name": "ag-grid-aurelia",
             "path": "../../ag-grid-aurelia",
             "main": "main"

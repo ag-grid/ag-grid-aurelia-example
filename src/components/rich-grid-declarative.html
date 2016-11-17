@@ -1,6 +1,6 @@
 <template>
   <div style="width: 800px;">
-    <h1>Rich Grid with pure JavaScript</h1>
+    <h1>Rich Grid with Declarative Markup</h1>
     <div style="padding: 4px;">
       <div style="float: right;">
         <input keyup.delegate="onQuickFilterChanged($event)" type="text" id="quickFilterInput"
@@ -43,8 +43,8 @@
       <div style="clear: both;"></div>
 
       <div style="width: 100%; height: 350px;">
-        <ag-grid-aurelia #agGrid class="ag-fresh"
-
+        <ag-grid-aurelia #agGrid style="width: 100%; height: 350px;" class="ag-fresh"
+                         context.bind="{vm:$this}"
                          grid-options.bind="gridOptions"
                          column-defs.bind="columnDefs"
                          show-tool-panel.bind="showToolPanel"
@@ -76,7 +76,7 @@
                          after-sort-changed.call="onAfterSortChanged()"
                          virtual-row-removed.call="onVirtualRowRemoved($event)"
                          row-clicked.call="onRowClicked($event)"
-                         ready.call="onReady($event)"
+                         grid-ready.call="onReady($event)"
 
                          column-everything-changed.call="onColumnEvent($event)"
                          column-row-group-changed.call="onColumnEvent($event)"
@@ -86,9 +86,23 @@
                          column-group-opened.call="onColumnEvent($event)"
                          column-resized.call="onColumnEvent($event)"
                          column-pinned-count-changed.call="onColumnEvent($event)">
+          <ag-grid-column header-name="Employee">
+            <ag-grid-column header-name="#" width.bind="30" checkbox-selection.bind="true" suppress-sorting.bind="true" suppress-menu.bind="true" pinned.bind="true"></ag-grid-column>
+            <ag-grid-column header-name="Name" field="name" width.bind="150" pinned.bind="true"></ag-grid-column>
+            <ag-grid-column header-name="Country" field="country" width.bind="150" cell-renderer.bind="countryCellRenderer" pinned.bind="true" filter-params.bind="getCountryFilterParams()"></ag-grid-column>
+          </ag-grid-column>
+          <ag-grid-column header-name="IT Skills">
+            <ag-grid-column header-name="Skills" width.bind="125" suppress-sorting.bind="true" cell-renderer.bind="skillsCellRenderer" filter.bind="getSkillFilter()"></ag-grid-column>
+            <ag-grid-column header-name="Proficiency" field="proficiency" width.bind="120"
+                            cell-renderer.bind="percentCellRenderer" filter.bind="getProficiencyFilter()"></ag-grid-column>
+          </ag-grid-column>
+          <ag-grid-column header-name="Contact">
+            <ag-grid-column header-name="Mobile" field="mobile" width.bind="150" filter="text"></ag-grid-column>
+            <ag-grid-column header-name="Land-line" field="landline" width.bind="150" filter="text"></ag-grid-column>
+            <ag-grid-column header-name="Address" field="address" width.bind="500" filter="text"></ag-grid-column>
+          </ag-grid-column>
         </ag-grid-aurelia>
       </div>
     </div>
-
   </div>
 </template>

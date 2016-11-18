@@ -4,8 +4,8 @@ import RefData from '../data/refData';
 import {GridOptions, GridApi, ColumnApi} from 'ag-grid';
 // only import this if you are using the ag-Grid-Enterprise
 import 'ag-grid-enterprise/main';
-import SkillFilter from "../renderers/skillFilter";
-import ProficiencyFilter from "../renderers/proficiencyFilter";
+import SkillFilter from "../filters/skillFilter";
+import ProficiencyFilter from "../filters/proficiencyFilter";
 
 @autoinject()
 @customElement('rich-grid')

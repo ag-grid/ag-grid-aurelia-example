@@ -35,10 +35,6 @@ export class NumericEditor extends BaseAureliaEditor {
     return '1234567890'.indexOf(this.params.charPress) < 0;
   }
 
-  onDoubleClick(event) {
-    console.log("asdfasdf")
-  }
-
   // will reject the number if it greater than 1,000,000
   // not very practical, but demonstrates the method.
   isCancelAfterEnd(): boolean {

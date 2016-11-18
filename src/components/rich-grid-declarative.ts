@@ -1,8 +1,8 @@
 import {autoinject, customElement} from 'aurelia-framework'
 
 import RefData from '../data/refData';
-import SkillFilter from '../renderers/skillFilter';
-import ProficiencyFilter from '../renderers/proficiencyFilter';
+import SkillFilter from '../filters/skillFilter';
+import ProficiencyFilter from '../filters/proficiencyFilter';
 
 import {GridOptions, GridApi, ColumnApi} from 'ag-grid';
 // only import this if you are using the ag-Grid-Enterprise

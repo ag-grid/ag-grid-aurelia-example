@@ -24,32 +24,4 @@ export class EditorExample {
       {name: "John", mood: "Happy", number: 15},
     ];
   }
-
-//
-  // private createColumnDefs() {
-  //   return [
-  //     {headerName: "Name", field: "name", width: 198},
-  //     // {
-  //     //   headerName: "Mood",
-  //     //   field: "mood",
-  //     //   cellRendererFramework: {
-  //     //     component: MoodRendererComponent
-  //     //   },
-  //     //   cellEditorFramework: {
-  //     //     component: MoodEditorComponent
-  //     //   },
-  //     //   editable: true,
-  //     //   width: 150
-  //     // },
-  //     {
-  //       headerName: "Numeric",
-  //       field: "number",
-  //       cellEditorFramework: {
-  //         component: NumericEditorComponent
-  //       },
-  //       editable: true,
-  //       width: 150
-  //     }
-  //   ];
-  // }
 }

@@ -6,7 +6,6 @@ import {BaseAureliaEditor} from 'ag-grid-aurelia';
 export class NumericEditor extends BaseAureliaEditor {
   params: any;
 
-  @bindable() value: number;
   @bindable() hasFocus:boolean = false;
 
   element:any;
@@ -26,10 +25,13 @@ export class NumericEditor extends BaseAureliaEditor {
   }
 
   getValue(): any {
-    return this.value;
+    return this.params.value;
   }
 
   isCancelBeforeStart(): boolean {
+    if(!this.params.charPress) {
+      return false;
+    }
     return '1234567890'.indexOf(this.params.charPress) < 0;
   }
 
@@ -40,7 +42,7 @@ export class NumericEditor extends BaseAureliaEditor {
   // will reject the number if it greater than 1,000,000
   // not very practical, but demonstrates the method.
   isCancelAfterEnd(): boolean {
-    return this.value > 1000000;
+    return this.params.value > 1000000;
   };
 
   onKeyDown(event): void {

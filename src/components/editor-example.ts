@@ -24,6 +24,7 @@ export class EditorExample {
       {name: "John", mood: "Happy", number: 15},
     ];
   }
+
 //
   // private createColumnDefs() {
   //   return [

@@ -1,21 +1,23 @@
-import {customElement,inject,bindable} from 'aurelia-framework';
-import {BaseAureliaEditor} from 'ag-grid-aurelia';
+import {customElement, inject, bindable} from "aurelia-framework";
+
+import {BaseAureliaEditor} from "ag-grid-aurelia";
 
 @customElement('ag-numeric-editor')
 @inject(Element)
 export class NumericEditor extends BaseAureliaEditor {
   params: any;
 
-  @bindable() hasFocus:boolean = false;
+  @bindable() hasFocus: boolean = false;
 
-  element:any;
+  element: any;
+
   constructor(element) {
     super();
 
     this.element = element;
   }
 
-  attached():void {
+  attached(): void {
     this.hasFocus = true;
     this.element.addEventListener('keydown', this.onKeyDown);
   }
@@ -29,7 +31,7 @@ export class NumericEditor extends BaseAureliaEditor {
   }
 
   isCancelBeforeStart(): boolean {
-    if(!this.params.charPress) {
+    if (!this.params.charPress) {
       return false;
     }
     return '1234567890'.indexOf(this.params.charPress) < 0;

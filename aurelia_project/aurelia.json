@@ -67,10 +67,6 @@
         }
       ]
     },
-    "options": {
-      "minify": "stage & prod",
-      "sourcemaps": "dev & stage"
-    },
     "bundles": [
       {
         "name": "app-bundle.js",

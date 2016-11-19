@@ -1,8 +1,8 @@
-import {autoinject, customElement} from 'aurelia-framework'
+import {autoinject, customElement} from "aurelia-framework";
 
-import {GridOptions, RowNode} from 'ag-grid';
+import {GridOptions, RowNode} from "ag-grid";
 // only import this if you are using the ag-Grid-Enterprise
-import 'ag-grid-enterprise/main';
+import "ag-grid-enterprise/main";
 
 import NameAndAgeRenderer from "../renderers/NameAndAgeRenderer";
 
@@ -13,10 +13,9 @@ export class FloatingRowExample {
   private gridOptions: GridOptions;
 
   constructor() {
-    // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
     this.gridOptions.rowData = this.createRowData();
-    this.gridOptions.isFullWidthCell = (rowNode:RowNode)=> {
+    this.gridOptions.isFullWidthCell = (rowNode: RowNode)=> {
       return (rowNode.id === "0") || (parseInt(rowNode.id) % 2 === 0);
     };
     this.gridOptions.fullWidthCellRenderer = NameAndAgeRenderer

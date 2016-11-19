@@ -1,12 +1,8 @@
-import {autoinject, customElement} from 'aurelia-framework'
+import {autoinject, customElement} from "aurelia-framework";
 
-import RefData from '../data/refData';
-import SkillFilter from '../filters/skillFilter';
-import ProficiencyFilter from '../filters/proficiencyFilter';
-
-import {GridOptions, GridApi, ColumnApi} from 'ag-grid';
+import {GridOptions} from "ag-grid";
 // only import this if you are using the ag-Grid-Enterprise
-import 'ag-grid-enterprise/main';
+import "ag-grid-enterprise/main";
 
 @autoinject()
 @customElement('floating-row-example')

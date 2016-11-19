@@ -1,5 +1,6 @@
-import {customElement,inject,bindable} from 'aurelia-framework';
-import {BaseAureliaEditor} from 'ag-grid-aurelia';
+import {customElement, inject, bindable} from "aurelia-framework";
+
+import {BaseAureliaEditor} from "ag-grid-aurelia";
 
 @customElement('ag-mood-editor')
 @inject(Element)
@@ -19,13 +20,7 @@ export class NumericEditor extends BaseAureliaEditor {
 
   attached(): void {
     this.setHappy(this.params.value === "Happy");
-
     this.hasFocus = true;
-    // this.element.addEventListener('keydown', this.onKeyDown);
-  }
-
-  detached() {
-    // this.element.removeEventListener('keydown', this.onKeyDown);
   }
 
   getValue(): any {

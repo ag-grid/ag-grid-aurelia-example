@@ -15,7 +15,6 @@ export class FloatingRowExample {
   private gridOptions: GridOptions;
 
   constructor() {
-    // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
     this.gridOptions.rowData = this.createRowData();
     this.gridOptions.floatingTopRowData = [

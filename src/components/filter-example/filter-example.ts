@@ -4,7 +4,7 @@ import {GridOptions} from "ag-grid";
 // only import this if you are using the ag-Grid-Enterprise
 import "ag-grid-enterprise/main";
 
-import PartialMatchFilter from "../filters/partialMatch";
+import PartialMatchFilter from "../../filters/partialMatch";
 
 @autoinject()
 @customElement('filter-example')

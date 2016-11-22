@@ -1,23 +1,13 @@
 <template>
-  <require from="./components/rich-grid"></require>
-  <require from="./components/rich-grid-declarative"></require>
-  <require from="./components/editor-example"></require>
-  <require from="./components/floating-row-example"></require>
-  <require from="./components/full-width-example"></require>
-  <require from="./components/group-row-example"></require>
-  <require from="./components/filter-example"></require>
+  <require from="bootstrap/css/bootstrap.css"></require>
+  <require from="ag-grid/dist/styles/ag-grid.css"></require>
+  <require from="ag-grid/dist/styles/theme-fresh.css"></require>
 
-  <rich-grid></rich-grid>
-  <hr/>
-  <rich-grid-declarative></rich-grid-declarative>
-  <hr/>
-  <editor-example></editor-example>
-  <hr/>
-  <floating-row-example></floating-row-example>
-  <hr/>
-  <full-width-example></full-width-example>
-  <hr/>
-  <group-row-example></group-row-example>
-  <hr/>
-  <filter-example></filter-example>
+  <ul class="nav nav-pills">
+    <li role="presentation" class.bind="router.currentInstruction.config.title === row.title ? 'active' : ''" repeat.for="row of router.navigation">
+      <a href.bind="row.href">${row.title}</a>
+    </li>
+  </ul>
+
+  <router-view></router-view>
 </template>

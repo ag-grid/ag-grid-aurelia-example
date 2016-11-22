@@ -38,6 +38,8 @@
     "gulp-tslint": "^5.0.0",
     "tslint": "^3.11.0",
     "typescript": ">=1.9.0-dev || ^2.0.0",
-    "typings": "^1.3.0"
+    "typings": "^1.3.0",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1"
   }
 }

@@ -82,6 +82,23 @@
           "scripts/require.js"
         ],
         "dependencies": [
+          {
+            "name": "jquery",
+            "path": "../node_modules/jquery/dist",
+            "main": "jquery.min",
+            "export": "$"
+          },
+          {
+            "name": "bootstrap",
+            "path": "../node_modules/bootstrap/dist",
+            "main": "js/bootstrap.min",
+            "deps": [
+              "jquery"
+            ],
+            "resources": [
+              "css/bootstrap.css"
+            ]
+          },
           "aurelia-binding",
           "aurelia-bootstrapper",
           "aurelia-dependency-injection",
@@ -126,7 +143,11 @@
           {
             "name": "ag-grid",
             "path": "../node_modules/ag-grid",
-            "main": "main"
+            "main": "main",
+            "resources": [
+              "dist/styles/ag-grid.css",
+              "dist/styles/theme-fresh.css"
+            ]
           },
           {
             "name": "ag-grid-enterprise",
@@ -138,7 +159,6 @@
             "path": "../../ag-grid-aurelia",
             "main": "main"
           }
-
         ]
       }
     ]

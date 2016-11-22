@@ -10,8 +10,8 @@
       <ag-grid-column header-name="Name" field="name" width.bind="198"></ag-grid-column>
       <ag-grid-column header-name="Mood" field="mood" width.bind="150" editable.bind="true">
         <ag-cell-template>
-          <img width="20px" if.bind="params.value === 'Happy'" src="../../../images/smiley.png"/>
-          <img width="20px" if.bind="params.value !== 'Happy'" src="../../../images/smiley-sad.png"/>
+          <img width="20px" if.bind="params.value === 'Happy'" src="images/smiley.png"/>
+          <img width="20px" if.bind="params.value !== 'Happy'" src="images/smiley-sad.png"/>
         </ag-cell-template>
         <ag-editor-template>
           <ag-mood-editor></ag-mood-editor>

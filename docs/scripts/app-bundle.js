@@ -482,7 +482,7 @@ define('filters/skillFilter',["require", "exports", '../data/refData'], function
         '    <div style="text-align: center;">SKILL_NAME</div>' +
         '    <div>' +
         '      <input type="checkbox"/>' +
-        '      <img src="/images/skills/SKILL.png" width="30px"/>' +
+        '      <img src="images/skills/SKILL.png" width="30px"/>' +
         '    </div>' +
         '  </span>' +
         '</label>';
@@ -915,7 +915,7 @@ define('components/rich-grid-declarative-example/rich-grid-declarative-example',
             console.log('onColumnEvent: ' + $event);
         };
         RichGridDeclarative.prototype.countryCellRenderer = function (params) {
-            var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='../images/flags/" + refData_1.default.COUNTRY_CODES[params.value] + ".png'>";
+            var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='images/flags/" + refData_1.default.COUNTRY_CODES[params.value] + ".png'>";
             return flag + " " + params.value;
         };
         RichGridDeclarative.prototype.skillsCellRenderer = function (params) {
@@ -923,7 +923,7 @@ define('components/rich-grid-declarative-example/rich-grid-declarative-example',
             var skills = [];
             refData_1.default.IT_SKILLS.forEach(function (skill) {
                 if (data && data.skills && data.skills[skill]) {
-                    skills.push('<img src="/images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
+                    skills.push('<img src="images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
                 }
             });
             return skills.join(' ');
@@ -1155,13 +1155,13 @@ define('components/rich-grid-example/rich-grid-example',["require", "exports", "
         var skills = [];
         refData_1.default.IT_SKILLS.forEach(function (skill) {
             if (data && data.skills && data.skills[skill]) {
-                skills.push('<img src="/images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
+                skills.push('<img src="images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
             }
         });
         return skills.join(' ');
     }
     function countryCellRenderer(params) {
-        var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='../images/flags/" + refData_1.default.COUNTRY_CODES[params.value] + ".png'>";
+        var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='images/flags/" + refData_1.default.COUNTRY_CODES[params.value] + ".png'>";
         return flag + " " + params.value;
     }
     function createRandomPhoneNumber() {

@@ -3,7 +3,7 @@
   "description": "An Aurelia client application.",
   "version": "0.1.0",
   "scripts": {
-    "release": "copyfiles index.html docs/ && copyfiles scripts/* docs/scripts/"
+    "release": "copyfiles index.html docs/ && copyfiles scripts/* docs/"
   },
   "repository": {
     "type": "???",

@@ -9,46 +9,52 @@ export class App {
     config.map([
       {route: '', redirect: 'rich-grid'},
       {
-        route: 'rich-grid',
+        route: 'rich-grid/:fromDocs?',
         name: 'rich-grid',
         nav: true,
         moduleId: 'components/rich-grid-example/rich-grid-example',
-        title: 'Rich Grid with pure JavaScript'
+        title: 'Rich Grid with pure JavaScript',
+        href:'#/rich-grid'
       },
       {
-        route: 'rich-grid-declarative',
-        name: 'rich-grid-declarative',
+        route: 'richgrid-declarative/:fromDocs?',
+        name: 'richgrid-declarative',
         nav: true,
         moduleId: 'components/rich-grid-declarative-example/rich-grid-declarative-example',
-        title: 'Rich Grid with Declarative Markup'
+        title: 'Rich Grid with Declarative Markup',
+        href:'#/richgrid-declarative'
       },
       {
-        route: 'editor',
+        route: 'editor/:fromDocs?',
         name: 'editor',
         nav: true,
         moduleId: 'components/editor-example/editor-example',
-        title: 'Editor Example'
+        title: 'Editor Example',
+        href:'#/editor'
       },
       {
-        route: 'floating-row',
+        route: 'floating-row/:fromDocs?',
         name: 'floating-row',
         nav: true,
         moduleId: 'components/floating-row-example/floating-row-example',
-        title: 'Floating Row Example'
+        title: 'Floating Row Example',
+        href:'#/floating-row'
       },
       {
-        route: 'full-width',
+        route: 'full-width/:fromDocs?',
         name: 'full-width',
         nav: true,
         moduleId: 'components/full-width-example/full-width-example',
-        title: 'Full Width Example'
+        title: 'Full Width Example',
+        href:'#/full-width'
       },
       {
-        route: 'filter',
+        route: 'filter/:fromDocs?',
         name: 'filter',
         nav: true,
         moduleId: 'components/filter-example/filter-example',
-        title: 'Filter Example'
+        title: 'Filter Example',
+        href:'#/filter'
       }
     ]);
   }

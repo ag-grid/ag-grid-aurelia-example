@@ -2,9 +2,8 @@
   <require from="bootstrap/css/bootstrap.css"></require>
   <require from="ag-grid/dist/styles/ag-grid.css"></require>
   <require from="ag-grid/dist/styles/theme-fresh.css"></require>
-
-  <ul class="nav nav-pills">
-    <li role="presentation" class.bind="router.currentInstruction.config.title === row.title ? 'active' : ''" repeat.for="row of router.navigation">
+  <ul if.bind="!router.currentInstruction.params.fromDocs" class="nav nav-pills">
+    <li role="presentation" class.bind="row.isActive ? 'active' : ''" repeat.for="row of router.navigation">
       <a href.bind="row.href">${row.title}</a>
     </li>
   </ul>

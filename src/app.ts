@@ -49,6 +49,14 @@ export class App {
         href:'#/full-width'
       },
       {
+        route: 'group-row/:fromDocs?',
+        name: 'group-row',
+        nav: true,
+        moduleId: 'components/group-row-example/group-row-example',
+        title: 'Group Row Example',
+        href:'#/group-row'
+      },
+      {
         route: 'filter/:fromDocs?',
         name: 'filter',
         nav: true,

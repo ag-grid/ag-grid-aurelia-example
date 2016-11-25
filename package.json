@@ -1,7 +1,7 @@
 {
   "name": "ag-grid-aurelia-example",
   "description": "An Aurelia client application.",
-  "version": "0.1.0",
+  "version": "7.0.0-beta.0",
   "scripts": {
     "release": "copyfiles index.html docs/ && ncp scripts/ docs/scripts/ && ncp src/components docs/components &&  ncp images/ docs/images/"
   },
@@ -13,7 +13,7 @@
   "dependencies": {
     "ag-grid": "6.4.x",
     "ag-grid-enterprise": "6.4.x",
-    "ag-grid-aurelia":"file:../ag-grid-aurelia",
+    "ag-grid-aurelia":"7.0.0-beta.0",
     "aurelia-bootstrapper": "^1.0.0-rc.1.0.0",
     "aurelia-fetch-client": "^1.0.0-rc.1.0.0",
     "aurelia-animator-css": "^1.0.0-rc.1.0.0",

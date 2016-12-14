@@ -1,12 +1,36 @@
-<template>
-  <require from="bootstrap/css/bootstrap.css"></require>
-  <require from="ag-grid/dist/styles/ag-grid.css"></require>
-  <require from="ag-grid/dist/styles/theme-fresh.css"></require>
-  <ul if.bind="!router.currentInstruction.params.fromDocs" class="nav nav-pills">
-    <li role="presentation" class.bind="row.isActive ? 'active' : ''" repeat.for="row of router.navigation">
-      <a href.bind="row.href">${row.title}</a>
-    </li>
-  </ul>
+<!--<template>-->
+  <!--<require from="bootstrap/css/bootstrap.css"></require>-->
+  <!--<require from="ag-grid/dist/styles/ag-grid.css"></require>-->
+  <!--<require from="ag-grid/dist/styles/theme-fresh.css"></require>-->
+  <!--<ul if.bind="!router.currentInstruction.params.fromDocs" class="nav nav-pills">-->
+    <!--<li role="presentation" class.bind="row.isActive ? 'active' : ''" repeat.for="row of router.navigation">-->
+      <!--<a href.bind="row.href">${row.title}</a>-->
+    <!--</li>-->
+  <!--</ul>-->
 
-  <router-view></router-view>
+  <!--<router-view></router-view>-->
+<!--</template>-->
+
+<template>
+  <!--<require from="./components/rich-grid"></require>-->
+  <require from="./components/rich-grid-declarative-example/rich-grid-declarative-example"></require>
+  <!--<require from="./components/editor-example"></require>-->
+  <!--<require from="./components/floating-row-example"></require>-->
+  <!--<require from="./components/full-width-example"></require>-->
+  <!--<require from="./components/group-row-example"></require>-->
+  <!--<require from="./components/filter-example"></require>-->
+
+  <!--<rich-grid></rich-grid>-->
+  <!--<hr/>-->
+  <rich-grid-declarative></rich-grid-declarative>
+  <!--<hr/>-->
+  <!--<editor-example></editor-example>-->
+  <!--<hr/>-->
+  <!--<floating-row-example></floating-row-example>-->
+  <!--<hr/>-->
+  <!--<full-width-example></full-width-example>-->
+  <!--<hr/>-->
+  <!--<group-row-example></group-row-example>-->
+  <!--<hr/>-->
+  <!--<filter-example></filter-example>-->
 </template>

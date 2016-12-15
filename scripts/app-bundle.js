@@ -635,9 +635,9 @@ define('components/editor-example/editor-example',["require", "exports", 'aureli
         }
         EditorExample.prototype.createRowData = function () {
             return [
-                { name: "Bob", happy: "Happy", number: 10 },
-                { name: "Harry", happy: "Sad", number: 3 },
-                { name: "Sally", happy: "Happy", number: 20 },
+                { name: "Bob", mood: "Happy", number: 10 },
+                { name: "Harry", mood: "Sad", number: 3 },
+                { name: "Sally", mood: "Happy", number: 20 },
                 { name: "Mary", mood: "Sad", number: 5 },
                 { name: "John", mood: "Happy", number: 15 },
                 { name: "Jack", mood: "Happy", number: 25 },
@@ -658,48 +658,6 @@ define('components/editor-example/editor-example',["require", "exports", 'aureli
         return EditorExample;
     }());
     exports.EditorExample = EditorExample;
-});
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-define('components/floating-row-example/floating-row-example',["require", "exports", "aurelia-framework", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1) {
-    "use strict";
-    var FloatingRowExample = (function () {
-        function FloatingRowExample() {
-            this.gridOptions = {};
-            this.gridOptions.rowData = this.createRowData();
-            this.gridOptions.floatingTopRowData = [
-                { row: "Top Row", number: "Top Number" }
-            ];
-            this.gridOptions.floatingBottomRowData = [
-                { row: "Bottom Row", number: "Bottom Number" }
-            ];
-        }
-        FloatingRowExample.prototype.createRowData = function () {
-            var rowData = [];
-            for (var i = 0; i < 15; i++) {
-                rowData.push({
-                    row: "Row " + i,
-                    number: Math.round(Math.random() * 100)
-                });
-            }
-            return rowData;
-        };
-        FloatingRowExample = __decorate([
-            aurelia_framework_1.autoinject(),
-            aurelia_framework_1.customElement('floating-row-example'), 
-            __metadata('design:paramtypes', [])
-        ], FloatingRowExample);
-        return FloatingRowExample;
-    }());
-    exports.FloatingRowExample = FloatingRowExample;
 });
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -750,6 +708,48 @@ define('components/filter-example/filter-example',["require", "exports", "aureli
         return FilterExample;
     }());
     exports.FilterExample = FilterExample;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('components/floating-row-example/floating-row-example',["require", "exports", "aurelia-framework", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    var FloatingRowExample = (function () {
+        function FloatingRowExample() {
+            this.gridOptions = {};
+            this.gridOptions.rowData = this.createRowData();
+            this.gridOptions.floatingTopRowData = [
+                { row: "Top Row", number: "Top Number" }
+            ];
+            this.gridOptions.floatingBottomRowData = [
+                { row: "Bottom Row", number: "Bottom Number" }
+            ];
+        }
+        FloatingRowExample.prototype.createRowData = function () {
+            var rowData = [];
+            for (var i = 0; i < 15; i++) {
+                rowData.push({
+                    row: "Row " + i,
+                    number: Math.round(Math.random() * 100)
+                });
+            }
+            return rowData;
+        };
+        FloatingRowExample = __decorate([
+            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.customElement('floating-row-example'), 
+            __metadata('design:paramtypes', [])
+        ], FloatingRowExample);
+        return FloatingRowExample;
+    }());
+    exports.FloatingRowExample = FloatingRowExample;
 });
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -894,6 +894,7 @@ define('components/rich-grid-declarative-example/rich-grid-declarative-example',
         function RichGridDeclarative() {
             var _this = this;
             this.gridOptions = {};
+            var that = this;
             this.createRowData();
             this.showGrid = true;
             this.gridOptions.onGridReady = function () {
@@ -987,6 +988,9 @@ define('components/rich-grid-declarative-example/rich-grid-declarative-example',
         };
         RichGridDeclarative.prototype.onColumnEvent = function ($event) {
             console.log('onColumnEvent: ' + $event);
+        };
+        RichGridDeclarative.prototype.onIdClicked = function (row) {
+            console.log('id clicked ' + row.id);
         };
         RichGridDeclarative.prototype.countryCellRenderer = function (params) {
             var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='images/flags/" + refData_1.default.COUNTRY_CODES[params.value] + ".png'>";
@@ -1273,7 +1277,7 @@ define('components/rich-grid-example/rich-grid-example',["require", "exports", "
     }
 });
 
-define('ag-grid-aurelia/lib/agGridAurelia',['require','exports','module','aurelia-framework','ag-grid/main','./aureliaFrameworkFactory'],function (require, exports, module) {// ag-grid-aurelia v7.0.0
+define('ag-grid-aurelia/lib/agGridAurelia',['require','exports','module','aurelia-framework','ag-grid/main','./aureliaFrameworkFactory','./agUtils'],function (require, exports, module) {// ag-grid-aurelia v7.0.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1287,6 +1291,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var aurelia_framework_1 = require("aurelia-framework");
 var main_1 = require("ag-grid/main");
 var aureliaFrameworkFactory_1 = require("./aureliaFrameworkFactory");
+var agUtils_1 = require("./agUtils");
 var AgGridAurelia = (function () {
     function AgGridAurelia(element, taskQueue, auFrameworkFactory, container, viewResources) {
         var _this = this;
@@ -1367,703 +1372,21 @@ var AgGridAurelia = (function () {
         }
     };
     __decorate([
-        aurelia_framework_1.children('ag-grid-column'), 
-        __metadata('design:type', Array)
-    ], AgGridAurelia.prototype, "columns", void 0);
-    __decorate([
         aurelia_framework_1.bindable(), 
         __metadata('design:type', Object)
     ], AgGridAurelia.prototype, "gridOptions", void 0);
     __decorate([
         aurelia_framework_1.bindable(), 
         __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "slaveGrids", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowData", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "floatingTopRowData", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "floatingBottomRowData", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "columnDefs", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowStyle", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
     ], AgGridAurelia.prototype, "context", void 0);
     __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupColumnDef", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "localeText", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "icons", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "datasource", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "viewportDatasource", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupRowRendererParams", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "aggFuncs", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "fullWidthCellRendererParams", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "sortingOrder", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowClass", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowSelection", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "overlayLoadingTemplate", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "overlayNoRowsTemplate", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "headerCellTemplate", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "quickFilterText", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowModelType", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowHeight", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowBuffer", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "colWidth", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "headerHeight", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupDefaultExpanded", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "minColWidth", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "maxColWidth", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "viewportRowModelPageSize", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "viewportRowModelBufferSize", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "layoutInterval", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "autoSizePadding", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "maxPagesInCache", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "maxConcurrentDatasourceRequests", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "paginationOverflowSize", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "paginationPageSize", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "paginationInitialRowCount", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "headerCellRenderer", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "localeTextFunc", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupRowInnerRenderer", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupRowRenderer", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "isScrollLag", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "isExternalFilterPresent", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "getRowHeight", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "doesExternalFilterPass", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "getRowClass", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "getRowStyle", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "getHeaderCellTemplate", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "traverseNode", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "getContextMenuItems", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "getMainMenuItems", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "processRowPostCreate", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "processCellForClipboard", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "getNodeChildDetails", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupRowAggNodes", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "getRowNodeId", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "isFullWidthCell", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "fullWidthCellRenderer", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "doesDataFlower", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "toolPanelSuppressRowGroups", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "toolPanelSuppressValues", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "toolPanelSuppressPivots", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "toolPanelSuppressPivotMode", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressRowClickSelection", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressCellSelection", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressHorizontalScroll", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "debug", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableColResize", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableCellExpressions", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableSorting", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableServerSideSorting", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableFilter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableServerSideFilter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "angularCompileRows", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "angularCompileFilters", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "angularCompileHeaders", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupSuppressAutoColumn", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupSelectsChildren", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupIncludeFooter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupUseEntireRow", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupSuppressRow", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "groupSuppressBlankHeader", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "forPrint", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressMenuHide", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowDeselection", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "unSortIcon", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressMultiSort", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressScrollLag", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "singleClickEdit", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressLoadingOverlay", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressNoRowsOverlay", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressAutoSize", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressParentsInRowNodes", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "showToolPanel", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressColumnMoveAnimation", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressMovableColumns", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressFieldDotNotation", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableRangeSelection", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressEnterprise", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rowGroupPanelShow", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "pivotPanelShow", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressContextMenu", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressMenuFilterPanel", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressMenuMainPanel", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressMenuColumnPanel", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableStatusBar", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "rememberGroupStateWhenNewData", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "enableCellChangeFlash", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressDragLeaveHidesColumns", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressMiddleClickScrolls", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressPreventDefaultOnMouseWheel", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressUseColIdForGroups", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressCopyRowsToClipboard", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "pivotMode", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressAggFuncInHeader", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressColumnVirtualisation", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "suppressFocusAfterRefresh", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "functionsPassive", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridAurelia.prototype, "functionsReadOnly", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "gridReady", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnEverythingChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "newColumnsLoaded", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnPivotModeChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnRowGroupChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnPivotChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "gridColumnsChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnValueChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnMoved", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnVisible", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnPinned", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnGroupOpened", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnResized", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "displayedColumnsChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "virtualColumnsChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "rowGroupOpened", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "rowDataChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "floatingRowDataChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "rangeSelectionChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnRowGroupAddRequest", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnRowGroupRemoveRequest", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnPivotAddRequest", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnPivotRemoveRequest", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnValueAddRequest", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnValueRemoveRequest", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "columnAggFuncChangeRequest", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "clipboardPaste", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "modelUpdated", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "cellClicked", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "cellDoubleClicked", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "cellContextMenu", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "cellValueChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "cellFocused", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "rowSelected", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "selectionChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "beforeFilterChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "filterChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "afterFilterChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "filterModified", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "beforeSortChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "sortChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "afterSortChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "virtualRowRemoved", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "rowClicked", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "rowDoubleClicked", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "gridSizeChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "viewportChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "dragStarted", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "dragStopped", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "itemsAdded", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridAurelia.prototype, "itemsRemoved", void 0);
+        aurelia_framework_1.children('ag-grid-column'), 
+        __metadata('design:type', Array)
+    ], AgGridAurelia.prototype, "columns", void 0);
     AgGridAurelia = __decorate([
         aurelia_framework_1.customElement('ag-grid-aurelia'),
+        agUtils_1.generateBindables(main_1.ComponentUtil.ALL_PROPERTIES.filter(function (property) { return property !== 'gridOptions'; })),
+        agUtils_1.generateBindables(main_1.ComponentUtil.EVENTS),
         aurelia_framework_1.inlineView("<template><slot></slot></template>"),
         aurelia_framework_1.autoinject(), 
         __metadata('design:paramtypes', [Element, aurelia_framework_1.TaskQueue, aureliaFrameworkFactory_1.AureliaFrameworkFactory, aurelia_framework_1.Container, aurelia_framework_1.ViewResources])
@@ -24286,7 +23609,34 @@ exports.AureliaComponentFactory = AureliaComponentFactory;
 
 });
 
-define('ag-grid-aurelia/lib/agGridColumn',['require','exports','module','aurelia-framework','./agTemplate'],function (require, exports, module) {// ag-grid-aurelia v7.0.0
+define('ag-grid-aurelia/lib/agUtils',['require','exports','module','aurelia-framework'],function (require, exports, module) {// ag-grid-aurelia v7.0.0
+"use strict";
+var aurelia_framework_1 = require("aurelia-framework");
+function generateBindables(names, bindingModeToUse) {
+    return function (target, key, descriptor) {
+        // get or create the HtmlBehaviorResource
+        // on which we're going to create the BindableProperty's
+        var behaviorResource = aurelia_framework_1.metadata.getOrCreateOwn(aurelia_framework_1.metadata.resource, aurelia_framework_1.HtmlBehaviorResource, target);
+        var nameOrConfigOrTargets = names.map(function (name) {
+            var nameOrConfigOrTarget = {
+                name: name
+            };
+            if (bindingModeToUse) {
+                nameOrConfigOrTarget["defaultBindingMode"] = bindingModeToUse;
+            }
+            return nameOrConfigOrTarget;
+        });
+        nameOrConfigOrTargets.forEach(function (nameOrConfigOrTarget) {
+            var prop = new aurelia_framework_1.BindableProperty(nameOrConfigOrTarget);
+            prop.registerWith(target, behaviorResource, descriptor);
+        });
+    };
+}
+exports.generateBindables = generateBindables;
+
+});
+
+define('ag-grid-aurelia/lib/agGridColumn',['require','exports','module','aurelia-framework','./agTemplate','./agUtils'],function (require, exports, module) {// ag-grid-aurelia v7.0.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -24297,8 +23647,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var aurelia_framework_1 = require('aurelia-framework');
-var agTemplate_1 = require('./agTemplate');
+var aurelia_framework_1 = require("aurelia-framework");
+var agTemplate_1 = require("./agTemplate");
+var agUtils_1 = require("./agUtils");
 var AgGridColumn = (function () {
     function AgGridColumn() {
         this.childColumns = [];
@@ -24309,7 +23660,7 @@ var AgGridColumn = (function () {
     AgGridColumn.prototype.toColDef = function () {
         var colDef = this.createColDefFromGridColumn();
         if (this.hasChildColumns()) {
-            colDef["children"] = this.getChildColDefs(this.childColumns);
+            colDef["children"] = AgGridColumn.getChildColDefs(this.childColumns);
         }
         if (this.cellTemplate) {
             colDef.cellRendererFramework = { template: this.cellTemplate.template };
@@ -24326,7 +23677,7 @@ var AgGridColumn = (function () {
         }
         return colDef;
     };
-    AgGridColumn.prototype.getChildColDefs = function (childColumns) {
+    AgGridColumn.getChildColDefs = function (childColumns) {
         return childColumns
             .filter(function (column) { return !column.hasChildColumns(); })
             .map(function (column) {
@@ -24359,276 +23710,17 @@ var AgGridColumn = (function () {
         aurelia_framework_1.child('ag-filter-template'), 
         __metadata('design:type', agTemplate_1.AgFilterTemplate)
     ], AgGridColumn.prototype, "filterTemplate", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', String)
-    ], AgGridColumn.prototype, "colId", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', String)
-    ], AgGridColumn.prototype, "sort", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Number)
-    ], AgGridColumn.prototype, "sortedAt", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Array)
-    ], AgGridColumn.prototype, "sortingOrder", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', String)
-    ], AgGridColumn.prototype, "field", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "headerValueGetter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "hide", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "pinned", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', String)
-    ], AgGridColumn.prototype, "tooltipField", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', String)
-    ], AgGridColumn.prototype, "headerTooltip", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "valueGetter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "keyCreator", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "headerCellRenderer", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "headerCellTemplate", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Number)
-    ], AgGridColumn.prototype, "width", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Number)
-    ], AgGridColumn.prototype, "minWidth", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Number)
-    ], AgGridColumn.prototype, "maxWidth", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellClass", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellStyle", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellRenderer", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellRendererFramework", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellRendererParams", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellEditor", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellEditorFramework", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellEditorParams", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "floatingCellRenderer", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "floatingCellRendererFramework", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "floatingCellRendererParams", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "cellFormatter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "floatingCellFormatter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "aggFunc", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Number)
-    ], AgGridColumn.prototype, "rowGroupIndex", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Number)
-    ], AgGridColumn.prototype, "pivotIndex", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "comparator", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "checkboxSelection", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "suppressMenu", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "suppressSorting", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "suppressMovable", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "suppressFilter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "unSortIcon", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "suppressSizeToFit", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "suppressResize", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "suppressAutoSize", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "enableRowGroup", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "enablePivot", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "enableValue", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "editable", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "suppressNavigable", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "newValueHandler", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "volatile", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "filter", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "filterFramework", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "filterParams", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "cellClassRules", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "onCellValueChanged", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "onCellClicked", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "onCellDoubleClicked", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Function)
-    ], AgGridColumn.prototype, "onCellContextMenu", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "icons", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "enableCellChangeFlash", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', String)
-    ], AgGridColumn.prototype, "headerName", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', String)
-    ], AgGridColumn.prototype, "columnGroupShow", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Object)
-    ], AgGridColumn.prototype, "headerClass", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Array)
-    ], AgGridColumn.prototype, "children", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', String)
-    ], AgGridColumn.prototype, "groupId", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "openByDefault", void 0);
-    __decorate([
-        aurelia_framework_1.bindable(), 
-        __metadata('design:type', Boolean)
-    ], AgGridColumn.prototype, "marryChildren", void 0);
     AgGridColumn = __decorate([
         aurelia_framework_1.customElement('ag-grid-column'),
+        agUtils_1.generateBindables(['colId', 'sort', 'sortedAt', 'sortingOrder', 'field', 'headerValueGetter', 'hide', 'pinned', 'tooltipField', 'headerTooltip',
+            'valueGetter', 'keyCreator', 'headerCellRenderer', 'headerCellTemplate', 'width', 'minWidth', 'maxWidth', 'cellClass',
+            'cellStyle', 'cellRenderer', 'cellRendererFramework', 'cellRendererParams', 'cellEditor', 'cellEditorFramework', 'cellEditorParams',
+            'floatingCellRenderer', 'floatingCellRendererFramework', 'floatingCellRendererParams', 'cellFormatter(', 'floatingCellFormatter',
+            'aggFunc', 'rowGroupIndex', 'pivotIndex', 'comparator', 'checkboxSelection', 'suppressMenu', 'suppressSorting', 'suppressMovable',
+            'suppressFilter', 'unSortIcon', 'suppressSizeToFit', 'suppressResize', 'suppressAutoSize', 'enableRowGroup', 'enablePivot',
+            'enableValue', 'editable', 'suppressNavigable', 'newValueHandler', 'volatile', 'filter', 'filterFramework', 'filterParams', 'cellClassRules',
+            'onCellValueChanged', 'onCellClicked', 'onCellDoubleClicked', 'onCellContextMenu', 'icons', 'enableCellChangeFlash', 'headerName',
+            'columnGroupShow', 'headerClass', 'children', 'groupId', 'openByDefault', 'marryChildren']),
         aurelia_framework_1.inlineView("<template><slot></slot></template>"),
         aurelia_framework_1.autoinject(), 
         __metadata('design:paramtypes', [])
@@ -30822,7 +29914,7 @@ exports.populateClientExports = populateClientExports;
 
 });
 
-define('text!app.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"bootstrap/css/bootstrap.css\"></require>\n  <require from=\"ag-grid/dist/styles/ag-grid.css\"></require>\n  <require from=\"ag-grid/dist/styles/theme-fresh.css\"></require>\n  <ul if.bind=\"!router.currentInstruction.params.fromDocs\" class=\"nav nav-pills\">\n    <li role=\"presentation\" class.bind=\"row.isActive ? 'active' : ''\" repeat.for=\"row of router.navigation\">\n      <a href.bind=\"row.href\">${row.title}</a>\n    </li>\n  </ul>\n\n  <router-view></router-view>\n</template>\n"; });
+define('text!app.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"bootstrap/css/bootstrap.css\"></require>\n  <require from=\"ag-grid/dist/styles/ag-grid.css\"></require>\n  <require from=\"ag-grid/dist/styles/theme-fresh.css\"></require>\n  <ul if.bind=\"!router.currentInstruction.params.fromDocs\" class=\"nav nav-pills\">\n    <li role=\"presentation\" class.bind=\"row.isActive ? 'active' : ''\" repeat.for=\"row of router.navigation\">\n      <a href.bind=\"row.href\">${row.title}</a>\n    </li>\n  </ul>\n\n  <router-view></router-view>\n</template>\n\n<!--<template>-->\n  <!--<require from=\"./components/rich-grid\"></require>-->\n  <!--<require from=\"./components/rich-grid-declarative-example/rich-grid-declarative-example\"></require>-->\n  <!--<require from=\"./components/editor-example\"></require>-->\n  <!--<require from=\"./components/floating-row-example\"></require>-->\n  <!--<require from=\"./components/full-width-example\"></require>-->\n  <!--<require from=\"./components/group-row-example\"></require>-->\n  <!--<require from=\"./components/filter-example\"></require>-->\n\n  <!--<rich-grid></rich-grid>-->\n  <!--<hr/>-->\n  <!--<rich-grid-declarative></rich-grid-declarative>-->\n  <!--<hr/>-->\n  <!--<editor-example></editor-example>-->\n  <!--<hr/>-->\n  <!--<floating-row-example></floating-row-example>-->\n  <!--<hr/>-->\n  <!--<full-width-example></full-width-example>-->\n  <!--<hr/>-->\n  <!--<group-row-example></group-row-example>-->\n  <!--<hr/>-->\n  <!--<filter-example></filter-example>-->\n<!--</template>-->\n"; });
 define('text!editors/mood-editor.css', ['module'], function(module) { module.exports = ".mood {\n  border-radius: 15px;\n  border: 1px solid grey;\n  background: #e6e6e6;\n  padding: 15px;\n  text-align: center;\n  display: inline-block;\n  outline: none\n}\n\n.default {\n  padding-left: 10px;\n  padding-right: 10px;\n  border: 1px solid transparent !important;\n}\n\n.selected {\n  padding-left: 10px;\n  padding-right: 10px;\n  border: 1px solid lightgreen !important;\n}\n"; });
 define('text!editors/mood-editor.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"./mood-editor.css\"></require>\n\n  <div class.bind=\"'mood'\" tabindex=\"0\" focus.bind=\"hasFocus\" keydown.trigger=\"onKeyDown($event)\">\n    <img src=\"images/smiley.png\" click.delegate=\"setHappy(true)\" class.bind=\"happy ? 'selected' : 'default'\">\n    <img src=\"images/smiley-sad.png\" click.delegate=\"setHappy(false)\" class.bind=\"!happy ? 'selected' : 'default'\">\n  </div>\n</template>\n"; });
 define('text!editors/numeric-editor.html', ['module'], function(module) { module.exports = "<template>\n  <input focus.bind=\"hasFocus\" value.bind=\"params.value\">\n</template>\n"; });
@@ -30831,6 +29923,6 @@ define('text!components/filter-example/filter-example.html', ['module'], functio
 define('text!components/floating-row-example/floating-row-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 800px;\">\n    <h1>Floating Row Example</h1>\n      <div style=\"width: 100%; height: 350px;\">\n        <ag-grid-aurelia #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\"\n                         grid-options.bind=\"gridOptions\">\n            <ag-grid-column header-name=\"Row\" field=\"row\" width.bind=\"400\">\n              <ag-cell-template>\n                <span style=\"font-weight: bold\">${params.value}</span>\n              </ag-cell-template>\n            </ag-grid-column>\n            <ag-grid-column header-name=\"Number\" field=\"number\" width.bind=\"399\">\n              <ag-cell-template>\n                <span style=\"font-style: italic\">${params.value}</span>\n              </ag-cell-template>\n            </ag-grid-column>\n        </ag-grid-aurelia>\n      </div>\n    </div>\n  </div>\n</template>\n"; });
 define('text!components/full-width-example/full-width-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 800px;\">\n    <h1>Full Width Example</h1>\n      <div style=\"width: 100%; height: 350px;\">\n        <ag-grid-aurelia #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\"\n                         grid-options.bind=\"gridOptions\">\n            <ag-grid-column header-name=\"Name\" field=\"name\" width.bind=\"400\">\n            </ag-grid-column>\n            <ag-grid-column header-name=\"Age\" field=\"age\" width.bind=\"400\">\n            </ag-grid-column>\n        </ag-grid-aurelia>\n      </div>\n    </div>\n  </div>\n</template>\n"; });
 define('text!components/group-row-example/group-row-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 800px;\">\n    <h1>Group Row Example</h1>\n    <div style=\"width: 100%; height: 350px;\">\n      <ag-grid-aurelia #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\"\n                       grid-options.bind=\"gridOptions\">\n        <ag-grid-column header-name=\"Country\" field=\"country\" width.bind=\"100\" row-group-index.bind=\"0\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Name\" field=\"name\" width.bind=\"100\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Gold\" field=\"gold\" width.bind=\"100\" agg-func=\"sum\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Silver\" field=\"silver\" width.bind=\"100\" agg-func=\"sum\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Bronze\" field=\"bronze\" width.bind=\"100\" agg-func=\"sum\">\n        </ag-grid-column>\n      </ag-grid-aurelia>\n    </div>\n  </div>\n  </div>\n</template>\n"; });
-define('text!components/rich-grid-declarative-example/rich-grid-declarative-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 800px;\">\n    <h1>Rich Grid with Declarative Markup</h1>\n    <div style=\"padding: 4px;\">\n      <div style=\"float: right;\">\n        <input keyup.delegate=\"onQuickFilterChanged($event)\" type=\"text\" id=\"quickFilterInput\"\n               placeholder=\"Type text to filter...\"/>\n        <button disabled.bind=\"!showGrid\" click.delegate=\"showGrid=false\">Destroy Grid</button>\n        <button disabled.bind=\"showGrid\" click.delegate=\"showGrid=true\">Create Grid</button>\n      </div>\n      <div>\n        <b>Employees Skills and Contact Details</b>\n        ${rowCount}\n      </div>\n    </div>\n    <div style=\"clear: both;\"></div>\n\n    <div if.bind=\"showGrid\">\n\n      <!-- Because we are using the Angular ID (ie #ag-grid marker), we have to have all the items that use\n           that marker inside the same ng-if as the grid -->\n\n      <div style=\"padding: 4px;\" class=\"toolbar\">\n            <span>\n                Grid API:\n                <button click.delegate=\"api.selectAll()\">Select All</button>\n                <button click.delegate=\"api.deselectAll()\">Clear Selection</button>\n            </span>\n        <span style=\"margin-left: 20px;\">\n                Column API:\n                <button click.delegate=\"columnApi.setColumnVisible('country', false)\">Hide Country Column</button>\n                <button click.delegate=\"columnApi.setColumnVisible('country', true)\">Show Country Column</button>\n            </span>\n      </div>\n      <div style=\"clear: both;\"></div>\n      <div style=\"padding: 4px;\" class=\"toolbar\">\n        <label>\n          <input type=\"checkbox\" change.delegate=\"showToolPanel=$event.target.checked\"/>\n          Show Tool Panel\n        </label>\n        <button click.delegate=\"createRowData()\">Refresh Data</button>\n      </div>\n      <div style=\"clear: both;\"></div>\n\n      <div style=\"width: 100%; height: 350px;\">\n        <ag-grid-aurelia #agGrid style=\"width: 100%; height: 350px;\" class=\"ag-fresh\"\n                         context.bind=\"{vm:$this}\"\n                         grid-options.bind=\"gridOptions\"\n                         column-defs.bind=\"columnDefs\"\n                         show-tool-panel.bind=\"showToolPanel\"\n                         row-data.bind=\"rowData\"\n\n                         enable-col-resize\n                         enable-sorting\n                         enable-filter\n                         group-headers\n                         suppress-row-click-selection\n                         tool-panel-suppress-groups\n                         tool-panel-suppress-values\n                         debug\n                         row-height=\"22\"\n                         row-selection=\"multiple\"\n\n                         model-updated.call=\"onModelUpdated()\"\n                         cell-clicked.call=\"onCellClicked($event)\"\n                         cell-double-clicked.call=\"onCellDoubleClicked($event)\"\n                         cell-context-menu.call=\"onCellContextMenu($event)\"\n                         cell-value-changed.call=\"onCellValueChanged($event)\"\n                         cell-focused.call=\"onCellFocused($event)\"\n                         row-selected.call=\"onRowSelected($event)\"\n                         selection-changed.call=\"onSelectionChanged()\"\n                         before-filter-changed.call=\"onBeforeFilterChanged()\"\n                         after-filter-changed.call=\"onAfterFilterChanged()\"\n                         filter-modified.call=\"onFilterModified()\"\n                         before-sort-changed.call=\"onBeforeSortChanged()\"\n                         after-sort-changed.call=\"onAfterSortChanged()\"\n                         virtual-row-removed.call=\"onVirtualRowRemoved($event)\"\n                         row-clicked.call=\"onRowClicked($event)\"\n                         grid-ready.call=\"onReady($event)\"\n\n                         column-everything-changed.call=\"onColumnEvent($event)\"\n                         column-row-group-changed.call=\"onColumnEvent($event)\"\n                         column-value-changed.call=\"onColumnEvent($event)\"\n                         column-moved.call=\"onColumnEvent($event)\"\n                         column-visible.call=\"onColumnEvent($event)\"\n                         column-group-opened.call=\"onColumnEvent($event)\"\n                         column-resized.call=\"onColumnEvent($event)\"\n                         column-pinned-count-changed.call=\"onColumnEvent($event)\">\n          <ag-grid-column header-name=\"#\" width.bind=\"30\" checkbox-selection.bind=\"true\" suppress-sorting.bind=\"true\" suppress-menu.bind=\"true\" pinned.bind=\"true\"></ag-grid-column>\n          <ag-grid-column header-name=\"Employee\">\n            <ag-grid-column header-name=\"Name\" field=\"name\" width.bind=\"150\" pinned.bind=\"true\"></ag-grid-column>\n            <ag-grid-column header-name=\"Country\" field=\"country\" width.bind=\"150\" cell-renderer.bind=\"countryCellRenderer\" pinned.bind=\"true\" filter-params.bind=\"getCountryFilterParams()\"></ag-grid-column>\n          </ag-grid-column>\n          <ag-grid-column header-name=\"IT Skills\">\n            <ag-grid-column header-name=\"Skills\" width.bind=\"125\" suppress-sorting.bind=\"true\" cell-renderer.bind=\"skillsCellRenderer\" filter.bind=\"getSkillFilter()\"></ag-grid-column>\n            <ag-grid-column header-name=\"Proficiency\" field=\"proficiency\" width.bind=\"120\"\n                            cell-renderer.bind=\"percentCellRenderer\" filter.bind=\"getProficiencyFilter()\"></ag-grid-column>\n          </ag-grid-column>\n          <ag-grid-column header-name=\"Contact\">\n            <ag-grid-column header-name=\"Mobile\" field=\"mobile\" width.bind=\"150\" filter=\"text\"></ag-grid-column>\n            <ag-grid-column header-name=\"Land-line\" field=\"landline\" width.bind=\"150\" filter=\"text\"></ag-grid-column>\n            <ag-grid-column header-name=\"Address\" field=\"address\" width.bind=\"500\" filter=\"text\"></ag-grid-column>\n          </ag-grid-column>\n        </ag-grid-aurelia>\n      </div>\n    </div>\n  </div>\n</template>\n"; });
+define('text!components/rich-grid-declarative-example/rich-grid-declarative-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 800px;\">\n    <h1>Rich Grid with Declarative Markup</h1>\n    <div style=\"padding: 4px;\">\n      <div style=\"float: right;\">\n        <input keyup.delegate=\"onQuickFilterChanged($event)\" type=\"text\" id=\"quickFilterInput\"\n               placeholder=\"Type text to filter...\"/>\n        <button disabled.bind=\"!showGrid\" click.delegate=\"showGrid=false\">Destroy Grid</button>\n        <button disabled.bind=\"showGrid\" click.delegate=\"showGrid=true\">Create Grid</button>\n      </div>\n      <div>\n        <b>Employees Skills and Contact Details</b>\n        ${rowCount}\n      </div>\n    </div>\n    <div style=\"clear: both;\"></div>\n\n    <div if.bind=\"showGrid\">\n\n      <!-- Because we are using the Angular ID (ie #ag-grid marker), we have to have all the items that use\n           that marker inside the same ng-if as the grid -->\n\n      <div style=\"padding: 4px;\" class=\"toolbar\">\n            <span>\n                Grid API:\n                <button click.delegate=\"api.selectAll()\">Select All</button>\n                <button click.delegate=\"api.deselectAll()\">Clear Selection</button>\n            </span>\n        <span style=\"margin-left: 20px;\">\n                Column API:\n                <button click.delegate=\"columnApi.setColumnVisible('country', false)\">Hide Country Column</button>\n                <button click.delegate=\"columnApi.setColumnVisible('country', true)\">Show Country Column</button>\n            </span>\n      </div>\n      <div style=\"clear: both;\"></div>\n      <div style=\"padding: 4px;\" class=\"toolbar\">\n        <label>\n          <input type=\"checkbox\" change.delegate=\"showToolPanel=$event.target.checked\"/>\n          Show Tool Panel\n        </label>\n        <button click.delegate=\"createRowData()\">Refresh Data</button>\n      </div>\n      <div style=\"clear: both;\"></div>\n\n      <div style=\"width: 100%; height: 350px;\">\n        <ag-grid-aurelia #agGrid style=\"width: 100%; height: 350px;\" class=\"ag-fresh\"\n                         context.bind=\"$this\"\n                         grid-options.bind=\"gridOptions\"\n                         column-defs.bind=\"columnDefs\"\n                         show-tool-panel.bind=\"showToolPanel\"\n                         row-data.bind=\"rowData\"\n\n                         enable-col-resize\n                         enable-sorting\n                         enable-filter\n                         group-headers\n                         suppress-row-click-selection\n                         tool-panel-suppress-groups\n                         tool-panel-suppress-values\n                         debug\n                         row-height=\"22\"\n                         row-selection=\"multiple\"\n\n                         model-updated.call=\"onModelUpdated()\"\n                         cell-clicked.call=\"onCellClicked($event)\"\n                         cell-double-clicked.call=\"onCellDoubleClicked($event)\"\n                         cell-context-menu.call=\"onCellContextMenu($event)\"\n                         cell-value-changed.call=\"onCellValueChanged($event)\"\n                         cell-focused.call=\"onCellFocused($event)\"\n                         row-selected.call=\"onRowSelected($event)\"\n                         selection-changed.call=\"onSelectionChanged()\"\n                         before-filter-changed.call=\"onBeforeFilterChanged()\"\n                         after-filter-changed.call=\"onAfterFilterChanged()\"\n                         filter-modified.call=\"onFilterModified()\"\n                         before-sort-changed.call=\"onBeforeSortChanged()\"\n                         after-sort-changed.call=\"onAfterSortChanged()\"\n                         virtual-row-removed.call=\"onVirtualRowRemoved($event)\"\n                         row-clicked.call=\"onRowClicked($event)\"\n                         grid-ready.call=\"onReady($event)\"\n\n                         column-everything-changed.call=\"onColumnEvent($event)\"\n                         column-row-group-changed.call=\"onColumnEvent($event)\"\n                         column-value-changed.call=\"onColumnEvent($event)\"\n                         column-moved.call=\"onColumnEvent($event)\"\n                         column-visible.call=\"onColumnEvent($event)\"\n                         column-group-opened.call=\"onColumnEvent($event)\"\n                         column-resized.call=\"onColumnEvent($event)\"\n                         column-pinned-count-changed.call=\"onColumnEvent($event)\">\n          <ag-grid-column header-name=\"#\" width.bind=\"30\" checkbox-selection.bind=\"true\" suppress-sorting.bind=\"true\" suppress-menu.bind=\"true\" pinned.bind=\"true\"></ag-grid-column>\n          <ag-grid-column header-name=\"Employee\">\n            <ag-grid-column header-name=\"Name\" field=\"name\" width.bind=\"150\" pinned.bind=\"true\"></ag-grid-column>\n            <ag-grid-column header-name=\"Country\" field=\"country\" width.bind=\"150\" cell-renderer.bind=\"countryCellRenderer\" pinned.bind=\"true\" filter-params.bind=\"getCountryFilterParams()\"></ag-grid-column>\n          </ag-grid-column>\n          <ag-grid-column header-name=\"IT Skills\">\n            <ag-grid-column header-name=\"Skills\" width.bind=\"125\" suppress-sorting.bind=\"true\" cell-renderer.bind=\"skillsCellRenderer\" filter.bind=\"getSkillFilter()\"></ag-grid-column>\n            <ag-grid-column header-name=\"Proficiency\" field=\"proficiency\" width.bind=\"120\"\n                            cell-renderer.bind=\"percentCellRenderer\" filter.bind=\"getProficiencyFilter()\"></ag-grid-column>\n          </ag-grid-column>\n          <ag-grid-column header-name=\"Contact\">\n            <ag-grid-column header-name=\"Mobile\" field=\"mobile\" width.bind=\"150\" filter=\"text\"></ag-grid-column>\n            <ag-grid-column header-name=\"Land-line\" field=\"landline\" width.bind=\"150\" filter=\"text\"></ag-grid-column>\n            <ag-grid-column header-name=\"Address\" field=\"address\" width.bind=\"500\" filter=\"text\"></ag-grid-column>\n          </ag-grid-column>\n        </ag-grid-aurelia>\n      </div>\n    </div>\n  </div>\n</template>\n"; });
 define('text!components/rich-grid-example/rich-grid-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 800px;\">\n    <h1>Rich Grid with Pure JavaScript</h1>\n    <div style=\"padding: 4px;\">\n      <div style=\"float: right;\">\n        <input keyup.delegate=\"onQuickFilterChanged($event)\" type=\"text\" id=\"quickFilterInput\"\n               placeholder=\"Type text to filter...\"/>\n        <button disabled.bind=\"!showGrid\" click.delegate=\"showGrid=false\">Destroy Grid</button>\n        <button disabled.bind=\"showGrid\" click.delegate=\"showGrid=true\">Create Grid</button>\n      </div>\n      <div>\n        <b>Employees Skills and Contact Details</b>\n        ${rowCount}\n      </div>\n    </div>\n    <div style=\"clear: both;\"></div>\n\n    <div if.bind=\"showGrid\">\n\n      <!-- Because we are using the Angular ID (ie #ag-grid marker), we have to have all the items that use\n           that marker inside the same ng-if as the grid -->\n\n      <div style=\"padding: 4px;\" class=\"toolbar\">\n            <span>\n                Grid API:\n                <button click.delegate=\"api.selectAll()\">Select All</button>\n                <button click.delegate=\"api.deselectAll()\">Clear Selection</button>\n            </span>\n        <span style=\"margin-left: 20px;\">\n                Column API:\n                <button click.delegate=\"columnApi.setColumnVisible('country', false)\">Hide Country Column</button>\n                <button click.delegate=\"columnApi.setColumnVisible('country', true)\">Show Country Column</button>\n            </span>\n      </div>\n      <div style=\"clear: both;\"></div>\n      <div style=\"padding: 4px;\" class=\"toolbar\">\n        <label>\n          <input type=\"checkbox\" change.delegate=\"showToolPanel=$event.target.checked\"/>\n          Show Tool Panel\n        </label>\n        <button click.delegate=\"createRowData()\">Refresh Data</button>\n      </div>\n      <div style=\"clear: both;\"></div>\n\n      <div style=\"width: 100%; height: 350px;\">\n        <ag-grid-aurelia #agGrid class=\"ag-fresh\"\n\n                         grid-options.bind=\"gridOptions\"\n                         column-defs.bind=\"columnDefs\"\n                         show-tool-panel.bind=\"showToolPanel\"\n                         row-data.bind=\"rowData\"\n\n                         enable-col-resize\n                         enable-sorting\n                         enable-filter\n                         group-headers\n                         suppress-row-click-selection\n                         tool-panel-suppress-groups\n                         tool-panel-suppress-values\n                         debug\n                         row-height.bind=\"22\"\n                         row-selection=\"multiple\"\n\n                         model-updated.call=\"onModelUpdated()\"\n                         cell-clicked.call=\"onCellClicked($event)\"\n                         cell-double-clicked.call=\"onCellDoubleClicked($event)\"\n                         cell-context-menu.call=\"onCellContextMenu($event)\"\n                         cell-value-changed.call=\"onCellValueChanged($event)\"\n                         cell-focused.call=\"onCellFocused($event)\"\n                         row-selected.call=\"onRowSelected($event)\"\n                         selection-changed.call=\"onSelectionChanged()\"\n                         before-filter-changed.call=\"onBeforeFilterChanged()\"\n                         after-filter-changed.call=\"onAfterFilterChanged()\"\n                         filter-modified.call=\"onFilterModified()\"\n                         before-sort-changed.call=\"onBeforeSortChanged()\"\n                         after-sort-changed.call=\"onAfterSortChanged()\"\n                         virtual-row-removed.call=\"onVirtualRowRemoved($event)\"\n                         row-clicked.call=\"onRowClicked($event)\"\n                         ready.call=\"onReady($event)\"\n\n                         column-everything-changed.call=\"onColumnEvent($event)\"\n                         column-row-group-changed.call=\"onColumnEvent($event)\"\n                         column-value-changed.call=\"onColumnEvent($event)\"\n                         column-moved.call=\"onColumnEvent($event)\"\n                         column-visible.call=\"onColumnEvent($event)\"\n                         column-group-opened.call=\"onColumnEvent($event)\"\n                         column-resized.call=\"onColumnEvent($event)\"\n                         column-pinned-count-changed.call=\"onColumnEvent($event)\">\n        </ag-grid-aurelia>\n      </div>\n    </div>\n\n  </div>\n</template>\n"; });
 //# sourceMappingURL=app-bundle.js.map

@@ -23988,7 +23988,7 @@ var AgGridColumn = (function () {
     AgGridColumn.prototype.toColDef = function () {
         var colDef = this.createColDefFromGridColumn();
         if (this.hasChildColumns()) {
-            colDef["children"] = this.getChildColDefs(this.childColumns);
+            colDef["children"] = AgGridColumn.getChildColDefs(this.childColumns);
         }
         if (this.cellTemplate) {
             colDef.cellRendererFramework = { template: this.cellTemplate.template };

@@ -5,6 +5,7 @@ import {GridOptions, RowNode} from "ag-grid";
 import "ag-grid-enterprise/main";
 
 import NameAndAgeRenderer from "../../renderers/NameAndAgeRenderer";
+import {NameAndAge} from './nameAndAge';
 
 @autoinject()
 @customElement('full-width-example')
@@ -18,7 +19,11 @@ export class FloatingRowExample {
     this.gridOptions.isFullWidthCell = (rowNode: RowNode)=> {
       return (rowNode.id === "0") || (parseInt(rowNode.id) % 2 === 0);
     };
-    this.gridOptions.fullWidthCellRenderer = NameAndAgeRenderer
+
+    //you can also do configure from code
+    //this.gridOptions.fullWidthCellRendererFramework = {component:NameAndAge};
+    //or
+    //this.gridOptions.fullWidthCellRendererFramework = {template:`<template><name-and-age></name-and-age></template>`};
   }
 
   private createRowData() {

@@ -673,6 +673,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+define('components/floating-row-example/floating-row-example',["require", "exports", "aurelia-framework", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    var FloatingRowExample = (function () {
+        function FloatingRowExample() {
+            this.gridOptions = {};
+            this.gridOptions.rowData = this.createRowData();
+            this.gridOptions.floatingTopRowData = [
+                { row: "Top Row", number: "Top Number" }
+            ];
+            this.gridOptions.floatingBottomRowData = [
+                { row: "Bottom Row", number: "Bottom Number" }
+            ];
+        }
+        FloatingRowExample.prototype.createRowData = function () {
+            var rowData = [];
+            for (var i = 0; i < 15; i++) {
+                rowData.push({
+                    row: "Row " + i,
+                    number: Math.round(Math.random() * 100)
+                });
+            }
+            return rowData;
+        };
+        return FloatingRowExample;
+    }());
+    FloatingRowExample = __decorate([
+        aurelia_framework_1.autoinject(),
+        aurelia_framework_1.customElement('floating-row-example'),
+        __metadata("design:paramtypes", [])
+    ], FloatingRowExample);
+    exports.FloatingRowExample = FloatingRowExample;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 define('components/filter-example/filter-example',["require", "exports", "aurelia-framework", "../../filters/partialMatch", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1, partialMatch_1) {
     "use strict";
     var FilterExample = (function () {
@@ -712,48 +754,6 @@ define('components/filter-example/filter-example',["require", "exports", "aureli
         __metadata("design:paramtypes", [])
     ], FilterExample);
     exports.FilterExample = FilterExample;
-});
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-define('components/floating-row-example/floating-row-example',["require", "exports", "aurelia-framework", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1) {
-    "use strict";
-    var FloatingRowExample = (function () {
-        function FloatingRowExample() {
-            this.gridOptions = {};
-            this.gridOptions.rowData = this.createRowData();
-            this.gridOptions.floatingTopRowData = [
-                { row: "Top Row", number: "Top Number" }
-            ];
-            this.gridOptions.floatingBottomRowData = [
-                { row: "Bottom Row", number: "Bottom Number" }
-            ];
-        }
-        FloatingRowExample.prototype.createRowData = function () {
-            var rowData = [];
-            for (var i = 0; i < 15; i++) {
-                rowData.push({
-                    row: "Row " + i,
-                    number: Math.round(Math.random() * 100)
-                });
-            }
-            return rowData;
-        };
-        return FloatingRowExample;
-    }());
-    FloatingRowExample = __decorate([
-        aurelia_framework_1.autoinject(),
-        aurelia_framework_1.customElement('floating-row-example'),
-        __metadata("design:paramtypes", [])
-    ], FloatingRowExample);
-    exports.FloatingRowExample = FloatingRowExample;
 });
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1281,7 +1281,7 @@ define('components/rich-grid-example/rich-grid-example',["require", "exports", "
     }
 });
 
-define('ag-grid-aurelia/lib/agGridAurelia',['require','exports','module','aurelia-framework','ag-grid/main','./aureliaFrameworkFactory','./agUtils'],function (require, exports, module) {// ag-grid-aurelia v7.1.0
+define('ag-grid-aurelia/lib/agGridAurelia',['require','exports','module','aurelia-framework','ag-grid/main','./aureliaFrameworkFactory','./agUtils'],function (require, exports, module) {// ag-grid-aurelia v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1405,9 +1405,9 @@ exports.AgGridAurelia = AgGridAurelia;
 
 });
 
-define('ag-grid/dist/lib/clientExports',['require','exports','module','./grid','./gridApi','./events','./components/componentUtil','./columnController/columnController','./components/agGridNg1','./components/agGridWebComponent','./entities/gridCell','./entities/rowNode','./entities/originalColumnGroup','./entities/columnGroup','./entities/column','./focusedCellController','./functions','./gridOptionsWrapper','./columnController/balancedColumnTreeBuilder','./columnController/columnKeyCreator','./columnController/columnUtils','./columnController/displayedGroupCreator','./columnController/groupInstanceIdCreator','./context/context','./dragAndDrop/dragAndDropService','./dragAndDrop/dragService','./filter/filterManager','./filter/numberFilter','./filter/textFilter','./gridPanel/gridPanel','./gridPanel/mouseEventService','./headerRendering/cssClassApplier','./headerRendering/headerContainer','./headerRendering/headerRenderer','./headerRendering/headerTemplateLoader','./headerRendering/horizontalDragService','./headerRendering/moveColumnController','./headerRendering/renderedHeaderCell','./headerRendering/renderedHeaderGroupCell','./headerRendering/standardMenu','./layout/borderLayout','./layout/tabbedLayout','./layout/verticalStack','./rendering/autoWidthCalculator','./rendering/renderedRow','./rendering/rowRenderer','./rowControllers/inMemory/filterStage','./rowControllers/inMemory/flattenStage','./rowControllers/inMemory/sortStage','./rowControllers/floatingRowModel','./rowControllers/paginationController','./widgets/component','./cellNavigationService','./columnChangeEvent','./constants','./csvCreator','./eventService','./expressionService','./gridCore','./logger','./masterSlaveService','./selectionController','./sortController','./svgFactory','./templateService','./utils','./valueService','./widgets/popupService','./entities/gridRow','./rowControllers/inMemory/inMemoryRowModel','./rowControllers/virtualPagination/virtualPageRowModel','./rendering/cellRenderers/animateSlideCellRenderer','./rendering/cellEditorFactory','./rendering/cellEditors/popupEditorWrapper','./rendering/cellEditors/popupSelectCellEditor','./rendering/cellEditors/popupTextCellEditor','./rendering/cellEditors/selectCellEditor','./rendering/cellEditors/textCellEditor','./rendering/cellEditors/largeTextCellEditor','./rendering/cellRendererFactory','./rendering/cellRenderers/groupCellRenderer','./rendering/cellRendererService','./rendering/valueFormatterService','./rendering/checkboxSelectionComponent','./widgets/componentAnnotations','./widgets/agCheckbox','./headerRendering/bodyDropPivotTarget','./headerRendering/bodyDropTarget','./misc/focusService','./rendering/features/setLeftFeature','./rendering/renderedCell','./headerRendering/headerRowComp','./rendering/cellRenderers/animateShowChangeCellRenderer','./rowControllers/inMemory/inMemoryNodeManager','./rowControllers/virtualPagination/virtualPageCache','./rowControllers/virtualPagination/virtualPage','./baseFrameworkFactory','./misc/methodNotImplementedException','./widgets/touchListener','./gridPanel/scrollVisibleService','./context/beanStub'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/clientExports',['require','exports','module','./grid','./gridApi','./events','./components/componentUtil','./columnController/columnController','./components/agGridNg1','./components/agGridWebComponent','./entities/gridCell','./entities/rowNode','./entities/originalColumnGroup','./entities/columnGroup','./entities/column','./focusedCellController','./functions','./gridOptionsWrapper','./columnController/balancedColumnTreeBuilder','./columnController/columnKeyCreator','./columnController/columnUtils','./columnController/displayedGroupCreator','./columnController/groupInstanceIdCreator','./context/context','./dragAndDrop/dragAndDropService','./dragAndDrop/dragService','./filter/filterManager','./filter/numberFilter','./filter/textFilter','./gridPanel/gridPanel','./gridPanel/mouseEventService','./headerRendering/cssClassApplier','./headerRendering/headerContainer','./headerRendering/headerRenderer','./headerRendering/headerTemplateLoader','./headerRendering/horizontalDragService','./headerRendering/moveColumnController','./headerRendering/renderedHeaderCell','./headerRendering/renderedHeaderGroupCell','./headerRendering/standardMenu','./layout/borderLayout','./layout/tabbedLayout','./layout/verticalStack','./rendering/autoWidthCalculator','./rendering/renderedRow','./rendering/rowRenderer','./rowControllers/inMemory/filterStage','./rowControllers/inMemory/flattenStage','./rowControllers/inMemory/sortStage','./rowControllers/floatingRowModel','./rowControllers/paginationController','./widgets/component','./cellNavigationService','./columnChangeEvent','./constants','./csvCreator','./downloader','./eventService','./expressionService','./gridCore','./logger','./masterSlaveService','./selectionController','./sortController','./svgFactory','./templateService','./utils','./valueService','./widgets/popupService','./entities/gridRow','./rowControllers/inMemory/inMemoryRowModel','./rowControllers/virtualPagination/virtualPageRowModel','./rendering/cellRenderers/animateSlideCellRenderer','./rendering/cellEditorFactory','./rendering/cellEditors/popupEditorWrapper','./rendering/cellEditors/popupSelectCellEditor','./rendering/cellEditors/popupTextCellEditor','./rendering/cellEditors/selectCellEditor','./rendering/cellEditors/textCellEditor','./rendering/cellEditors/largeTextCellEditor','./rendering/cellRendererFactory','./rendering/cellRenderers/groupCellRenderer','./rendering/cellRendererService','./rendering/valueFormatterService','./rendering/checkboxSelectionComponent','./widgets/componentAnnotations','./widgets/agCheckbox','./headerRendering/bodyDropPivotTarget','./headerRendering/bodyDropTarget','./misc/focusService','./rendering/features/setLeftFeature','./rendering/renderedCell','./headerRendering/headerRowComp','./rendering/cellRenderers/animateShowChangeCellRenderer','./rowControllers/inMemory/inMemoryNodeManager','./rowControllers/virtualPagination/virtualPageCache','./rowControllers/virtualPagination/virtualPage','./baseFrameworkFactory','./misc/methodNotImplementedException','./widgets/touchListener','./gridPanel/scrollVisibleService','./xmlFactory','./context/beanStub','./gridSerializer','./styling/stylingService'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -1465,6 +1465,7 @@ var cellNavigationService_1 = require("./cellNavigationService");
 var columnChangeEvent_1 = require("./columnChangeEvent");
 var constants_1 = require("./constants");
 var csvCreator_1 = require("./csvCreator");
+var downloader_1 = require("./downloader");
 var eventService_1 = require("./eventService");
 var expressionService_1 = require("./expressionService");
 var gridCore_1 = require("./gridCore");
@@ -1509,7 +1510,10 @@ var baseFrameworkFactory_1 = require("./baseFrameworkFactory");
 var methodNotImplementedException_1 = require("./misc/methodNotImplementedException");
 var touchListener_1 = require("./widgets/touchListener");
 var scrollVisibleService_1 = require("./gridPanel/scrollVisibleService");
+var xmlFactory_1 = require("./xmlFactory");
 var beanStub_1 = require("./context/beanStub");
+var gridSerializer_1 = require("./gridSerializer");
+var stylingService_1 = require("./styling/stylingService");
 function populateClientExports(exports) {
     // columnController
     exports.BalancedColumnTreeBuilder = balancedColumnTreeBuilder_1.BalancedColumnTreeBuilder;
@@ -1610,6 +1614,8 @@ function populateClientExports(exports) {
     exports.VirtualPageRowModel = virtualPageRowModel_1.VirtualPageRowModel;
     exports.VirtualPageCache = virtualPageCache_1.VirtualPageCache;
     exports.VirtualPage = virtualPage_1.VirtualPage;
+    //styling
+    exports.StylingService = stylingService_1.StylingService;
     // widgets
     exports.AgCheckbox = agCheckbox_1.AgCheckbox;
     exports.Component = component_1.Component;
@@ -1623,6 +1629,7 @@ function populateClientExports(exports) {
     exports.ColumnChangeEvent = columnChangeEvent_1.ColumnChangeEvent;
     exports.Constants = constants_1.Constants;
     exports.CsvCreator = csvCreator_1.CsvCreator;
+    exports.Downloader = downloader_1.Downloader;
     exports.Events = events_1.Events;
     exports.EventService = eventService_1.EventService;
     exports.ExpressionService = expressionService_1.ExpressionService;
@@ -1642,14 +1649,18 @@ function populateClientExports(exports) {
     exports.Utils = utils_1.Utils;
     exports.NumberSequence = utils_1.NumberSequence;
     exports.ValueService = valueService_1.ValueService;
+    exports.XmlFactory = xmlFactory_1.XmlFactory;
+    exports.GridSerializer = gridSerializer_1.GridSerializer;
+    exports.BaseGridSerializingSession = gridSerializer_1.BaseGridSerializingSession;
+    exports.RowType = gridSerializer_1.RowType;
 }
 exports.populateClientExports = populateClientExports;
 
 });
 
-define('ag-grid/dist/lib/grid',['require','exports','module','./gridOptionsWrapper','./rowControllers/paginationController','./rowControllers/floatingRowModel','./selectionController','./columnController/columnController','./rendering/rowRenderer','./headerRendering/headerRenderer','./filter/filterManager','./valueService','./masterSlaveService','./eventService','./gridPanel/gridPanel','./gridApi','./headerRendering/headerTemplateLoader','./columnController/balancedColumnTreeBuilder','./columnController/displayedGroupCreator','./expressionService','./templateService','./widgets/popupService','./logger','./columnController/columnUtils','./rendering/autoWidthCalculator','./headerRendering/horizontalDragService','./context/context','./csvCreator','./gridCore','./headerRendering/standardMenu','./dragAndDrop/dragAndDropService','./dragAndDrop/dragService','./sortController','./focusedCellController','./gridPanel/mouseEventService','./cellNavigationService','./utils','./rowControllers/inMemory/filterStage','./rowControllers/inMemory/sortStage','./rowControllers/inMemory/flattenStage','./misc/focusService','./rendering/cellEditorFactory','./events','./rowControllers/virtualPagination/virtualPageRowModel','./rowControllers/inMemory/inMemoryRowModel','./rendering/cellRendererFactory','./rendering/cellRendererService','./rendering/valueFormatterService','./widgets/agCheckbox','./baseFrameworkFactory','./gridPanel/scrollVisibleService'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/grid',['require','exports','module','./gridOptionsWrapper','./rowControllers/paginationController','./rowControllers/floatingRowModel','./selectionController','./columnController/columnController','./rendering/rowRenderer','./headerRendering/headerRenderer','./filter/filterManager','./valueService','./masterSlaveService','./eventService','./gridPanel/gridPanel','./gridApi','./headerRendering/headerTemplateLoader','./columnController/balancedColumnTreeBuilder','./columnController/displayedGroupCreator','./expressionService','./templateService','./widgets/popupService','./logger','./columnController/columnUtils','./rendering/autoWidthCalculator','./headerRendering/horizontalDragService','./context/context','./csvCreator','./gridCore','./headerRendering/standardMenu','./dragAndDrop/dragAndDropService','./dragAndDrop/dragService','./sortController','./focusedCellController','./gridPanel/mouseEventService','./cellNavigationService','./utils','./rowControllers/inMemory/filterStage','./rowControllers/inMemory/sortStage','./rowControllers/inMemory/flattenStage','./misc/focusService','./rendering/cellEditorFactory','./events','./rowControllers/virtualPagination/virtualPageRowModel','./rowControllers/inMemory/inMemoryRowModel','./rendering/cellRendererFactory','./rendering/cellRendererService','./rendering/valueFormatterService','./widgets/agCheckbox','./baseFrameworkFactory','./gridPanel/scrollVisibleService','./downloader','./xmlFactory','./gridSerializer','./styling/stylingService'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -1702,6 +1713,10 @@ var valueFormatterService_1 = require("./rendering/valueFormatterService");
 var agCheckbox_1 = require("./widgets/agCheckbox");
 var baseFrameworkFactory_1 = require("./baseFrameworkFactory");
 var scrollVisibleService_1 = require("./gridPanel/scrollVisibleService");
+var downloader_1 = require("./downloader");
+var xmlFactory_1 = require("./xmlFactory");
+var gridSerializer_1 = require("./gridSerializer");
+var stylingService_1 = require("./styling/stylingService");
 var Grid = (function () {
     function Grid(eGridDiv, gridOptions, params) {
         if (!eGridDiv) {
@@ -1731,14 +1746,16 @@ var Grid = (function () {
             beans: [rowModelClass, cellRendererFactory_1.CellRendererFactory, horizontalDragService_1.HorizontalDragService, headerTemplateLoader_1.HeaderTemplateLoader, floatingRowModel_1.FloatingRowModel, dragService_1.DragService,
                 displayedGroupCreator_1.DisplayedGroupCreator, eventService_1.EventService, gridOptionsWrapper_1.GridOptionsWrapper, selectionController_1.SelectionController,
                 filterManager_1.FilterManager, columnController_1.ColumnController, rowRenderer_1.RowRenderer,
-                headerRenderer_1.HeaderRenderer, expressionService_1.ExpressionService, balancedColumnTreeBuilder_1.BalancedColumnTreeBuilder, csvCreator_1.CsvCreator,
-                templateService_1.TemplateService, gridPanel_1.GridPanel, popupService_1.PopupService, valueService_1.ValueService, masterSlaveService_1.MasterSlaveService,
+                headerRenderer_1.HeaderRenderer, expressionService_1.ExpressionService, balancedColumnTreeBuilder_1.BalancedColumnTreeBuilder, csvCreator_1.CsvCreator, downloader_1.Downloader, xmlFactory_1.XmlFactory,
+                gridSerializer_1.GridSerializer, templateService_1.TemplateService, gridPanel_1.GridPanel, popupService_1.PopupService, valueService_1.ValueService, masterSlaveService_1.MasterSlaveService,
                 logger_1.LoggerFactory, columnUtils_1.ColumnUtils, autoWidthCalculator_1.AutoWidthCalculator, gridApi_1.GridApi,
                 paginationController_1.PaginationController, popupService_1.PopupService, gridCore_1.GridCore, standardMenu_1.StandardMenuFactory,
                 dragAndDropService_1.DragAndDropService, sortController_1.SortController, columnController_1.ColumnApi, focusedCellController_1.FocusedCellController, mouseEventService_1.MouseEventService,
                 cellNavigationService_1.CellNavigationService, filterStage_1.FilterStage, sortStage_1.SortStage, flattenStage_1.FlattenStage, focusService_1.FocusService,
-                cellEditorFactory_1.CellEditorFactory, cellRendererService_1.CellRendererService, valueFormatterService_1.ValueFormatterService, scrollVisibleService_1.ScrollVisibleService],
-            components: [{ componentName: 'AgCheckbox', theClass: agCheckbox_1.AgCheckbox }],
+                cellEditorFactory_1.CellEditorFactory, cellRendererService_1.CellRendererService, valueFormatterService_1.ValueFormatterService, stylingService_1.StylingService, scrollVisibleService_1.ScrollVisibleService],
+            components: [
+                { componentName: 'AgCheckbox', theClass: agCheckbox_1.AgCheckbox }
+            ],
             debug: !!gridOptions.debug
         });
         var eventService = this.context.getBean('eventService');
@@ -1791,7 +1808,7 @@ exports.Grid = Grid;
 
 define('ag-grid/dist/lib/gridOptionsWrapper',['require','exports','module','./eventService','./constants','./components/componentUtil','./gridApi','./context/context','./columnController/columnController','./utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -1918,6 +1935,7 @@ var GridOptionsWrapper = (function () {
     GridOptionsWrapper.prototype.getDoesDataFlowerFunc = function () { return this.gridOptions.doesDataFlower; };
     GridOptionsWrapper.prototype.getIsFullWidthCellFunc = function () { return this.gridOptions.isFullWidthCell; };
     GridOptionsWrapper.prototype.getFullWidthCellRendererParams = function () { return this.gridOptions.fullWidthCellRendererParams; };
+    GridOptionsWrapper.prototype.isEmbedFullWidthRows = function () { return isTrue(this.gridOptions.embedFullWidthRows); };
     GridOptionsWrapper.prototype.getBusinessKeyForNodeFunc = function () { return this.gridOptions.getBusinessKeyForNode; };
     GridOptionsWrapper.prototype.getHeaderCellRenderer = function () { return this.gridOptions.headerCellRenderer; };
     GridOptionsWrapper.prototype.getApi = function () { return this.gridOptions.api; };
@@ -1932,6 +1950,7 @@ var GridOptionsWrapper = (function () {
     GridOptionsWrapper.prototype.getPaginationOverflowSize = function () { return this.gridOptions.paginationOverflowSize; };
     GridOptionsWrapper.prototype.getPaginationPageSize = function () { return this.gridOptions.paginationPageSize; };
     GridOptionsWrapper.prototype.getPaginationInitialRowCount = function () { return this.gridOptions.paginationInitialRowCount; };
+    GridOptionsWrapper.prototype.getDateComponent = function () { return this.gridOptions.dateComponent; };
     GridOptionsWrapper.prototype.getRowData = function () { return this.gridOptions.rowData; };
     GridOptionsWrapper.prototype.isGroupUseEntireRow = function () { return isTrue(this.gridOptions.groupUseEntireRow); };
     GridOptionsWrapper.prototype.isEnableRtl = function () { return isTrue(this.gridOptions.enableRtl); };
@@ -1948,6 +1967,7 @@ var GridOptionsWrapper = (function () {
     GridOptionsWrapper.prototype.getViewportDatasource = function () { return this.gridOptions.viewportDatasource; };
     GridOptionsWrapper.prototype.isEnableSorting = function () { return isTrue(this.gridOptions.enableSorting) || isTrue(this.gridOptions.enableServerSideSorting); };
     GridOptionsWrapper.prototype.isEnableCellExpressions = function () { return isTrue(this.gridOptions.enableCellExpressions); };
+    GridOptionsWrapper.prototype.isEnableGroupEdit = function () { return isTrue(this.gridOptions.enableGroupEdit); };
     GridOptionsWrapper.prototype.isSuppressMiddleClickScrolls = function () { return isTrue(this.gridOptions.suppressMiddleClickScrolls); };
     GridOptionsWrapper.prototype.isSuppressPreventDefaultOnMouseWheel = function () { return isTrue(this.gridOptions.suppressPreventDefaultOnMouseWheel); };
     GridOptionsWrapper.prototype.isEnableServerSideSorting = function () { return isTrue(this.gridOptions.enableServerSideSorting); };
@@ -2040,6 +2060,20 @@ var GridOptionsWrapper = (function () {
         }
         else {
             return false;
+        }
+    };
+    GridOptionsWrapper.prototype.getDocument = function () {
+        // if user is providing document, we use the users one,
+        // otherwise we use the document on the global namespace.
+        var result;
+        if (utils_1.Utils.exists(this.gridOptions.getDocument)) {
+            result = this.gridOptions.getDocument();
+        }
+        if (utils_1.Utils.exists(result)) {
+            return result;
+        }
+        else {
+            return document;
         }
     };
     GridOptionsWrapper.prototype.getLayoutInterval = function () {
@@ -2242,7 +2276,7 @@ exports.GridOptionsWrapper = GridOptionsWrapper;
 
 define('ag-grid/dist/lib/eventService',['require','exports','module','./logger','./utils','./context/context','./context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -2325,6 +2359,8 @@ var EventService = (function () {
             listener(eventType, event);
         });
     };
+    // this is an old idea niall had, should really take it out, was to do with ordering who gets to process
+    // events first, to give model and service objects preference over the view
     EventService.PRIORITY = '-P1';
     __decorate([
         __param(0, context_2.Qualifier('loggerFactory')),
@@ -2345,7 +2381,7 @@ exports.EventService = EventService;
 
 define('ag-grid/dist/lib/logger',['require','exports','module','./gridOptionsWrapper','./context/context','./context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -2405,7 +2441,7 @@ exports.Logger = Logger;
 
 define('ag-grid/dist/lib/context/context',['require','exports','module','../utils','../logger'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -2720,7 +2756,7 @@ function getOrCreateProps(target) {
 
 define('ag-grid/dist/lib/utils',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -2887,12 +2923,57 @@ var Utils = (function () {
         });
         return result;
     };
+    Utils.mergeDeep = function (object, source) {
+        if (this.exists(source)) {
+            this.iterateObject(source, function (key, value) {
+                var currentValue = object[key];
+                var target = source[key];
+                if (currentValue == null) {
+                    object[key] = value;
+                }
+                if (typeof currentValue === 'object') {
+                    if (target) {
+                        this.mergeDeep(object[key], target);
+                    }
+                }
+                if (target) {
+                    object[key] = target;
+                }
+            });
+        }
+    };
     Utils.assign = function (object, source) {
         if (this.exists(source)) {
             this.iterateObject(source, function (key, value) {
                 object[key] = value;
             });
         }
+    };
+    Utils.parseYyyyMmDdToDate = function (yyyyMmDd, separator) {
+        try {
+            if (!yyyyMmDd)
+                return null;
+            if (yyyyMmDd.indexOf(separator) === -1)
+                return null;
+            var fields = yyyyMmDd.split(separator);
+            if (fields.length != 3)
+                return null;
+            return new Date(Number(fields[0]), Number(fields[1]) - 1, Number(fields[2]));
+        }
+        catch (e) {
+            return null;
+        }
+    };
+    Utils.serializeDateToYyyyMmDd = function (date, separator) {
+        if (!date)
+            return null;
+        return date.getFullYear() + separator + Utils.pad(date.getMonth() + 1, 2) + separator + Utils.pad(date.getDate(), 2);
+    };
+    Utils.pad = function (num, totalStringSize) {
+        var asString = num + "";
+        while (asString.length < totalStringSize)
+            asString = "0" + asString;
+        return asString;
     };
     Utils.pushAll = function (target, source) {
         if (this.missing(source) || this.missing(target)) {
@@ -3343,18 +3424,8 @@ var Utils = (function () {
         var pressedKey = event.which || event.keyCode;
         return pressedKey === keyToCheck;
     };
-    Utils.setVisible = function (element, visible, visibleStyle) {
-        if (visible) {
-            if (this.exists(visibleStyle)) {
-                element.style.display = visibleStyle;
-            }
-            else {
-                element.style.display = 'inline';
-            }
-        }
-        else {
-            element.style.display = 'none';
-        }
+    Utils.setVisible = function (element, visible) {
+        this.addOrRemoveCssClass(element, 'ag-hidden', !visible);
     };
     Utils.isBrowserIE = function () {
         if (this.isIE === undefined) {
@@ -3370,7 +3441,10 @@ var Utils = (function () {
     };
     Utils.isBrowserSafari = function () {
         if (this.isSafari === undefined) {
-            this.isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+            var anyWindow = window;
+            // taken from https://github.com/ceolter/ag-grid/issues/550
+            this.isSafari = Object.prototype.toString.call(anyWindow.HTMLElement).indexOf('Constructor') > 0
+                || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!anyWindow.safari || anyWindow.safari.pushNotification);
         }
         return this.isSafari;
     };
@@ -3446,6 +3520,9 @@ var Utils = (function () {
                 }
             });
         }
+    };
+    Utils.isNumeric = function (value) {
+        return !isNaN(parseFloat(value)) && isFinite(value);
     };
     // Taken from here: https://github.com/facebook/fixed-data-table/blob/master/src/vendor_upstream/dom/normalizeWheel.js
     /**
@@ -3629,7 +3706,7 @@ exports.NumberSequence = NumberSequence;
 
 define('ag-grid/dist/lib/constants',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -3677,7 +3754,7 @@ exports.Constants = Constants;
 
 define('ag-grid/dist/lib/components/componentUtil',['require','exports','module','../events','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -3836,7 +3913,7 @@ var ComponentUtil = (function () {
         'groupRowRendererParams', 'aggFuncs', 'fullWidthCellRendererParams', 'defaultColGroupDef', 'defaultColDef'
     ];
     ComponentUtil.ARRAY_PROPERTIES = [
-        'slaveGrids', 'rowData', 'floatingTopRowData', 'floatingBottomRowData', 'columnDefs'
+        'slaveGrids', 'rowData', 'floatingTopRowData', 'floatingBottomRowData', 'columnDefs', 'excelStyles'
     ];
     ComponentUtil.NUMBER_PROPERTIES = [
         'rowHeight', 'rowBuffer', 'colWidth', 'headerHeight', 'groupDefaultExpanded',
@@ -3861,15 +3938,17 @@ var ComponentUtil = (function () {
         'suppressMiddleClickScrolls', 'suppressPreventDefaultOnMouseWheel', 'suppressUseColIdForGroups',
         'suppressCopyRowsToClipboard', 'pivotMode', 'suppressAggFuncInHeader', 'suppressColumnVirtualisation',
         'suppressFocusAfterRefresh', 'functionsPassive', 'functionsReadOnly', 'suppressRowHoverClass',
-        'animateRows', 'groupSelectsFiltered', 'groupRemoveSingleChildren', 'enableRtl', 'suppressClickEdit'
+        'animateRows', 'groupSelectsFiltered', 'groupRemoveSingleChildren', 'enableRtl', 'suppressClickEdit',
+        'enableGroupEdit', 'embedFullWidthRows'
     ];
     ComponentUtil.FUNCTION_PROPERTIES = ['headerCellRenderer', 'localeTextFunc', 'groupRowInnerRenderer', 'groupRowInnerRendererFramework',
-        'groupRowRenderer', 'groupRowRendererFramework', 'isScrollLag', 'isExternalFilterPresent', 'getRowHeight',
+        'dateComponent', 'groupRowRenderer', 'groupRowRendererFramework', 'isScrollLag', 'isExternalFilterPresent', 'getRowHeight',
         'doesExternalFilterPass', 'getRowClass', 'getRowStyle', 'getHeaderCellTemplate', 'traverseNode',
         'getContextMenuItems', 'getMainMenuItems', 'processRowPostCreate', 'processCellForClipboard',
         'getNodeChildDetails', 'groupRowAggNodes', 'getRowNodeId', 'isFullWidthCell', 'fullWidthCellRenderer',
         'fullWidthCellRendererFramework', 'doesDataFlower', 'processSecondaryColDef', 'processSecondaryColGroupDef',
-        'getBusinessKeyForNode', 'checkboxSelection', 'sendToClipboard', 'navigateToNextCell', 'tabToNextCell'];
+        'getBusinessKeyForNode', 'checkboxSelection', 'sendToClipboard', 'navigateToNextCell', 'tabToNextCell',
+        'processCellFromClipboard', 'getDocument'];
     ComponentUtil.ALL_PROPERTIES = ComponentUtil.ARRAY_PROPERTIES
         .concat(ComponentUtil.OBJECT_PROPERTIES)
         .concat(ComponentUtil.STRING_PROPERTIES)
@@ -3895,7 +3974,7 @@ function checkForDeprecated(changes) {
 
 define('ag-grid/dist/lib/events',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -4007,7 +4086,7 @@ exports.Events = Events;
 
 define('ag-grid/dist/lib/gridApi',['require','exports','module','./csvCreator','./rendering/rowRenderer','./headerRendering/headerRenderer','./filter/filterManager','./columnController/columnController','./selectionController','./gridOptionsWrapper','./gridPanel/gridPanel','./valueService','./masterSlaveService','./eventService','./rowControllers/floatingRowModel','./constants','./context/context','./gridCore','./sortController','./rowControllers/paginationController','./focusedCellController','./entities/gridCell','./utils','./rendering/cellRendererFactory','./rendering/cellEditorFactory'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -4072,6 +4151,18 @@ var GridApi = (function () {
     };
     GridApi.prototype.exportDataAsCsv = function (params) {
         this.csvCreator.exportDataAsCsv(params);
+    };
+    GridApi.prototype.getDataAsExcel = function (params) {
+        if (!this.excelCreator) {
+            console.warn('ag-Grid: Excel export is only available in ag-Grid Enterprise');
+        }
+        return this.excelCreator.getDataAsExcelXml(params);
+    };
+    GridApi.prototype.exportDataAsExcel = function (params) {
+        if (!this.excelCreator) {
+            console.warn('ag-Grid: Excel export is only available in ag-Grid Enterprise');
+        }
+        this.excelCreator.exportDataAsExcel(params);
     };
     GridApi.prototype.setDatasource = function (datasource) {
         if (this.gridOptionsWrapper.isRowModelPagination()) {
@@ -4361,6 +4452,9 @@ var GridApi = (function () {
     GridApi.prototype.onFilterChanged = function () {
         this.filterManager.onFilterChanged();
     };
+    GridApi.prototype.onSortChanged = function () {
+        this.sortController.onSortChanged();
+    };
     GridApi.prototype.setSortModel = function (sortModel) {
         this.sortController.setSortModel(sortModel);
     };
@@ -4581,6 +4675,10 @@ var GridApi = (function () {
         __metadata('design:type', csvCreator_1.CsvCreator)
     ], GridApi.prototype, "csvCreator", void 0);
     __decorate([
+        context_1.Optional('excelCreator'), 
+        __metadata('design:type', Object)
+    ], GridApi.prototype, "excelCreator", void 0);
+    __decorate([
         context_1.Autowired('gridCore'), 
         __metadata('design:type', gridCore_1.GridCore)
     ], GridApi.prototype, "gridCore", void 0);
@@ -4688,9 +4786,174 @@ exports.GridApi = GridApi;
 
 });
 
-define('ag-grid/dist/lib/csvCreator',['require','exports','module','./columnController/columnController','./valueService','./context/context','./gridOptionsWrapper','./constants','./rowControllers/floatingRowModel','./utils','./selectionController'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/csvCreator',['require','exports','module','./context/context','./gridSerializer','./downloader','./columnController/columnController','./valueService','./gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
+ * @link http://www.ag-grid.com/
+ * @license MIT
+ */
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var context_1 = require("./context/context");
+var gridSerializer_1 = require("./gridSerializer");
+var downloader_1 = require("./downloader");
+var columnController_1 = require("./columnController/columnController");
+var valueService_1 = require("./valueService");
+var gridOptionsWrapper_1 = require("./gridOptionsWrapper");
+var LINE_SEPARATOR = '\r\n';
+var CsvSerializingSession = (function (_super) {
+    __extends(CsvSerializingSession, _super);
+    function CsvSerializingSession(columnController, valueService, gridOptionsWrapper, processCellCallback, processHeaderCallback, suppressQuotes, columnSeparator) {
+        _super.call(this, columnController, valueService, gridOptionsWrapper, processCellCallback, processHeaderCallback);
+        this.suppressQuotes = suppressQuotes;
+        this.columnSeparator = columnSeparator;
+        this.result = '';
+        this.lineOpened = false;
+    }
+    CsvSerializingSession.prototype.prepare = function (columnsToExport) {
+    };
+    CsvSerializingSession.prototype.addCustomHeader = function (customHeader) {
+        if (!customHeader)
+            return;
+        this.result += customHeader + LINE_SEPARATOR;
+    };
+    CsvSerializingSession.prototype.addCustomFooter = function (customFooter) {
+        if (!customFooter)
+            return;
+        this.result += customFooter + LINE_SEPARATOR;
+    };
+    CsvSerializingSession.prototype.onNewHeaderGroupingRow = function () {
+        if (this.lineOpened)
+            this.result += LINE_SEPARATOR;
+        return {
+            onColumn: this.onNewHeaderGroupingRowColumn.bind(this)
+        };
+    };
+    CsvSerializingSession.prototype.onNewHeaderGroupingRowColumn = function (header, index, span) {
+        if (index != 0) {
+            this.result += this.columnSeparator;
+        }
+        this.result += header;
+        for (var i = 1; i <= span; i++) {
+            this.result += this.columnSeparator + this.putInQuotes("", this.suppressQuotes);
+        }
+        this.lineOpened = true;
+    };
+    CsvSerializingSession.prototype.onNewHeaderRow = function () {
+        if (this.lineOpened)
+            this.result += LINE_SEPARATOR;
+        return {
+            onColumn: this.onNewHeaderRowColumn.bind(this)
+        };
+    };
+    CsvSerializingSession.prototype.onNewHeaderRowColumn = function (column, index, node) {
+        if (index != 0) {
+            this.result += this.columnSeparator;
+        }
+        this.result += this.putInQuotes(this.extractHeaderValue(column), this.suppressQuotes);
+        this.lineOpened = true;
+    };
+    CsvSerializingSession.prototype.onNewBodyRow = function () {
+        if (this.lineOpened)
+            this.result += LINE_SEPARATOR;
+        return {
+            onColumn: this.onNewBodyRowColumn.bind(this)
+        };
+    };
+    CsvSerializingSession.prototype.onNewBodyRowColumn = function (column, index, node) {
+        if (index != 0) {
+            this.result += this.columnSeparator;
+        }
+        this.result += this.putInQuotes(this.extractRowCellValue(column, index, node), this.suppressQuotes);
+        this.lineOpened = true;
+    };
+    CsvSerializingSession.prototype.putInQuotes = function (value, suppressQuotes) {
+        if (suppressQuotes) {
+            return value;
+        }
+        if (value === null || value === undefined) {
+            return '""';
+        }
+        var stringValue;
+        if (typeof value === 'string') {
+            stringValue = value;
+        }
+        else if (typeof value.toString === 'function') {
+            stringValue = value.toString();
+        }
+        else {
+            console.warn('unknown value type during csv conversion');
+            stringValue = '';
+        }
+        // replace each " with "" (ie two sets of double quotes is how to do double quotes in csv)
+        var valueEscaped = stringValue.replace(/"/g, "\"\"");
+        return '"' + valueEscaped + '"';
+    };
+    CsvSerializingSession.prototype.parse = function () {
+        return this.result;
+    };
+    return CsvSerializingSession;
+}(gridSerializer_1.BaseGridSerializingSession));
+exports.CsvSerializingSession = CsvSerializingSession;
+var CsvCreator = (function () {
+    function CsvCreator() {
+    }
+    CsvCreator.prototype.exportDataAsCsv = function (params) {
+        var fileNamePresent = params && params.fileName && params.fileName.length !== 0;
+        var fileName = fileNamePresent ? params.fileName : 'export.csv';
+        var dataAsCsv = this.getDataAsCsv(params);
+        this.downloader.download(fileName, dataAsCsv, "text/csv;charset=utf-8;");
+        return dataAsCsv;
+    };
+    CsvCreator.prototype.getDataAsCsv = function (params) {
+        return this.gridSerializer.serialize(new CsvSerializingSession(this.columnController, this.valueService, this.gridOptionsWrapper, params.processCellCallback, params.processHeaderCallback, params && params.suppressQuotes, (params && params.columnSeparator) || ','), params);
+    };
+    __decorate([
+        context_1.Autowired('downloader'), 
+        __metadata('design:type', downloader_1.Downloader)
+    ], CsvCreator.prototype, "downloader", void 0);
+    __decorate([
+        context_1.Autowired('gridSerializer'), 
+        __metadata('design:type', gridSerializer_1.GridSerializer)
+    ], CsvCreator.prototype, "gridSerializer", void 0);
+    __decorate([
+        context_1.Autowired('columnController'), 
+        __metadata('design:type', columnController_1.ColumnController)
+    ], CsvCreator.prototype, "columnController", void 0);
+    __decorate([
+        context_1.Autowired('valueService'), 
+        __metadata('design:type', valueService_1.ValueService)
+    ], CsvCreator.prototype, "valueService", void 0);
+    __decorate([
+        context_1.Autowired('gridOptionsWrapper'), 
+        __metadata('design:type', gridOptionsWrapper_1.GridOptionsWrapper)
+    ], CsvCreator.prototype, "gridOptionsWrapper", void 0);
+    CsvCreator = __decorate([
+        context_1.Bean('csvCreator'), 
+        __metadata('design:paramtypes', [])
+    ], CsvCreator);
+    return CsvCreator;
+}());
+exports.CsvCreator = CsvCreator;
+
+});
+
+define('ag-grid/dist/lib/gridSerializer',['require','exports','module','./context/context','./columnController/columnController','./constants','./rowControllers/floatingRowModel','./utils','./selectionController','./gridOptionsWrapper','./columnController/displayedGroupCreator','./columnController/balancedColumnTreeBuilder','./columnController/groupInstanceIdCreator','./entities/columnGroup'],function (require, exports, module) {/**
+ * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -4704,44 +4967,93 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var columnController_1 = require("./columnController/columnController");
-var valueService_1 = require("./valueService");
 var context_1 = require("./context/context");
-var gridOptionsWrapper_1 = require("./gridOptionsWrapper");
+var columnController_1 = require("./columnController/columnController");
 var constants_1 = require("./constants");
 var floatingRowModel_1 = require("./rowControllers/floatingRowModel");
 var utils_1 = require("./utils");
 var selectionController_1 = require("./selectionController");
-var LINE_SEPARATOR = '\r\n';
-var CsvCreator = (function () {
-    function CsvCreator() {
+var gridOptionsWrapper_1 = require("./gridOptionsWrapper");
+var displayedGroupCreator_1 = require("./columnController/displayedGroupCreator");
+var balancedColumnTreeBuilder_1 = require("./columnController/balancedColumnTreeBuilder");
+var groupInstanceIdCreator_1 = require("./columnController/groupInstanceIdCreator");
+var columnGroup_1 = require("./entities/columnGroup");
+var BaseGridSerializingSession = (function () {
+    function BaseGridSerializingSession(columnController, valueService, gridOptionsWrapper, processCellCallback, processHeaderCallback) {
+        this.columnController = columnController;
+        this.valueService = valueService;
+        this.gridOptionsWrapper = gridOptionsWrapper;
+        this.processCellCallback = processCellCallback;
+        this.processHeaderCallback = processHeaderCallback;
     }
-    CsvCreator.prototype.exportDataAsCsv = function (params) {
-        var csvString = this.getDataAsCsv(params);
-        var fileNamePresent = params && params.fileName && params.fileName.length !== 0;
-        var fileName = fileNamePresent ? params.fileName : 'export.csv';
-        // for Excel, we need \ufeff at the start
-        // http://stackoverflow.com/questions/17879198/adding-utf-8-bom-to-string-blob
-        var blobObject = new Blob(["\ufeff", csvString], {
-            type: "text/csv;charset=utf-8;"
-        });
-        // Internet Explorer
-        if (window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(blobObject, fileName);
+    BaseGridSerializingSession.prototype.extractHeaderValue = function (column) {
+        var nameForCol = this.getHeaderName(this.processHeaderCallback, column);
+        if (nameForCol === null || nameForCol === undefined) {
+            nameForCol = '';
+        }
+        return nameForCol;
+    };
+    BaseGridSerializingSession.prototype.extractRowCellValue = function (column, index, node) {
+        var isRowGrouping = this.columnController.getRowGroupColumns().length > 0;
+        var valueForCell;
+        if (node.group && isRowGrouping && index === 0) {
+            valueForCell = this.createValueForGroupNode(node);
         }
         else {
-            // Chrome
-            var downloadLink = document.createElement("a");
-            downloadLink.href = window.URL.createObjectURL(blobObject);
-            downloadLink.download = fileName;
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+            valueForCell = this.valueService.getValue(column, node);
+        }
+        valueForCell = this.processCell(node, column, valueForCell, this.processCellCallback);
+        if (valueForCell === null || valueForCell === undefined) {
+            valueForCell = '';
+        }
+        return valueForCell;
+    };
+    BaseGridSerializingSession.prototype.getHeaderName = function (callback, column) {
+        if (callback) {
+            return callback({
+                column: column,
+                api: this.gridOptionsWrapper.getApi(),
+                columnApi: this.gridOptionsWrapper.getColumnApi(),
+                context: this.gridOptionsWrapper.getContext()
+            });
+        }
+        else {
+            return this.columnController.getDisplayNameForColumn(column, 'csv', true);
         }
     };
-    CsvCreator.prototype.getDataAsCsv = function (params) {
+    BaseGridSerializingSession.prototype.createValueForGroupNode = function (node) {
+        var keys = [node.key];
+        while (node.parent) {
+            node = node.parent;
+            keys.push(node.key);
+        }
+        return keys.reverse().join(' -> ');
+    };
+    BaseGridSerializingSession.prototype.processCell = function (rowNode, column, value, processCellCallback) {
+        if (processCellCallback) {
+            return processCellCallback({
+                column: column,
+                node: rowNode,
+                value: value,
+                api: this.gridOptionsWrapper.getApi(),
+                columnApi: this.gridOptionsWrapper.getColumnApi(),
+                context: this.gridOptionsWrapper.getContext()
+            });
+        }
+        else {
+            return value;
+        }
+    };
+    return BaseGridSerializingSession;
+}());
+exports.BaseGridSerializingSession = BaseGridSerializingSession;
+var GridSerializer = (function () {
+    function GridSerializer() {
+    }
+    GridSerializer.prototype.serialize = function (gridSerializingSession, params) {
         var skipGroups = params && params.skipGroups;
         var skipHeader = params && params.skipHeader;
+        var columnGroups = params && params.columnGroups;
         var skipFooters = params && params.skipFooters;
         var skipFloatingTop = params && params.skipFloatingTop;
         var skipFloatingBottom = params && params.skipFloatingBottom;
@@ -4749,15 +5061,10 @@ var CsvCreator = (function () {
         var includeCustomFooter = params && params.customFooter;
         var allColumns = params && params.allColumns;
         var onlySelected = params && params.onlySelected;
-        var columnSeparator = (params && params.columnSeparator) || ',';
-        var suppressQuotes = params && params.suppressQuotes;
         var columnKeys = params && params.columnKeys;
         var onlySelectedAllPages = params && params.onlySelectedAllPages;
-        var processCellCallback = params && params.processCellCallback;
-        var processHeaderCallback = params && params.processHeaderCallback;
         // when in pivot mode, we always render cols on screen, never 'all columns'
         var isPivotMode = this.columnController.isPivotMode();
-        var isRowGrouping = this.columnController.getRowGroupColumns().length > 0;
         var rowModelNormal = this.rowModel.getType() === constants_1.Constants.ROW_MODEL_TYPE_NORMAL;
         var onlySelectedNonStandardModel = !rowModelNormal && onlySelected;
         // we can only export if it's a normal row model - unless we are exporting
@@ -4768,8 +5075,6 @@ var CsvCreator = (function () {
             return '';
         }
         var inMemoryRowModel = this.rowModel;
-        var that = this;
-        var result = '';
         var columnsToExport;
         if (utils_1.Utils.existsAndNotEmpty(columnKeys)) {
             columnsToExport = this.columnController.getGridColumns(columnKeys);
@@ -4783,13 +5088,26 @@ var CsvCreator = (function () {
         if (!columnsToExport || columnsToExport.length === 0) {
             return '';
         }
+        gridSerializingSession.prepare(columnsToExport);
         if (includeCustomHeader) {
-            result += params.customHeader;
+            gridSerializingSession.addCustomHeader(params.customHeader);
         }
         // first pass, put in the header names of the cols
         if (!skipHeader) {
-            columnsToExport.forEach(processHeaderColumn);
-            result += LINE_SEPARATOR;
+            var groupInstanceIdCreator = new groupInstanceIdCreator_1.GroupInstanceIdCreator();
+            var displayedGroups = this.displayedGroupCreator.createDisplayedGroups(columnsToExport, this.columnController.getGridBalancedTree(), groupInstanceIdCreator);
+            if (columnGroups && displayedGroups.length > 0 && displayedGroups[0] instanceof columnGroup_1.ColumnGroup) {
+                var gridRowIterator_1 = gridSerializingSession.onNewHeaderGroupingRow();
+                var columnIndex_1 = 0;
+                displayedGroups.forEach(function (it) {
+                    var casted = it;
+                    gridRowIterator_1.onColumn(casted.getDefinition().headerName, columnIndex_1++, casted.getChildren().length - 1);
+                });
+            }
+            var gridRowIterator_2 = gridSerializingSession.onNewHeaderRow();
+            columnsToExport.forEach(function (column, index) {
+                gridRowIterator_2.onColumn(column, index, null);
+            });
         }
         this.floatingRowModel.forEachFloatingTopRow(processRow);
         if (isPivotMode) {
@@ -4803,7 +5121,9 @@ var CsvCreator = (function () {
             // (eg viewport) then again rowmodel cannot be used, so need to use selected instead.
             if (onlySelectedAllPages || onlySelectedNonStandardModel) {
                 var selectedNodes = this.selectionController.getSelectedNodes();
-                selectedNodes.forEach(processRow);
+                selectedNodes.forEach(function (node) {
+                    processRow(node);
+                });
             }
             else {
                 // here is everything else - including standard row model and selected. we don't use
@@ -4814,7 +5134,7 @@ var CsvCreator = (function () {
         }
         this.floatingRowModel.forEachFloatingBottomRow(processRow);
         if (includeCustomFooter) {
-            result += params.customFooter;
+            gridSerializingSession.addCustomFooter(params.customFooter);
         }
         function processRow(node) {
             if (skipGroups && node.group) {
@@ -4838,132 +5158,60 @@ var CsvCreator = (function () {
             if (nodeIsRootNode && !node.leafGroup) {
                 return;
             }
+            var rowAccumulator = gridSerializingSession.onNewBodyRow();
             columnsToExport.forEach(function (column, index) {
-                var valueForCell;
-                if (node.group && isRowGrouping && index === 0) {
-                    valueForCell = that.createValueForGroupNode(node);
-                }
-                else {
-                    valueForCell = that.valueService.getValue(column, node);
-                }
-                valueForCell = that.processCell(node, column, valueForCell, processCellCallback);
-                if (valueForCell === null || valueForCell === undefined) {
-                    valueForCell = '';
-                }
-                if (index != 0) {
-                    result += columnSeparator;
-                }
-                result += that.putInQuotes(valueForCell, suppressQuotes);
-            });
-            result += LINE_SEPARATOR;
-        }
-        function processHeaderColumn(column, index) {
-            var nameForCol = that.getHeaderName(processHeaderCallback, column);
-            if (nameForCol === null || nameForCol === undefined) {
-                nameForCol = '';
-            }
-            if (index != 0) {
-                result += columnSeparator;
-            }
-            result += that.putInQuotes(nameForCol, suppressQuotes);
-        }
-        return result;
-    };
-    CsvCreator.prototype.getHeaderName = function (callback, column) {
-        if (callback) {
-            return callback({
-                column: column,
-                api: this.gridOptionsWrapper.getApi(),
-                columnApi: this.gridOptionsWrapper.getColumnApi(),
-                context: this.gridOptionsWrapper.getContext()
+                rowAccumulator.onColumn(column, index, node);
             });
         }
-        else {
-            return this.columnController.getDisplayNameForColumn(column, 'csv', true);
-        }
-    };
-    CsvCreator.prototype.processCell = function (rowNode, column, value, processCellCallback) {
-        if (processCellCallback) {
-            return processCellCallback({
-                column: column,
-                node: rowNode,
-                value: value,
-                api: this.gridOptionsWrapper.getApi(),
-                columnApi: this.gridOptionsWrapper.getColumnApi(),
-                context: this.gridOptionsWrapper.getContext()
-            });
-        }
-        else {
-            return value;
-        }
-    };
-    CsvCreator.prototype.createValueForGroupNode = function (node) {
-        var keys = [node.key];
-        while (node.parent) {
-            node = node.parent;
-            keys.push(node.key);
-        }
-        return keys.reverse().join(' -> ');
-    };
-    CsvCreator.prototype.putInQuotes = function (value, suppressQuotes) {
-        if (suppressQuotes) {
-            return value;
-        }
-        if (value === null || value === undefined) {
-            return '""';
-        }
-        var stringValue;
-        if (typeof value === 'string') {
-            stringValue = value;
-        }
-        else if (typeof value.toString === 'function') {
-            stringValue = value.toString();
-        }
-        else {
-            console.warn('unknown value type during csv conversion');
-            stringValue = '';
-        }
-        // replace each " with "" (ie two sets of double quotes is how to do double quotes in csv)
-        var valueEscaped = stringValue.replace(/"/g, "\"\"");
-        return '"' + valueEscaped + '"';
+        return gridSerializingSession.parse();
     };
     __decorate([
-        context_1.Autowired('rowModel'), 
-        __metadata('design:type', Object)
-    ], CsvCreator.prototype, "rowModel", void 0);
-    __decorate([
-        context_1.Autowired('floatingRowModel'), 
-        __metadata('design:type', floatingRowModel_1.FloatingRowModel)
-    ], CsvCreator.prototype, "floatingRowModel", void 0);
+        context_1.Autowired('displayedGroupCreator'), 
+        __metadata('design:type', displayedGroupCreator_1.DisplayedGroupCreator)
+    ], GridSerializer.prototype, "displayedGroupCreator", void 0);
     __decorate([
         context_1.Autowired('columnController'), 
         __metadata('design:type', columnController_1.ColumnController)
-    ], CsvCreator.prototype, "columnController", void 0);
+    ], GridSerializer.prototype, "columnController", void 0);
     __decorate([
-        context_1.Autowired('valueService'), 
-        __metadata('design:type', valueService_1.ValueService)
-    ], CsvCreator.prototype, "valueService", void 0);
+        context_1.Autowired('rowModel'), 
+        __metadata('design:type', Object)
+    ], GridSerializer.prototype, "rowModel", void 0);
     __decorate([
-        context_1.Autowired('gridOptionsWrapper'), 
-        __metadata('design:type', gridOptionsWrapper_1.GridOptionsWrapper)
-    ], CsvCreator.prototype, "gridOptionsWrapper", void 0);
+        context_1.Autowired('floatingRowModel'), 
+        __metadata('design:type', floatingRowModel_1.FloatingRowModel)
+    ], GridSerializer.prototype, "floatingRowModel", void 0);
     __decorate([
         context_1.Autowired('selectionController'), 
         __metadata('design:type', selectionController_1.SelectionController)
-    ], CsvCreator.prototype, "selectionController", void 0);
-    CsvCreator = __decorate([
-        context_1.Bean('csvCreator'), 
+    ], GridSerializer.prototype, "selectionController", void 0);
+    __decorate([
+        context_1.Autowired('balancedColumnTreeBuilder'), 
+        __metadata('design:type', balancedColumnTreeBuilder_1.BalancedColumnTreeBuilder)
+    ], GridSerializer.prototype, "balancedColumnTreeBuilder", void 0);
+    __decorate([
+        context_1.Autowired('gridOptionsWrapper'), 
+        __metadata('design:type', gridOptionsWrapper_1.GridOptionsWrapper)
+    ], GridSerializer.prototype, "gridOptionsWrapper", void 0);
+    GridSerializer = __decorate([
+        context_1.Bean("gridSerializer"), 
         __metadata('design:paramtypes', [])
-    ], CsvCreator);
-    return CsvCreator;
+    ], GridSerializer);
+    return GridSerializer;
 }());
-exports.CsvCreator = CsvCreator;
+exports.GridSerializer = GridSerializer;
+(function (RowType) {
+    RowType[RowType["HEADER_GROUPING"] = 0] = "HEADER_GROUPING";
+    RowType[RowType["HEADER"] = 1] = "HEADER";
+    RowType[RowType["BODY"] = 2] = "BODY";
+})(exports.RowType || (exports.RowType = {}));
+var RowType = exports.RowType;
 
 });
 
 define('ag-grid/dist/lib/columnController/columnController',['require','exports','module','../utils','../entities/columnGroup','../entities/column','../gridOptionsWrapper','../expressionService','./balancedColumnTreeBuilder','./displayedGroupCreator','../rendering/autoWidthCalculator','../eventService','./columnUtils','../logger','../events','../columnChangeEvent','../entities/originalColumnGroup','./groupInstanceIdCreator','../functions','../context/context','../gridPanel/gridPanel'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -5939,6 +6187,11 @@ var ColumnController = (function () {
             this.valueColumns.push(column);
         }
         else {
+            if (utils_1.Utils.exists(stateItem.aggFunc)) {
+                console.warn('ag-Grid: stateItem.aggFunc must be a string. if using your own aggregation ' +
+                    'functions, register the functions first before using them in get/set state. This is because it is' +
+                    'intended for the column state to be stored and retrieved as simple JSON.');
+            }
             column.setAggFunc(null);
             column.setValueActive(false);
         }
@@ -6696,6 +6949,9 @@ var ColumnController = (function () {
         }
         return result;
     };
+    ColumnController.prototype.getGridBalancedTree = function () {
+        return this.gridBalancedTree;
+    };
     ColumnController.GROUP_AUTO_COLUMN_ID = 'ag-Grid-AutoColumn';
     __decorate([
         context_1.Autowired('gridOptionsWrapper'), 
@@ -6761,7 +7017,7 @@ exports.ColumnController = ColumnController;
 
 define('ag-grid/dist/lib/entities/columnGroup',['require','exports','module','./column','../eventService','../context/context','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -6994,7 +7250,7 @@ exports.ColumnGroup = ColumnGroup;
 
 define('ag-grid/dist/lib/entities/column',['require','exports','module','../eventService','../utils','../context/context','../gridOptionsWrapper','../columnController/columnUtils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -7397,7 +7653,7 @@ exports.Column = Column;
 
 define('ag-grid/dist/lib/columnController/columnUtils',['require','exports','module','../gridOptionsWrapper','../entities/columnGroup','../entities/originalColumnGroup','../context/context','../context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -7552,7 +7808,7 @@ exports.ColumnUtils = ColumnUtils;
 
 define('ag-grid/dist/lib/entities/originalColumnGroup',['require','exports','module','./columnGroup','./column'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -7656,7 +7912,7 @@ exports.OriginalColumnGroup = OriginalColumnGroup;
 
 define('ag-grid/dist/lib/expressionService',['require','exports','module','./logger','./context/context','./context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -7738,7 +7994,7 @@ exports.ExpressionService = ExpressionService;
 
 define('ag-grid/dist/lib/columnController/balancedColumnTreeBuilder',['require','exports','module','../gridOptionsWrapper','../logger','../columnController/columnUtils','./columnKeyCreator','../entities/originalColumnGroup','../entities/column','../context/context','../context/context','../context/context','../context/context','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -7937,7 +8193,7 @@ exports.BalancedColumnTreeBuilder = BalancedColumnTreeBuilder;
 
 define('ag-grid/dist/lib/columnController/columnKeyCreator',['require','exports','module','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -7987,7 +8243,7 @@ exports.ColumnKeyCreator = ColumnKeyCreator;
 
 define('ag-grid/dist/lib/columnController/displayedGroupCreator',['require','exports','module','./columnUtils','../entities/columnGroup','../entities/originalColumnGroup','../context/context','../context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -8135,7 +8391,7 @@ exports.DisplayedGroupCreator = DisplayedGroupCreator;
 
 define('ag-grid/dist/lib/rendering/autoWidthCalculator',['require','exports','module','./rowRenderer','../gridPanel/gridPanel','../context/context','../context/context','../headerRendering/headerRenderer','../headerRendering/renderedHeaderCell','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -8265,7 +8521,7 @@ exports.AutoWidthCalculator = AutoWidthCalculator;
 
 define('ag-grid/dist/lib/rendering/rowRenderer',['require','exports','module','../utils','../gridOptionsWrapper','../gridPanel/gridPanel','../expressionService','../templateService','../valueService','../eventService','../rowControllers/floatingRowModel','./renderedRow','../events','../constants','../context/context','../gridCore','../columnController/columnController','../logger','../focusedCellController','../cellNavigationService','../entities/gridCell'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -8317,20 +8573,9 @@ var RowRenderer = (function () {
     RowRenderer.prototype.agWire = function (loggerFactory) {
         this.logger = loggerFactory.create('RowRenderer');
     };
-    RowRenderer.prototype.setupDocumentFragments = function () {
-        var usingDocumentFragments = !!document.createDocumentFragment;
-        if (usingDocumentFragments) {
-            this.eBodyContainerDF = document.createDocumentFragment();
-            if (!this.gridOptionsWrapper.isForPrint()) {
-                this.ePinnedLeftColsContainerDF = document.createDocumentFragment();
-                this.ePinnedRightColsContainerDF = document.createDocumentFragment();
-            }
-        }
-    };
     RowRenderer.prototype.init = function () {
         var _this = this;
-        this.getContainersFromGridPanel();
-        this.setupDocumentFragments();
+        this.rowContainers = this.gridPanel.getRowContainers();
         var modelUpdatedListener = this.onModelUpdated.bind(this);
         var floatingRowDataChangedListener = this.onFloatingRowDataChanged.bind(this);
         this.eventService.addEventListener(events_1.Events.EVENT_MODEL_UPDATED, modelUpdatedListener);
@@ -8340,21 +8585,6 @@ var RowRenderer = (function () {
             _this.eventService.removeEventListener(events_1.Events.EVENT_FLOATING_ROW_DATA_CHANGED, floatingRowDataChangedListener);
         });
         this.refreshView();
-    };
-    RowRenderer.prototype.getContainersFromGridPanel = function () {
-        this.eFullWidthContainer = this.gridPanel.getFullWidthCellContainer();
-        this.eBodyContainer = this.gridPanel.getBodyContainer();
-        this.ePinnedLeftColsContainer = this.gridPanel.getPinnedLeftColsContainer();
-        this.ePinnedRightColsContainer = this.gridPanel.getPinnedRightColsContainer();
-        this.eFloatingTopContainer = this.gridPanel.getFloatingTopContainer();
-        this.eFloatingTopPinnedLeftContainer = this.gridPanel.getPinnedLeftFloatingTop();
-        this.eFloatingTopPinnedRightContainer = this.gridPanel.getPinnedRightFloatingTop();
-        this.eFloatingTopFullWidthContainer = this.gridPanel.getFloatingTopFullWidthCellContainer();
-        this.eFloatingBottomContainer = this.gridPanel.getFloatingBottomContainer();
-        this.eFloatingBottomPinnedLeftContainer = this.gridPanel.getPinnedLeftFloatingBottom();
-        this.eFloatingBottomPinnedRightContainer = this.gridPanel.getPinnedRightFloatingBottom();
-        this.eFloatingBottomFullWithContainer = this.gridPanel.getFloatingBottomFullWidthCellContainer();
-        this.eBodyViewport = this.gridPanel.getBodyViewport();
     };
     RowRenderer.prototype.getAllCellsForColumn = function (column) {
         var eCells = [];
@@ -8370,10 +8600,10 @@ var RowRenderer = (function () {
         return eCells;
     };
     RowRenderer.prototype.refreshAllFloatingRows = function () {
-        this.refreshFloatingRows(this.renderedTopFloatingRows, this.floatingRowModel.getFloatingTopRowData(), this.eFloatingTopPinnedLeftContainer, this.eFloatingTopPinnedRightContainer, this.eFloatingTopContainer, this.eFloatingTopFullWidthContainer);
-        this.refreshFloatingRows(this.renderedBottomFloatingRows, this.floatingRowModel.getFloatingBottomRowData(), this.eFloatingBottomPinnedLeftContainer, this.eFloatingBottomPinnedRightContainer, this.eFloatingBottomContainer, this.eFloatingBottomFullWithContainer);
+        this.refreshFloatingRows(this.renderedTopFloatingRows, this.floatingRowModel.getFloatingTopRowData(), this.rowContainers.floatingTopPinnedLeft, this.rowContainers.floatingTopPinnedRight, this.rowContainers.floatingTop, this.rowContainers.floatingTopFullWidth);
+        this.refreshFloatingRows(this.renderedBottomFloatingRows, this.floatingRowModel.getFloatingBottomRowData(), this.rowContainers.floatingBottomPinnedLeft, this.rowContainers.floatingBottomPinnedRight, this.rowContainers.floatingBottom, this.rowContainers.floatingBottomFullWith);
     };
-    RowRenderer.prototype.refreshFloatingRows = function (renderedRows, rowNodes, ePinnedLeftContainer, ePinnedRightContainer, eBodyContainer, eFullWidthContainer) {
+    RowRenderer.prototype.refreshFloatingRows = function (renderedRows, rowNodes, pinnedLeftContainerComp, pinnedRightContainerComp, bodyContainerComp, fullWidthContainerComp) {
         var _this = this;
         renderedRows.forEach(function (row) {
             row.destroy();
@@ -8386,7 +8616,7 @@ var RowRenderer = (function () {
         }
         if (rowNodes) {
             rowNodes.forEach(function (node) {
-                var renderedRow = new renderedRow_1.RenderedRow(_this.$scope, _this, eBodyContainer, null, eFullWidthContainer, ePinnedLeftContainer, null, ePinnedRightContainer, null, node, false);
+                var renderedRow = new renderedRow_1.RenderedRow(_this.$scope, _this, bodyContainerComp, fullWidthContainerComp, pinnedLeftContainerComp, pinnedRightContainerComp, node, false);
                 _this.context.wireBean(renderedRow);
                 renderedRows.push(renderedRow);
             });
@@ -8432,10 +8662,17 @@ var RowRenderer = (function () {
         var focusedCell = this.focusedCellController.getFocusCellToUseAfterRefresh();
         if (!this.gridOptionsWrapper.isForPrint()) {
             var containerHeight = this.rowModel.getRowCombinedHeight();
-            this.eBodyContainer.style.height = containerHeight + "px";
-            this.eFullWidthContainer.style.height = containerHeight + "px";
-            this.ePinnedLeftColsContainer.style.height = containerHeight + "px";
-            this.ePinnedRightColsContainer.style.height = containerHeight + "px";
+            // we need at least 1 pixel for the horizontal scroll to work. so if there are now rows,
+            // we still want the scroll to be present, otherwise there would be no way to access the columns
+            // on the RHS - and if that was where the filter was that cause no rows to be presented, there
+            // is no way to remove the filter.
+            if (containerHeight === 0) {
+                containerHeight = 1;
+            }
+            this.rowContainers.body.setHeight(containerHeight);
+            this.rowContainers.fullWidth.setHeight(containerHeight);
+            this.rowContainers.pinnedLeft.setHeight(containerHeight);
+            this.rowContainers.pinnedRight.setHeight(containerHeight);
         }
         this.refreshAllVirtualRows(keepRenderedRows, animate);
         this.refreshAllFloatingRows();
@@ -8664,14 +8901,10 @@ var RowRenderer = (function () {
             delayedDestroyFunctions.forEach(function (func) { return func(); });
         }, 400);
         // timer.print('removing');
-        // we prepend rather than append so that new rows appear under current rows. this way the new
-        // rows are not over the current rows which will get animation as they slid to new position
-        if (this.eBodyContainerDF) {
-            utils_1.Utils.prependDC(this.eBodyContainer, this.eBodyContainerDF);
-            if (!this.gridOptionsWrapper.isForPrint()) {
-                utils_1.Utils.prependDC(this.ePinnedLeftColsContainer, this.ePinnedLeftColsContainerDF);
-                utils_1.Utils.prependDC(this.ePinnedRightColsContainer, this.ePinnedRightColsContainerDF);
-            }
+        this.rowContainers.body.flushDocumentFragment();
+        if (!this.gridOptionsWrapper.isForPrint()) {
+            this.rowContainers.pinnedLeft.flushDocumentFragment();
+            this.rowContainers.pinnedRight.flushDocumentFragment();
         }
         // if we are doing angular compiling, then do digest the scope here
         if (this.gridOptionsWrapper.isAngularCompileRows()) {
@@ -8687,7 +8920,7 @@ var RowRenderer = (function () {
             delete oldRowsByNodeId[rowNode.id];
         }
         else {
-            renderedRow = new renderedRow_1.RenderedRow(this.$scope, this, this.eBodyContainer, this.eBodyContainerDF, this.eFullWidthContainer, this.ePinnedLeftColsContainer, this.ePinnedLeftColsContainerDF, this.ePinnedRightColsContainer, this.ePinnedRightColsContainerDF, rowNode, animate);
+            renderedRow = new renderedRow_1.RenderedRow(this.$scope, this, this.rowContainers.body, this.rowContainers.fullWidth, this.rowContainers.pinnedLeft, this.rowContainers.pinnedRight, rowNode, animate);
             this.context.wireBean(renderedRow);
         }
         return renderedRow;
@@ -9005,9 +9238,9 @@ exports.RowRenderer = RowRenderer;
 
 });
 
-define('ag-grid/dist/lib/gridPanel/gridPanel',['require','exports','module','../utils','../masterSlaveService','../gridOptionsWrapper','../columnController/columnController','../rendering/rowRenderer','../rowControllers/floatingRowModel','../layout/borderLayout','../logger','../context/context','../eventService','../events','../dragAndDrop/dragService','../constants','../selectionController','../csvCreator','./mouseEventService','../focusedCellController','./scrollVisibleService','../context/beanStub'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/gridPanel/gridPanel',['require','exports','module','../utils','../masterSlaveService','../gridOptionsWrapper','../columnController/columnController','../rendering/rowRenderer','../rowControllers/floatingRowModel','../layout/borderLayout','../logger','../context/context','../eventService','../events','../dragAndDrop/dragService','../constants','../selectionController','../csvCreator','./mouseEventService','../focusedCellController','./scrollVisibleService','../context/beanStub','../rendering/rowContainerComponent'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -9048,9 +9281,10 @@ var mouseEventService_1 = require("./mouseEventService");
 var focusedCellController_1 = require("../focusedCellController");
 var scrollVisibleService_1 = require("./scrollVisibleService");
 var beanStub_1 = require("../context/beanStub");
+var rowContainerComponent_1 = require("../rendering/rowContainerComponent");
 // in the html below, it is important that there are no white space between some of the divs, as if there is white space,
 // it won't render correctly in safari, as safari renders white space as a gap
-var gridHtml = '<div>' +
+var gridHtml = '<div class="ag-root ag-font-style">' +
     // header
     '<div class="ag-header">' +
     '<div class="ag-pinned-left-header"></div>' +
@@ -9096,7 +9330,7 @@ var gridHtml = '<div>' +
     '</div>' +
     '</div>' +
     '</div>';
-var gridForPrintHtml = '<div>' +
+var gridForPrintHtml = '<div class="ag-root ag-font-style">' +
     // header
     '<div class="ag-header-container"></div>' +
     // floating
@@ -9131,6 +9365,7 @@ var GridPanel = (function (_super) {
         this.scrollWidth = this.gridOptionsWrapper.getScrollbarWidth();
         this.useScrollLag = this.isUseScrollLag();
         this.enableRtl = this.gridOptionsWrapper.isEnableRtl();
+        this.loadTemplate();
         this.findElements();
     };
     GridPanel.prototype.getVerticalPixelRange = function () {
@@ -9451,24 +9686,6 @@ var GridPanel = (function (_super) {
         event.preventDefault();
         return false;
     };
-    GridPanel.prototype.getPinnedLeftFloatingTop = function () {
-        return this.ePinnedLeftFloatingTop;
-    };
-    GridPanel.prototype.getPinnedRightFloatingTop = function () {
-        return this.ePinnedRightFloatingTop;
-    };
-    GridPanel.prototype.getFloatingTopContainer = function () {
-        return this.eFloatingTopContainer;
-    };
-    GridPanel.prototype.getPinnedLeftFloatingBottom = function () {
-        return this.ePinnedLeftFloatingBottom;
-    };
-    GridPanel.prototype.getPinnedRightFloatingBottom = function () {
-        return this.ePinnedRightFloatingBottom;
-    };
-    GridPanel.prototype.getFloatingBottomContainer = function () {
-        return this.eFloatingBottomContainer;
-    };
     GridPanel.prototype.createOverlayTemplate = function (name, defaultTemplate, userProvidedTemplate) {
         var template = mainOverlayTemplate
             .replace('[OVERLAY_NAME]', name);
@@ -9556,12 +9773,16 @@ var GridPanel = (function (_super) {
         }
     };
     GridPanel.prototype.isBodyVerticalScrollShowing = function () {
-        if (this.columnController.isPinningRight()) {
+        // if the scroll is on the pinned panel, then it is never in the center panel.
+        // if LRT, then pinning right means scroll NOT on center
+        if (!this.enableRtl && this.columnController.isPinningRight()) {
             return false;
         }
-        else {
-            return utils_1.Utils.isHorizontalScrollShowing(this.eBodyViewport);
+        // if RTL, then pinning left means scroll NOT on center
+        if (this.enableRtl && this.columnController.isPinningLeft()) {
+            return false;
         }
+        return utils_1.Utils.isVerticalScrollShowing(this.eBodyViewport);
     };
     // gets called every 500 ms. we use this to set padding on right pinned column
     GridPanel.prototype.periodicallyCheck = function () {
@@ -9759,15 +9980,6 @@ var GridPanel = (function (_super) {
     GridPanel.prototype.getBodyContainer = function () {
         return this.eBodyContainer;
     };
-    GridPanel.prototype.getFullWidthCellContainer = function () {
-        return this.eFullWidthCellContainer;
-    };
-    GridPanel.prototype.getFloatingTopFullWidthCellContainer = function () {
-        return this.eFloatingTopFullWidthCellContainer;
-    };
-    GridPanel.prototype.getFloatingBottomFullWidthCellContainer = function () {
-        return this.eFloatingBottomFullWidthCellContainer;
-    };
     GridPanel.prototype.getDropTargetBodyContainers = function () {
         if (this.forPrint) {
             return [this.eBodyContainer, this.eFloatingTopContainer, this.eFloatingBottomContainer];
@@ -9779,9 +9991,6 @@ var GridPanel = (function (_super) {
     GridPanel.prototype.getBodyViewport = function () {
         return this.eBodyViewport;
     };
-    GridPanel.prototype.getPinnedLeftColsContainer = function () {
-        return this.ePinnedLeftColsContainer;
-    };
     GridPanel.prototype.getDropTargetLeftContainers = function () {
         if (this.forPrint) {
             return [];
@@ -9789,9 +9998,6 @@ var GridPanel = (function (_super) {
         else {
             return [this.ePinnedLeftColsViewport, this.ePinnedLeftFloatingBottom, this.ePinnedLeftFloatingTop];
         }
-    };
-    GridPanel.prototype.getPinnedRightColsContainer = function () {
-        return this.ePinnedRightColsContainer;
     };
     GridPanel.prototype.getDropTargetPinnedRightContainers = function () {
         if (this.forPrint) {
@@ -9819,31 +10025,43 @@ var GridPanel = (function (_super) {
     GridPanel.prototype.queryHtmlElement = function (selector) {
         return this.eRoot.querySelector(selector);
     };
+    GridPanel.prototype.loadTemplate = function () {
+        // the template we use is different when doing 'for print'
+        var template = this.forPrint ? gridForPrintHtml : gridHtml;
+        this.eRoot = utils_1.Utils.loadTemplate(template);
+        // parts of the CSS need to know if we are in 'for print' mode or not,
+        // so we add a class to allow applying CSS based on this.
+        var scrollClass = this.forPrint ? 'ag-no-scrolls' : 'ag-scrolls';
+        utils_1.Utils.addCssClass(this.eRoot, scrollClass);
+    };
     GridPanel.prototype.findElements = function () {
-        if (this.forPrint) {
-            this.eRoot = utils_1.Utils.loadTemplate(gridForPrintHtml);
-            utils_1.Utils.addCssClass(this.eRoot, 'ag-root');
-            utils_1.Utils.addCssClass(this.eRoot, 'ag-font-style');
-            utils_1.Utils.addCssClass(this.eRoot, 'ag-no-scrolls');
-        }
-        else {
-            this.eRoot = utils_1.Utils.loadTemplate(gridHtml);
-            utils_1.Utils.addCssClass(this.eRoot, 'ag-root');
-            utils_1.Utils.addCssClass(this.eRoot, 'ag-font-style');
-            utils_1.Utils.addCssClass(this.eRoot, 'ag-scrolls');
-        }
         if (this.forPrint) {
             this.eHeaderContainer = this.queryHtmlElement('.ag-header-container');
             this.eBodyContainer = this.queryHtmlElement('.ag-body-container');
             this.eFloatingTopContainer = this.queryHtmlElement('.ag-floating-top-container');
             this.eFloatingBottomContainer = this.queryHtmlElement('.ag-floating-bottom-container');
             this.eAllCellContainers = [this.eBodyContainer, this.eFloatingTopContainer, this.eFloatingBottomContainer];
+            var containers = {
+                body: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eBodyContainer, useDocumentFragment: true }),
+                fullWidth: null,
+                pinnedLeft: null,
+                pinnedRight: null,
+                floatingTop: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eFloatingTopContainer }),
+                floatingTopPinnedLeft: null,
+                floatingTopPinnedRight: null,
+                floatingTopFullWidth: null,
+                floatingBottom: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eFloatingBottomContainer }),
+                floatingBottomPinnedLeft: null,
+                floatingBottomPinnedRight: null,
+                floatingBottomFullWith: null
+            };
+            this.rowContainerComponents = containers;
             // when doing forPrint, we don't have any fullWidth containers, instead we add directly to the main
             // containers. this works in forPrint only as there are no pinned columns (no need for fullWidth to
             // span pinned columns) and the rows are already the full width of the grid (the reason for fullWidth)
-            this.eFullWidthCellContainer = this.eBodyContainer;
-            this.eFloatingBottomFullWidthCellContainer = this.eFloatingBottomContainer;
-            this.eFloatingTopFullWidthCellContainer = this.eFloatingTopContainer;
+            containers.fullWidth = containers.body;
+            containers.floatingBottomFullWith = containers.floatingBottom;
+            containers.floatingTopFullWidth = containers.floatingTop;
         }
         else {
             this.eBody = this.queryHtmlElement('.ag-body');
@@ -9877,8 +10095,25 @@ var GridPanel = (function (_super) {
             this.eAllCellContainers = [
                 this.ePinnedLeftColsContainer, this.ePinnedRightColsContainer, this.eBodyContainer,
                 this.eFloatingTop, this.eFloatingBottom, this.eFullWidthCellContainer];
+            this.rowContainerComponents = {
+                body: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eBodyContainer, eViewport: this.eBodyViewport, useDocumentFragment: true }),
+                fullWidth: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eFullWidthCellContainer, hideWhenNoChildren: true, eViewport: this.eFullWidthCellViewport }),
+                pinnedLeft: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.ePinnedLeftColsContainer, eViewport: this.ePinnedLeftColsViewport, useDocumentFragment: true }),
+                pinnedRight: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.ePinnedRightColsContainer, eViewport: this.ePinnedRightColsViewport, useDocumentFragment: true }),
+                floatingTop: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eFloatingTopContainer }),
+                floatingTopPinnedLeft: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.ePinnedLeftFloatingTop }),
+                floatingTopPinnedRight: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.ePinnedRightFloatingTop }),
+                floatingTopFullWidth: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eFloatingTopFullWidthCellContainer, hideWhenNoChildren: true }),
+                floatingBottom: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eFloatingBottomContainer }),
+                floatingBottomPinnedLeft: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.ePinnedLeftFloatingBottom }),
+                floatingBottomPinnedRight: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.ePinnedRightFloatingBottom }),
+                floatingBottomFullWith: new rowContainerComponent_1.RowContainerComponent({ eContainer: this.eFloatingBottomFullWidthCellContainer, hideWhenNoChildren: true }),
+            };
             this.addMouseWheelEventListeners();
         }
+    };
+    GridPanel.prototype.getRowContainers = function () {
+        return this.rowContainerComponents;
     };
     GridPanel.prototype.addMouseWheelEventListeners = function () {
         // IE9, Chrome, Safari, Opera use 'mousewheel', Firefox uses 'DOMMouseScroll'
@@ -10131,7 +10366,7 @@ var GridPanel = (function (_super) {
     GridPanel.prototype.onBodyHorizontalScroll = function () {
         var newLeftPosition = this.eBodyViewport.scrollLeft;
         if (newLeftPosition !== this.lastLeftPosition) {
-            this.eventService.dispatchEvent(events_1.Events.EVENT_BODY_SCROLL);
+            this.eventService.dispatchEvent(events_1.Events.EVENT_BODY_SCROLL, { direction: 'horizontal' });
             this.lastLeftPosition = newLeftPosition;
             this.horizontallyScrollHeaderCenterAndFloatingCenter();
             this.masterSlaveService.fireHorizontalScrollEvent(newLeftPosition);
@@ -10147,7 +10382,7 @@ var GridPanel = (function (_super) {
     GridPanel.prototype.onVerticalScroll = function (sourceElement) {
         var newTopPosition = sourceElement.scrollTop;
         if (newTopPosition !== this.lastTopPosition) {
-            this.eventService.dispatchEvent(events_1.Events.EVENT_BODY_SCROLL);
+            this.eventService.dispatchEvent(events_1.Events.EVENT_BODY_SCROLL, { direction: 'vertical' });
             this.lastTopPosition = newTopPosition;
             this.fakeVerticalScroll(newTopPosition);
             this.rowRenderer.drawVirtualRowsWithLock();
@@ -10384,7 +10619,7 @@ exports.GridPanel = GridPanel;
 
 define('ag-grid/dist/lib/masterSlaveService',['require','exports','module','./gridOptionsWrapper','./columnController/columnController','./gridPanel/gridPanel','./eventService','./logger','./events','./context/context','./context/context','./context/context','./context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -10595,7 +10830,7 @@ exports.MasterSlaveService = MasterSlaveService;
 
 define('ag-grid/dist/lib/rowControllers/floatingRowModel',['require','exports','module','../gridOptionsWrapper','../entities/rowNode','../context/context','../eventService','../context/context','../events','../context/context','../constants','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -10750,7 +10985,7 @@ exports.FloatingRowModel = FloatingRowModel;
 
 define('ag-grid/dist/lib/entities/rowNode',['require','exports','module','../eventService','../events','../gridOptionsWrapper','../selectionController','../valueService','../columnController/columnController','../context/context','../constants','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -11003,7 +11238,7 @@ var RowNode = (function () {
         var actionWasOnThisNode = !tailingNodeInSequence;
         if (actionWasOnThisNode) {
             if (newValue && (clearSelection || !this.gridOptionsWrapper.isRowSelectionMulti())) {
-                this.selectionController.clearOtherNodes(this);
+                updatedCount += this.selectionController.clearOtherNodes(this);
             }
             // only if we selected something, then update groups and fire events
             if (updatedCount > 0) {
@@ -11194,7 +11429,7 @@ exports.RowNode = RowNode;
 
 define('ag-grid/dist/lib/selectionController',['require','exports','module','./utils','./context/context','./context/context','./logger','./eventService','./events','./context/context','./gridOptionsWrapper','./context/context','./constants'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -11290,10 +11525,11 @@ var SelectionController = (function () {
     SelectionController.prototype.clearOtherNodes = function (rowNodeToKeepSelected) {
         var _this = this;
         var groupsToRefresh = {};
+        var updatedCount = 0;
         utils_1.Utils.iterateObject(this.selectedNodes, function (key, otherRowNode) {
             if (otherRowNode && otherRowNode.id !== rowNodeToKeepSelected.id) {
                 var rowNode = _this.selectedNodes[otherRowNode.id];
-                rowNode.setSelectedParams({ newValue: false, clearSelection: false, tailingNodeInSequence: true });
+                updatedCount += rowNode.setSelectedParams({ newValue: false, clearSelection: false, tailingNodeInSequence: true });
                 if (_this.groupSelectsChildren && otherRowNode.parent) {
                     groupsToRefresh[otherRowNode.parent.id] = otherRowNode.parent;
                 }
@@ -11302,6 +11538,7 @@ var SelectionController = (function () {
         utils_1.Utils.iterateObject(groupsToRefresh, function (key, group) {
             group.calculateSelectedFromChildren();
         });
+        return updatedCount;
     };
     SelectionController.prototype.onRowSelected = function (event) {
         var rowNode = event.node;
@@ -11480,7 +11717,7 @@ exports.SelectionController = SelectionController;
 
 define('ag-grid/dist/lib/valueService',['require','exports','module','./gridOptionsWrapper','./expressionService','./columnController/columnController','./context/context','./utils','./events','./eventService'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -11669,7 +11906,7 @@ exports.ValueService = ValueService;
 
 define('ag-grid/dist/lib/layout/borderLayout',['require','exports','module','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -11928,7 +12165,7 @@ exports.BorderLayout = BorderLayout;
 
 define('ag-grid/dist/lib/dragAndDrop/dragService',['require','exports','module','../context/context','../logger','../utils','../eventService','../events','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -11961,7 +12198,6 @@ var DragService = (function () {
     }
     DragService.prototype.init = function () {
         this.logger = this.loggerFactory.create('DragService');
-        this.eBody = document.querySelector('body');
     };
     DragService.prototype.destroy = function () {
         this.dragSources.forEach(this.removeListener.bind(this));
@@ -11986,8 +12222,10 @@ var DragService = (function () {
         utils_1.Utils.removeFromArray(this.dragSources, dragSourceAndListener);
     };
     DragService.prototype.setNoSelectToBody = function (noSelect) {
-        if (utils_1.Utils.exists(this.eBody)) {
-            utils_1.Utils.addOrRemoveCssClass(this.eBody, 'ag-body-no-select', noSelect);
+        var usrDocument = this.gridOptionsWrapper.getDocument();
+        var eBody = usrDocument.querySelector('body');
+        if (utils_1.Utils.exists(eBody)) {
+            utils_1.Utils.addOrRemoveCssClass(eBody, 'ag-body-no-select', noSelect);
         }
     };
     DragService.prototype.addDragSource = function (params, includeTouch) {
@@ -12043,13 +12281,14 @@ var DragService = (function () {
         this.dragging = false;
         this.mouseEventLastTime = mouseEvent;
         this.mouseStartEvent = mouseEvent;
+        var usrDocument = this.gridOptionsWrapper.getDocument();
         // we temporally add these listeners, for the duration of the drag, they
         // are removed in mouseup handling.
-        document.addEventListener('mousemove', this.onMouseMoveListener);
-        document.addEventListener('mouseup', this.onMouseUpListener);
+        usrDocument.addEventListener('mousemove', this.onMouseMoveListener);
+        usrDocument.addEventListener('mouseup', this.onMouseUpListener);
         this.dragEndFunctions.push(function () {
-            document.removeEventListener('mousemove', _this.onMouseMoveListener);
-            document.removeEventListener('mouseup', _this.onMouseUpListener);
+            usrDocument.removeEventListener('mousemove', _this.onMouseMoveListener);
+            usrDocument.removeEventListener('mouseup', _this.onMouseUpListener);
         });
         // see if we want to start dragging straight away
         if (params.dragStartPixels === 0) {
@@ -12177,7 +12416,7 @@ exports.DragService = DragService;
 
 define('ag-grid/dist/lib/gridPanel/mouseEventService',['require','exports','module','../context/context','../context/context','../utils','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -12231,7 +12470,7 @@ exports.MouseEventService = MouseEventService;
 
 define('ag-grid/dist/lib/focusedCellController',['require','exports','module','./context/context','./eventService','./events','./gridOptionsWrapper','./columnController/columnController','./utils','./entities/gridCell','./constants'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -12416,7 +12655,7 @@ exports.FocusedCellController = FocusedCellController;
 
 define('ag-grid/dist/lib/entities/gridCell',['require','exports','module','../utils','./gridRow'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -12453,7 +12692,7 @@ exports.GridCell = GridCell;
 
 define('ag-grid/dist/lib/entities/gridRow',['require','exports','module','../constants','../utils','./gridCell'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -12526,7 +12765,7 @@ exports.GridRow = GridRow;
 
 define('ag-grid/dist/lib/gridPanel/scrollVisibleService',['require','exports','module','../context/context','../utils','../eventService','../events','../columnController/columnController'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -12613,7 +12852,7 @@ exports.ScrollVisibleService = ScrollVisibleService;
 
 define('ag-grid/dist/lib/context/beanStub',['require','exports','module','../eventService','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -12679,9 +12918,78 @@ exports.BeanStub = BeanStub;
 
 });
 
+define('ag-grid/dist/lib/rendering/rowContainerComponent',['require','exports','module','../utils'],function (require, exports, module) {/**
+ * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
+ * @version v7.2.0
+ * @link http://www.ag-grid.com/
+ * @license MIT
+ */
+"use strict";
+var utils_1 = require("../utils");
+/**
+ * There are many instances of this component covering each of the areas a row can be entered
+ * eg body, pinned left, fullWidth. The component differs from others in that it's given the
+ * elements, there is no template. All of the elements are part of the GridPanel.
+ */
+var RowContainerComponent = (function () {
+    function RowContainerComponent(params) {
+        this.childCount = 0;
+        this.eContainer = params.eContainer;
+        this.eViewport = params.eViewport;
+        if (params.useDocumentFragment) {
+            this.setupDocumentFragment();
+        }
+        this.hideWhenNoChildren = params.hideWhenNoChildren;
+        this.checkVisibility();
+    }
+    RowContainerComponent.prototype.setupDocumentFragment = function () {
+        var browserSupportsDocumentFragment = !!document.createDocumentFragment;
+        if (browserSupportsDocumentFragment) {
+            this.eDocumentFragment = document.createDocumentFragment();
+        }
+    };
+    RowContainerComponent.prototype.setHeight = function (height) {
+        this.eContainer.style.height = height + "px";
+    };
+    RowContainerComponent.prototype.appendRowElement = function (eRow) {
+        var eTarget = this.eDocumentFragment ? this.eDocumentFragment : this.eContainer;
+        eTarget.appendChild(eRow);
+        this.childCount++;
+        this.checkVisibility();
+    };
+    RowContainerComponent.prototype.removeRowElement = function (eRow) {
+        this.eContainer.removeChild(eRow);
+        this.childCount--;
+        this.checkVisibility();
+    };
+    RowContainerComponent.prototype.flushDocumentFragment = function () {
+        if (utils_1.Utils.exists(this.eDocumentFragment)) {
+            // we prepend rather than append so that new rows appear under current rows. this way the new
+            // rows are not over the current rows which will get animation as they slid to new position
+            utils_1.Utils.prependDC(this.eContainer, this.eDocumentFragment);
+        }
+    };
+    RowContainerComponent.prototype.checkVisibility = function () {
+        if (!this.hideWhenNoChildren) {
+            return;
+        }
+        var eGui = this.eViewport ? this.eViewport : this.eContainer;
+        var visible = this.childCount > 0;
+        if (this.visible !== visible) {
+            console.log("visible = " + visible);
+            this.visible = visible;
+            utils_1.Utils.setVisible(eGui, visible);
+        }
+    };
+    return RowContainerComponent;
+}());
+exports.RowContainerComponent = RowContainerComponent;
+
+});
+
 define('ag-grid/dist/lib/templateService',['require','exports','module','./context/context','./context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -12768,13 +13076,18 @@ exports.TemplateService = TemplateService;
 
 });
 
-define('ag-grid/dist/lib/rendering/renderedRow',['require','exports','module','../utils','./renderedCell','../entities/rowNode','../gridOptionsWrapper','../columnController/columnController','../entities/column','../events','../eventService','../context/context','../focusedCellController','../constants','./cellRendererService','./cellRendererFactory','../gridPanel/gridPanel'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/rendering/renderedRow',['require','exports','module','../utils','./renderedCell','../entities/rowNode','../gridOptionsWrapper','../columnController/columnController','../entities/column','../events','../eventService','../context/context','../focusedCellController','../constants','./cellRendererService','./cellRendererFactory','../gridPanel/gridPanel','../context/beanStub'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12798,11 +13111,13 @@ var constants_1 = require("../constants");
 var cellRendererService_1 = require("./cellRendererService");
 var cellRendererFactory_1 = require("./cellRendererFactory");
 var gridPanel_1 = require("../gridPanel/gridPanel");
-var RenderedRow = (function () {
-    function RenderedRow(parentScope, rowRenderer, eBodyContainer, eBodyContainerDF, eFullWidthContainer, ePinnedLeftContainer, ePinnedLeftContainerDF, ePinnedRightContainer, ePinnedRightContainerDF, node, animateIn) {
+var beanStub_1 = require("../context/beanStub");
+var RenderedRow = (function (_super) {
+    __extends(RenderedRow, _super);
+    function RenderedRow(parentScope, rowRenderer, bodyContainerComp, fullWidthContainerComp, pinnedLeftContainerComp, pinnedRightContainerComp, node, animateIn) {
+        _super.call(this);
         this.eAllRowContainers = [];
         this.renderedCells = {};
-        this.destroyFunctions = [];
         // for animations, there are bits we want done in the next VM turn, to all DOM to update first.
         // instead of each row doing a setTimeout(func,0), we put the functions here and the rowRenderer
         // executes them all in one timeout
@@ -12818,13 +13133,10 @@ var RenderedRow = (function () {
         this.initialised = false;
         this.parentScope = parentScope;
         this.rowRenderer = rowRenderer;
-        this.eBodyContainer = eBodyContainer;
-        this.eBodyContainerDF = eBodyContainerDF;
-        this.eFullWidthContainer = eFullWidthContainer;
-        this.ePinnedLeftContainer = ePinnedLeftContainer;
-        this.ePinnedLeftContainerDF = ePinnedLeftContainerDF;
-        this.ePinnedRightContainer = ePinnedRightContainer;
-        this.ePinnedRightContainerDF = ePinnedRightContainerDF;
+        this.bodyContainerComp = bodyContainerComp;
+        this.fullWidthContainerComp = fullWidthContainerComp;
+        this.pinnedLeftContainerComp = pinnedLeftContainerComp;
+        this.pinnedRightContainerComp = pinnedRightContainerComp;
         this.rowNode = node;
         this.animateIn = animateIn;
     }
@@ -12842,6 +13154,29 @@ var RenderedRow = (function () {
             this.setupNormalContainers(animateInRowTop);
         }
     };
+    /*    private createGroupSpanningEntireRowCell(padding: boolean): HTMLElement {
+            var eRow: HTMLElement = document.createElement('span');
+            // padding means we are on the right hand side of a pinned table, ie
+            // in the main body.
+            if (!padding) {
+    
+                var params = this.createFullWidthParams(eRow, null);
+    
+                var cellComponent = this.cellRendererService.useCellRenderer(this.fullWidthCellRenderer, eRow, params);
+    
+                if (cellComponent && cellComponent.destroy) {
+                    this.addDestroyFunc( () => cellComponent.destroy() );
+                }
+            }
+    
+            if (this.rowNode.footer) {
+                _.addCssClass(eRow, 'ag-footer-cell-entire-row');
+            } else {
+                _.addCssClass(eRow, 'ag-group-cell-entire-row');
+            }
+    
+            return eRow;
+        }*/
     // we clear so that the functions are never executed twice
     RenderedRow.prototype.getAndClearDelayedDestroyFunctions = function () {
         var result = this.delayedDestroyFunctions;
@@ -12860,7 +13195,7 @@ var RenderedRow = (function () {
         gridCellNoType[domDataKey] = {
             renderedRow: this
         };
-        this.destroyFunctions.push(function () { gridCellNoType[domDataKey] = null; });
+        this.addDestroyFunc(function () { gridCellNoType[domDataKey] = null; });
     };
     RenderedRow.prototype.setupFullWidthContainers = function (animateInRowTop) {
         this.fullWidthRow = true;
@@ -12869,22 +13204,14 @@ var RenderedRow = (function () {
         if (utils_1.Utils.missing(this.fullWidthCellRenderer)) {
             console.warn("ag-Grid: you need to provide a fullWidthCellRenderer if using isFullWidthCell()");
         }
-        this.eFullWidthRow = this.createRowContainer(null, this.eFullWidthContainer, animateInRowTop);
-        if (!this.gridOptionsWrapper.isForPrint()) {
-            this.addMouseWheelListenerToFullWidthRow();
-        }
+        this.createFullWidthRow(animateInRowTop);
     };
     RenderedRow.prototype.addMouseWheelListenerToFullWidthRow = function () {
-        var _this = this;
         var mouseWheelListener = this.gridPanel.genericMouseWheelListener.bind(this.gridPanel);
         // IE9, Chrome, Safari, Opera
-        this.eFullWidthRow.addEventListener('mousewheel', mouseWheelListener);
+        this.addDestroyableEventListener(this.eFullWidthRow, 'mousewheel', mouseWheelListener);
         // Firefox
-        this.eFullWidthRow.addEventListener('DOMMouseScroll', mouseWheelListener);
-        this.destroyFunctions.push(function () {
-            _this.eFullWidthRow.removeEventListener('mousewheel', mouseWheelListener);
-            _this.eFullWidthRow.removeEventListener('DOMMouseScroll', mouseWheelListener);
-        });
+        this.addDestroyableEventListener(this.eFullWidthRow, 'DOMMouseScroll', mouseWheelListener);
     };
     RenderedRow.prototype.setupFullWidthGroupContainers = function (animateInRowTop) {
         this.fullWidthRow = true;
@@ -12896,17 +13223,33 @@ var RenderedRow = (function () {
                 innerRenderer: this.gridOptionsWrapper.getGroupRowInnerRenderer()
             };
         }
-        this.eFullWidthRow = this.createRowContainer(null, this.eFullWidthContainer, animateInRowTop);
-        if (!this.gridOptionsWrapper.isForPrint()) {
-            this.addMouseWheelListenerToFullWidthRow();
+        this.createFullWidthRow(animateInRowTop);
+    };
+    RenderedRow.prototype.createFullWidthRow = function (animateInRowTop) {
+        var embedFullWidthRows = this.gridOptionsWrapper.isEmbedFullWidthRows();
+        if (embedFullWidthRows) {
+            // if embedding the full width, it gets added to the body, left and right
+            this.eFullWidthRowBody = this.createRowContainer(this.bodyContainerComp, animateInRowTop);
+            this.eFullWidthRowLeft = this.createRowContainer(this.pinnedLeftContainerComp, animateInRowTop);
+            this.eFullWidthRowRight = this.createRowContainer(this.pinnedRightContainerComp, animateInRowTop);
+            utils_1.Utils.addCssClass(this.eFullWidthRowLeft, 'ag-cell-last-left-pinned');
+            utils_1.Utils.addCssClass(this.eFullWidthRowRight, 'ag-cell-first-right-pinned');
+        }
+        else {
+            // otherwise we add to the fullWidth container as normal
+            this.eFullWidthRow = this.createRowContainer(this.fullWidthContainerComp, animateInRowTop);
+            // and fake the mouse wheel for the fullWidth container
+            if (!this.gridOptionsWrapper.isForPrint()) {
+                this.addMouseWheelListenerToFullWidthRow();
+            }
         }
     };
     RenderedRow.prototype.setupNormalContainers = function (animateInRowTop) {
         this.fullWidthRow = false;
-        this.eBodyRow = this.createRowContainer(this.eBodyContainerDF, this.eBodyContainer, animateInRowTop);
+        this.eBodyRow = this.createRowContainer(this.bodyContainerComp, animateInRowTop);
         if (!this.gridOptionsWrapper.isForPrint()) {
-            this.ePinnedLeftRow = this.createRowContainer(this.ePinnedLeftContainerDF, this.ePinnedLeftContainer, animateInRowTop);
-            this.ePinnedRightRow = this.createRowContainer(this.ePinnedRightContainerDF, this.ePinnedRightContainer, animateInRowTop);
+            this.ePinnedLeftRow = this.createRowContainer(this.pinnedLeftContainerComp, animateInRowTop);
+            this.ePinnedRightRow = this.createRowContainer(this.pinnedRightContainerComp, animateInRowTop);
         }
     };
     RenderedRow.prototype.init = function () {
@@ -12920,6 +13263,7 @@ var RenderedRow = (function () {
             this.refreshCellsIntoRow();
         }
         this.addGridClasses();
+        this.addExpandedAndContractedClasses();
         this.addStyleFromRowStyle();
         this.addStyleFromRowStyleFunc();
         this.addClassesFromRowClass();
@@ -13001,8 +13345,7 @@ var RenderedRow = (function () {
             _this.addStyleFromRowStyleFunc();
             _this.addClassesFromRowClass();
         };
-        this.rowNode.addEventListener(rowNode_1.RowNode.EVENT_DATA_CHANGED, dataChangedListener);
-        this.destroyFunctions.push(function () { return _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_DATA_CHANGED, dataChangedListener); });
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_DATA_CHANGED, dataChangedListener);
     };
     RenderedRow.prototype.angular1Compile = function (element) {
         if (this.scope) {
@@ -13010,27 +13353,27 @@ var RenderedRow = (function () {
         }
     };
     RenderedRow.prototype.addColumnListener = function () {
-        var _this = this;
         var columnListener = this.onDisplayedColumnsChanged.bind(this);
         var virtualListener = this.onVirtualColumnsChanged.bind(this);
         var gridColumnsChangedListener = this.onGridColumnsChanged.bind(this);
-        this.mainEventService.addEventListener(events_1.Events.EVENT_DISPLAYED_COLUMNS_CHANGED, columnListener);
-        this.mainEventService.addEventListener(events_1.Events.EVENT_VIRTUAL_COLUMNS_CHANGED, virtualListener);
-        this.mainEventService.addEventListener(events_1.Events.EVENT_COLUMN_RESIZED, columnListener);
-        this.mainEventService.addEventListener(events_1.Events.EVENT_GRID_COLUMNS_CHANGED, gridColumnsChangedListener);
-        this.destroyFunctions.push(function () {
-            _this.mainEventService.removeEventListener(events_1.Events.EVENT_DISPLAYED_COLUMNS_CHANGED, columnListener);
-            _this.mainEventService.removeEventListener(events_1.Events.EVENT_VIRTUAL_COLUMNS_CHANGED, virtualListener);
-            _this.mainEventService.removeEventListener(events_1.Events.EVENT_COLUMN_RESIZED, columnListener);
-            _this.mainEventService.removeEventListener(events_1.Events.EVENT_GRID_COLUMNS_CHANGED, gridColumnsChangedListener);
-        });
+        this.addDestroyableEventListener(this.mainEventService, events_1.Events.EVENT_DISPLAYED_COLUMNS_CHANGED, columnListener);
+        this.addDestroyableEventListener(this.mainEventService, events_1.Events.EVENT_VIRTUAL_COLUMNS_CHANGED, virtualListener);
+        this.addDestroyableEventListener(this.mainEventService, events_1.Events.EVENT_COLUMN_RESIZED, columnListener);
+        this.addDestroyableEventListener(this.mainEventService, events_1.Events.EVENT_GRID_COLUMNS_CHANGED, gridColumnsChangedListener);
     };
-    RenderedRow.prototype.onDisplayedColumnsChanged = function (event) {
+    RenderedRow.prototype.onDisplayedColumnsChanged = function () {
         // if row is a group row that spans, then it's not impacted by column changes, with exception of pinning
         if (this.fullWidthRow) {
-            var columnPinned = event.getType() === events_1.Events.EVENT_COLUMN_PINNED;
-            if (columnPinned) {
-                this.refreshFullWidthComponent();
+            if (this.gridOptionsWrapper.isEmbedFullWidthRows()) {
+                var leftMismatch = this.fullWidthPinnedLeftLastTime !== this.columnController.isPinningLeft();
+                var rightMismatch = this.fullWidthPinnedRightLastTime !== this.columnController.isPinningRight();
+                // if either of the pinned panels has shown / hidden, then need to redraw the fullWidth bits when
+                // embedded, as what appears in each section depends on whether we are pinned or not
+                if (leftMismatch || rightMismatch) {
+                    this.refreshFullWidthComponent();
+                }
+            }
+            else {
             }
         }
         else {
@@ -13130,12 +13473,7 @@ var RenderedRow = (function () {
         this.eAllRowContainers.forEach(function (row) { return utils_1.Utils.addOrRemoveCssClass(row, 'ag-row-selected', selected); });
     };
     RenderedRow.prototype.addRowSelectedListener = function () {
-        var _this = this;
-        var rowSelectedListener = this.onRowSelected.bind(this);
-        this.rowNode.addEventListener(rowNode_1.RowNode.EVENT_ROW_SELECTED, rowSelectedListener);
-        this.destroyFunctions.push(function () {
-            _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_ROW_SELECTED, rowSelectedListener);
-        });
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_ROW_SELECTED, this.onRowSelected.bind(this));
     };
     RenderedRow.prototype.onMouseEvent = function (eventName, mouseEvent) {
         switch (eventName) {
@@ -13159,44 +13497,32 @@ var RenderedRow = (function () {
         var onGuiMouseEnter = this.rowNode.onMouseEnter.bind(this.rowNode);
         var onGuiMouseLeave = this.rowNode.onMouseLeave.bind(this.rowNode);
         this.eAllRowContainers.forEach(function (eRow) {
-            eRow.addEventListener('mouseenter', onGuiMouseEnter);
-            eRow.addEventListener('mouseleave', onGuiMouseLeave);
+            _this.addDestroyableEventListener(eRow, 'mouseenter', onGuiMouseEnter);
+            _this.addDestroyableEventListener(eRow, 'mouseleave', onGuiMouseLeave);
         });
         var onNodeMouseEnter = this.addHoverClass.bind(this, true);
         var onNodeMouseLeave = this.addHoverClass.bind(this, false);
-        this.rowNode.addEventListener(rowNode_1.RowNode.EVENT_MOUSE_ENTER, onNodeMouseEnter);
-        this.rowNode.addEventListener(rowNode_1.RowNode.EVENT_MOUSE_LEAVE, onNodeMouseLeave);
-        this.destroyFunctions.push(function () {
-            _this.eAllRowContainers.forEach(function (eRow) {
-                eRow.removeEventListener('mouseenter', onGuiMouseEnter);
-                eRow.removeEventListener('mouseleave', onGuiMouseLeave);
-            });
-            _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_MOUSE_ENTER, onNodeMouseEnter);
-            _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_MOUSE_LEAVE, onNodeMouseLeave);
-        });
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_MOUSE_ENTER, onNodeMouseEnter);
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_MOUSE_LEAVE, onNodeMouseLeave);
     };
     RenderedRow.prototype.addHoverClass = function (hover) {
         this.eAllRowContainers.forEach(function (eRow) { return utils_1.Utils.addOrRemoveCssClass(eRow, 'ag-row-hover', hover); });
     };
+    RenderedRow.prototype.setRowFocusClasses = function () {
+        var rowFocused = this.focusedCellController.isRowFocused(this.rowNode.rowIndex, this.rowNode.floating);
+        if (rowFocused !== this.rowFocusedLastTime) {
+            this.eAllRowContainers.forEach(function (row) { return utils_1.Utils.addOrRemoveCssClass(row, 'ag-row-focus', rowFocused); });
+            this.eAllRowContainers.forEach(function (row) { return utils_1.Utils.addOrRemoveCssClass(row, 'ag-row-no-focus', !rowFocused); });
+            this.rowFocusedLastTime = rowFocused;
+        }
+        if (!rowFocused && this.editingRow) {
+            this.stopEditing(false);
+        }
+    };
     RenderedRow.prototype.addCellFocusedListener = function () {
-        var _this = this;
-        var rowFocusedLastTime = null;
-        var rowFocusedListener = function () {
-            var rowFocused = _this.focusedCellController.isRowFocused(_this.rowNode.rowIndex, _this.rowNode.floating);
-            if (rowFocused !== rowFocusedLastTime) {
-                _this.eAllRowContainers.forEach(function (row) { return utils_1.Utils.addOrRemoveCssClass(row, 'ag-row-focus', rowFocused); });
-                _this.eAllRowContainers.forEach(function (row) { return utils_1.Utils.addOrRemoveCssClass(row, 'ag-row-no-focus', !rowFocused); });
-                rowFocusedLastTime = rowFocused;
-            }
-            if (!rowFocused && _this.editingRow) {
-                _this.stopEditing(false);
-            }
-        };
-        this.mainEventService.addEventListener(events_1.Events.EVENT_CELL_FOCUSED, rowFocusedListener);
-        this.destroyFunctions.push(function () {
-            _this.mainEventService.removeEventListener(events_1.Events.EVENT_CELL_FOCUSED, rowFocusedListener);
-        });
-        rowFocusedListener();
+        this.addDestroyableEventListener(this.mainEventService, events_1.Events.EVENT_CELL_FOCUSED, this.setRowFocusClasses.bind(this));
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_ROW_INDEX_CHANGED, this.setRowFocusClasses.bind(this));
+        this.setRowFocusClasses();
     };
     RenderedRow.prototype.forEachRenderedCell = function (callback) {
         utils_1.Utils.iterateObject(this.renderedCells, function (key, renderedCell) {
@@ -13216,10 +13542,7 @@ var RenderedRow = (function () {
             // as a result. this is what happens when selected rows are loaded in virtual pagination.
             _this.onRowSelected();
         };
-        this.rowNode.addEventListener(rowNode_1.RowNode.EVENT_DATA_CHANGED, nodeDataChangedListener);
-        this.destroyFunctions.push(function () {
-            _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_DATA_CHANGED, nodeDataChangedListener);
-        });
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_DATA_CHANGED, nodeDataChangedListener);
     };
     RenderedRow.prototype.onTopChanged = function () {
         // console.log(`top changed for ${this.rowNode.id} = ${this.rowNode.rowTop}`);
@@ -13234,13 +13557,11 @@ var RenderedRow = (function () {
         }
     };
     RenderedRow.prototype.setupTop = function (animateInRowTop) {
-        var _this = this;
         if (this.gridOptionsWrapper.isForPrint()) {
             return;
         }
         var topChangedListener = this.onTopChanged.bind(this);
-        this.rowNode.addEventListener(rowNode_1.RowNode.EVENT_TOP_CHANGED, topChangedListener);
-        this.destroyFunctions.push(function () { return _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_TOP_CHANGED, topChangedListener); });
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_TOP_CHANGED, topChangedListener);
         if (!animateInRowTop) {
             this.onTopChanged();
         }
@@ -13256,8 +13577,7 @@ var RenderedRow = (function () {
                 _this.eAllRowContainers.forEach(function (row) { return row.style.height = heightPx; });
             }
         };
-        this.rowNode.addEventListener(rowNode_1.RowNode.EVENT_HEIGHT_CHANGED, setHeightListener);
-        this.destroyFunctions.push(function () { return _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_HEIGHT_CHANGED, setHeightListener); });
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_HEIGHT_CHANGED, setHeightListener);
         setHeightListener();
     };
     RenderedRow.prototype.addRowIndexes = function () {
@@ -13277,8 +13597,7 @@ var RenderedRow = (function () {
                 utils_1.Utils.addOrRemoveCssClass(eRow, 'ag-row-odd', !rowIsEven);
             });
         };
-        this.rowNode.addEventListener(rowNode_1.RowNode.EVENT_ROW_INDEX_CHANGED, rowIndexListener);
-        this.destroyFunctions.push(function () { return _this.rowNode.removeEventListener(rowNode_1.RowNode.EVENT_ROW_INDEX_CHANGED, rowIndexListener); });
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_ROW_INDEX_CHANGED, rowIndexListener);
         rowIndexListener();
     };
     // adds in row and row-id attributes to the row
@@ -13313,10 +13632,12 @@ var RenderedRow = (function () {
     };
     RenderedRow.prototype.destroy = function (animate) {
         if (animate === void 0) { animate = false; }
+        _super.prototype.destroy.call(this);
+        // why do we have this method? shouldn't everything below be added as a destroy func beside
+        // the corresponding create logic?
         this.destroyScope();
         this.destroyFullWidthComponent();
         this.forEachRenderedCell(function (renderedCell) { return renderedCell.destroy(); });
-        this.destroyFunctions.forEach(function (func) { return func(); });
         if (animate) {
             this.startRemoveAnimationFunctions.forEach(function (func) { return func(); });
         }
@@ -13338,9 +13659,6 @@ var RenderedRow = (function () {
             this.scope = null;
         }
     };
-    RenderedRow.prototype.isDataInList = function (rows) {
-        return rows.indexOf(this.rowNode.data) >= 0;
-    };
     RenderedRow.prototype.isGroup = function () {
         return this.rowNode.group === true;
     };
@@ -13349,9 +13667,28 @@ var RenderedRow = (function () {
         this.createFullWidthComponent();
     };
     RenderedRow.prototype.createFullWidthComponent = function () {
-        var params = this.createFullWidthParams(this.eFullWidthRow);
-        this.fullWidthRowComponent = this.cellRendererService.useCellRenderer(this.fullWidthCellRenderer, this.eFullWidthRow, params);
-        this.angular1Compile(this.eFullWidthRow);
+        this.fullWidthPinnedLeftLastTime = this.columnController.isPinningLeft();
+        this.fullWidthPinnedRightLastTime = this.columnController.isPinningRight();
+        if (this.eFullWidthRow) {
+            var params = this.createFullWidthParams(this.eFullWidthRow, null);
+            this.fullWidthRowComponent = this.cellRendererService.useCellRenderer(this.fullWidthCellRenderer, this.eFullWidthRow, params);
+            this.angular1Compile(this.eFullWidthRow);
+        }
+        if (this.eFullWidthRowBody) {
+            var params = this.createFullWidthParams(this.eFullWidthRowBody, null);
+            this.fullWidthRowComponentBody = this.cellRendererService.useCellRenderer(this.fullWidthCellRenderer, this.eFullWidthRowBody, params);
+            this.angular1Compile(this.eFullWidthRowBody);
+        }
+        if (this.eFullWidthRowLeft) {
+            var params = this.createFullWidthParams(this.eFullWidthRowLeft, column_1.Column.PINNED_LEFT);
+            this.fullWidthRowComponentLeft = this.cellRendererService.useCellRenderer(this.fullWidthCellRenderer, this.eFullWidthRowLeft, params);
+            this.angular1Compile(this.eFullWidthRowLeft);
+        }
+        if (this.eFullWidthRowRight) {
+            var params = this.createFullWidthParams(this.eFullWidthRowRight, column_1.Column.PINNED_RIGHT);
+            this.fullWidthRowComponentRight = this.cellRendererService.useCellRenderer(this.fullWidthCellRenderer, this.eFullWidthRowRight, params);
+            this.angular1Compile(this.eFullWidthRowRight);
+        }
     };
     RenderedRow.prototype.destroyFullWidthComponent = function () {
         if (this.fullWidthRowComponent) {
@@ -13360,9 +13697,38 @@ var RenderedRow = (function () {
             }
             this.fullWidthRowComponent = null;
         }
-        utils_1.Utils.removeAllChildren(this.eFullWidthRow);
+        if (this.fullWidthRowComponentBody) {
+            if (this.fullWidthRowComponentBody.destroy) {
+                this.fullWidthRowComponentBody.destroy();
+            }
+            this.fullWidthRowComponent = null;
+        }
+        if (this.fullWidthRowComponentLeft) {
+            if (this.fullWidthRowComponentLeft.destroy) {
+                this.fullWidthRowComponentLeft.destroy();
+            }
+            this.fullWidthRowComponentLeft = null;
+        }
+        if (this.fullWidthRowComponentRight) {
+            if (this.fullWidthRowComponentRight.destroy) {
+                this.fullWidthRowComponentRight.destroy();
+            }
+            this.fullWidthRowComponent = null;
+        }
+        if (this.eFullWidthRow) {
+            utils_1.Utils.removeAllChildren(this.eFullWidthRow);
+        }
+        if (this.eFullWidthRowBody) {
+            utils_1.Utils.removeAllChildren(this.eFullWidthRowBody);
+        }
+        if (this.eFullWidthRowLeft) {
+            utils_1.Utils.removeAllChildren(this.eFullWidthRowLeft);
+        }
+        if (this.eFullWidthRowRight) {
+            utils_1.Utils.removeAllChildren(this.eFullWidthRowRight);
+        }
     };
-    RenderedRow.prototype.createFullWidthParams = function (eRow) {
+    RenderedRow.prototype.createFullWidthParams = function (eRow, pinned) {
         var params = {
             data: this.rowNode.data,
             node: this.rowNode,
@@ -13373,6 +13739,7 @@ var RenderedRow = (function () {
             context: this.gridOptionsWrapper.getContext(),
             eGridCell: eRow,
             eParentOfValue: eRow,
+            pinned: pinned,
             addRenderedRowListener: this.addEventListener.bind(this),
             colDef: {
                 cellRenderer: this.fullWidthCellRenderer,
@@ -13383,25 +13750,6 @@ var RenderedRow = (function () {
             utils_1.Utils.assign(params, this.fullWidthCellRendererParams);
         }
         return params;
-    };
-    RenderedRow.prototype.createGroupSpanningEntireRowCell = function (padding) {
-        var eRow = document.createElement('span');
-        // padding means we are on the right hand side of a pinned table, ie
-        // in the main body.
-        if (!padding) {
-            var params = this.createFullWidthParams(eRow);
-            var cellComponent = this.cellRendererService.useCellRenderer(this.fullWidthCellRenderer, eRow, params);
-            if (cellComponent && cellComponent.destroy) {
-                this.destroyFunctions.push(function () { return cellComponent.destroy(); });
-            }
-        }
-        if (this.rowNode.footer) {
-            utils_1.Utils.addCssClass(eRow, 'ag-footer-cell-entire-row');
-        }
-        else {
-            utils_1.Utils.addCssClass(eRow, 'ag-group-cell-entire-row');
-        }
-        return eRow;
     };
     RenderedRow.prototype.createChildScopeOrNull = function (data) {
         if (this.gridOptionsWrapper.isAngularCompileRows()) {
@@ -13457,15 +13805,14 @@ var RenderedRow = (function () {
         agEvent.eventSource = eventSource;
         return agEvent;
     };
-    RenderedRow.prototype.createRowContainer = function (eParentDF, eParent, slideRowIn) {
+    RenderedRow.prototype.createRowContainer = function (rowContainerComp, slideRowIn) {
         var _this = this;
         var eRow = document.createElement('div');
         this.addDomData(eRow);
-        var eTarget = eParentDF ? eParentDF : eParent;
-        eTarget.appendChild(eRow);
+        rowContainerComp.appendRowElement(eRow);
         this.eAllRowContainers.push(eRow);
         this.delayedDestroyFunctions.push(function () {
-            eParent.removeChild(eRow);
+            rowContainerComp.removeRowElement(eRow);
         });
         this.startRemoveAnimationFunctions.push(function () {
             utils_1.Utils.addCssClass(eRow, 'ag-opacity-zero');
@@ -13621,13 +13968,6 @@ var RenderedRow = (function () {
             classes.push('ag-row-group');
             // if a group, put the level of the group in
             classes.push('ag-row-level-' + this.rowNode.level);
-            if (!this.rowNode.footer && this.rowNode.expanded) {
-                classes.push('ag-row-group-expanded');
-            }
-            if (!this.rowNode.footer && !this.rowNode.expanded) {
-                // opposite of expanded is contracted according to the internet.
-                classes.push('ag-row-group-contracted');
-            }
             if (this.rowNode.footer) {
                 classes.push('ag-row-footer');
             }
@@ -13647,6 +13987,19 @@ var RenderedRow = (function () {
         classes.forEach(function (classStr) {
             _this.eAllRowContainers.forEach(function (row) { return utils_1.Utils.addCssClass(row, classStr); });
         });
+    };
+    RenderedRow.prototype.addExpandedAndContractedClasses = function () {
+        var _this = this;
+        var isGroupNode = this.rowNode.group && !this.rowNode.footer;
+        if (!isGroupNode) {
+            return;
+        }
+        var listener = function () {
+            var expanded = _this.rowNode.expanded;
+            _this.eAllRowContainers.forEach(function (row) { return utils_1.Utils.addOrRemoveCssClass(row, 'ag-row-group-expanded', expanded); });
+            _this.eAllRowContainers.forEach(function (row) { return utils_1.Utils.addOrRemoveCssClass(row, 'ag-row-group-contracted', !expanded); });
+        };
+        this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_EXPANDED_CHANGED, listener);
     };
     RenderedRow.prototype.addClassesFromRowClass = function () {
         var _this = this;
@@ -13712,14 +14065,14 @@ var RenderedRow = (function () {
         __metadata('design:returntype', void 0)
     ], RenderedRow.prototype, "init", null);
     return RenderedRow;
-}());
+}(beanStub_1.BeanStub));
 exports.RenderedRow = RenderedRow;
 
 });
 
-define('ag-grid/dist/lib/rendering/renderedCell',['require','exports','module','../utils','../entities/column','../entities/rowNode','../gridOptionsWrapper','../expressionService','./rowRenderer','../templateService','../columnController/columnController','../valueService','../eventService','../constants','../events','../context/context','../gridApi','../focusedCellController','../entities/gridCell','../misc/focusService','./cellEditorFactory','../widgets/component','../widgets/popupService','./cellRendererFactory','./cellRendererService','./valueFormatterService','./checkboxSelectionComponent','./features/setLeftFeature','../misc/methodNotImplementedException'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/rendering/renderedCell',['require','exports','module','../utils','../entities/column','../entities/rowNode','../gridOptionsWrapper','../expressionService','./rowRenderer','../templateService','../columnController/columnController','../valueService','../eventService','../constants','../events','../context/context','../gridApi','../focusedCellController','../entities/gridCell','../misc/focusService','./cellEditorFactory','../widgets/component','../widgets/popupService','./cellRendererFactory','./cellRendererService','./valueFormatterService','./checkboxSelectionComponent','./features/setLeftFeature','../misc/methodNotImplementedException','../styling/stylingService'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -13764,6 +14117,7 @@ var valueFormatterService_1 = require("./valueFormatterService");
 var checkboxSelectionComponent_1 = require("./checkboxSelectionComponent");
 var setLeftFeature_1 = require("./features/setLeftFeature");
 var methodNotImplementedException_1 = require("../misc/methodNotImplementedException");
+var stylingService_1 = require("../styling/stylingService");
 var RenderedCell = (function (_super) {
     __extends(RenderedCell, _super);
     function RenderedCell(column, node, scope, renderedRow) {
@@ -14068,8 +14422,14 @@ var RenderedCell = (function (_super) {
         }
     };
     RenderedCell.prototype.onPopupEditorClosed = function () {
+        // we only call stopEditing if we are editing, as
+        // it's possible the popup called 'stop editing'
+        // before this, eg if 'enter key' was pressed on
+        // the editor.
         if (this.editingCell) {
-            this.stopRowOrCellEdit(true);
+            // note: this only happens when use clicks outside of the grid. if use clicks on another
+            // cell, then the editing will have already stopped on this cell
+            this.stopRowOrCellEdit();
             // we only focus cell again if this cell is still focused. it is possible
             // it is not focused if the user cancelled the edit by clicking on another
             // cell outside of this one
@@ -14164,6 +14524,7 @@ var RenderedCell = (function (_super) {
             keyPress: keyPress,
             charPress: charPress,
             column: this.column,
+            rowIndex: this.gridCell.rowIndex,
             node: this.node,
             api: this.gridOptionsWrapper.getApi(),
             cellStartedEdit: cellStartedEdit,
@@ -14257,13 +14618,7 @@ var RenderedCell = (function (_super) {
         this.hideEditorPopup = this.popupService.addAsModalPopup(ePopupGui, true, 
         // callback for when popup disappears
         function () {
-            // we only call stopEditing if we are editing, as
-            // it's possible the popup called 'stop editing'
-            // before this, eg if 'enter key' was pressed on
-            // the editor
-            if (_this.editingCell) {
-                _this.onPopupEditorClosed();
-            }
+            _this.onPopupEditorClosed();
         });
         this.popupService.positionPopupOverComponent({
             eventSource: this.eGridCell,
@@ -14359,8 +14714,8 @@ var RenderedCell = (function (_super) {
         return this.column.isSuppressNavigable(this.node);
     };
     RenderedCell.prototype.isCellEditable = function () {
-        // never allow editing of groups
-        if (this.node.group) {
+        // only allow editing of groups if the user has this option enabled
+        if (this.node.group && !this.gridOptionsWrapper.isEnableGroupEdit()) {
             return false;
         }
         return this.column.isCellEditable(this.node);
@@ -14530,39 +14885,6 @@ var RenderedCell = (function (_super) {
             }
         }
     };
-    RenderedCell.prototype.addClassesFromRules = function () {
-        var colDef = this.column.getColDef();
-        var classRules = colDef.cellClassRules;
-        if (typeof classRules === 'object' && classRules !== null) {
-            var params = {
-                value: this.value,
-                data: this.node.data,
-                node: this.node,
-                colDef: colDef,
-                rowIndex: this.gridCell.rowIndex,
-                api: this.gridOptionsWrapper.getApi(),
-                context: this.gridOptionsWrapper.getContext()
-            };
-            var classNames = Object.keys(classRules);
-            for (var i = 0; i < classNames.length; i++) {
-                var className = classNames[i];
-                var rule = classRules[className];
-                var resultOfRule;
-                if (typeof rule === 'string') {
-                    resultOfRule = this.expressionService.evaluate(rule, params);
-                }
-                else if (typeof rule === 'function') {
-                    resultOfRule = rule(params);
-                }
-                if (resultOfRule) {
-                    utils_1.Utils.addCssClass(this.eGridCell, className);
-                }
-                else {
-                    utils_1.Utils.removeCssClass(this.eGridCell, className);
-                }
-            }
-        }
-    };
     RenderedCell.prototype.createParentOfValue = function () {
         if (this.checkboxSelection) {
             this.eCellWrapper = document.createElement('span');
@@ -14643,6 +14965,22 @@ var RenderedCell = (function (_super) {
                 that.$compile(that.eGridCell)(that.scope);
             }
         }
+    };
+    RenderedCell.prototype.addClassesFromRules = function () {
+        var _this = this;
+        this.stylingService.processCellClassRules(this.column.getColDef(), {
+            value: this.value,
+            data: this.node.data,
+            node: this.node,
+            colDef: this.column.getColDef(),
+            rowIndex: this.gridCell.rowIndex,
+            api: this.gridOptionsWrapper.getApi(),
+            context: this.gridOptionsWrapper.getContext()
+        }, function (className) {
+            utils_1.Utils.addCssClass(_this.eGridCell, className);
+        }, function (className) {
+            utils_1.Utils.removeCssClass(_this.eGridCell, className);
+        });
     };
     RenderedCell.prototype.putDataIntoCell = function () {
         // template gets preference, then cellRenderer, then do it ourselves
@@ -14816,6 +15154,10 @@ var RenderedCell = (function (_super) {
         __metadata('design:type', valueFormatterService_1.ValueFormatterService)
     ], RenderedCell.prototype, "valueFormatterService", void 0);
     __decorate([
+        context_1.Autowired('stylingService'), 
+        __metadata('design:type', stylingService_1.StylingService)
+    ], RenderedCell.prototype, "stylingService", void 0);
+    __decorate([
         context_1.PostConstruct, 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
@@ -14829,7 +15171,7 @@ exports.RenderedCell = RenderedCell;
 
 define('ag-grid/dist/lib/misc/focusService',['require','exports','module','../context/context','../utils','../gridCore','../columnController/columnController','../constants','../entities/gridCell'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -14962,7 +15304,7 @@ exports.FocusService = FocusService;
 
 define('ag-grid/dist/lib/gridCore',['require','exports','module','./gridOptionsWrapper','./rowControllers/paginationController','./columnController/columnController','./rendering/rowRenderer','./filter/filterManager','./eventService','./gridPanel/gridPanel','./logger','./constants','./widgets/popupService','./events','./utils','./layout/borderLayout','./context/context','./focusedCellController','./widgets/component'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -15307,7 +15649,7 @@ exports.GridCore = GridCore;
 
 define('ag-grid/dist/lib/rowControllers/paginationController',['require','exports','module','../utils','../gridOptionsWrapper','../context/context','../gridPanel/gridPanel','../selectionController','../sortController','../eventService','../events','../filter/filterManager','../constants'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -15663,7 +16005,7 @@ exports.PaginationController = PaginationController;
 
 define('ag-grid/dist/lib/sortController',['require','exports','module','./entities/column','./context/context','./gridOptionsWrapper','./columnController/columnController','./eventService','./events','./context/context','./utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -15704,6 +16046,11 @@ var SortController = (function () {
         if (!doingMultiSort) {
             this.clearSortBarThisColumn(column);
         }
+        this.dispatchSortChangedEvents();
+    };
+    // gets called by API, so if data changes, use can call this, which will end up
+    // working out the sort order again of the rows.
+    SortController.prototype.onSortChanged = function () {
         this.dispatchSortChangedEvents();
     };
     SortController.prototype.dispatchSortChangedEvents = function () {
@@ -15836,9 +16183,9 @@ exports.SortController = SortController;
 
 });
 
-define('ag-grid/dist/lib/filter/filterManager',['require','exports','module','../utils','../gridOptionsWrapper','../widgets/popupService','../valueService','../columnController/columnController','./textFilter','./numberFilter','../context/context','../eventService','../events'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/filter/filterManager',['require','exports','module','../utils','../gridOptionsWrapper','../widgets/popupService','../valueService','../columnController/columnController','./textFilter','./numberFilter','../context/context','../eventService','../events','./dateFilter'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -15862,13 +16209,15 @@ var numberFilter_1 = require("./numberFilter");
 var context_1 = require("../context/context");
 var eventService_1 = require("../eventService");
 var events_1 = require("../events");
+var dateFilter_1 = require("./dateFilter");
 var FilterManager = (function () {
     function FilterManager() {
         this.allFilters = {};
         this.quickFilter = null;
         this.availableFilters = {
             'text': textFilter_1.TextFilter,
-            'number': numberFilter_1.NumberFilter
+            'number': numberFilter_1.NumberFilter,
+            'date': dateFilter_1.DateFilter
         };
     }
     FilterManager.prototype.init = function () {
@@ -15934,13 +16283,16 @@ var FilterManager = (function () {
     };
     // returns true if any advanced filter (ie not quick filter) active
     FilterManager.prototype.isAdvancedFilterPresent = function () {
+        return this.advancedFilterPresent;
+    };
+    FilterManager.prototype.setAdvancedFilterPresent = function () {
         var atLeastOneActive = false;
         utils_1.Utils.iterateObject(this.allFilters, function (key, filterWrapper) {
             if (filterWrapper.filter.isFilterActive()) {
                 atLeastOneActive = true;
             }
         });
-        return atLeastOneActive;
+        this.advancedFilterPresent = atLeastOneActive;
     };
     FilterManager.prototype.updateFilterFlagInColumns = function () {
         utils_1.Utils.iterateObject(this.allFilters, function (key, filterWrapper) {
@@ -16006,7 +16358,7 @@ var FilterManager = (function () {
     };
     FilterManager.prototype.onFilterChanged = function () {
         this.eventService.dispatchEvent(events_1.Events.EVENT_BEFORE_FILTER_CHANGED);
-        this.advancedFilterPresent = this.isAdvancedFilterPresent();
+        this.setAdvancedFilterPresent();
         this.updateFilterFlagInColumns();
         this.checkExternalFilter();
         utils_1.Utils.iterateObject(this.allFilters, function (key, filterWrapper) {
@@ -16083,6 +16435,7 @@ var FilterManager = (function () {
             }
         });
         this.updateFilterFlagInColumns();
+        this.setAdvancedFilterPresent();
     };
     FilterManager.prototype.createValueGetter = function (column) {
         var that = this;
@@ -16313,7 +16666,7 @@ exports.FilterManager = FilterManager;
 
 define('ag-grid/dist/lib/widgets/popupService',['require','exports','module','../utils','../constants','../context/context','../gridCore','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -16566,7 +16919,7 @@ exports.PopupService = PopupService;
 
 define('ag-grid/dist/lib/filter/textFilter',['require','exports','module','../utils','../context/context','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -16755,7 +17108,7 @@ exports.TextFilter = TextFilter;
 
 define('ag-grid/dist/lib/filter/numberFilter',['require','exports','module','../utils','../context/context','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -16934,9 +17287,269 @@ exports.NumberFilter = NumberFilter;
 
 });
 
+define('ag-grid/dist/lib/filter/dateFilter',['require','exports','module','../widgets/component','../widgets/componentAnnotations','../context/context','../gridOptionsWrapper','../utils'],function (require, exports, module) {/**
+ * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
+ * @version v7.2.0
+ * @link http://www.ag-grid.com/
+ * @license MIT
+ */
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var component_1 = require("../widgets/component");
+var componentAnnotations_1 = require("../widgets/componentAnnotations");
+var context_1 = require("../context/context");
+var gridOptionsWrapper_1 = require("../gridOptionsWrapper");
+var utils_1 = require("../utils");
+var DateFilter = (function (_super) {
+    __extends(DateFilter, _super);
+    function DateFilter() {
+        _super.apply(this, arguments);
+        this.filter = 'equals';
+    }
+    DateFilter.prototype.init = function (params) {
+        this.filterParams = params;
+        this.applyActive = params.apply === true;
+        this.newRowsActionKeep = params.newRowsAction === 'keep';
+        this.setTemplate(this.generateTemplate());
+        if (this.applyActive) {
+            this.addDestroyableEventListener(this.eApplyButton, "click", this.filterParams.filterChangedCallback);
+        }
+        else {
+            this.getGui().removeChild(this.eApplyPanel);
+        }
+        var UserDateComponent = this.gridOptionsWrapper.getDateComponent();
+        var DateComponent = UserDateComponent ? UserDateComponent : DefaultDateComponent;
+        this.dateToComponent = new DateComponent();
+        this.dateFromComponent = new DateComponent();
+        var dateComponentParams = {
+            onDateChanged: this.onDateChanged.bind(this)
+        };
+        this.dateFromComponent.init(dateComponentParams);
+        this.dateToComponent.init(dateComponentParams);
+        this.addInDateComponents();
+        this.setVisibilityOnDateToPanel();
+        this.instantiate(this.context);
+        this.addDestroyableEventListener(this.eTypeSelector, "change", this.onFilterTypeChanged.bind(this));
+    };
+    DateFilter.prototype.generateTemplate = function () {
+        var translate = this.gridOptionsWrapper.getLocaleTextFunc();
+        return "<div>\n                    <div>\n                        <select class=\"ag-filter-select\" id=\"filterType\">\n                            <option value=\"" + DateFilter.EQUALS + "\">" + translate('equals', 'Equals') + "</option>\n                            <option value=\"" + DateFilter.NOT_EQUAL + "\">" + translate('notEqual', 'Not equal') + "</option>\n                            <option value=\"" + DateFilter.LESS_THAN + "\">" + translate('lessThan', 'Less than') + "</option>\n                            <option value=\"" + DateFilter.GREATER_THAN + "\">" + translate('greaterThan', 'Greater than') + "</option>\n                            <option value=\"" + DateFilter.IN_RANGE + "\">" + translate('inRange', 'In range') + "</option>\n                        </select>\n                    </div>\n                    <div class=\"ag-filter-date-from\" id=\"filterDateFromPanel\">\n                    </div>\n                    <div class=\"ag-filter-date-to\" id=\"filterDateToPanel\">\n                    </div>\n                    <div class=\"ag-filter-apply-panel\" id=\"applyPanel\">\n                        <button type=\"button\" id=\"applyButton\">" + translate('applyFilter', 'Apply Filter') + "</button>\n                    </div>\n                </div>";
+    };
+    DateFilter.prototype.onNewRowsLoaded = function () {
+        if (!this.newRowsActionKeep) {
+            this.setFilterType(DateFilter.EQUALS);
+            this.setDateFrom(null);
+            this.setDateTo(null);
+        }
+    };
+    DateFilter.prototype.onDateChanged = function () {
+        this.dateFrom = this.removeTimezone(this.dateFromComponent.getDate());
+        this.dateTo = this.removeTimezone(this.dateToComponent.getDate());
+        this.filterParams.filterModifiedCallback();
+        if (!this.applyActive) {
+            this.filterParams.filterChangedCallback();
+        }
+    };
+    DateFilter.prototype.onFilterTypeChanged = function () {
+        this.filter = this.eTypeSelector.value;
+        this.setVisibilityOnDateToPanel();
+        this.filterParams.filterModifiedCallback();
+        if (!this.applyActive) {
+            this.filterParams.filterChangedCallback();
+        }
+    };
+    DateFilter.prototype.setVisibilityOnDateToPanel = function () {
+        var visible = this.filter === DateFilter.IN_RANGE;
+        utils_1.Utils.setVisible(this.eDateToPanel, visible);
+    };
+    DateFilter.prototype.addInDateComponents = function () {
+        this.eDateFromPanel.appendChild(this.dateFromComponent.getGui());
+        this.eDateToPanel.appendChild(this.dateToComponent.getGui());
+        if (this.dateFromComponent.afterGuiAttached) {
+            this.dateFromComponent.afterGuiAttached();
+        }
+        if (this.dateToComponent.afterGuiAttached) {
+            this.dateToComponent.afterGuiAttached();
+        }
+    };
+    DateFilter.prototype.isFilterActive = function () {
+        if (this.filter === DateFilter.IN_RANGE) {
+            return this.dateFrom != null && this.dateTo != null;
+        }
+        else {
+            return this.dateFrom != null;
+        }
+    };
+    DateFilter.prototype.doesFilterPass = function (params) {
+        var value = this.filterParams.valueGetter(params.node);
+        var comparator = null;
+        if (this.filterParams.comparator) {
+            comparator = this.filterParams.comparator;
+        }
+        else {
+            comparator = this.defaultComparator.bind(this);
+        }
+        var compareDateFromResult = comparator(this.dateFrom, value);
+        if (this.filter === DateFilter.EQUALS) {
+            return compareDateFromResult === 0;
+        }
+        if (this.filter === DateFilter.GREATER_THAN) {
+            return compareDateFromResult > 0;
+        }
+        if (this.filter === DateFilter.LESS_THAN) {
+            return compareDateFromResult < 0;
+        }
+        if (this.filter === DateFilter.NOT_EQUAL) {
+            return compareDateFromResult != 0;
+        }
+        //From now on the type is a range
+        var compareDateToResult = comparator(this.dateTo, value);
+        if (this.filter === DateFilter.IN_RANGE) {
+            return compareDateFromResult > 0 && compareDateToResult < 0;
+        }
+        throw new Error('Unexpected type of date filter!: ' + this.filter);
+    };
+    DateFilter.prototype.defaultComparator = function (filterDate, cellValue) {
+        //The default comparator assumes that the cellValue is a date
+        var cellAsDate = cellValue;
+        if (cellAsDate < filterDate) {
+            return -1;
+        }
+        if (cellAsDate > filterDate) {
+            return 1;
+        }
+        return 0;
+    };
+    DateFilter.prototype.getModel = function () {
+        if (this.isFilterActive()) {
+            return {
+                dateTo: utils_1.Utils.serializeDateToYyyyMmDd(this.dateToComponent.getDate(), "-"),
+                dateFrom: utils_1.Utils.serializeDateToYyyyMmDd(this.dateFromComponent.getDate(), "-"),
+                type: this.filter
+            };
+        }
+        else {
+            return null;
+        }
+    };
+    // not used by ag-Grid, but exposed as part of the filter API for the client if they want it
+    DateFilter.prototype.getDateFrom = function () {
+        return utils_1.Utils.serializeDateToYyyyMmDd(this.dateFromComponent.getDate(), "-");
+    };
+    // not used by ag-Grid, but exposed as part of the filter API for the client if they want it
+    DateFilter.prototype.getDateTo = function () {
+        return utils_1.Utils.serializeDateToYyyyMmDd(this.dateToComponent.getDate(), "-");
+    };
+    // not used by ag-Grid, but exposed as part of the filter API for the client if they want it
+    DateFilter.prototype.getFilterType = function () {
+        return this.filter;
+    };
+    DateFilter.prototype.setDateFrom = function (date) {
+        this.dateFrom = utils_1.Utils.parseYyyyMmDdToDate(date, "-");
+        this.dateFromComponent.setDate(this.dateFrom);
+    };
+    DateFilter.prototype.setDateTo = function (date) {
+        this.dateTo = utils_1.Utils.parseYyyyMmDdToDate(date, "-");
+        this.dateToComponent.setDate(this.dateTo);
+    };
+    DateFilter.prototype.setFilterType = function (filterType) {
+        this.filter = filterType;
+        this.eTypeSelector.value = filterType;
+    };
+    DateFilter.prototype.setModel = function (model) {
+        if (model) {
+            this.setDateFrom(model.dateFrom);
+            this.setDateTo(model.dateTo);
+            this.setFilterType(model.type);
+        }
+        else {
+            this.setDateFrom(null);
+            this.setDateTo(null);
+            this.setFilterType("equals");
+        }
+    };
+    DateFilter.prototype.removeTimezone = function (from) {
+        if (!from)
+            return null;
+        return new Date(from.getFullYear(), from.getMonth(), from.getDate());
+    };
+    DateFilter.EQUALS = 'equals';
+    DateFilter.NOT_EQUAL = 'notEqual';
+    DateFilter.LESS_THAN = 'lessThan';
+    DateFilter.GREATER_THAN = 'greaterThan';
+    DateFilter.IN_RANGE = 'inRange';
+    __decorate([
+        context_1.Autowired('gridOptionsWrapper'), 
+        __metadata('design:type', gridOptionsWrapper_1.GridOptionsWrapper)
+    ], DateFilter.prototype, "gridOptionsWrapper", void 0);
+    __decorate([
+        context_1.Autowired('context'), 
+        __metadata('design:type', context_1.Context)
+    ], DateFilter.prototype, "context", void 0);
+    __decorate([
+        componentAnnotations_1.QuerySelector('#filterDateFromPanel'), 
+        __metadata('design:type', HTMLElement)
+    ], DateFilter.prototype, "eDateFromPanel", void 0);
+    __decorate([
+        componentAnnotations_1.QuerySelector('#filterDateToPanel'), 
+        __metadata('design:type', HTMLElement)
+    ], DateFilter.prototype, "eDateToPanel", void 0);
+    __decorate([
+        componentAnnotations_1.QuerySelector('#applyPanel'), 
+        __metadata('design:type', HTMLElement)
+    ], DateFilter.prototype, "eApplyPanel", void 0);
+    __decorate([
+        componentAnnotations_1.QuerySelector('#applyButton'), 
+        __metadata('design:type', HTMLElement)
+    ], DateFilter.prototype, "eApplyButton", void 0);
+    __decorate([
+        componentAnnotations_1.QuerySelector('#filterType'), 
+        __metadata('design:type', HTMLSelectElement)
+    ], DateFilter.prototype, "eTypeSelector", void 0);
+    return DateFilter;
+}(component_1.Component));
+exports.DateFilter = DateFilter;
+var DefaultDateComponent = (function (_super) {
+    __extends(DefaultDateComponent, _super);
+    function DefaultDateComponent() {
+        _super.call(this, "<input class=\"ag-filter-filter\" type=\"text\" placeholder=\"yyyy-mm-dd\">");
+    }
+    DefaultDateComponent.prototype.init = function (params) {
+        this.eDateInput = this.getGui();
+        if (utils_1.Utils.isBrowserChrome()) {
+            this.eDateInput.type = 'date';
+        }
+        this.listener = params.onDateChanged;
+        this.addGuiEventListener('input', this.listener);
+    };
+    DefaultDateComponent.prototype.getDate = function () {
+        return utils_1.Utils.parseYyyyMmDdToDate(this.eDateInput.value, "-");
+    };
+    DefaultDateComponent.prototype.setDate = function (date) {
+        this.eDateInput.value = utils_1.Utils.serializeDateToYyyyMmDd(date, "-");
+    };
+    return DefaultDateComponent;
+}(component_1.Component));
+exports.DefaultDateComponent = DefaultDateComponent;
+
+});
+
 define('ag-grid/dist/lib/widgets/component',['require','exports','module','../utils','../context/beanStub'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17062,6 +17675,11 @@ var Component = (function (_super) {
     Component.prototype.getGui = function () {
         return this.eGui;
     };
+    // this method is for older code, that wants to provide the gui element,
+    // it is not intended for this to be in ag-Stack
+    Component.prototype.setGui = function (eGui) {
+        this.eGui = eGui;
+    };
     Component.prototype.queryForHtmlElement = function (cssSelector) {
         return this.eGui.querySelector(cssSelector);
     };
@@ -17121,9 +17739,69 @@ exports.Component = Component;
 
 });
 
+define('ag-grid/dist/lib/widgets/componentAnnotations',['require','exports','module'],function (require, exports, module) {/**
+ * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
+ * @version v7.2.0
+ * @link http://www.ag-grid.com/
+ * @license MIT
+ */
+"use strict";
+function QuerySelector(selector) {
+    return querySelectorFunc.bind(this, selector);
+}
+exports.QuerySelector = QuerySelector;
+function querySelectorFunc(selector, classPrototype, methodOrAttributeName, index) {
+    if (selector === null) {
+        console.error('ag-Grid: QuerySelector selector should not be null');
+        return;
+    }
+    if (typeof index === 'number') {
+        console.error('ag-Grid: QuerySelector should be on an attribute');
+        return;
+    }
+    // it's an attribute on the class
+    var props = getOrCreateProps(classPrototype);
+    if (!props.querySelectors) {
+        props.querySelectors = [];
+    }
+    props.querySelectors.push({
+        attributeName: methodOrAttributeName,
+        querySelector: selector
+    });
+}
+function Listener(eventName) {
+    return listenerFunc.bind(this, eventName);
+}
+exports.Listener = Listener;
+function listenerFunc(eventName, target, methodName, descriptor) {
+    if (eventName === null) {
+        console.error('ag-Grid: EventListener eventName should not be null');
+        return;
+    }
+    // it's an attribute on the class
+    var props = getOrCreateProps(target);
+    if (!props.listenerMethods) {
+        props.listenerMethods = [];
+    }
+    props.listenerMethods.push({
+        methodName: methodName,
+        eventName: eventName
+    });
+}
+function getOrCreateProps(target) {
+    var props = target.__agComponentMetaData;
+    if (!props) {
+        props = {};
+        target.__agComponentMetaData = props;
+    }
+    return props;
+}
+
+});
+
 define('ag-grid/dist/lib/rendering/cellEditorFactory',['require','exports','module','../context/context','../utils','./cellEditors/textCellEditor','./cellEditors/selectCellEditor','./cellEditors/popupEditorWrapper','./cellEditors/popupTextCellEditor','./cellEditors/popupSelectCellEditor','../gridOptionsWrapper','./cellEditors/largeTextCellEditor'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17229,7 +17907,7 @@ exports.CellEditorFactory = CellEditorFactory;
 
 define('ag-grid/dist/lib/rendering/cellEditors/textCellEditor',['require','exports','module','../../constants','../../widgets/component','../../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17321,7 +17999,7 @@ exports.TextCellEditor = TextCellEditor;
 
 define('ag-grid/dist/lib/rendering/cellEditors/selectCellEditor',['require','exports','module','../../widgets/component','../../utils','../../constants'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17386,7 +18064,7 @@ exports.SelectCellEditor = SelectCellEditor;
 
 define('ag-grid/dist/lib/rendering/cellEditors/popupEditorWrapper',['require','exports','module','../../widgets/component'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17464,7 +18142,7 @@ exports.PopupEditorWrapper = PopupEditorWrapper;
 
 define('ag-grid/dist/lib/rendering/cellEditors/popupTextCellEditor',['require','exports','module','./textCellEditor'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17491,7 +18169,7 @@ exports.PopupTextCellEditor = PopupTextCellEditor;
 
 define('ag-grid/dist/lib/rendering/cellEditors/popupSelectCellEditor',['require','exports','module','./selectCellEditor'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17518,7 +18196,7 @@ exports.PopupSelectCellEditor = PopupSelectCellEditor;
 
 define('ag-grid/dist/lib/rendering/cellEditors/largeTextCellEditor',['require','exports','module','../../widgets/component','../../constants','../../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17583,7 +18261,7 @@ exports.LargeTextCellEditor = LargeTextCellEditor;
 
 define('ag-grid/dist/lib/rendering/cellRendererFactory',['require','exports','module','../context/context','../utils','../gridOptionsWrapper','../eventService','../expressionService','./cellRenderers/animateSlideCellRenderer','./cellRenderers/animateShowChangeCellRenderer','./cellRenderers/groupCellRenderer'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17665,7 +18343,7 @@ exports.CellRendererFactory = CellRendererFactory;
 
 define('ag-grid/dist/lib/rendering/cellRenderers/animateSlideCellRenderer',['require','exports','module','../../utils','../../widgets/component'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17750,7 +18428,7 @@ exports.AnimateSlideCellRenderer = AnimateSlideCellRenderer;
 
 define('ag-grid/dist/lib/rendering/cellRenderers/animateShowChangeCellRenderer',['require','exports','module','../../utils','../../widgets/component'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17846,9 +18524,9 @@ exports.AnimateShowChangeCellRenderer = AnimateShowChangeCellRenderer;
 
 });
 
-define('ag-grid/dist/lib/rendering/cellRenderers/groupCellRenderer',['require','exports','module','../../svgFactory','../../gridOptionsWrapper','../../expressionService','../../eventService','../../constants','../../utils','../../events','../../context/context','../../widgets/component','../../entities/rowNode','../cellRendererService','../valueFormatterService','../checkboxSelectionComponent','../../columnController/columnController'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/rendering/cellRenderers/groupCellRenderer',['require','exports','module','../../svgFactory','../../gridOptionsWrapper','../../expressionService','../../eventService','../../constants','../../utils','../../events','../../context/context','../../widgets/component','../../entities/rowNode','../cellRendererService','../valueFormatterService','../checkboxSelectionComponent','../../columnController/columnController','../../entities/column'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -17881,6 +18559,7 @@ var cellRendererService_1 = require("../cellRendererService");
 var valueFormatterService_1 = require("../valueFormatterService");
 var checkboxSelectionComponent_1 = require("../checkboxSelectionComponent");
 var columnController_1 = require("../../columnController/columnController");
+var column_1 = require("../../entities/column");
 var svgFactory = svgFactory_1.SvgFactory.getInstance();
 var GroupCellRenderer = (function (_super) {
     __extends(GroupCellRenderer, _super);
@@ -17896,10 +18575,39 @@ var GroupCellRenderer = (function (_super) {
         this.rowNode = params.node;
         this.rowIndex = params.rowIndex;
         this.gridApi = params.api;
+        if (this.isLeaveCellBlank(params)) {
+            return;
+        }
         this.addExpandAndContract(params.eGridCell);
         this.addCheckboxIfNeeded(params);
         this.addValueElement(params);
         this.addPadding(params);
+    };
+    // if we are doing embedded full width rows, we only show the renderer when
+    // in the body, or if pinning in the pinned section, or if pinning and RTL,
+    // in the right section. otherwise we would have the cell repeated in each section.
+    GroupCellRenderer.prototype.isLeaveCellBlank = function (params) {
+        if (this.gridOptionsWrapper.isEmbedFullWidthRows()) {
+            var pinnedLeftCell = params.pinned === column_1.Column.PINNED_LEFT;
+            var pinnedRightCell = params.pinned === column_1.Column.PINNED_RIGHT;
+            var bodyCell = !pinnedLeftCell && !pinnedRightCell;
+            if (this.gridOptionsWrapper.isEnableRtl()) {
+                if (this.columnController.isPinningLeft()) {
+                    return !pinnedRightCell;
+                }
+                else {
+                    return !bodyCell;
+                }
+            }
+            else {
+                if (this.columnController.isPinningLeft()) {
+                    return !pinnedLeftCell;
+                }
+                else {
+                    return !bodyCell;
+                }
+            }
+        }
     };
     GroupCellRenderer.prototype.addPadding = function (params) {
         // only do this if an indent - as this overwrites the padding that
@@ -18077,7 +18785,10 @@ var GroupCellRenderer = (function (_super) {
         this.eContracted.appendChild(eContractedIcon);
         this.addDestroyableEventListener(this.eExpanded, 'click', this.onExpandOrContract.bind(this));
         this.addDestroyableEventListener(this.eContracted, 'click', this.onExpandOrContract.bind(this));
-        this.addDestroyableEventListener(eGroupCell, 'dblclick', this.onExpandOrContract.bind(this));
+        // if editing groups, then double click is to start editing
+        if (!this.gridOptionsWrapper.isEnableGroupEdit()) {
+            this.addDestroyableEventListener(eGroupCell, 'dblclick', this.onExpandOrContract.bind(this));
+        }
         // expand / contract as the user hits enter
         this.addDestroyableEventListener(eGroupCell, 'keydown', this.onKeyDown.bind(this));
         this.addDestroyableEventListener(this.rowNode, rowNode_1.RowNode.EVENT_EXPANDED_CHANGED, this.showExpandAndContractIcons.bind(this));
@@ -18152,7 +18863,7 @@ exports.GroupCellRenderer = GroupCellRenderer;
 
 define('ag-grid/dist/lib/svgFactory',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -18451,7 +19162,7 @@ function createCircle(fill) {
 
 define('ag-grid/dist/lib/rendering/cellRendererService',['require','exports','module','../utils','../context/context','./cellRendererFactory'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -18557,7 +19268,7 @@ exports.CellRendererService = CellRendererService;
 
 define('ag-grid/dist/lib/rendering/valueFormatterService',['require','exports','module','../context/context','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -18617,7 +19328,7 @@ exports.ValueFormatterService = ValueFormatterService;
 
 define('ag-grid/dist/lib/rendering/checkboxSelectionComponent',['require','exports','module','../widgets/component','../entities/rowNode','../utils','../context/context','../gridOptionsWrapper','../svgFactory'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -18703,29 +19414,31 @@ exports.CheckboxSelectionComponent = CheckboxSelectionComponent;
 
 });
 
-define('ag-grid/dist/lib/rendering/features/setLeftFeature',['require','exports','module','../../utils','../../entities/column'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/rendering/features/setLeftFeature',['require','exports','module','../../utils','../../entities/column','../../context/beanStub'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var utils_1 = require("../../utils");
 var column_1 = require("../../entities/column");
-var SetLeftFeature = (function () {
+var beanStub_1 = require("../../context/beanStub");
+var SetLeftFeature = (function (_super) {
+    __extends(SetLeftFeature, _super);
     function SetLeftFeature(columnOrGroup, eCell) {
-        this.destroyFunctions = [];
+        _super.call(this);
         this.columnOrGroup = columnOrGroup;
         this.eCell = eCell;
         this.init();
     }
     SetLeftFeature.prototype.init = function () {
-        var _this = this;
-        var listener = this.onLeftChanged.bind(this);
-        this.columnOrGroup.addEventListener(column_1.Column.EVENT_LEFT_CHANGED, listener);
-        this.destroyFunctions.push(function () {
-            _this.columnOrGroup.removeEventListener(column_1.Column.EVENT_LEFT_CHANGED, listener);
-        });
+        this.addDestroyableEventListener(this.columnOrGroup, column_1.Column.EVENT_LEFT_CHANGED, this.onLeftChanged.bind(this));
         this.onLeftChanged();
     };
     SetLeftFeature.prototype.onLeftChanged = function () {
@@ -18737,20 +19450,15 @@ var SetLeftFeature = (function () {
             this.eCell.style.left = '';
         }
     };
-    SetLeftFeature.prototype.destroy = function () {
-        this.destroyFunctions.forEach(function (func) {
-            func();
-        });
-    };
     return SetLeftFeature;
-}());
+}(beanStub_1.BeanStub));
 exports.SetLeftFeature = SetLeftFeature;
 
 });
 
 define('ag-grid/dist/lib/misc/methodNotImplementedException',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -18764,9 +19472,67 @@ exports.MethodNotImplementedException = MethodNotImplementedException;
 
 });
 
+define('ag-grid/dist/lib/styling/stylingService',['require','exports','module','../context/context','../expressionService'],function (require, exports, module) {/**
+ * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
+ * @version v7.2.0
+ * @link http://www.ag-grid.com/
+ * @license MIT
+ */
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var context_1 = require("../context/context");
+var expressionService_1 = require("../expressionService");
+var StylingService = (function () {
+    function StylingService() {
+    }
+    StylingService.prototype.processCellClassRules = function (colDef, params, onApplicableClass, onNotApplicableClass) {
+        var classRules = colDef.cellClassRules;
+        if (typeof classRules === 'object' && classRules !== null) {
+            var classNames = Object.keys(classRules);
+            for (var i = 0; i < classNames.length; i++) {
+                var className = classNames[i];
+                var rule = classRules[className];
+                var resultOfRule;
+                if (typeof rule === 'string') {
+                    resultOfRule = this.expressionService.evaluate(rule, params);
+                }
+                else if (typeof rule === 'function') {
+                    resultOfRule = rule(params);
+                }
+                if (resultOfRule) {
+                    onApplicableClass(className);
+                }
+                else if (onNotApplicableClass) {
+                    onNotApplicableClass(className);
+                }
+            }
+        }
+    };
+    __decorate([
+        context_1.Autowired('expressionService'), 
+        __metadata('design:type', expressionService_1.ExpressionService)
+    ], StylingService.prototype, "expressionService", void 0);
+    StylingService = __decorate([
+        context_1.Bean('stylingService'), 
+        __metadata('design:paramtypes', [])
+    ], StylingService);
+    return StylingService;
+}());
+exports.StylingService = StylingService;
+
+});
+
 define('ag-grid/dist/lib/cellNavigationService',['require','exports','module','./context/context','./constants','./columnController/columnController','./rowControllers/floatingRowModel','./utils','./entities/gridRow','./entities/gridCell','./gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -19010,7 +19776,7 @@ exports.CellNavigationService = CellNavigationService;
 
 define('ag-grid/dist/lib/headerRendering/headerRenderer',['require','exports','module','../gridOptionsWrapper','../columnController/columnController','../gridPanel/gridPanel','../entities/column','../context/context','./headerContainer','../eventService','../events','../gridPanel/scrollVisibleService'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -19149,7 +19915,7 @@ exports.HeaderRenderer = HeaderRenderer;
 
 define('ag-grid/dist/lib/headerRendering/headerContainer',['require','exports','module','../utils','../gridOptionsWrapper','../context/context','../dragAndDrop/dragAndDropService','../columnController/columnController','../gridPanel/gridPanel','../eventService','../events','./headerRowComp','./bodyDropTarget','../entities/column','../gridPanel/scrollVisibleService'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -19298,7 +20064,7 @@ exports.HeaderContainer = HeaderContainer;
 
 define('ag-grid/dist/lib/dragAndDrop/dragAndDropService',['require','exports','module','../logger','../context/context','../utils','../gridOptionsWrapper','../svgFactory','./dragService','../columnController/columnController'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -19357,10 +20123,6 @@ var DragAndDropService = (function () {
     };
     DragAndDropService.prototype.setBeans = function (loggerFactory) {
         this.logger = loggerFactory.create('OldToolPanelDragAndDropService');
-        this.eBody = document.querySelector('body');
-        if (!this.eBody) {
-            console.warn('ag-Grid: could not find document body, it is needed for dragging columns');
-        }
     };
     DragAndDropService.prototype.addDragSource = function (dragSource, allowTouch) {
         if (allowTouch === void 0) { allowTouch = false; }
@@ -19529,8 +20291,9 @@ var DragAndDropService = (function () {
         var top = event.pageY - (ghostHeight / 2);
         // horizontally, place cursor just right of icon
         var left = event.pageX - 30;
-        var windowScrollY = window.pageYOffset || document.documentElement.scrollTop;
-        var windowScrollX = window.pageXOffset || document.documentElement.scrollLeft;
+        var usrDocument = this.gridOptionsWrapper.getDocument();
+        var windowScrollY = window.pageYOffset || usrDocument.documentElement.scrollTop;
+        var windowScrollX = window.pageXOffset || usrDocument.documentElement.scrollLeft;
         // check ghost is not positioned outside of the browser
         if (browserWidth > 0) {
             if ((left + this.eGhost.clientWidth) > (browserWidth + windowScrollX)) {
@@ -19552,8 +20315,8 @@ var DragAndDropService = (function () {
         this.eGhost.style.top = top + 'px';
     };
     DragAndDropService.prototype.removeGhost = function () {
-        if (this.eGhost) {
-            this.eBody.removeChild(this.eGhost);
+        if (this.eGhost && this.eGhostParent) {
+            this.eGhostParent.removeChild(this.eGhost);
         }
         this.eGhost = null;
     };
@@ -19566,7 +20329,14 @@ var DragAndDropService = (function () {
         this.eGhost.style.height = this.gridOptionsWrapper.getHeaderHeight() + 'px';
         this.eGhost.style.top = '20px';
         this.eGhost.style.left = '20px';
-        this.eBody.appendChild(this.eGhost);
+        var usrDocument = this.gridOptionsWrapper.getDocument();
+        this.eGhostParent = usrDocument.querySelector('body');
+        if (!this.eGhostParent) {
+            console.warn('ag-Grid: could not find document body, it is needed for dragging columns');
+        }
+        else {
+            this.eGhostParent.appendChild(this.eGhost);
+        }
     };
     DragAndDropService.prototype.setGhostIcon = function (iconName, shake) {
         if (shake === void 0) { shake = false; }
@@ -19663,7 +20433,7 @@ exports.DragAndDropService = DragAndDropService;
 
 define('ag-grid/dist/lib/headerRendering/headerRowComp',['require','exports','module','../widgets/component','../context/context','../gridOptionsWrapper','../entities/columnGroup','../columnController/columnController','./renderedHeaderGroupCell','./renderedHeaderCell','../eventService','../events','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -19769,7 +20539,8 @@ var HeaderRowComp = (function (_super) {
                 return;
             }
             // skip groups that have no displayed children. this can happen when the group is broken,
-            // and this section happens to have nothing to display for the open / closed state
+            // and this section happens to have nothing to display for the open / closed state.
+            // (PS niall note - i can't remember what i meant by the above exactly, what's a broken group???)
             if (child instanceof columnGroup_1.ColumnGroup && child.getDisplayedChildren().length === 0) {
                 return;
             }
@@ -19819,13 +20590,18 @@ exports.HeaderRowComp = HeaderRowComp;
 
 });
 
-define('ag-grid/dist/lib/headerRendering/renderedHeaderGroupCell',['require','exports','module','../utils','../svgFactory','../columnController/columnController','../filter/filterManager','../gridOptionsWrapper','../entities/column','./horizontalDragService','../context/context','./cssClassApplier','../dragAndDrop/dragAndDropService','../rendering/features/setLeftFeature','../widgets/touchListener'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/headerRendering/renderedHeaderGroupCell',['require','exports','module','../utils','../svgFactory','../columnController/columnController','../filter/filterManager','../gridOptionsWrapper','../entities/column','./horizontalDragService','../context/context','./cssClassApplier','../dragAndDrop/dragAndDropService','../rendering/features/setLeftFeature','../widgets/touchListener','../widgets/component'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -19847,26 +20623,19 @@ var cssClassApplier_1 = require("./cssClassApplier");
 var dragAndDropService_1 = require("../dragAndDrop/dragAndDropService");
 var setLeftFeature_1 = require("../rendering/features/setLeftFeature");
 var touchListener_1 = require("../widgets/touchListener");
+var component_1 = require("../widgets/component");
 var svgFactory = svgFactory_1.SvgFactory.getInstance();
-var RenderedHeaderGroupCell = (function () {
+var RenderedHeaderGroupCell = (function (_super) {
+    __extends(RenderedHeaderGroupCell, _super);
     function RenderedHeaderGroupCell(columnGroup, eRoot, dragSourceDropTarget, pinned) {
-        this.destroyFunctions = [];
+        _super.call(this, "<div/>");
         this.columnGroup = columnGroup;
         this.eRoot = eRoot;
         this.dragSourceDropTarget = dragSourceDropTarget;
         this.pinned = pinned;
     }
-    RenderedHeaderGroupCell.prototype.getGui = function () {
-        return this.eHeaderGroupCell;
-    };
-    RenderedHeaderGroupCell.prototype.onIndividualColumnResized = function (column) {
-        if (this.columnGroup.isChildInThisGroupDeepSearch(column)) {
-            this.setWidth();
-        }
-    };
     RenderedHeaderGroupCell.prototype.init = function () {
-        this.eHeaderGroupCell = document.createElement('div');
-        cssClassApplier_1.CssClassApplier.addHeaderClassesFromColDef(this.columnGroup.getColGroupDef(), this.eHeaderGroupCell, this.gridOptionsWrapper, null, this.columnGroup);
+        cssClassApplier_1.CssClassApplier.addHeaderClassesFromColDef(this.columnGroup.getColGroupDef(), this.getGui(), this.gridOptionsWrapper, null, this.columnGroup);
         // this.displayName = this.columnGroup.getHeaderName();
         this.displayName = this.columnController.getDisplayNameForColumnGroup(this.columnGroup, 'header');
         this.setupResize();
@@ -19874,15 +20643,15 @@ var RenderedHeaderGroupCell = (function () {
         this.setupLabel();
         this.setupMove();
         this.setWidth();
-        var setLeftFeature = new setLeftFeature_1.SetLeftFeature(this.columnGroup, this.eHeaderGroupCell);
-        this.destroyFunctions.push(setLeftFeature.destroy.bind(setLeftFeature));
+        var setLeftFeature = new setLeftFeature_1.SetLeftFeature(this.columnGroup, this.getGui());
+        this.addDestroyFunc(function () { return setLeftFeature.destroy(); });
     };
     RenderedHeaderGroupCell.prototype.setupLabel = function () {
         // no renderer, default text render
         if (this.displayName && this.displayName !== '') {
             var eGroupCellLabel = document.createElement("div");
             eGroupCellLabel.className = 'ag-header-group-cell-label';
-            this.eHeaderGroupCell.appendChild(eGroupCellLabel);
+            this.getGui().appendChild(eGroupCellLabel);
             if (utils_1.Utils.isBrowserSafari()) {
                 eGroupCellLabel.style.display = 'table-cell';
             }
@@ -19896,15 +20665,15 @@ var RenderedHeaderGroupCell = (function () {
         }
     };
     RenderedHeaderGroupCell.prototype.addClasses = function () {
-        utils_1.Utils.addCssClass(this.eHeaderGroupCell, 'ag-header-group-cell');
+        utils_1.Utils.addCssClass(this.getGui(), 'ag-header-group-cell');
         // having different classes below allows the style to not have a bottom border
         // on the group header, if no group is specified
         // columnGroup.getColGroupDef
         if (this.columnGroup.isPadding()) {
-            utils_1.Utils.addCssClass(this.eHeaderGroupCell, 'ag-header-group-cell-no-group');
+            utils_1.Utils.addCssClass(this.getGui(), 'ag-header-group-cell-no-group');
         }
         else {
-            utils_1.Utils.addCssClass(this.eHeaderGroupCell, 'ag-header-group-cell-with-group');
+            utils_1.Utils.addCssClass(this.getGui(), 'ag-header-group-cell-with-group');
         }
     };
     RenderedHeaderGroupCell.prototype.setupResize = function () {
@@ -19914,7 +20683,7 @@ var RenderedHeaderGroupCell = (function () {
         }
         this.eHeaderCellResize = document.createElement("div");
         this.eHeaderCellResize.className = "ag-header-cell-resize";
-        this.eHeaderGroupCell.appendChild(this.eHeaderCellResize);
+        this.getGui().appendChild(this.eHeaderCellResize);
         this.dragService.addDragHandling({
             eDraggableElement: this.eHeaderCellResize,
             eBody: this.eRoot,
@@ -19950,12 +20719,11 @@ var RenderedHeaderGroupCell = (function () {
         var result = childSuppressesMoving
             || this.gridOptionsWrapper.isSuppressMovableColumns()
             || this.gridOptionsWrapper.isForPrint();
-        // || this.columnController.isPivotMode();
         return result;
     };
     RenderedHeaderGroupCell.prototype.setupMove = function () {
         var _this = this;
-        var eLabel = this.eHeaderGroupCell.querySelector('.ag-header-group-cell-label');
+        var eLabel = this.queryForHtmlElement('.ag-header-group-cell-label');
         if (!eLabel) {
             return;
         }
@@ -19972,7 +20740,7 @@ var RenderedHeaderGroupCell = (function () {
                 dragSourceDropTarget: this.dragSourceDropTarget
             };
             this.dragAndDropService.addDragSource(dragSource, true);
-            this.destroyFunctions.push(function () { return _this.dragAndDropService.removeDragSource(dragSource); });
+            this.addDestroyFunc(function () { return _this.dragAndDropService.removeDragSource(dragSource); });
         }
     };
     // when moving the columns, we want to move all the columns in this group in one go, and in the order they
@@ -19992,21 +20760,13 @@ var RenderedHeaderGroupCell = (function () {
     };
     RenderedHeaderGroupCell.prototype.setWidth = function () {
         var _this = this;
-        var widthChangedListener = function () {
-            _this.eHeaderGroupCell.style.width = _this.columnGroup.getActualWidth() + 'px';
-        };
         this.columnGroup.getLeafColumns().forEach(function (column) {
-            column.addEventListener(column_1.Column.EVENT_WIDTH_CHANGED, widthChangedListener);
-            _this.destroyFunctions.push(function () {
-                column.removeEventListener(column_1.Column.EVENT_WIDTH_CHANGED, widthChangedListener);
-            });
+            return _this.addDestroyableEventListener(column, column_1.Column.EVENT_WIDTH_CHANGED, _this.onWidthChanged.bind(_this));
         });
-        widthChangedListener();
+        this.onWidthChanged();
     };
-    RenderedHeaderGroupCell.prototype.destroy = function () {
-        this.destroyFunctions.forEach(function (func) {
-            func();
-        });
+    RenderedHeaderGroupCell.prototype.onWidthChanged = function () {
+        this.getGui().style.width = this.columnGroup.getActualWidth() + 'px';
     };
     RenderedHeaderGroupCell.prototype.addGroupExpandIcon = function (eGroupCellLabel) {
         var _this = this;
@@ -20025,16 +20785,10 @@ var RenderedHeaderGroupCell = (function () {
             var newExpandedValue = !_this.columnGroup.isExpanded();
             _this.columnController.setColumnGroupOpened(_this.columnGroup, newExpandedValue);
         };
-        eGroupIcon.addEventListener('click', expandAction);
-        this.destroyFunctions.push(function () {
-            eGroupIcon.removeEventListener('click', expandAction);
-        });
+        this.addDestroyableEventListener(eGroupIcon, 'click', expandAction);
         var touchListener = new touchListener_1.TouchListener(eGroupIcon);
-        touchListener.addEventListener(touchListener_1.TouchListener.EVENT_TAP, expandAction);
-        this.destroyFunctions.push(function () {
-            touchListener.removeEventListener(touchListener_1.TouchListener.EVENT_TAP, expandAction);
-            touchListener.destroy();
-        });
+        this.addDestroyableEventListener(touchListener, touchListener_1.TouchListener.EVENT_TAP, expandAction);
+        this.addDestroyFunc(function () { return touchListener.destroy(); });
     };
     RenderedHeaderGroupCell.prototype.onDragStart = function () {
         var _this = this;
@@ -20122,14 +20876,14 @@ var RenderedHeaderGroupCell = (function () {
         __metadata('design:returntype', void 0)
     ], RenderedHeaderGroupCell.prototype, "init", null);
     return RenderedHeaderGroupCell;
-}());
+}(component_1.Component));
 exports.RenderedHeaderGroupCell = RenderedHeaderGroupCell;
 
 });
 
 define('ag-grid/dist/lib/headerRendering/horizontalDragService',['require','exports','module','../context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -20233,7 +20987,7 @@ var DragInstance = (function () {
 
 define('ag-grid/dist/lib/headerRendering/cssClassApplier',['require','exports','module','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -20293,7 +21047,7 @@ exports.CssClassApplier = CssClassApplier;
 
 define('ag-grid/dist/lib/widgets/touchListener',['require','exports','module','../eventService','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -20386,13 +21140,18 @@ exports.TouchListener = TouchListener;
 
 });
 
-define('ag-grid/dist/lib/headerRendering/renderedHeaderCell',['require','exports','module','../utils','../entities/column','../filter/filterManager','../columnController/columnController','./headerTemplateLoader','../gridOptionsWrapper','./horizontalDragService','../gridCore','../context/context','./cssClassApplier','../dragAndDrop/dragAndDropService','../sortController','../rendering/features/setLeftFeature','../widgets/touchListener'],function (require, exports, module) {/**
+define('ag-grid/dist/lib/headerRendering/renderedHeaderCell',['require','exports','module','../utils','../entities/column','../filter/filterManager','../columnController/columnController','./headerTemplateLoader','../gridOptionsWrapper','./horizontalDragService','../gridCore','../context/context','./cssClassApplier','../dragAndDrop/dragAndDropService','../sortController','../rendering/features/setLeftFeature','../widgets/touchListener','../widgets/component'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20416,12 +21175,11 @@ var dragAndDropService_1 = require("../dragAndDrop/dragAndDropService");
 var sortController_1 = require("../sortController");
 var setLeftFeature_1 = require("../rendering/features/setLeftFeature");
 var touchListener_1 = require("../widgets/touchListener");
-var RenderedHeaderCell = (function () {
+var component_1 = require("../widgets/component");
+var RenderedHeaderCell = (function (_super) {
+    __extends(RenderedHeaderCell, _super);
     function RenderedHeaderCell(column, eRoot, dragSourceDropTarget, pinned) {
-        // for better structured code, anything we need to do when this column gets destroyed,
-        // we put a function in here. otherwise we would have a big destroy function with lots
-        // of 'if / else' mapping to things that got created.
-        this.destroyFunctions = [];
+        _super.call(this);
         this.column = column;
         this.eRoot = eRoot;
         this.dragSourceDropTarget = dragSourceDropTarget;
@@ -20431,13 +21189,14 @@ var RenderedHeaderCell = (function () {
         return this.column;
     };
     RenderedHeaderCell.prototype.init = function () {
-        this.eHeaderCell = this.headerTemplateLoader.createHeaderElement(this.column);
-        utils_1.Utils.addCssClass(this.eHeaderCell, 'ag-header-cell');
+        var eGui = this.headerTemplateLoader.createHeaderElement(this.column);
+        this.setGui(eGui);
+        utils_1.Utils.addCssClass(eGui, 'ag-header-cell');
         this.createScope();
         this.addAttributes();
-        cssClassApplier_1.CssClassApplier.addHeaderClassesFromColDef(this.column.getColDef(), this.eHeaderCell, this.gridOptionsWrapper, this.column, null);
+        cssClassApplier_1.CssClassApplier.addHeaderClassesFromColDef(this.column.getColDef(), eGui, this.gridOptionsWrapper, this.column, null);
         // label div
-        var eHeaderCellLabel = this.eHeaderCell.querySelector('#agHeaderCellLabel');
+        var eHeaderCellLabel = eGui.querySelector('#agHeaderCellLabel');
         this.displayName = this.columnController.getDisplayNameForColumn(this.column, 'header', true);
         this.setupMovingCss();
         this.setupTooltip();
@@ -20449,14 +21208,14 @@ var RenderedHeaderCell = (function () {
         this.setupFilterIcon();
         this.setupText();
         this.setupWidth();
-        var setLeftFeature = new setLeftFeature_1.SetLeftFeature(this.column, this.eHeaderCell);
-        this.destroyFunctions.push(setLeftFeature.destroy.bind(setLeftFeature));
+        var setLeftFeature = new setLeftFeature_1.SetLeftFeature(this.column, eGui);
+        this.addDestroyFunc(function () { return setLeftFeature.destroy(); });
     };
     RenderedHeaderCell.prototype.setupTooltip = function () {
         var colDef = this.column.getColDef();
         // add tooltip if exists
         if (colDef.headerTooltip) {
-            this.eHeaderCell.title = colDef.headerTooltip;
+            this.getGui().title = colDef.headerTooltip;
         }
     };
     RenderedHeaderCell.prototype.setupText = function () {
@@ -20469,53 +21228,38 @@ var RenderedHeaderCell = (function () {
         else if (this.gridOptionsWrapper.getHeaderCellRenderer()) {
             headerCellRenderer = this.gridOptionsWrapper.getHeaderCellRenderer();
         }
-        var eText = this.eHeaderCell.querySelector('#agText');
+        var eText = this.queryForHtmlElement('#agText');
         if (eText) {
             if (headerCellRenderer) {
                 this.useRenderer(this.displayName, headerCellRenderer, eText);
             }
             else {
                 // no renderer, default text render
-                eText.className = 'ag-header-cell-text';
                 eText.innerHTML = this.displayName;
+                // i don't remember why this is here, take it out???
+                utils_1.Utils.addCssClass(eText, 'ag-header-cell-text');
             }
         }
     };
     RenderedHeaderCell.prototype.setupFilterIcon = function () {
-        var _this = this;
-        var eFilterIcon = this.eHeaderCell.querySelector('#agFilter');
-        if (!eFilterIcon) {
+        this.eFilterIcon = this.queryForHtmlElement('#agFilter');
+        if (!this.eFilterIcon) {
             return;
         }
-        var filterChangedListener = function () {
-            var filterPresent = _this.column.isFilterActive();
-            utils_1.Utils.addOrRemoveCssClass(_this.eHeaderCell, 'ag-header-cell-filtered', filterPresent);
-            utils_1.Utils.addOrRemoveCssClass(eFilterIcon, 'ag-hidden', !filterPresent);
-        };
-        this.column.addEventListener(column_1.Column.EVENT_FILTER_CHANGED, filterChangedListener);
-        this.destroyFunctions.push(function () {
-            _this.column.removeEventListener(column_1.Column.EVENT_FILTER_CHANGED, filterChangedListener);
-        });
-        filterChangedListener();
+        this.addDestroyableEventListener(this.column, column_1.Column.EVENT_FILTER_CHANGED, this.onFilterChanged.bind(this));
+        this.onFilterChanged();
+    };
+    RenderedHeaderCell.prototype.onFilterChanged = function () {
+        var filterPresent = this.column.isFilterActive();
+        utils_1.Utils.addOrRemoveCssClass(this.getGui(), 'ag-header-cell-filtered', filterPresent);
+        utils_1.Utils.addOrRemoveCssClass(this.eFilterIcon, 'ag-hidden', !filterPresent);
     };
     RenderedHeaderCell.prototype.setupWidth = function () {
-        var _this = this;
-        var widthChangedListener = function () {
-            _this.eHeaderCell.style.width = _this.column.getActualWidth() + 'px';
-        };
-        this.column.addEventListener(column_1.Column.EVENT_WIDTH_CHANGED, widthChangedListener);
-        this.destroyFunctions.push(function () {
-            _this.column.removeEventListener(column_1.Column.EVENT_WIDTH_CHANGED, widthChangedListener);
-        });
-        widthChangedListener();
+        this.addDestroyableEventListener(this.column, column_1.Column.EVENT_WIDTH_CHANGED, this.onColumnWidthChanged.bind(this));
+        this.onColumnWidthChanged();
     };
-    RenderedHeaderCell.prototype.getGui = function () {
-        return this.eHeaderCell;
-    };
-    RenderedHeaderCell.prototype.destroy = function () {
-        this.destroyFunctions.forEach(function (func) {
-            func();
-        });
+    RenderedHeaderCell.prototype.onColumnWidthChanged = function () {
+        this.getGui().style.width = this.column.getActualWidth() + 'px';
     };
     RenderedHeaderCell.prototype.createScope = function () {
         var _this = this;
@@ -20524,17 +21268,17 @@ var RenderedHeaderCell = (function () {
             this.childScope.colDef = this.column.getColDef();
             this.childScope.colDefWrapper = this.column;
             this.childScope.context = this.gridOptionsWrapper.getContext();
-            this.destroyFunctions.push(function () {
+            this.addDestroyFunc(function () {
                 _this.childScope.$destroy();
             });
         }
     };
     RenderedHeaderCell.prototype.addAttributes = function () {
-        this.eHeaderCell.setAttribute("colId", this.column.getColId());
+        this.getGui().setAttribute("colId", this.column.getColId());
     };
     RenderedHeaderCell.prototype.setupMenu = function () {
         var _this = this;
-        var eMenu = this.eHeaderCell.querySelector('#agMenu');
+        var eMenu = this.queryForHtmlElement('#agMenu');
         // if no menu provided in template, do nothing
         if (!eMenu) {
             return;
@@ -20547,10 +21291,10 @@ var RenderedHeaderCell = (function () {
         eMenu.addEventListener('click', function () { return _this.showMenu(eMenu); });
         if (!this.gridOptionsWrapper.isSuppressMenuHide()) {
             eMenu.style.opacity = '0';
-            this.eHeaderCell.addEventListener('mouseover', function () {
+            this.addGuiEventListener('mouseover', function () {
                 eMenu.style.opacity = '1';
             });
-            this.eHeaderCell.addEventListener('mouseout', function () {
+            this.addGuiEventListener('mouseout', function () {
                 eMenu.style.opacity = '0';
             });
         }
@@ -20562,31 +21306,25 @@ var RenderedHeaderCell = (function () {
         this.menuFactory.showMenuAfterButtonClick(this.column, eventSource);
     };
     RenderedHeaderCell.prototype.setupMovingCss = function () {
-        var _this = this;
-        // this function adds or removes the moving css, based on if the col is moving
-        var addMovingCssFunc = function () {
-            if (_this.column.isMoving()) {
-                utils_1.Utils.addCssClass(_this.eHeaderCell, 'ag-header-cell-moving');
-            }
-            else {
-                utils_1.Utils.removeCssClass(_this.eHeaderCell, 'ag-header-cell-moving');
-            }
-        };
-        // call it now once, so the col is set up correctly
-        addMovingCssFunc();
-        // then call it every time we are informed of a moving state change in the col
-        this.column.addEventListener(column_1.Column.EVENT_MOVING_CHANGED, addMovingCssFunc);
-        // finally we remove the listener when this cell is no longer rendered
-        this.destroyFunctions.push(function () {
-            _this.column.removeEventListener(column_1.Column.EVENT_MOVING_CHANGED, addMovingCssFunc);
-        });
+        this.addDestroyableEventListener(this.column, column_1.Column.EVENT_MOVING_CHANGED, this.onColumnMovingChanged.bind(this));
+        this.onColumnMovingChanged();
+    };
+    RenderedHeaderCell.prototype.onColumnMovingChanged = function () {
+        // this function adds or removes the moving css, based on if the col is moving.
+        // this is what makes the header go dark when it is been moved (gives impression to
+        // user that the column was picked up).
+        if (this.column.isMoving()) {
+            utils_1.Utils.addCssClass(this.getGui(), 'ag-header-cell-moving');
+        }
+        else {
+            utils_1.Utils.removeCssClass(this.getGui(), 'ag-header-cell-moving');
+        }
     };
     RenderedHeaderCell.prototype.setupMove = function (eHeaderCellLabel) {
         var _this = this;
         var suppressMove = this.gridOptionsWrapper.isSuppressMovableColumns()
             || this.column.getColDef().suppressMovable
             || this.gridOptionsWrapper.isForPrint();
-        // || this.columnController.isPivotMode();
         if (suppressMove) {
             return;
         }
@@ -20599,7 +21337,7 @@ var RenderedHeaderCell = (function () {
                 dragSourceDropTarget: this.dragSourceDropTarget
             };
             this.dragAndDropService.addDragSource(dragSource, true);
-            this.destroyFunctions.push(function () { return _this.dragAndDropService.removeDragSource(dragSource); });
+            this.addDestroyFunc(function () { return _this.dragAndDropService.removeDragSource(dragSource); });
         }
     };
     RenderedHeaderCell.prototype.setupTap = function () {
@@ -20608,24 +21346,20 @@ var RenderedHeaderCell = (function () {
             return;
         }
         var touchListener = new touchListener_1.TouchListener(this.getGui());
-        var tapListener = function (touch) {
+        var tapListener = function () {
             _this.sortController.progressSort(_this.column, false);
         };
         var longTapListener = function (touch) {
             _this.gridOptionsWrapper.getApi().showColumnMenuAfterMouseClick(_this.column, touch);
         };
-        touchListener.addEventListener(touchListener_1.TouchListener.EVENT_TAP, tapListener);
-        touchListener.addEventListener(touchListener_1.TouchListener.EVENT_LONG_TAP, longTapListener);
-        this.destroyFunctions.push(function () {
-            touchListener.removeEventListener(touchListener_1.TouchListener.EVENT_TAP, tapListener);
-            touchListener.removeEventListener(touchListener_1.TouchListener.EVENT_LONG_TAP, longTapListener);
-            touchListener.destroy();
-        });
+        this.addDestroyableEventListener(touchListener, touchListener_1.TouchListener.EVENT_TAP, tapListener);
+        this.addDestroyableEventListener(touchListener, touchListener_1.TouchListener.EVENT_LONG_TAP, longTapListener);
+        this.addDestroyFunc(function () { return touchListener.destroy(); });
     };
     RenderedHeaderCell.prototype.setupResize = function () {
         var _this = this;
         var colDef = this.column.getColDef();
-        var eResize = this.eHeaderCell.querySelector('#agResizeBar');
+        var eResize = this.queryForHtmlElement('#agResizeBar');
         // if no eResize in template, do nothing
         if (!eResize) {
             return;
@@ -20645,7 +21379,7 @@ var RenderedHeaderCell = (function () {
         });
         var weWantAutoSize = !this.gridOptionsWrapper.isSuppressAutoSize() && !colDef.suppressAutoSize;
         if (weWantAutoSize) {
-            eResize.addEventListener('dblclick', function () {
+            this.addDestroyableEventListener(eResize, 'dblclick', function () {
                 _this.columnController.autoSizeColumn(_this.column);
             });
         }
@@ -20658,7 +21392,7 @@ var RenderedHeaderCell = (function () {
             context: this.gridOptionsWrapper.getContext(),
             value: headerNameValue,
             api: this.gridOptionsWrapper.getApi(),
-            eHeaderCell: this.eHeaderCell
+            eHeaderCell: this.getGui()
         };
         var cellRendererResult = headerCellRenderer(cellRendererParams);
         var childToAppend;
@@ -20684,14 +21418,15 @@ var RenderedHeaderCell = (function () {
     RenderedHeaderCell.prototype.setupSort = function (eHeaderCellLabel) {
         var _this = this;
         var enableSorting = this.gridOptionsWrapper.isEnableSorting() && !this.column.getColDef().suppressSorting;
+        var eGui = this.getGui();
         if (!enableSorting) {
-            utils_1.Utils.removeFromParent(this.eHeaderCell.querySelector('#agSortAsc'));
-            utils_1.Utils.removeFromParent(this.eHeaderCell.querySelector('#agSortDesc'));
-            utils_1.Utils.removeFromParent(this.eHeaderCell.querySelector('#agNoSort'));
+            utils_1.Utils.removeFromParent(eGui.querySelector('#agSortAsc'));
+            utils_1.Utils.removeFromParent(eGui.querySelector('#agSortDesc'));
+            utils_1.Utils.removeFromParent(eGui.querySelector('#agNoSort'));
             return;
         }
         // add sortable class for styling
-        utils_1.Utils.addCssClass(this.eHeaderCell, 'ag-header-cell-sortable');
+        utils_1.Utils.addCssClass(eGui, 'ag-header-cell-sortable');
         // add the event on the header, so when clicked, we do sorting
         if (eHeaderCellLabel) {
             eHeaderCellLabel.addEventListener("click", function (event) {
@@ -20699,29 +21434,26 @@ var RenderedHeaderCell = (function () {
             });
         }
         // add listener for sort changing, and update the icons accordingly
-        var eSortAsc = this.eHeaderCell.querySelector('#agSortAsc');
-        var eSortDesc = this.eHeaderCell.querySelector('#agSortDesc');
-        var eSortNone = this.eHeaderCell.querySelector('#agNoSort');
-        var sortChangedListener = function () {
-            utils_1.Utils.addOrRemoveCssClass(_this.eHeaderCell, 'ag-header-cell-sorted-asc', _this.column.isSortAscending());
-            utils_1.Utils.addOrRemoveCssClass(_this.eHeaderCell, 'ag-header-cell-sorted-desc', _this.column.isSortDescending());
-            utils_1.Utils.addOrRemoveCssClass(_this.eHeaderCell, 'ag-header-cell-sorted-none', _this.column.isSortNone());
-            if (eSortAsc) {
-                utils_1.Utils.addOrRemoveCssClass(eSortAsc, 'ag-hidden', !_this.column.isSortAscending());
-            }
-            if (eSortDesc) {
-                utils_1.Utils.addOrRemoveCssClass(eSortDesc, 'ag-hidden', !_this.column.isSortDescending());
-            }
-            if (eSortNone) {
-                var alwaysHideNoSort = !_this.column.getColDef().unSortIcon && !_this.gridOptionsWrapper.isUnSortIcon();
-                utils_1.Utils.addOrRemoveCssClass(eSortNone, 'ag-hidden', alwaysHideNoSort || !_this.column.isSortNone());
-            }
-        };
-        this.column.addEventListener(column_1.Column.EVENT_SORT_CHANGED, sortChangedListener);
-        this.destroyFunctions.push(function () {
-            _this.column.removeEventListener(column_1.Column.EVENT_SORT_CHANGED, sortChangedListener);
-        });
-        sortChangedListener();
+        this.eSortAsc = this.queryForHtmlElement('#agSortAsc');
+        this.eSortDesc = this.queryForHtmlElement('#agSortDesc');
+        this.eSortNone = this.queryForHtmlElement('#agNoSort');
+        this.addDestroyableEventListener(this.column, column_1.Column.EVENT_SORT_CHANGED, this.onSortChanged.bind(this));
+        this.onSortChanged();
+    };
+    RenderedHeaderCell.prototype.onSortChanged = function () {
+        utils_1.Utils.addOrRemoveCssClass(this.getGui(), 'ag-header-cell-sorted-asc', this.column.isSortAscending());
+        utils_1.Utils.addOrRemoveCssClass(this.getGui(), 'ag-header-cell-sorted-desc', this.column.isSortDescending());
+        utils_1.Utils.addOrRemoveCssClass(this.getGui(), 'ag-header-cell-sorted-none', this.column.isSortNone());
+        if (this.eSortAsc) {
+            utils_1.Utils.addOrRemoveCssClass(this.eSortAsc, 'ag-hidden', !this.column.isSortAscending());
+        }
+        if (this.eSortDesc) {
+            utils_1.Utils.addOrRemoveCssClass(this.eSortDesc, 'ag-hidden', !this.column.isSortDescending());
+        }
+        if (this.eSortNone) {
+            var alwaysHideNoSort = !this.column.getColDef().unSortIcon && !this.gridOptionsWrapper.isUnSortIcon();
+            utils_1.Utils.addOrRemoveCssClass(this.eSortNone, 'ag-hidden', alwaysHideNoSort || !this.column.isSortNone());
+        }
     };
     RenderedHeaderCell.prototype.onDragStart = function () {
         this.startWidth = this.column.getActualWidth();
@@ -20748,13 +21480,6 @@ var RenderedHeaderCell = (function () {
         var dragChangeNormalised = this.normaliseDragChange(dragChange);
         var newWidth = this.startWidth + dragChangeNormalised;
         this.columnController.setColumnWidth(this.column, newWidth, finished);
-    };
-    RenderedHeaderCell.prototype.onIndividualColumnResized = function (column) {
-        if (this.column !== column) {
-            return;
-        }
-        var newWidthPx = column.getActualWidth() + "px";
-        this.eHeaderCell.style.width = newWidthPx;
     };
     __decorate([
         context_1.Autowired('context'), 
@@ -20811,14 +21536,14 @@ var RenderedHeaderCell = (function () {
         __metadata('design:returntype', void 0)
     ], RenderedHeaderCell.prototype, "init", null);
     return RenderedHeaderCell;
-}());
+}(component_1.Component));
 exports.RenderedHeaderCell = RenderedHeaderCell;
 
 });
 
 define('ag-grid/dist/lib/headerRendering/headerTemplateLoader',['require','exports','module','../utils','../svgFactory','../gridOptionsWrapper','../context/context'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -20919,7 +21644,7 @@ exports.HeaderTemplateLoader = HeaderTemplateLoader;
 
 define('ag-grid/dist/lib/headerRendering/bodyDropTarget',['require','exports','module','../dragAndDrop/dragAndDropService','../context/context','./moveColumnController','../entities/column','../gridPanel/gridPanel','./bodyDropPivotTarget','../columnController/columnController'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21036,7 +21761,7 @@ exports.BodyDropTarget = BodyDropTarget;
 
 define('ag-grid/dist/lib/headerRendering/moveColumnController',['require','exports','module','../context/context','../logger','../columnController/columnController','../entities/column','../utils','../dragAndDrop/dragAndDropService','../gridPanel/gridPanel','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21341,7 +22066,7 @@ exports.MoveColumnController = MoveColumnController;
 
 define('ag-grid/dist/lib/headerRendering/bodyDropPivotTarget',['require','exports','module','../dragAndDrop/dragAndDropService','../columnController/columnController','../context/context','../gridOptionsWrapper'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21444,7 +22169,7 @@ exports.BodyDropPivotTarget = BodyDropPivotTarget;
 
 define('ag-grid/dist/lib/columnChangeEvent',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21536,7 +22261,7 @@ exports.ColumnChangeEvent = ColumnChangeEvent;
 
 define('ag-grid/dist/lib/columnController/groupInstanceIdCreator',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21577,7 +22302,7 @@ exports.GroupInstanceIdCreator = GroupInstanceIdCreator;
 
 define('ag-grid/dist/lib/functions',['require','exports','module','./utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21605,9 +22330,59 @@ exports.defaultGroupComparator = defaultGroupComparator;
 
 });
 
+define('ag-grid/dist/lib/downloader',['require','exports','module','./context/context'],function (require, exports, module) {/**
+ * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
+ * @version v7.2.0
+ * @link http://www.ag-grid.com/
+ * @license MIT
+ */
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var context_1 = require("./context/context");
+var Downloader = (function () {
+    function Downloader() {
+    }
+    Downloader.prototype.download = function (fileName, content, mimeType) {
+        // for Excel, we need \ufeff at the start
+        // http://stackoverflow.com/questions/17879198/adding-utf-8-bom-to-string-blob
+        var blobObject = new Blob(["\ufeff", content], {
+            type: mimeType
+        });
+        // Internet Explorer
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blobObject, fileName);
+        }
+        else {
+            // Chrome
+            var downloadLink = document.createElement("a");
+            downloadLink.href = window.URL.createObjectURL(blobObject);
+            downloadLink.download = fileName;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+    };
+    Downloader = __decorate([
+        context_1.Bean('downloader'), 
+        __metadata('design:paramtypes', [])
+    ], Downloader);
+    return Downloader;
+}());
+exports.Downloader = Downloader;
+
+});
+
 define('ag-grid/dist/lib/headerRendering/standardMenu',['require','exports','module','../context/context','../filter/filterManager','../utils','../widgets/popupService','../gridOptionsWrapper','../eventService'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21651,8 +22426,12 @@ var StandardMenuFactory = (function () {
         var eMenu = document.createElement('div');
         utils_1.Utils.addCssClass(eMenu, 'ag-menu');
         eMenu.appendChild(filterWrapper.gui);
-        var bodyScrollListener = function () {
-            hidePopup();
+        var hidePopup;
+        var bodyScrollListener = function (event) {
+            // if h scroll, popup is no longer over the column
+            if (event.direction === 'horizontal') {
+                hidePopup();
+            }
         };
         this.eventService.addEventListener('bodyScroll', bodyScrollListener);
         var closedCallback = function () {
@@ -21660,7 +22439,7 @@ var StandardMenuFactory = (function () {
         };
         // need to show filter before positioning, as only after filter
         // is visible can we find out what the width of it is
-        var hidePopup = this.popupService.addAsModalPopup(eMenu, true, closedCallback);
+        hidePopup = this.popupService.addAsModalPopup(eMenu, true, closedCallback);
         positionCallback(eMenu);
         if (filterWrapper.filter.afterGuiAttached) {
             var params = {
@@ -21701,7 +22480,7 @@ exports.StandardMenuFactory = StandardMenuFactory;
 
 define('ag-grid/dist/lib/rowControllers/inMemory/filterStage',['require','exports','module','../../context/context','../../context/context','../../gridOptionsWrapper','../../filter/filterManager'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21799,7 +22578,7 @@ exports.FilterStage = FilterStage;
 
 define('ag-grid/dist/lib/rowControllers/inMemory/sortStage',['require','exports','module','../../context/context','../../gridOptionsWrapper','../../sortController','../../valueService','../../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -21902,7 +22681,7 @@ exports.SortStage = SortStage;
 
 define('ag-grid/dist/lib/rowControllers/inMemory/flattenStage',['require','exports','module','../../context/context','../../entities/rowNode','../../utils','../../gridOptionsWrapper','../../selectionController','../../eventService','../../columnController/columnController'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -22070,7 +22849,7 @@ exports.FlattenStage = FlattenStage;
 
 define('ag-grid/dist/lib/rowControllers/virtualPagination/virtualPageRowModel',['require','exports','module','../../utils','../../gridOptionsWrapper','../../context/context','../../eventService','../../selectionController','../../events','../../sortController','../../filter/filterManager','../../constants','./virtualPageCache'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -22337,7 +23116,7 @@ exports.VirtualPageRowModel = VirtualPageRowModel;
 
 define('ag-grid/dist/lib/rowControllers/virtualPagination/virtualPageCache',['require','exports','module','../../utils','../../context/context','../../eventService','../../events','../../logger','./virtualPage'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -22665,7 +23444,7 @@ exports.VirtualPageCache = VirtualPageCache;
 
 define('ag-grid/dist/lib/rowControllers/virtualPagination/virtualPage',['require','exports','module','../../utils','../../gridOptionsWrapper','../../entities/rowNode','../../context/context','../../eventService'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -22861,7 +23640,7 @@ exports.VirtualPage = VirtualPage;
 
 define('ag-grid/dist/lib/rowControllers/inMemory/inMemoryRowModel',['require','exports','module','../../utils','../../constants','../../gridOptionsWrapper','../../columnController/columnController','../../filter/filterManager','../../entities/rowNode','../../eventService','../../events','../../context/context','../../selectionController','./inMemoryNodeManager'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -23316,7 +24095,7 @@ exports.InMemoryRowModel = InMemoryRowModel;
 
 define('ag-grid/dist/lib/rowControllers/inMemory/inMemoryNodeManager',['require','exports','module','../../entities/rowNode','../../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -23490,7 +24269,7 @@ exports.InMemoryNodeManager = InMemoryNodeManager;
 
 define('ag-grid/dist/lib/widgets/agCheckbox',['require','exports','module','./component','./componentAnnotations','../utils','../context/context','../gridOptionsWrapper','../svgFactory'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -23652,69 +24431,9 @@ exports.AgCheckbox = AgCheckbox;
 
 });
 
-define('ag-grid/dist/lib/widgets/componentAnnotations',['require','exports','module'],function (require, exports, module) {/**
- * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
- * @link http://www.ag-grid.com/
- * @license MIT
- */
-"use strict";
-function QuerySelector(selector) {
-    return querySelectorFunc.bind(this, selector);
-}
-exports.QuerySelector = QuerySelector;
-function querySelectorFunc(selector, classPrototype, methodOrAttributeName, index) {
-    if (selector === null) {
-        console.error('ag-Grid: QuerySelector selector should not be null');
-        return;
-    }
-    if (typeof index === 'number') {
-        console.error('ag-Grid: QuerySelector should be on an attribute');
-        return;
-    }
-    // it's an attribute on the class
-    var props = getOrCreateProps(classPrototype);
-    if (!props.querySelectors) {
-        props.querySelectors = [];
-    }
-    props.querySelectors.push({
-        attributeName: methodOrAttributeName,
-        querySelector: selector
-    });
-}
-function Listener(eventName) {
-    return listenerFunc.bind(this, eventName);
-}
-exports.Listener = Listener;
-function listenerFunc(eventName, target, methodName, descriptor) {
-    if (eventName === null) {
-        console.error('ag-Grid: EventListener eventName should not be null');
-        return;
-    }
-    // it's an attribute on the class
-    var props = getOrCreateProps(target);
-    if (!props.listenerMethods) {
-        props.listenerMethods = [];
-    }
-    props.listenerMethods.push({
-        methodName: methodName,
-        eventName: eventName
-    });
-}
-function getOrCreateProps(target) {
-    var props = target.__agComponentMetaData;
-    if (!props) {
-        props = {};
-        target.__agComponentMetaData = props;
-    }
-    return props;
-}
-
-});
-
 define('ag-grid/dist/lib/baseFrameworkFactory',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -23753,9 +24472,66 @@ exports.BaseFrameworkFactory = BaseFrameworkFactory;
 
 });
 
+define('ag-grid/dist/lib/xmlFactory',['require','exports','module','./context/context'],function (require, exports, module) {/**
+ * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
+ * @version v7.2.0
+ * @link http://www.ag-grid.com/
+ * @license MIT
+ */
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var context_1 = require("./context/context");
+var LINE_SEPARATOR = '\r\n';
+var XmlFactory = (function () {
+    function XmlFactory() {
+    }
+    XmlFactory.prototype.createXml = function (xmlElement) {
+        var _this = this;
+        var props = "";
+        if (xmlElement.properties && xmlElement.properties.prefix && xmlElement.properties.prefixedMap) {
+            Object.keys(xmlElement.properties.prefixedMap).forEach(function (key) {
+                props += " " + xmlElement.properties.prefix + key + "=\"" + xmlElement.properties.prefixedMap[key] + "\"";
+            });
+        }
+        if (xmlElement.properties && xmlElement.properties.rawMap) {
+            Object.keys(xmlElement.properties.rawMap).forEach(function (key) {
+                props += " " + key + "=\"" + xmlElement.properties.rawMap[key] + "\"";
+            });
+        }
+        var result = "<" + xmlElement.name + props;
+        if (!xmlElement.children && !xmlElement.textNode) {
+            return result + "/>" + LINE_SEPARATOR;
+        }
+        if (xmlElement.textNode) {
+            return result + ">" + xmlElement.textNode + "</" + xmlElement.name + ">" + LINE_SEPARATOR;
+        }
+        result += ">" + LINE_SEPARATOR;
+        xmlElement.children.forEach(function (it) {
+            result += _this.createXml(it);
+        });
+        return result + "</" + xmlElement.name + ">" + LINE_SEPARATOR;
+    };
+    XmlFactory = __decorate([
+        context_1.Bean('xmlFactory'), 
+        __metadata('design:paramtypes', [])
+    ], XmlFactory);
+    return XmlFactory;
+}());
+exports.XmlFactory = XmlFactory;
+
+});
+
 define('ag-grid/dist/lib/components/agGridNg1',['require','exports','module','../grid'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -23798,7 +24574,7 @@ function AngularDirectiveController($element, $scope, $compile, $attrs) {
 
 define('ag-grid/dist/lib/components/agGridWebComponent',['require','exports','module','./componentUtil','../grid'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -23913,7 +24689,7 @@ function toCamelCase(myString) {
 
 define('ag-grid/dist/lib/layout/tabbedLayout',['require','exports','module','../utils'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -24014,7 +24790,7 @@ exports.TabbedLayout = TabbedLayout;
 
 define('ag-grid/dist/lib/layout/verticalStack',['require','exports','module'],function (require, exports, module) {/**
  * ag-grid - Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components
- * @version v7.1.0
+ * @version v7.2.0
  * @link http://www.ag-grid.com/
  * @license MIT
  */
@@ -24054,7 +24830,7 @@ exports.VerticalStack = VerticalStack;
 
 });
 
-define('ag-grid-aurelia/lib/aureliaFrameworkFactory',['require','exports','module','aurelia-framework','ag-grid/main','./aureliaComponentFactory'],function (require, exports, module) {// ag-grid-aurelia v7.1.0
+define('ag-grid-aurelia/lib/aureliaFrameworkFactory',['require','exports','module','aurelia-framework','ag-grid/main','./aureliaComponentFactory'],function (require, exports, module) {// ag-grid-aurelia v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -24132,16 +24908,13 @@ exports.AureliaFrameworkFactory = AureliaFrameworkFactory;
 
 });
 
-define('ag-grid-aurelia/lib/aureliaComponentFactory',['require','exports','module','aurelia-framework'],function (require, exports, module) {// ag-grid-aurelia v7.1.0
+define('ag-grid-aurelia/lib/aureliaComponentFactory',['require','exports','module','aurelia-framework'],function (require, exports, module) {// ag-grid-aurelia v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var aurelia_framework_1 = require("aurelia-framework");
 var AureliaComponentFactory = (function () {
@@ -24233,14 +25006,13 @@ var AureliaComponentFactory = (function () {
 }());
 AureliaComponentFactory = __decorate([
     aurelia_framework_1.autoinject(),
-    aurelia_framework_1.transient(),
-    __metadata("design:paramtypes", [])
+    aurelia_framework_1.transient()
 ], AureliaComponentFactory);
 exports.AureliaComponentFactory = AureliaComponentFactory;
 
 });
 
-define('ag-grid-aurelia/lib/agUtils',['require','exports','module','aurelia-framework'],function (require, exports, module) {// ag-grid-aurelia v7.1.0
+define('ag-grid-aurelia/lib/agUtils',['require','exports','module','aurelia-framework'],function (require, exports, module) {// ag-grid-aurelia v7.2.0
 "use strict";
 var aurelia_framework_1 = require("aurelia-framework");
 function generateBindables(names, bindingModeToUse) {
@@ -24267,7 +25039,7 @@ exports.generateBindables = generateBindables;
 
 });
 
-define('ag-grid-aurelia/lib/agGridColumn',['require','exports','module','aurelia-framework','./agTemplate','./agUtils'],function (require, exports, module) {// ag-grid-aurelia v7.1.0
+define('ag-grid-aurelia/lib/agGridColumn',['require','exports','module','aurelia-framework','./agTemplate','./agUtils'],function (require, exports, module) {// ag-grid-aurelia v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -24363,7 +25135,7 @@ var AgGridColumn_1;
 
 });
 
-define('ag-grid-aurelia/lib/agTemplate',['require','exports','module','aurelia-framework'],function (require, exports, module) {// ag-grid-aurelia v7.1.0
+define('ag-grid-aurelia/lib/agTemplate',['require','exports','module','aurelia-framework'],function (require, exports, module) {// ag-grid-aurelia v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -24439,7 +25211,7 @@ exports.AgFilterTemplate = AgFilterTemplate;
 
 });
 
-define('ag-grid-aurelia/lib/aureliaCellRendererComponent',['require','exports','module'],function (require, exports, module) {// ag-grid-aurelia v7.1.0
+define('ag-grid-aurelia/lib/aureliaCellRendererComponent',['require','exports','module'],function (require, exports, module) {// ag-grid-aurelia v7.2.0
 "use strict";
 var AureliaCellRendererComponent = (function () {
     function AureliaCellRendererComponent() {
@@ -24461,7 +25233,7 @@ exports.AureliaCellRendererComponent = AureliaCellRendererComponent;
 
 });
 
-define('ag-grid-aurelia/lib/editorViewModels',['require','exports','module'],function (require, exports, module) {// ag-grid-aurelia v7.1.0
+define('ag-grid-aurelia/lib/editorViewModels',['require','exports','module'],function (require, exports, module) {// ag-grid-aurelia v7.2.0
 "use strict";
 /**
  * A base editor component for inline editing
@@ -24481,7 +25253,7 @@ exports.BaseAureliaEditor = BaseAureliaEditor;
 
 });
 
-define('ag-grid-enterprise/dist/lib/main',['require','exports','module','ag-grid/main','./menu/enterpriseMenu','./rangeController','./clipboardService','./rowStages/groupStage','./rowStages/aggregationStage','./enterpriseBoot','./statusBar/statusBar','./menu/contextMenu','./viewport/viewportRowModel','./toolPanel/columnDrop/pivotColumnsPanel','./toolPanel/toolPanelComp','./rowGroupCompFactory','./licenseManager','./license/md5','./rowStages/pivotStage','./rowStages/pivotColDefService','./aggregation/aggFuncService','./pivotCompFactory','./menu/menuItemMapper'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/main',['require','exports','module','ag-grid/main','./menu/enterpriseMenu','./rangeController','./clipboardService','./rowStages/groupStage','./rowStages/aggregationStage','./enterpriseBoot','./statusBar/statusBar','./menu/contextMenu','./viewport/viewportRowModel','./toolPanel/columnDrop/pivotColumnsPanel','./toolPanel/toolPanelComp','./rowGroupCompFactory','./licenseManager','./license/md5','./rowStages/pivotStage','./rowStages/pivotColDefService','./aggregation/aggFuncService','./pivotCompFactory','./menu/menuItemMapper','./excelCreator','./excelXmlFactory'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var main_1 = require("ag-grid/main");
 var enterpriseMenu_1 = require("./menu/enterpriseMenu");
@@ -24503,15 +25275,17 @@ var pivotColDefService_1 = require("./rowStages/pivotColDefService");
 var aggFuncService_1 = require("./aggregation/aggFuncService");
 var pivotCompFactory_1 = require("./pivotCompFactory");
 var menuItemMapper_1 = require("./menu/menuItemMapper");
+var excelCreator_1 = require("./excelCreator");
+var excelXmlFactory_1 = require("./excelXmlFactory");
 var rowModelTypes = { viewport: viewportRowModel_1.ViewportRowModel };
-main_1.Grid.setEnterpriseBeans([toolPanelComp_1.ToolPanelComp, enterpriseMenu_1.EnterpriseMenuFactory, rowGroupCompFactory_1.RowGroupCompFactory, pivotCompFactory_1.PivotCompFactory,
+main_1.Grid.setEnterpriseBeans([toolPanelComp_1.ToolPanelComp, enterpriseMenu_1.EnterpriseMenuFactory, excelCreator_1.ExcelCreator, excelXmlFactory_1.ExcelXmlFactory, rowGroupCompFactory_1.RowGroupCompFactory, pivotCompFactory_1.PivotCompFactory,
     pivotColumnsPanel_1.PivotColumnsPanel, rangeController_1.RangeController, clipboardService_1.ClipboardService, pivotStage_1.PivotStage, pivotColDefService_1.PivotColDefService,
     contextMenu_1.ContextMenuFactory, groupStage_1.GroupStage, aggregationStage_1.AggregationStage, enterpriseBoot_1.EnterpriseBoot, aggFuncService_1.AggFuncService,
     statusBar_1.StatusBar, licenseManager_1.LicenseManager, md5_1.MD5, menuItemMapper_1.MenuItemMapper], rowModelTypes);
 
 });
 
-define('ag-grid-enterprise/dist/lib/menu/enterpriseMenu',['require','exports','module','ag-grid','../toolPanel/columnsSelect/columnSelectPanel','./menuList','./menuItemComponent','./menuItemMapper'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/menu/enterpriseMenu',['require','exports','module','ag-grid','../toolPanel/columnsSelect/columnSelectPanel','./menuList','./menuItemComponent','./menuItemMapper'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -24777,8 +25551,14 @@ var EnterpriseMenu = (function () {
         this.showTabBasedOnPreviousSelection();
         this.hidePopupFunc = params.hidePopup;
         // if the body scrolls, we want to hide the menu, as the menu will not appear in the right location anymore
-        this.eventService.addEventListener('bodyScroll', params.hidePopup);
-        this.destroyFunctions.push(function () { return _this.eventService.removeEventListener('bodyScroll', params.hidePopup); });
+        var onBodyScroll = function (event) {
+            // if h scroll, popup is no longer over the column
+            if (event.direction === 'horizontal') {
+                params.hidePopup();
+            }
+        };
+        this.eventService.addEventListener('bodyScroll', onBodyScroll);
+        this.destroyFunctions.push(function () { return _this.eventService.removeEventListener('bodyScroll', onBodyScroll); });
     };
     EnterpriseMenu.prototype.getGui = function () {
         return this.tabbedLayout.getGui();
@@ -24828,7 +25608,7 @@ exports.EnterpriseMenu = EnterpriseMenu;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnsSelect/columnSelectPanel',['require','exports','module','ag-grid/main','./renderedGroup','./renderedColumn'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnsSelect/columnSelectPanel',['require','exports','module','ag-grid/main','./renderedGroup','./renderedColumn'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -24966,7 +25746,7 @@ exports.ColumnSelectPanel = ColumnSelectPanel;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnsSelect/renderedGroup',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnsSelect/renderedGroup',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -25231,7 +26011,7 @@ exports.RenderedGroup = RenderedGroup;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnsSelect/renderedColumn',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnsSelect/renderedColumn',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -25471,7 +26251,7 @@ exports.RenderedColumn = RenderedColumn;
 
 });
 
-define('ag-grid-enterprise/dist/lib/menu/menuList',['require','exports','module','ag-grid','./menuItemComponent'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/menu/menuList',['require','exports','module','ag-grid','./menuItemComponent'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -25629,7 +26409,7 @@ exports.MenuList = MenuList;
 
 });
 
-define('ag-grid-enterprise/dist/lib/menu/menuItemComponent',['require','exports','module','ag-grid'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/menu/menuItemComponent',['require','exports','module','ag-grid'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -25732,7 +26512,7 @@ exports.MenuItemComponent = MenuItemComponent;
 
 });
 
-define('ag-grid-enterprise/dist/lib/menu/menuItemMapper',['require','exports','module','ag-grid','../clipboardService','../aggregation/aggFuncService'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/menu/menuItemMapper',['require','exports','module','ag-grid','../clipboardService','../aggregation/aggFuncService'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -25831,11 +26611,6 @@ var MenuItemMapper = (function () {
                 name: localeTextFunc('collapseAll', 'Collapse All'),
                 action: function () { return _this.gridApi.collapseAll(); }
             };
-            case 'toolPanel': return {
-                name: localeTextFunc('toolPanel', 'Tool Panel'),
-                checked: this.gridApi.isToolPanelShowing(),
-                action: function () { return _this.gridApi.showToolPanel(!_this.gridApi.isToolPanelShowing()); }
-            };
             case 'copy': return {
                 name: localeTextFunc('copy', 'Copy'),
                 shortcut: localeTextFunc('ctrlC', 'Ctrl+C'),
@@ -25859,6 +26634,18 @@ var MenuItemMapper = (function () {
                 name: localeTextFunc('toolPanel', 'Tool Panel'),
                 checked: this.gridApi.isToolPanelShowing(),
                 action: function () { return _this.gridApi.showToolPanel(!_this.gridApi.isToolPanelShowing()); }
+            };
+            case 'export': return {
+                name: localeTextFunc('export', 'Export'),
+                subMenu: ['csvExport', 'excelExport']
+            };
+            case 'csvExport': return {
+                name: localeTextFunc('csvExport', 'CSV Export'),
+                action: function () { return _this.gridApi.exportDataAsCsv({}); }
+            };
+            case 'excelExport': return {
+                name: localeTextFunc('excelExport', 'Excel Export'),
+                action: function () { return _this.gridApi.exportDataAsExcel({}); }
             };
             case 'separator': return 'separator';
             default:
@@ -25921,7 +26708,7 @@ exports.MenuItemMapper = MenuItemMapper;
 
 });
 
-define('ag-grid-enterprise/dist/lib/clipboardService',['require','exports','module','ag-grid/main','./rangeController'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/clipboardService',['require','exports','module','ag-grid/main','./rangeController'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -26155,7 +26942,7 @@ var ClipboardService = (function () {
         var value = this.valueService.getValue(column, rowNode);
         var processedValue = this.processRangeCell(rowNode, column, value, this.gridOptionsWrapper.getProcessCellForClipboardFunc());
         if (main_1.Utils.exists(processedValue)) {
-            var data = value.toString();
+            var data = processedValue.toString();
             this.copyDataToClipboard(data);
         }
         else {
@@ -26202,7 +26989,7 @@ var ClipboardService = (function () {
             onlySelected: true,
             processCellCallback: this.gridOptionsWrapper.getProcessCellForClipboardFunc()
         };
-        var data = this.csvCreator.getDataAsCsv(params);
+        var data = this.csvCreator.exportDataAsCsv(params);
         this.copyDataToClipboard(data);
     };
     ClipboardService.prototype.copyDataToClipboard = function (data) {
@@ -26374,7 +27161,7 @@ exports.ClipboardService = ClipboardService;
 
 });
 
-define('ag-grid-enterprise/dist/lib/rangeController',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rangeController',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -26668,7 +27455,7 @@ exports.RangeController = RangeController;
 
 });
 
-define('ag-grid-enterprise/dist/lib/aggregation/aggFuncService',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/aggregation/aggFuncService',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -26887,7 +27674,7 @@ function aggAvg(input) {
 
 });
 
-define('ag-grid-enterprise/dist/lib/rowStages/groupStage',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rowStages/groupStage',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27054,7 +27841,7 @@ exports.GroupStage = GroupStage;
 
 });
 
-define('ag-grid-enterprise/dist/lib/rowStages/aggregationStage',['require','exports','module','ag-grid/main','./pivotStage','../aggregation/aggFuncService'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rowStages/aggregationStage',['require','exports','module','ag-grid/main','./pivotStage','../aggregation/aggFuncService'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27247,7 +28034,7 @@ exports.AggregationStage = AggregationStage;
 
 });
 
-define('ag-grid-enterprise/dist/lib/rowStages/pivotStage',['require','exports','module','ag-grid/main','./pivotColDefService'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rowStages/pivotStage',['require','exports','module','ag-grid/main','./pivotColDefService'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27395,7 +28182,7 @@ exports.PivotStage = PivotStage;
 
 });
 
-define('ag-grid-enterprise/dist/lib/rowStages/pivotColDefService',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rowStages/pivotColDefService',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27524,7 +28311,7 @@ exports.PivotColDefService = PivotColDefService;
 
 });
 
-define('ag-grid-enterprise/dist/lib/enterpriseBoot',['require','exports','module','ag-grid/main','./setFilter/setFilter','./rendering/richSelect/richSelectCellEditor','./licenseManager'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/enterpriseBoot',['require','exports','module','ag-grid/main','./setFilter/setFilter','./rendering/richSelect/richSelectCellEditor','./licenseManager'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27576,7 +28363,7 @@ exports.EnterpriseBoot = EnterpriseBoot;
 
 });
 
-define('ag-grid-enterprise/dist/lib/setFilter/setFilter',['require','exports','module','ag-grid/main','./setFilterModel','./setFilterListItem','../rendering/virtualList'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/setFilter/setFilter',['require','exports','module','ag-grid/main','./setFilterModel','./setFilterListItem','../rendering/virtualList'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -27834,7 +28621,7 @@ var ModelWrapper = (function () {
 
 });
 
-define('ag-grid-enterprise/dist/lib/setFilter/setFilterModel',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/setFilter/setFilterModel',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var main_1 = require("ag-grid/main");
 var SetFilterModel = (function () {
@@ -28068,7 +28855,7 @@ exports.SetFilterModel = SetFilterModel;
 
 });
 
-define('ag-grid-enterprise/dist/lib/setFilter/setFilterListItem',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/setFilter/setFilterListItem',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -28146,7 +28933,7 @@ exports.SetFilterListItem = SetFilterListItem;
 
 });
 
-define('ag-grid-enterprise/dist/lib/rendering/virtualList',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rendering/virtualList',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -28299,7 +29086,7 @@ exports.VirtualList = VirtualList;
 
 });
 
-define('ag-grid-enterprise/dist/lib/rendering/richSelect/richSelectCellEditor',['require','exports','module','ag-grid/main','./richSelectRow','../virtualList'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rendering/richSelect/richSelectCellEditor',['require','exports','module','ag-grid/main','./richSelectRow','../virtualList'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -28411,7 +29198,8 @@ var RichSelectCellEditor = (function (_super) {
         var mouseY = mouseEvent.clientY - rect.top + scrollTop;
         var row = Math.floor(mouseY / this.virtualList.getRowHeight());
         var value = this.params.values[row];
-        if (main_1.Utils.exists(value)) {
+        // not using utils.exist() as want empty string test to pass
+        if (value !== null && value !== undefined) {
             this.setSelectedValue(value);
         }
     };
@@ -28460,7 +29248,7 @@ exports.RichSelectCellEditor = RichSelectCellEditor;
 
 });
 
-define('ag-grid-enterprise/dist/lib/rendering/richSelect/richSelectRow',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rendering/richSelect/richSelectRow',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -28498,6 +29286,10 @@ var RichSelectRow = (function (_super) {
             // https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#Security_considerations
             this.getGui().textContent = value.toString();
         }
+        else {
+            // putting in blank, so if missing, at least the user can click on it
+            this.getGui().innerHTML = '&nbsp;';
+        }
     };
     RichSelectRow.prototype.populateWithRenderer = function (value) {
         var childComponent = this.cellRendererService.useCellRenderer(this.cellRenderer, this.getGui(), { value: value });
@@ -28515,7 +29307,7 @@ exports.RichSelectRow = RichSelectRow;
 
 });
 
-define('ag-grid-enterprise/dist/lib/licenseManager',['require','exports','module','ag-grid/main','ag-grid/main','./license/md5'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/licenseManager',['require','exports','module','ag-grid/main','ag-grid/main','./license/md5'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -28647,7 +29439,7 @@ exports.LicenseManager = LicenseManager;
 
 });
 
-define('ag-grid-enterprise/dist/lib/license/md5',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/license/md5',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -28835,7 +29627,7 @@ exports.MD5 = MD5;
 
 });
 
-define('ag-grid-enterprise/dist/lib/statusBar/statusBar',['require','exports','module','ag-grid/main','./statusItem','../rangeController'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/statusBar/statusBar',['require','exports','module','ag-grid/main','./statusItem','../rangeController'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -29020,7 +29812,7 @@ exports.StatusBar = StatusBar;
 
 });
 
-define('ag-grid-enterprise/dist/lib/statusBar/statusItem',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/statusBar/statusItem',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -29065,7 +29857,7 @@ exports.StatusItem = StatusItem;
 
 });
 
-define('ag-grid-enterprise/dist/lib/menu/contextMenu',['require','exports','module','ag-grid','../clipboardService','./menuItemComponent','./menuList','./menuItemMapper'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/menu/contextMenu',['require','exports','module','ag-grid','../clipboardService','./menuItemComponent','./menuList','./menuItemMapper'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -29096,6 +29888,10 @@ var ContextMenuFactory = (function () {
         if (ag_grid_1.Utils.exists(node)) {
             // if user clicks a cell
             defaultMenuOptions = ['copy', 'copyWithHeaders', 'paste', 'separator', 'toolPanel'];
+            // only put in the export if normal row model, other row models confuse things with export.
+            if (this.rowModel.getType() === ag_grid_1.Constants.ROW_MODEL_TYPE_NORMAL) {
+                defaultMenuOptions.push('export');
+            }
         }
         else {
             // if user clicks outside of a cell (eg below the rows, or not rows present)
@@ -29148,6 +29944,10 @@ var ContextMenuFactory = (function () {
         ag_grid_1.Autowired('gridOptionsWrapper'), 
         __metadata('design:type', ag_grid_1.GridOptionsWrapper)
     ], ContextMenuFactory.prototype, "gridOptionsWrapper", void 0);
+    __decorate([
+        ag_grid_1.Autowired('rowModel'), 
+        __metadata('design:type', Object)
+    ], ContextMenuFactory.prototype, "rowModel", void 0);
     __decorate([
         ag_grid_1.PostConstruct, 
         __metadata('design:type', Function), 
@@ -29215,7 +30015,7 @@ var ContextMenu = (function (_super) {
 
 });
 
-define('ag-grid-enterprise/dist/lib/viewport/viewportRowModel',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/viewport/viewportRowModel',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -29433,7 +30233,7 @@ exports.ViewportRowModel = ViewportRowModel;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/pivotColumnsPanel',['require','exports','module','ag-grid/main','./abstractColumnDropPanel'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/pivotColumnsPanel',['require','exports','module','ag-grid/main','./abstractColumnDropPanel'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -29569,7 +30369,7 @@ exports.PivotColumnsPanel = PivotColumnsPanel;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/abstractColumnDropPanel',['require','exports','module','ag-grid/main','./columnComponent'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/abstractColumnDropPanel',['require','exports','module','ag-grid/main','./columnComponent'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -29894,7 +30694,7 @@ exports.AbstractColumnDropPanel = AbstractColumnDropPanel;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/columnComponent',['require','exports','module','ag-grid/main','../../rendering/virtualList','../../aggregation/aggFuncService'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/columnComponent',['require','exports','module','ag-grid/main','../../rendering/virtualList','../../aggregation/aggFuncService'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -30093,7 +30893,7 @@ var AggItemComp = (function (_super) {
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/toolPanelComp',['require','exports','module','ag-grid/main','./columnsSelect/columnSelectPanel','./columnDrop/rowGroupColumnsPanel','./columnDrop/pivotColumnsPanel','./columnDrop/pivotModePanel','./columnDrop/valueColumnsPanel'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/toolPanelComp',['require','exports','module','ag-grid/main','./columnsSelect/columnSelectPanel','./columnDrop/rowGroupColumnsPanel','./columnDrop/pivotColumnsPanel','./columnDrop/pivotModePanel','./columnDrop/valueColumnsPanel'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -30170,7 +30970,7 @@ exports.ToolPanelComp = ToolPanelComp;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/rowGroupColumnsPanel',['require','exports','module','ag-grid/main','./abstractColumnDropPanel'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/rowGroupColumnsPanel',['require','exports','module','ag-grid/main','./abstractColumnDropPanel'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -30275,7 +31075,7 @@ exports.RowGroupColumnsPanel = RowGroupColumnsPanel;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/pivotModePanel',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/pivotModePanel',['require','exports','module','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -30351,7 +31151,7 @@ exports.PivotModePanel = PivotModePanel;
 
 });
 
-define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/valueColumnsPanel',['require','exports','module','ag-grid/main','./abstractColumnDropPanel'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/toolPanel/columnDrop/valueColumnsPanel',['require','exports','module','ag-grid/main','./abstractColumnDropPanel'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -30456,7 +31256,7 @@ exports.ValuesColumnPanel = ValuesColumnPanel;
 
 });
 
-define('ag-grid-enterprise/dist/lib/rowGroupCompFactory',['require','exports','module','ag-grid/main','./toolPanel/columnDrop/rowGroupColumnsPanel'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/rowGroupCompFactory',['require','exports','module','ag-grid/main','./toolPanel/columnDrop/rowGroupColumnsPanel'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -30491,7 +31291,7 @@ exports.RowGroupCompFactory = RowGroupCompFactory;
 
 });
 
-define('ag-grid-enterprise/dist/lib/pivotCompFactory',['require','exports','module','ag-grid/main','./toolPanel/columnDrop/pivotColumnsPanel'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/pivotCompFactory',['require','exports','module','ag-grid/main','./toolPanel/columnDrop/pivotColumnsPanel'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -30526,7 +31326,583 @@ exports.PivotCompFactory = PivotCompFactory;
 
 });
 
-define('ag-grid-enterprise/dist/lib/clientExports',['require','exports','module','./toolPanel/columnsSelect/columnSelectPanel','./toolPanel/columnsSelect/renderedColumn','./toolPanel/columnsSelect/renderedGroup','./rowStages/aggregationStage','./rowStages/groupStage','./setFilter/setFilter','./setFilter/setFilterModel','./statusBar/statusBar','./statusBar/statusItem','./clipboardService','./enterpriseBoot','./menu/enterpriseMenu','./menu/menuItemComponent','./menu/menuList','./rangeController','./toolPanel/columnDrop/rowGroupColumnsPanel','./menu/contextMenu','./viewport/viewportRowModel','./rendering/richSelect/richSelectCellEditor','./rendering/richSelect/richSelectRow','./rendering/virtualList','./toolPanel/columnDrop/abstractColumnDropPanel','./toolPanel/columnDrop/pivotColumnsPanel','./toolPanel/toolPanelComp','./licenseManager','./rowStages/pivotStage','./rowStages/pivotColDefService','./toolPanel/columnDrop/pivotModePanel','./aggregation/aggFuncService','./license/md5','./setFilter/setFilterListItem','./toolPanel/columnDrop/columnComponent','./toolPanel/columnDrop/valueColumnsPanel','./pivotCompFactory','./rowGroupCompFactory'],function (require, exports, module) {// ag-grid-enterprise v7.1.0
+define('ag-grid-enterprise/dist/lib/excelCreator',['require','exports','module','ag-grid/main','ag-grid/main','ag-grid/main','ag-grid/main','./excelXmlFactory','ag-grid/main','ag-grid/main','ag-grid/main','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var main_1 = require('ag-grid/main');
+var main_2 = require('ag-grid/main');
+var main_3 = require('ag-grid/main');
+var main_4 = require('ag-grid/main');
+var excelXmlFactory_1 = require("./excelXmlFactory");
+var main_5 = require('ag-grid/main');
+var main_6 = require('ag-grid/main');
+var main_7 = require('ag-grid/main');
+var main_8 = require('ag-grid/main');
+var ExcelGridSerializingSession = (function (_super) {
+    __extends(ExcelGridSerializingSession, _super);
+    function ExcelGridSerializingSession(columnController, valueService, gridOptionsWrapper, processCellCallback, processHeaderCallback, excelXmlFactory, baseExcelStyles, styleLinker) {
+        _super.call(this, columnController, valueService, gridOptionsWrapper, processCellCallback, processHeaderCallback);
+        this.excelXmlFactory = excelXmlFactory;
+        this.styleLinker = styleLinker;
+        this.mixedStyles = {};
+        this.mixedStyleCounter = 0;
+        this.rows = [];
+        if (!baseExcelStyles) {
+            this.styleIds = [];
+            this.excelStyles = [];
+        }
+        else {
+            this.styleIds = baseExcelStyles.map(function (it) {
+                return it.id;
+            });
+            this.excelStyles = baseExcelStyles.slice();
+        }
+    }
+    ExcelGridSerializingSession.prototype.addCustomHeader = function (customHeader) {
+        throw new Error("Custom header not supported for Excel serialization");
+    };
+    ExcelGridSerializingSession.prototype.addCustomFooter = function (customFooter) {
+        throw new Error("Custom footer not supported for Excel serialization");
+    };
+    ExcelGridSerializingSession.prototype.prepare = function (columnsToExport) {
+        this.cols = main_6.Utils.map(columnsToExport, function (it) {
+            it.getColDef().cellStyle;
+            return {
+                width: it.getActualWidth()
+            };
+        });
+    };
+    ExcelGridSerializingSession.prototype.onNewHeaderGroupingRow = function () {
+        var currentCells = [];
+        var that = this;
+        this.rows.push({
+            cells: currentCells
+        });
+        return {
+            onColumn: function (header, index, span) {
+                var styleIds = that.styleLinker(main_5.RowType.HEADER_GROUPING, 1, index, "grouping-" + header, null, null);
+                currentCells.push(that.createMergedCell(styleIds.length > 0 ? styleIds[0] : null, excelXmlFactory_1.ExcelDataType.String, header, span));
+            }
+        };
+    };
+    ExcelGridSerializingSession.prototype.onNewHeaderRow = function () {
+        return this.onNewRow(this.onNewHeaderColumn);
+    };
+    ExcelGridSerializingSession.prototype.onNewBodyRow = function () {
+        return this.onNewRow(this.onNewBodyColumn);
+    };
+    ExcelGridSerializingSession.prototype.onNewRow = function (onNewColumnAccumulator) {
+        var currentCells = [];
+        this.rows.push({
+            cells: currentCells
+        });
+        return {
+            onColumn: onNewColumnAccumulator.bind(this, this.rows.length, currentCells)()
+        };
+    };
+    ExcelGridSerializingSession.prototype.onNewHeaderColumn = function (rowIndex, currentCells) {
+        var _this = this;
+        var that = this;
+        return function (column, index, node) {
+            var nameForCol = _this.extractHeaderValue(column);
+            var styleIds = that.styleLinker(main_5.RowType.HEADER, rowIndex, index, nameForCol, column, null);
+            currentCells.push(_this.createCell(styleIds.length > 0 ? styleIds[0] : null, excelXmlFactory_1.ExcelDataType.String, nameForCol));
+        };
+    };
+    ExcelGridSerializingSession.prototype.parse = function () {
+        var data = [{
+                name: "ag-grid",
+                table: {
+                    columns: this.cols,
+                    rows: this.rows
+                }
+            }];
+        return this.excelXmlFactory.createExcelXml(this.excelStyles, data);
+    };
+    ExcelGridSerializingSession.prototype.onNewBodyColumn = function (rowIndex, currentCells) {
+        var _this = this;
+        var that = this;
+        return function (column, index, node) {
+            var valueForCell = _this.extractRowCellValue(column, index, node);
+            var styleIds = that.styleLinker(main_5.RowType.BODY, rowIndex, index, valueForCell, column, node);
+            var excelStyleId = null;
+            if (styleIds && styleIds.length == 1) {
+                excelStyleId = styleIds[0];
+            }
+            else if (styleIds && styleIds.length > 1) {
+                var key = styleIds.join("-");
+                if (!_this.mixedStyles[key]) {
+                    _this.addNewMixedStyle(styleIds);
+                }
+                excelStyleId = _this.mixedStyles[key].excelID;
+            }
+            var type = main_6.Utils.isNumeric(valueForCell) ? excelXmlFactory_1.ExcelDataType.Number : excelXmlFactory_1.ExcelDataType.String;
+            currentCells.push(that.createCell(excelStyleId, type, valueForCell));
+        };
+    };
+    ExcelGridSerializingSession.prototype.addNewMixedStyle = function (styleIds) {
+        var _this = this;
+        this.mixedStyleCounter += 1;
+        var excelId = 'mixedStyle' + this.mixedStyleCounter;
+        var resultantStyle = {};
+        styleIds.forEach(function (styleId) {
+            _this.excelStyles.forEach(function (excelStyle) {
+                if (excelStyle.id === styleId) {
+                    main_6.Utils.mergeDeep(resultantStyle, excelStyle);
+                }
+            });
+        });
+        resultantStyle['id'] = excelId;
+        resultantStyle['name'] = excelId;
+        var key = styleIds.join("-");
+        this.mixedStyles[key] = {
+            excelID: excelId,
+            key: key,
+            result: resultantStyle
+        };
+        this.excelStyles.push(resultantStyle);
+        this.styleIds.push(excelId);
+    };
+    ExcelGridSerializingSession.prototype.styleExists = function (styleId) {
+        if (styleId == null)
+            return false;
+        return this.styleIds.indexOf(styleId) > -1;
+    };
+    ExcelGridSerializingSession.prototype.createCell = function (styleId, type, value) {
+        return {
+            styleId: this.styleExists(styleId) ? styleId : null,
+            data: {
+                type: type,
+                value: value
+            }
+        };
+    };
+    ExcelGridSerializingSession.prototype.createMergedCell = function (styleId, type, value, numOfCells) {
+        return {
+            styleId: this.styleExists(styleId) ? styleId : null,
+            data: {
+                type: type,
+                value: value
+            },
+            mergeAcross: numOfCells
+        };
+    };
+    return ExcelGridSerializingSession;
+}(main_5.BaseGridSerializingSession));
+exports.ExcelGridSerializingSession = ExcelGridSerializingSession;
+var ExcelCreator = (function () {
+    function ExcelCreator() {
+    }
+    ExcelCreator.prototype.exportDataAsExcel = function (params) {
+        var fileNamePresent = params && params.fileName && params.fileName.length !== 0;
+        var fileName = fileNamePresent ? params.fileName : 'export.xls';
+        if (fileName.indexOf(".") === -1) {
+            fileName = fileName + '.xls';
+        }
+        var content = this.getDataAsExcelXml(params);
+        this.downloader.download(fileName, content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    };
+    ExcelCreator.prototype.getDataAsExcelXml = function (params) {
+        return this.gridSerializer.serialize(new ExcelGridSerializingSession(this.columnController, this.valueService, this.gridOptionsWrapper, params.processCellCallback, params.processHeaderCallback, this.excelXmlFactory, this.gridOptions.excelStyles, this.styleLinker.bind(this)), params);
+    };
+    ExcelCreator.prototype.styleLinker = function (rowType, rowIndex, colIndex, value, column, node) {
+        if ((rowType === main_5.RowType.HEADER) || (rowType === main_5.RowType.HEADER_GROUPING))
+            return ["header"];
+        if (!this.gridOptions.excelStyles || this.gridOptions.excelStyles.length === 0)
+            return null;
+        var styleIds = this.gridOptions.excelStyles.map(function (it) {
+            return it.id;
+        });
+        var applicableStyles = [];
+        this.stylingService.processCellClassRules(column.getColDef(), {
+            value: value,
+            data: node.data,
+            node: node,
+            colDef: column.getColDef(),
+            rowIndex: rowIndex,
+            api: this.gridOptionsWrapper.getApi(),
+            context: this.gridOptionsWrapper.getContext()
+        }, function (className) {
+            if (styleIds.indexOf(className) > -1) {
+                applicableStyles.push(className);
+            }
+        });
+        return applicableStyles.sort(function (left, right) {
+            return (styleIds.indexOf(left) < styleIds.indexOf(right)) ? -1 : 1;
+        });
+    };
+    __decorate([
+        main_3.Autowired('excelXmlFactory'), 
+        __metadata('design:type', excelXmlFactory_1.ExcelXmlFactory)
+    ], ExcelCreator.prototype, "excelXmlFactory", void 0);
+    __decorate([
+        main_3.Autowired('downloader'), 
+        __metadata('design:type', main_4.Downloader)
+    ], ExcelCreator.prototype, "downloader", void 0);
+    __decorate([
+        main_3.Autowired('columnController'), 
+        __metadata('design:type', main_1.ColumnController)
+    ], ExcelCreator.prototype, "columnController", void 0);
+    __decorate([
+        main_3.Autowired('valueService'), 
+        __metadata('design:type', main_2.ValueService)
+    ], ExcelCreator.prototype, "valueService", void 0);
+    __decorate([
+        main_3.Autowired('gridSerializer'), 
+        __metadata('design:type', main_5.GridSerializer)
+    ], ExcelCreator.prototype, "gridSerializer", void 0);
+    __decorate([
+        main_3.Autowired('gridOptionsWrapper'), 
+        __metadata('design:type', main_7.GridOptionsWrapper)
+    ], ExcelCreator.prototype, "gridOptionsWrapper", void 0);
+    __decorate([
+        main_3.Autowired('gridOptions'), 
+        __metadata('design:type', Object)
+    ], ExcelCreator.prototype, "gridOptions", void 0);
+    __decorate([
+        main_3.Autowired('stylingService'), 
+        __metadata('design:type', main_8.StylingService)
+    ], ExcelCreator.prototype, "stylingService", void 0);
+    ExcelCreator = __decorate([
+        main_3.Bean('excelCreator'), 
+        __metadata('design:paramtypes', [])
+    ], ExcelCreator);
+    return ExcelCreator;
+}());
+exports.ExcelCreator = ExcelCreator;
+
+});
+
+define('ag-grid-enterprise/dist/lib/excelXmlFactory',['require','exports','module','ag-grid/main','ag-grid/main','ag-grid/main'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var main_1 = require('ag-grid/main');
+var main_2 = require('ag-grid/main');
+var main_3 = require('ag-grid/main');
+var LINE_SEPARATOR = '\r\n';
+/**
+ * See https://msdn.microsoft.com/en-us/library/aa140066(v=office.10).aspx
+ */
+var ExcelXmlFactory = (function () {
+    function ExcelXmlFactory() {
+    }
+    ExcelXmlFactory.prototype.createExcelXml = function (styles, worksheets) {
+        var documentProperties = this.documentProperties();
+        var excelWorkbook = this.excelWorkbook();
+        return this.excelXmlHeader() +
+            this.xmlFactory.createXml(this.workbook(documentProperties, excelWorkbook, styles, worksheets));
+    };
+    ExcelXmlFactory.prototype.workbook = function (documentProperties, excelWorkbook, styles, worksheets) {
+        var _this = this;
+        var children = [
+            documentProperties,
+            excelWorkbook,
+            this.stylesXmlElement(styles)
+        ];
+        main_3.Utils.map(worksheets, function (it) {
+            return _this.worksheetXmlElement(it);
+        }).forEach(function (it) {
+            children.push(it);
+        });
+        return {
+            name: "Workbook",
+            properties: {
+                prefix: "xmlns:",
+                prefixedMap: {
+                    o: "urn:schemas-microsoft-com:office:office",
+                    x: "urn:schemas-microsoft-com:office:excel",
+                    ss: "urn:schemas-microsoft-com:office:spreadsheet",
+                    html: "http://www.w3.org/TR/REC-html40"
+                },
+                rawMap: {
+                    xmlns: "urn:schemas-microsoft-com:office:spreadsheet"
+                }
+            },
+            children: children
+        };
+    };
+    ExcelXmlFactory.prototype.excelXmlHeader = function () {
+        return "<?xml version=\"1.0\"?>" + LINE_SEPARATOR +
+            "<?mso-application progid=\"Excel.Sheet\"?>" + LINE_SEPARATOR;
+    };
+    ExcelXmlFactory.prototype.stylesXmlElement = function (styles) {
+        var _this = this;
+        return {
+            name: "Styles",
+            children: styles ? main_3.Utils.map(styles, function (it) {
+                return _this.styleXmlElement(it);
+            }) : []
+        };
+    };
+    ExcelXmlFactory.prototype.styleXmlElement = function (style) {
+        var borders = [];
+        if (style.borders) {
+            [
+                style.borders.borderBottom,
+                style.borders.borderLeft,
+                style.borders.borderRight,
+                style.borders.borderTop
+            ].forEach(function (it, index) {
+                var current = index == 0 ? "Bottom" : index == 1 ? "Left" : index == 2 ? "Right" : "Top";
+                borders.push({
+                    name: "Border",
+                    properties: {
+                        prefix: "ss:",
+                        prefixedMap: {
+                            Position: current,
+                            LineStyle: it.lineStyle,
+                            Weight: it.weight,
+                            Color: it.color
+                        }
+                    }
+                });
+            });
+        }
+        var children = [];
+        if (style.alignment) {
+            children.push({
+                name: "Alignment",
+                properties: {
+                    prefix: "ss:",
+                    prefixedMap: {
+                        Vertical: style.alignment.vertical,
+                        Horizontal: style.alignment.horizontal
+                    }
+                }
+            });
+        }
+        if (style.borders) {
+            children.push({
+                name: "Borders",
+                children: borders
+            });
+        }
+        if (style.font) {
+            children.push({
+                name: "Font",
+                properties: {
+                    prefix: "ss:",
+                    prefixedMap: {
+                        Color: style.font.color
+                    }
+                }
+            });
+        }
+        if (style.interior) {
+            children.push({
+                name: "Interior",
+                properties: {
+                    prefix: "ss:",
+                    prefixedMap: {
+                        Color: style.interior.color,
+                        Pattern: style.interior.pattern
+                    }
+                }
+            });
+        }
+        return {
+            name: "Style",
+            properties: {
+                prefix: "ss:",
+                prefixedMap: {
+                    ID: style.id,
+                    Name: (style.name) ? style.name : style.id
+                },
+            },
+            children: children
+        };
+    };
+    ExcelXmlFactory.prototype.worksheetXmlElement = function (worksheet) {
+        var _this = this;
+        var children = [];
+        main_3.Utils.map(worksheet.table.columns, function (it) {
+            return _this.columnXmlElement(it);
+        }).forEach(function (it) {
+            children.push(it);
+        });
+        main_3.Utils.map(worksheet.table.rows, function (it) {
+            return _this.rowXmlElement(it);
+        }).forEach(function (it) {
+            children.push(it);
+        });
+        return {
+            name: "Worksheet",
+            children: [{
+                    name: "Table",
+                    children: children
+                }],
+            properties: {
+                prefix: "ss:",
+                prefixedMap: {
+                    Name: worksheet.name
+                }
+            }
+        };
+    };
+    ExcelXmlFactory.prototype.columnXmlElement = function (column) {
+        return {
+            name: "Column",
+            properties: {
+                prefix: "ss:",
+                prefixedMap: {
+                    Width: column.width
+                }
+            }
+        };
+    };
+    ExcelXmlFactory.prototype.rowXmlElement = function (row) {
+        var _this = this;
+        return {
+            name: "Row",
+            children: main_3.Utils.map(row.cells, function (it) {
+                return _this.rowCellXmlElement(it);
+            })
+        };
+    };
+    ExcelXmlFactory.prototype.rowCellXmlElement = function (cell) {
+        var properties = {};
+        if (cell.mergeAcross) {
+            properties['MergeAcross'] = cell.mergeAcross;
+        }
+        if (cell.styleId) {
+            properties['StyleID'] = cell.styleId;
+        }
+        return {
+            name: "Cell",
+            properties: {
+                prefix: "ss:",
+                prefixedMap: properties
+            },
+            children: [{
+                    name: "Data",
+                    properties: {
+                        prefix: "ss:",
+                        prefixedMap: {
+                            Type: ExcelDataType[cell.data.type]
+                        }
+                    },
+                    textNode: cell.data.value
+                }]
+        };
+    };
+    ExcelXmlFactory.prototype.excelWorkbook = function () {
+        return {
+            name: "ExcelWorkbook",
+            properties: {
+                rawMap: {
+                    xmlns: "urn:schemas-microsoft-com:office:excel"
+                }
+            },
+            children: [{
+                    name: "WindowHeight",
+                    textNode: "8130"
+                }, {
+                    name: "WindowWidth",
+                    textNode: "15135"
+                }, {
+                    name: "WindowHeight",
+                    textNode: "8130"
+                }, {
+                    name: "WindowTopX",
+                    textNode: "120"
+                }, {
+                    name: "WindowTopY",
+                    textNode: "45"
+                }, {
+                    name: "ProtectStructure",
+                    textNode: "False"
+                }, {
+                    name: "ProtectWindow",
+                    textNode: "False"
+                }]
+        };
+    };
+    ExcelXmlFactory.prototype.documentProperties = function () {
+        return {
+            name: "DocumentProperties",
+            properties: {
+                rawMap: {
+                    xmlns: "urn:schemas-microsoft-com:office:office"
+                }
+            },
+            children: [{
+                    name: "Version",
+                    textNode: "12.00"
+                }]
+        };
+    };
+    __decorate([
+        main_2.Autowired('xmlFactory'), 
+        __metadata('design:type', main_1.XmlFactory)
+    ], ExcelXmlFactory.prototype, "xmlFactory", void 0);
+    ExcelXmlFactory = __decorate([
+        main_2.Bean('excelXmlFactory'), 
+        __metadata('design:paramtypes', [])
+    ], ExcelXmlFactory);
+    return ExcelXmlFactory;
+}());
+exports.ExcelXmlFactory = ExcelXmlFactory;
+(function (ExcelDataType) {
+    ExcelDataType[ExcelDataType["String"] = 0] = "String";
+    ExcelDataType[ExcelDataType["Number"] = 1] = "Number";
+})(exports.ExcelDataType || (exports.ExcelDataType = {}));
+var ExcelDataType = exports.ExcelDataType;
+var HorizontalAlign = (function () {
+    function HorizontalAlign() {
+    }
+    HorizontalAlign.LEFT = 'Left';
+    HorizontalAlign.RIGHT = 'Right';
+    return HorizontalAlign;
+}());
+exports.HorizontalAlign = HorizontalAlign;
+var VerticalAlign = (function () {
+    function VerticalAlign() {
+    }
+    VerticalAlign.BOTTOM = 'BOTTOM';
+    VerticalAlign.TOP = 'TOP';
+    VerticalAlign.CENTER = 'CENTER';
+    return VerticalAlign;
+}());
+exports.VerticalAlign = VerticalAlign;
+var LineStyle = (function () {
+    function LineStyle() {
+    }
+    LineStyle.CONTINUOUS = 'CONTINUOUS';
+    return LineStyle;
+}());
+exports.LineStyle = LineStyle;
+var Pattern = (function () {
+    function Pattern() {
+    }
+    Pattern.SOLID = 'SOLID';
+    return Pattern;
+}());
+exports.Pattern = Pattern;
+
+});
+
+define('ag-grid-enterprise/dist/lib/clientExports',['require','exports','module','./toolPanel/columnsSelect/columnSelectPanel','./toolPanel/columnsSelect/renderedColumn','./toolPanel/columnsSelect/renderedGroup','./rowStages/aggregationStage','./rowStages/groupStage','./setFilter/setFilter','./setFilter/setFilterModel','./statusBar/statusBar','./statusBar/statusItem','./clipboardService','./enterpriseBoot','./menu/enterpriseMenu','./menu/menuItemComponent','./menu/menuList','./rangeController','./toolPanel/columnDrop/rowGroupColumnsPanel','./menu/contextMenu','./viewport/viewportRowModel','./rendering/richSelect/richSelectCellEditor','./rendering/richSelect/richSelectRow','./rendering/virtualList','./toolPanel/columnDrop/abstractColumnDropPanel','./toolPanel/columnDrop/pivotColumnsPanel','./toolPanel/toolPanelComp','./licenseManager','./rowStages/pivotStage','./rowStages/pivotColDefService','./toolPanel/columnDrop/pivotModePanel','./aggregation/aggFuncService','./license/md5','./setFilter/setFilterListItem','./toolPanel/columnDrop/columnComponent','./toolPanel/columnDrop/valueColumnsPanel','./pivotCompFactory','./rowGroupCompFactory','./excelCreator','./excelXmlFactory'],function (require, exports, module) {// ag-grid-enterprise v7.2.0
 "use strict";
 var columnSelectPanel_1 = require("./toolPanel/columnsSelect/columnSelectPanel");
 var renderedColumn_1 = require("./toolPanel/columnsSelect/renderedColumn");
@@ -30563,6 +31939,8 @@ var columnComponent_1 = require("./toolPanel/columnDrop/columnComponent");
 var valueColumnsPanel_1 = require("./toolPanel/columnDrop/valueColumnsPanel");
 var pivotCompFactory_1 = require("./pivotCompFactory");
 var rowGroupCompFactory_1 = require("./rowGroupCompFactory");
+var excelCreator_1 = require("./excelCreator");
+var excelXmlFactory_1 = require("./excelXmlFactory");
 function populateClientExports(exports) {
     exports.AggFuncService = aggFuncService_1.AggFuncService;
     exports.MD5 = md5_1.MD5;
@@ -30597,6 +31975,8 @@ function populateClientExports(exports) {
     exports.EnterpriseBoot = enterpriseBoot_1.EnterpriseBoot;
     exports.LicenseManager = licenseManager_1.LicenseManager;
     exports.PivotCompFactory = pivotCompFactory_1.PivotCompFactory;
+    exports.ExcelCreator = excelCreator_1.ExcelCreator;
+    exports.ExcelXmlFactory = excelXmlFactory_1.ExcelXmlFactory;
     exports.RangeController = rangeController_1.RangeController;
     exports.RowGroupCompFactory = rowGroupCompFactory_1.RowGroupCompFactory;
 }

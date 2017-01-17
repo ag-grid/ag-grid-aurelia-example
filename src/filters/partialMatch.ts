@@ -1,4 +1,4 @@
-import {IFilter, IFilterParams, IDoesFilterPassParams, RowNode, IAfterFilterGuiAttachedParams} from "ag-grid/main";
+import {IFilter, IFilterParams, IDoesFilterPassParams, RowNode, IAfterGuiAttachedParams} from "ag-grid/main";
 
 export default class PartialMatchFilter implements IFilter {
   private params: IFilterParams;
@@ -62,7 +62,7 @@ export default class PartialMatchFilter implements IFilter {
     this.eFilterText.value = model.value;
   }
 
-  afterGuiAttached(params: IAfterFilterGuiAttachedParams): void {
+  afterGuiAttached(params: IAfterGuiAttachedParams): void {
     this.eGui.focus();
   }
 }

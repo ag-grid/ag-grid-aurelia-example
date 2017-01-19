@@ -1,9 +1,16 @@
 <template>
+  <require from="./nameAndAge"></require>
   <div style="width: 800px;">
     <h1>Full Width Example</h1>
       <div style="width: 100%; height: 350px;">
         <ag-grid-aurelia #agGrid style="width: 100%; height: 100%;" class="ag-fresh"
                          grid-options.bind="gridOptions">
+
+            <ag-full-width-row-template>
+              <span style="font-weight: bold">${params.data.name}</span>
+              <name-and-age></name-and-age>
+            </ag-full-width-row-template>
+
             <ag-grid-column header-name="Name" field="name" width.bind="400">
             </ag-grid-column>
             <ag-grid-column header-name="Age" field="age" width.bind="400">

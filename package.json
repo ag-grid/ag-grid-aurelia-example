@@ -3,7 +3,9 @@
   "description": "An Aurelia client application.",
   "version": "7.2.0",
   "scripts": {
-    "release": "copyfiles index.html docs/ && ncp scripts/ docs/scripts/ && ncp src/components docs/components &&  ncp images/ docs/images/"
+    "build": "au build",
+    "copy-to-docs":"copyfiles index.html docs/ && ncp scripts/ docs/scripts/ && ncp src/components docs/components &&  ncp images/ docs/images/",
+    "copy-to-ag-docs":"npm run build && npm run copy-to-docs && ncp docs ../ag-grid-docs/src/aurelia-example/"
   },
   "repository": {
     "type": "git",

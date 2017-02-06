@@ -4,7 +4,7 @@ import {BaseAureliaEditor} from "ag-grid-aurelia";
 
 @customElement('ag-mood-editor')
 @inject(Element)
-export class NumericEditor extends BaseAureliaEditor {
+export class MoodEditor extends BaseAureliaEditor {
   params: any;
 
   @bindable() happy: boolean = false;

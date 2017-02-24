@@ -4,7 +4,7 @@
   "version": "8.1.0",
   "scripts": {
     "build": "au build",
-    "copy-to-docs":"copyfiles index.html docs/ && ncp scripts/ docs/scripts/ && ncp src/components docs/components &&  ncp images/ docs/images/",
+    "copy-to-docs":"copyfiles index.html docs/ && ncp scripts/ docs/scripts/ && ncp src/components docs/components && ncp images/ docs/images/ && ncp node_modules/bootstrap/dist docs/node_modules/bootstrap/dist && ncp node_modules/bootstrap/dist docs/node_modules/jquery/dist",
     "copy-to-ag-docs":"npm run build && npm run copy-to-docs && ncp docs ../ag-grid-docs/src/aurelia-example/"
   },
   "repository": {

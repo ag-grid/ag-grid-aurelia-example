@@ -15,4 +15,8 @@ export default class MedalRenderer implements ICellRenderer {
   getGui(): HTMLElement {
     return this.eGui;
   }
+
+  refresh(params: any): boolean{
+    return false;
+  }
 }

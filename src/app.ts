@@ -37,7 +37,7 @@ export class App {
         name: 'floating-row',
         nav: true,
         moduleId: 'components/floating-row-example/floating-row-example',
-        title: 'Floating Row Example',
+        title: 'Pinned Row Example',
         href:'#/floating-row'
       },
       {

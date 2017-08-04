@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ceolter/ag-grid-aurelia-example.git"
+    "url": "https://github.com/ag-grid/ag-grid-aurelia-example.git"
   },
   "license": "MIT",
   "dependencies": {

@@ -27,7 +27,7 @@ export class RichGrid {
         this.createColumnDefs();
         this.gridOptions.dateComponent = DateComponent;
         this.gridOptions.defaultColDef = {
-            headerComponent: HeaderComponent,
+            // headerComponentFramework: HeaderComponent,
             headerComponentParams: {
                 menuIcon: 'fa-bars'
             }
@@ -79,7 +79,7 @@ export class RichGrid {
             },
             {
                 headerName: 'Employee',
-                headerGroupComponent: HeaderGroupComponent,
+                // headerGroupComponent: HeaderGroupComponent,
                 children: [
                     {
                         headerName: "Name", field: "name",

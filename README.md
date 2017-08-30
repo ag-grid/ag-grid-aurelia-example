@@ -4,6 +4,8 @@ ag-Grid
 
 Example of using ag-Grid with Aurelia and TypeScript
 
+## Note: v13.0.2 will be the last version of ag-Grid to support Aurelia 
+
 Aurelia CLI
 ==============
 http://aurelia.io/hub.html#/doc/article/aurelia/framework/latest/the-aurelia-cli

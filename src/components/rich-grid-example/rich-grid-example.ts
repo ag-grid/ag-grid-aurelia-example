@@ -4,8 +4,8 @@ import "ag-grid-enterprise/main";
 import RefData from "../../data/refData";
 import SkillFilter from "../../filters/skillFilter";
 import ProficiencyFilter from "../../filters/proficiencyFilter";
-import HeaderComponent from "../../headerComponent/headerComponent";
-import HeaderGroupComponent from "../../headerComponent/headerGroupComponent";
+import HeaderComponent from "../../jsHeaderComponent/headerComponent";
+import HeaderGroupComponent from "../../jsHeaderComponent/headerGroupComponent";
 import DateComponent from "../../dateComponent/dateComponent";
 
 @autoinject()
@@ -27,7 +27,7 @@ export class RichGrid {
         this.createColumnDefs();
         this.gridOptions.dateComponent = DateComponent;
         this.gridOptions.defaultColDef = {
-            // headerComponentFramework: HeaderComponent,
+            headerComponent: <any>HeaderComponent,
             headerComponentParams: {
                 menuIcon: 'fa-bars'
             }
@@ -79,7 +79,7 @@ export class RichGrid {
             },
             {
                 headerName: 'Employee',
-                // headerGroupComponent: HeaderGroupComponent,
+                headerGroupComponent: HeaderGroupComponent,
                 children: [
                     {
                         headerName: "Name", field: "name",

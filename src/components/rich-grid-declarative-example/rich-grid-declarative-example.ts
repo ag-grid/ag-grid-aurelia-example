@@ -34,10 +34,10 @@ export class RichGridDeclarative {
     }
 
     private createRowData() {
-        var rowData: any[] = [];
+        const rowData: any[] = [];
 
-        for (var i = 0; i < 10000; i++) {
-            var countryData = RefData.countries[i % RefData.countries.length];
+        for (let i = 0; i < 10000; i++) {
+            const countryData = RefData.countries[i % RefData.countries.length];
             rowData.push({
                 name: RefData.firstNames[i % RefData.firstNames.length] + ' ' + RefData.lastNames[i % RefData.lastNames.length],
                 skills: {
@@ -63,9 +63,9 @@ export class RichGridDeclarative {
 
     private calculateRowCount() {
         if (this.gridOptions.api && this.rowData) {
-            var model = this.gridOptions.api.getModel();
-            var totalRows = this.rowData.length;
-            var processedRows = model.getRowCount();
+            const model = this.gridOptions.api.getModel();
+            const totalRows = this.rowData.length;
+            const processedRows = model.getRowCount();
             this.rowCount = processedRows.toLocaleString() + ' / ' + totalRows.toLocaleString();
         }
     }
@@ -156,13 +156,13 @@ export class RichGridDeclarative {
     }
 
     private countryCellRenderer(params) {
-        var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='images/flags/" + RefData.COUNTRY_CODES[params.value] + ".png'>";
+        const flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='images/flags/" + RefData.COUNTRY_CODES[params.value] + ".png'>";
         return flag + " " + params.value;
     }
 
     private skillsCellRenderer(params) {
-        var data = params.data;
-        var skills = [];
+        const data = params.data;
+        const skills = [];
         RefData.IT_SKILLS.forEach(function (skill) {
             if (data && data.skills && data.skills[skill]) {
                 skills.push('<img src="images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
@@ -172,9 +172,9 @@ export class RichGridDeclarative {
     }
 
     private percentCellRenderer(params) {
-        var value = params.value;
+        const value = params.value;
 
-        var eDivPercentBar = document.createElement('div');
+        const eDivPercentBar = document.createElement('div');
         eDivPercentBar.className = 'div-percent-bar';
         eDivPercentBar.style.width = value + '%';
         if (value < 20) {
@@ -185,11 +185,11 @@ export class RichGridDeclarative {
             eDivPercentBar.style.backgroundColor = '#00A000';
         }
 
-        var eValue = document.createElement('div');
+        const eValue = document.createElement('div');
         eValue.className = 'div-percent-value';
         eValue.innerHTML = value + '%';
 
-        var eOuterDiv = document.createElement('div');
+        const eOuterDiv = document.createElement('div');
         eOuterDiv.className = 'div-outer-div';
         eOuterDiv.appendChild(eValue);
         eOuterDiv.appendChild(eDivPercentBar);
@@ -213,8 +213,8 @@ export class RichGridDeclarative {
     }
 
     private createRandomPhoneNumber() {
-        var result = '+';
-        for (var i = 0; i < 12; i++) {
+        let result = '+';
+        for (let i = 0; i < 12; i++) {
             result += Math.round(Math.random() * 10);
             if (i === 2 || i === 5 || i === 8) {
                 result += ' ';

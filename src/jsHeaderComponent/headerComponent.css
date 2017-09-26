@@ -1,3 +1,8 @@
+.headerComponent {
+    position:relative;
+    top: -5px
+}
+
 .customHeaderMenuButton {
     margin-top: 5px;
     margin-left: 4px;

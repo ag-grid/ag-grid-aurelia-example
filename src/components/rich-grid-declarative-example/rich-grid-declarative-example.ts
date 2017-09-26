@@ -47,6 +47,7 @@ export class RichGridDeclarative {
                     windows: Math.random() < 0.4,
                     css: Math.random() < 0.4
                 },
+                dob: RefData.DOBs[i % RefData.DOBs.length],
                 address: RefData.addresses[i % RefData.addresses.length],
                 years: Math.round(Math.random() * 100),
                 proficiency: Math.round(Math.random() * 100),
@@ -97,7 +98,7 @@ export class RichGridDeclarative {
     }
 
     private onCellFocused($event) {
-        if($event.rowIndex !== null) {
+        if ($event.rowIndex !== null) {
             console.log('onCellFocused: (' + $event.rowIndex + ',' + ($event.column ? $event.column.colId : '') + ')');
         }
     }
@@ -153,6 +154,12 @@ export class RichGridDeclarative {
 
     public onIdClicked(row) {
         console.log('id clicked ' + row.id);
+    }
+
+    private dobCellRenderer(params) {
+        return pad(params.value.getDate(), 2) + '/' +
+            pad(params.value.getMonth() + 1, 2) + '/' +
+            params.value.getFullYear();
     }
 
     private countryCellRenderer(params) {
@@ -222,5 +229,11 @@ export class RichGridDeclarative {
         }
         return result;
     }
+}
+
+function pad(num, totalStringSize) {
+    let asString = num + "";
+    while (asString.length < totalStringSize) asString = "0" + asString;
+    return asString;
 }
 

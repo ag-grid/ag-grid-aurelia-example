@@ -6,7 +6,7 @@ import SkillFilter from "../../filters/skillFilter";
 import ProficiencyFilter from "../../filters/proficiencyFilter";
 import HeaderComponent from "../../jsHeaderComponent/headerComponent";
 import HeaderGroupComponent from "../../jsHeaderComponent/headerGroupComponent";
-import DateComponent from "../../dateComponent/dateComponent";
+import DateComponent from "../../jsDateComponent/dateComponent";
 
 @autoinject()
 @customElement('rich-grid')
@@ -25,7 +25,7 @@ export class RichGrid {
         this.gridOptions = <GridOptions>{};
         this.createRowData();
         this.createColumnDefs();
-        this.gridOptions.dateComponent = DateComponent;
+        this.gridOptions.dateComponent = <any>DateComponent;
         this.gridOptions.defaultColDef = {
             headerComponent: <any>HeaderComponent,
             headerComponentParams: {
@@ -43,10 +43,10 @@ export class RichGrid {
     }
 
     private createRowData() {
-        var rowData: any[] = [];
+        const rowData: any[] = [];
 
-        for (var i = 0; i < 200; i++) {
-            var countryData = RefData.countries[i % RefData.countries.length];
+        for (let i = 0; i < 200; i++) {
+            const countryData = RefData.countries[i % RefData.countries.length];
             rowData.push({
                 name: RefData.firstNames[i % RefData.firstNames.length] + ' ' + RefData.lastNames[i % RefData.lastNames.length],
                 skills: {
@@ -93,7 +93,7 @@ export class RichGrid {
                     {
                         headerName: "DOB", field: "dob", width: 120, pinned: true,
                         cellRenderer: function (params) {
-                            return pad(params.value.getDate(), 2) + '/' +
+                            return pad(params.value.getDate(), 2) + ' /' +
                                 pad(params.value.getMonth() + 1, 2) + '/' +
                                 params.value.getFullYear();
                         },
@@ -134,9 +134,9 @@ export class RichGrid {
 
     private calculateRowCount() {
         if (this.gridOptions.api && this.rowData) {
-            var model = this.gridOptions.api.getModel();
-            var totalRows = this.rowData.length;
-            var processedRows = model.getRowCount();
+            const model = this.gridOptions.api.getModel();
+            const totalRows = this.rowData.length;
+            const processedRows = model.getRowCount();
             this.rowCount = processedRows.toLocaleString() + ' / ' + totalRows.toLocaleString();
         }
     }
@@ -223,8 +223,8 @@ export class RichGrid {
 }
 
 function skillsCellRenderer(params) {
-    var data = params.data;
-    var skills = [];
+    const data = params.data;
+    const skills = [];
     RefData.IT_SKILLS.forEach(function (skill) {
         if (data && data.skills && data.skills[skill]) {
             skills.push('<img src="images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
@@ -234,13 +234,13 @@ function skillsCellRenderer(params) {
 }
 
 function countryCellRenderer(params) {
-    var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='images/flags/" + RefData.COUNTRY_CODES[params.value] + ".png'>";
+    const flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='images/flags/" + RefData.COUNTRY_CODES[params.value] + ".png'>";
     return flag + " " + params.value;
 }
 
 function createRandomPhoneNumber() {
-    var result = '+';
-    for (var i = 0; i < 12; i++) {
+    let result = '+';
+    for (let i = 0; i < 12; i++) {
         result += Math.round(Math.random() * 10);
         if (i === 2 || i === 5 || i === 8) {
             result += ' ';
@@ -250,9 +250,9 @@ function createRandomPhoneNumber() {
 }
 
 function percentCellRenderer(params) {
-    var value = params.value;
+    const value = params.value;
 
-    var eDivPercentBar = document.createElement('div');
+    const eDivPercentBar = document.createElement('div');
     eDivPercentBar.className = 'div-percent-bar';
     eDivPercentBar.style.width = value + '%';
     if (value < 20) {
@@ -263,11 +263,11 @@ function percentCellRenderer(params) {
         eDivPercentBar.style.backgroundColor = '#00A000';
     }
 
-    var eValue = document.createElement('div');
+    const eValue = document.createElement('div');
     eValue.className = 'div-percent-value';
     eValue.innerHTML = value + '%';
 
-    var eOuterDiv = document.createElement('div');
+    const eOuterDiv = document.createElement('div');
     eOuterDiv.className = 'div-outer-div';
     eOuterDiv.appendChild(eValue);
     eOuterDiv.appendChild(eDivPercentBar);

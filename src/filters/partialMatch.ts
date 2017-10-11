@@ -59,7 +59,7 @@ export default class PartialMatchFilter implements IFilter {
   }
 
   setModel(model: any): void {
-    this.eFilterText.value = model.value;
+    this.eFilterText.value = model ? model.value : '';
   }
 
   afterGuiAttached(params: IAfterGuiAttachedParams): void {

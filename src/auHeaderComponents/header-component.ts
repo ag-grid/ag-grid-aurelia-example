@@ -42,7 +42,7 @@ export class HeaderComponent {
     }
 
     private querySelector(selector: string) {
-        return <HTMLElement>this.element.nativeElement.querySelector('.customHeaderMenuButton', selector);
+        return <HTMLElement>this.element.querySelector('.customHeaderMenuButton', selector);
     }
 
     onSortRequested(order, event) {

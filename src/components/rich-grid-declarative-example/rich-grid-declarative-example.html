@@ -1,6 +1,7 @@
 <template>
     <require from="../../auHeaderComponents/header-component"></require>
     <require from="../../auHeaderComponents/header-group-component"></require>
+    <require from="../../auDateComponents/date-component"></require>
 
     <div style="width: 800px;">
         <h1>Rich Grid with Declarative Markup</h1>
@@ -88,6 +89,9 @@
                                  column-group-opened.call="onColumnEvent($event)"
                                  column-resized.call="onColumnEvent($event)"
                                  column-pinned-count-changed.call="onColumnEvent($event)">
+                    <ag-date-template>
+                        <ag-date-component></ag-date-component>
+                    </ag-date-template>
                     <ag-grid-column header-name="#" width.bind="30" checkbox-selection.bind="true"
                                     suppress-sorting.bind="true" suppress-menu.bind="true"
                                     pinned.bind="true"></ag-grid-column>

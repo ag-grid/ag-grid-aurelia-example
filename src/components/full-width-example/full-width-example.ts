@@ -4,7 +4,7 @@ import {GridOptions, RowNode} from "ag-grid";
 // only import this if you are using the ag-Grid-Enterprise
 import "ag-grid-enterprise/main";
 
-import NameAndAgeRenderer from "../../renderers/NameAndAgeRenderer";
+import NameAndAgeRenderer from "../../jsRenderers/NameAndAgeRenderer";
 
 @autoinject()
 @customElement('full-width-example')

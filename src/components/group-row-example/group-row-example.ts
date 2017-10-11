@@ -1,7 +1,7 @@
 import {autoinject, customElement} from "aurelia-framework";
 import {GridOptions} from "ag-grid";
 import "ag-grid-enterprise/main";
-import MedalRenderer from "../../renderers/MedalRenderer";
+import MedalRenderer from "../../jsRenderers/MedalRenderer";
 
 @autoinject()
 @customElement('group-row-example')

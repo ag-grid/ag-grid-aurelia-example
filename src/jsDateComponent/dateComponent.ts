@@ -56,6 +56,8 @@ DateComponent.prototype.getDate = function () {
 };
 
 DateComponent.prototype.setDate = function (date) {
+    if(!date) return;
+
     this.dd = date.getDate() + '';
     this.mm = (date.getMonth() + 1) + '';
     this.yyyy = date.getFullYear() + '';

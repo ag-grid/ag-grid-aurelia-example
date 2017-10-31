@@ -5,7 +5,8 @@
   "scripts": {
     "build": "au build",
     "copy-to-docs":"copyfiles index.html docs/ && ncp scripts/ docs/scripts/ && ncp src/components docs/components && ncp images/ docs/images/ && mkdir -p docs/node_modules/bootstrap/dist && mkdir -p docs/node_modules/jquery/dist && ncp node_modules/bootstrap/dist docs/node_modules/bootstrap/dist && ncp node_modules/bootstrap/dist docs/node_modules/jquery/dist",
-    "copy-to-ag-docs":"npm run build && npm run copy-to-docs && ncp docs ../ag-grid-docs/src/aurelia-example/"
+    "copy-to-ag-docs":"npm run build && npm run copy-to-docs && ncp docs ../ag-grid-docs/src/aurelia-example/",
+    "start": "au run"
   },
   "repository": {
     "type": "git",

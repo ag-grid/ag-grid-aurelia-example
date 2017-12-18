@@ -97,7 +97,7 @@ export class RichGrid {
                                 pad(params.value.getMonth() + 1, 2) + '/' +
                                 params.value.getFullYear();
                         },
-                        filter: 'date',
+                        filter: 'agDateColumnFilter',
                         columnGroupShow: 'open'
                     }
                 ]

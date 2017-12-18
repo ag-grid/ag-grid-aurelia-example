@@ -115,7 +115,7 @@
                         </ag-grid-column>
                         <ag-grid-column header-name="DOB" field="dob" width.bind="150"
                                         cell-renderer.bind="dobCellRenderer" pinned.bind="true"
-                                        filter="date" column-group-show="open"
+                                        filter="agDateColumnFilter" column-group-show="open"
                                         header-component-params.bind="{ menuIcon: 'fa-bars' }">
                             <ag-header-template>
                                 <ag-header-component></ag-header-component>

@@ -1,16 +1,15 @@
 <template>
     <require from="../../auRenderers/styled-renderer"></require>
-    <div style="width: 800px;">
-        <h1>Pinned Row Example</h1>
+    <div style="width: 900px;">
         <div style="width: 100%; height: 350px;">
             <ag-grid-aurelia #agGrid style="width: 100%; height: 100%;" class="ag-fresh"
                              grid-options.bind="gridOptions">
-                <ag-grid-column header-name="Row" field="row" width.bind="400" pinned-row-cell-renderer-params.bind="{style: {'fontWeight': 'bold'}}">
+                <ag-grid-column header-name="Row" field="row" width.bind="450" pinned-row-cell-renderer-params.bind="{style: {'fontWeight': 'bold'}}">
                     <ag-pinned-row-template>
                         <ag-styled-renderer></ag-styled-renderer>
                     </ag-pinned-row-template>
                 </ag-grid-column>
-                <ag-grid-column header-name="Number" field="number" width.bind="399" pinned-row-cell-renderer-params.bind="{style: {'fontStyle': 'italic'}}">
+                <ag-grid-column header-name="Number" field="number" width.bind="430" pinned-row-cell-renderer-params.bind="{style: {'fontStyle': 'italic'}}">
                     <ag-pinned-row-template>
                         <ag-styled-renderer></ag-styled-renderer>
                     </ag-pinned-row-template>

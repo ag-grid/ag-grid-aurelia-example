@@ -69,13 +69,6 @@
     },
     "bundles": [
       {
-        "name": "app-bundle.js",
-        "source": [
-          "[**/*.js]",
-          "**/*.{css,html}"
-        ]
-      },
-      {
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
@@ -159,6 +152,10 @@
             "path": "../node_modules/ag-grid-aurelia",
             "main": "main"
           }
+        ],
+        "source": [
+          "[**/*.js]",
+          "**/*.{css,html}"
         ]
       }
     ]

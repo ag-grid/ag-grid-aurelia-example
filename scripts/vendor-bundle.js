@@ -3817,6 +3817,1821 @@ K(require)||(w=require,require=void 0);g=requirejs=function(b,c,d,m){var r,q="_"
 (d=c,c=b,b=null);L(c)||(d=c,c=null);!c&&K(d)&&(c=[],d.length&&(d.toString().replace(qa,ka).replace(ra,function(b,d){c.push(d)}),c=(1===d.length?["require"]:["require","exports","module"]).concat(c)));S&&(e=P||pa())&&(b||(b=e.getAttribute("data-requiremodule")),g=J[e.getAttribute("data-requirecontext")]);g?(g.defQueue.push([b,c,d]),g.defQueueMap[b]=!0):V.push([b,c,d])};define.amd={jQuery:!0};g.exec=function(b){return eval(b)};g(w)}})(this);
 
 _aureliaConfigureModuleLoader();
+define('app',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var App = (function () {
+        function App() {
+        }
+        App.prototype.configureRouter = function (config, router) {
+            this.router = router;
+            config.title = 'ag-Grid Aurelia Examples';
+            config.map([
+                {
+                    route: '',
+                    name: 'blank',
+                    nav: true,
+                    moduleId: 'components/blank/blank'
+                },
+                {
+                    route: 'rich-grid',
+                    name: 'rich-grid',
+                    nav: true,
+                    moduleId: 'components/rich-grid-example/rich-grid-example',
+                    title: 'Rich Grid with pure JavaScript',
+                    href: '#/rich-grid'
+                },
+                {
+                    route: 'richgrid-declarative',
+                    name: 'richgrid-declarative',
+                    nav: true,
+                    moduleId: 'components/rich-grid-declarative-example/rich-grid-declarative-example',
+                    title: 'Rich Grid with Declarative Markup',
+                    href: '#/richgrid-declarative'
+                },
+                {
+                    route: 'editor',
+                    name: 'editor',
+                    nav: true,
+                    moduleId: 'components/editor-example/editor-example',
+                    title: 'Editor Example',
+                    href: '#/editor'
+                },
+                {
+                    route: 'pinned-row',
+                    name: 'pinned-row',
+                    nav: true,
+                    moduleId: 'components/pinned-row-example/pinned-row-example',
+                    title: 'Pinned Row Example',
+                    href: '#/pinned-row'
+                },
+                {
+                    route: 'full-width',
+                    name: 'full-width',
+                    nav: true,
+                    moduleId: 'components/full-width-example/full-width-example',
+                    title: 'Full Width Example',
+                    href: '#/full-width'
+                },
+                {
+                    route: 'group-row',
+                    name: 'group-row',
+                    nav: true,
+                    moduleId: 'components/group-row-example/group-row-example',
+                    title: 'Group Row Example',
+                    href: '#/group-row'
+                },
+                {
+                    route: 'filter',
+                    name: 'filter',
+                    nav: true,
+                    moduleId: 'components/filter-example/filter-example',
+                    title: 'Filter Example',
+                    href: '#/filter'
+                }
+            ]);
+        };
+        App.prototype.attached = function (argument) {
+            var route = this.router.currentInstruction.queryParams.route ? this.router.currentInstruction.queryParams.route : 'rich-grid';
+            this.router.navigateToRoute(route, this.router.currentInstruction.queryParams);
+        };
+        return App;
+    }());
+    exports.App = App;
+});
+
+define('environment',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.default = {
+        debug: true,
+        testing: true
+    };
+});
+
+define('main',["require", "exports", "./environment"], function (require, exports, environment_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    Promise.config({
+        warnings: {
+            wForgottenReturn: false
+        }
+    });
+    function configure(aurelia) {
+        aurelia.use
+            .standardConfiguration()
+            .plugin('ag-grid-aurelia')
+            .feature('resources');
+        if (environment_1.default.debug) {
+            aurelia.use.developmentLogging();
+        }
+        if (environment_1.default.testing) {
+            aurelia.use.plugin('aurelia-testing');
+        }
+        aurelia.start().then(function () { return aurelia.setRoot(); });
+    }
+    exports.configure = configure;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+define('auDateComponents/date-component',["require", "exports", "aurelia-framework"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var DateComponent = (function () {
+        function DateComponent() {
+            this.dd = '';
+            this.mm = '';
+            this.yyyy = '';
+        }
+        DateComponent.prototype.onResetDate = function () {
+            this.setDate(null);
+            this.params.onDateChanged();
+        };
+        DateComponent.prototype.onDateChanged = function (on, newValue) {
+            this.date = this.parseDate(on === 'dd' ? newValue : this.dd, on === 'mm' ? newValue : this.mm, on === 'yyyy' ? newValue : this.yyyy);
+            this.params.onDateChanged();
+        };
+        DateComponent.prototype.getDate = function () {
+            return this.date;
+        };
+        DateComponent.prototype.setDate = function (date) {
+            if (date == null) {
+                this.dd = '';
+                this.mm = '';
+                this.yyyy = '';
+                this.date = null;
+            }
+            else {
+                this.dd = date.getDate() + '';
+                this.mm = (date.getMonth() + 1) + '';
+                this.yyyy = date.getFullYear() + '';
+                this.date = date;
+            }
+        };
+        DateComponent.prototype.parseDate = function (dd, mm, yyyy) {
+            if (dd.trim() === '' || mm.trim() === '' || yyyy.trim() === '') {
+                return null;
+            }
+            var day = Number(dd);
+            var month = Number(mm);
+            var year = Number(yyyy);
+            var date = new Date(year, month - 1, day);
+            if (isNaN(date.getTime())) {
+                return null;
+            }
+            if (date.getDate() != day || date.getMonth() + 1 != month || date.getFullYear() != year) {
+                return null;
+            }
+            return date;
+        };
+        DateComponent = __decorate([
+            aurelia_framework_1.customElement('ag-date-component'),
+            aurelia_framework_1.inject(Element)
+        ], DateComponent);
+        return DateComponent;
+    }());
+    exports.DateComponent = DateComponent;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('auHeaderComponents/header-component',["require", "exports", "aurelia-framework"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var HeaderComponent = (function () {
+        function HeaderComponent(element) {
+            this.element = element;
+            this.onSortChanged = this.onSortChanged.bind(this);
+        }
+        HeaderComponent.prototype.attached = function () {
+            this.menuIcon = 'fa ' + this.params.menuIcon;
+            this.params.column.addEventListener('sortChanged', this.onSortChanged);
+            this.onSortChanged();
+        };
+        HeaderComponent.prototype.detached = function () {
+            this.params.column.addEventListener('sortChanged', this.onSortChanged);
+        };
+        HeaderComponent.prototype.onSortChanged = function () {
+            if (this.params.column.isSortAscending()) {
+                this.sorted = 'asc';
+            }
+            else if (this.params.column.isSortDescending()) {
+                this.sorted = 'desc';
+            }
+            else {
+                this.sorted = '';
+            }
+        };
+        ;
+        HeaderComponent.prototype.onMenuClick = function () {
+            this.params.showColumnMenu(this.querySelector('.customHeaderMenuButton'));
+        };
+        HeaderComponent.prototype.querySelector = function (selector) {
+            return this.element.querySelector('.customHeaderMenuButton', selector);
+        };
+        HeaderComponent.prototype.onSortRequested = function (order, event) {
+            this.params.setSort(order, event.shiftKey);
+        };
+        ;
+        __decorate([
+            aurelia_framework_1.bindable(),
+            __metadata("design:type", String)
+        ], HeaderComponent.prototype, "sorted", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(),
+            __metadata("design:type", String)
+        ], HeaderComponent.prototype, "menuIcon", void 0);
+        HeaderComponent = __decorate([
+            aurelia_framework_1.customElement('ag-header-component'),
+            aurelia_framework_1.inject(Element),
+            __metadata("design:paramtypes", [Object])
+        ], HeaderComponent);
+        return HeaderComponent;
+    }());
+    exports.HeaderComponent = HeaderComponent;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('auHeaderComponents/header-group-component',["require", "exports", "aurelia-framework"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var HeaderGroupComponent = (function () {
+        function HeaderGroupComponent(element) {
+            this.element = element;
+            this.onExpandChanged = this.onExpandChanged.bind(this);
+        }
+        HeaderGroupComponent.prototype.attached = function () {
+            this.params.columnGroup.getOriginalColumnGroup().addEventListener('expandedChanged', this.onExpandChanged);
+        };
+        HeaderGroupComponent.prototype.detached = function () {
+            this.params.columnGroup.getOriginalColumnGroup().removeEventListener('expandedChanged', this.onExpandChanged);
+        };
+        HeaderGroupComponent.prototype.expandOrCollapse = function () {
+            this.params.setExpanded(!this.expanded);
+        };
+        ;
+        HeaderGroupComponent.prototype.onExpandChanged = function () {
+            this.expanded = this.params.columnGroup.getOriginalColumnGroup().isExpanded();
+        };
+        __decorate([
+            aurelia_framework_1.bindable(),
+            __metadata("design:type", Boolean)
+        ], HeaderGroupComponent.prototype, "expanded", void 0);
+        HeaderGroupComponent = __decorate([
+            aurelia_framework_1.customElement('ag-header-group-component'),
+            aurelia_framework_1.inject(Element),
+            __metadata("design:paramtypes", [Object])
+        ], HeaderGroupComponent);
+        return HeaderGroupComponent;
+    }());
+    exports.HeaderGroupComponent = HeaderGroupComponent;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+define('auRenderers/styled-renderer',["require", "exports", "aurelia-framework"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var StyledRenderer = (function () {
+        function StyledRenderer() {
+        }
+        StyledRenderer = __decorate([
+            aurelia_framework_1.customElement('ag-styled-renderer'),
+            aurelia_framework_1.inject(Element)
+        ], StyledRenderer);
+        return StyledRenderer;
+    }());
+    exports.StyledRenderer = StyledRenderer;
+});
+
+define('data/refData',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var RefData = (function () {
+        function RefData() {
+        }
+        RefData.IT_SKILLS = ['android', 'css', 'html5', 'mac', 'windows'];
+        RefData.IT_SKILLS_NAMES = ['Android', 'CSS', 'HTML 5', 'Mac', 'Windows'];
+        RefData.firstNames = ["Sophie", "Isabelle", "Emily", "Olivia", "Lily", "Chloe", "Isabella",
+            "Amelia", "Jessica", "Sophia", "Ava", "Charlotte", "Mia", "Lucy", "Grace", "Ruby",
+            "Ella", "Evie", "Freya", "Isla", "Poppy", "Daisy", "Layla"];
+        RefData.lastNames = ["Beckham", "Black", "Braxton", "Brennan", "Brock", "Bryson", "Cadwell",
+            "Cage", "Carson", "Chandler", "Cohen", "Cole", "Corbin", "Dallas", "Dalton", "Dane",
+            "Donovan", "Easton", "Fisher", "Fletcher", "Grady", "Greyson", "Griffin", "Gunner",
+            "Hayden", "Hudson", "Hunter", "Jacoby", "Jagger", "Jaxon", "Jett", "Kade", "Kane",
+            "Keating", "Keegan", "Kingston", "Kobe"];
+        RefData.COUNTRY_CODES = {
+            Ireland: "ie",
+            Spain: "es",
+            "United Kingdom": "gb",
+            France: "fr",
+            Germany: "de",
+            Sweden: "se",
+            Italy: "it",
+            Greece: "gr",
+            Iceland: "is",
+            Portugal: "pt",
+            Malta: "mt",
+            Norway: "no",
+            Brazil: "br",
+            Argentina: "ar",
+            Colombia: "co",
+            Peru: "pe",
+            Venezuela: "ve",
+            Uruguay: "uy"
+        };
+        RefData.DOBs = [
+            new Date(2000, 0, 1),
+            new Date(2001, 1, 2),
+            new Date(2002, 2, 3),
+            new Date(2003, 3, 4),
+            new Date(2004, 4, 5),
+            new Date(2005, 5, 6),
+            new Date(2006, 6, 7),
+            new Date(2007, 7, 8),
+            new Date(2008, 8, 9),
+            new Date(2009, 9, 10),
+            new Date(2010, 10, 11),
+            new Date(2011, 11, 12)
+        ];
+        RefData.countries = [
+            { country: "Ireland", continent: "Europe", language: "English" },
+            { country: "Spain", continent: "Europe", language: "Spanish" },
+            { country: "United Kingdom", continent: "Europe", language: "English" },
+            { country: "France", continent: "Europe", language: "French" },
+            { country: "Germany", continent: "Europe", language: "(other)" },
+            { country: "Sweden", continent: "Europe", language: "(other)" },
+            { country: "Norway", continent: "Europe", language: "(other)" },
+            { country: "Italy", continent: "Europe", language: "(other)" },
+            { country: "Greece", continent: "Europe", language: "(other)" },
+            { country: "Iceland", continent: "Europe", language: "(other)" },
+            { country: "Portugal", continent: "Europe", language: "Portuguese" },
+            { country: "Malta", continent: "Europe", language: "(other)" },
+            { country: "Brazil", continent: "South America", language: "Portuguese" },
+            { country: "Argentina", continent: "South America", language: "Spanish" },
+            { country: "Colombia", continent: "South America", language: "Spanish" },
+            { country: "Peru", continent: "South America", language: "Spanish" },
+            { country: "Venezuela", continent: "South America", language: "Spanish" },
+            { country: "Uruguay", continent: "South America", language: "Spanish" }
+        ];
+        RefData.addresses = [
+            '1197 Thunder Wagon Common, Cataract, RI, 02987-1016, US, (401) 747-0763',
+            '3685 Rocky Glade, Showtucket, NU, X1E-9I0, CA, (867) 371-4215',
+            '3235 High Forest, Glen Campbell, MS, 39035-6845, US, (601) 638-8186',
+            '2234 Sleepy Pony Mall , Drain, DC, 20078-4243, US, (202) 948-3634',
+            '2722 Hazy Turnabout, Burnt Cabins, NY, 14120-5642, US, (917) 604-6597',
+            '6686 Lazy Ledge, Two Rock, CA, 92639-3020, US, (619) 901-9911',
+            '2000 Dewy Limits, Wacahoota, NF, A4L-2V9, CA, (709) 065-3959',
+            '7710 Noble Pond Avenue, Bolivia, RI, 02931-1842, US, (401) 865-2160',
+            '3452 Sunny Vale, Pyro, ON, M8V-4Z0, CA, (519) 072-8609',
+            '4402 Dusty Cove, Many Farms, UT, 84853-8223, US, (435) 518-0673',
+            '5198 Silent Parade, Round Bottom, MD, 21542-9798, US, (301) 060-7245',
+            '8550 Shady Moor, Kitty Fork, CO, 80941-6207, US, (303) 502-3767',
+            '2131 Old Dell, Merry Midnight, AK, 99906-8842, US, (907) 369-2206',
+            '7390 Harvest Crest, Mosquito Crossing, RI, 02957-6116, US, (401) 463-6348',
+            '874 Little Point, Hot Coffee, BC, V3U-2P6, CA, (250) 706-9207',
+            '8834 Stony Pioneer Heights, Newlove, OR, 97419-8670, US, (541) 408-2213',
+            '9829 Grand Beach, Flint, UT, 84965-9900, US, (435) 700-5161',
+            '3799 Cozy Blossom Ramp, Ptarmigan, MS, 38715-0313, US, (769) 740-1526',
+            '3254 Silver Island Loop, Maunaloa, DE, 19869-3169, US, (302) 667-7671',
+            '1081 Middle Wood, Taylors Gut Landing, OR, 97266-2873, US, (541) 357-6310',
+            '1137 Umber Trail, Shacktown, NW, X3U-5Y8, CA, (867) 702-6883',
+            '9914 Hidden Bank, Wyoming, MO, 64635-9665, US, (636) 280-4192',
+            '7080 Misty Nectar Townline, Coward, AB, T9U-3N4, CA, (403) 623-2838',
+            '1184 Wishing Grounds, Vibank, NW, X7D-0V9, CA, (867) 531-2730',
+            '126 Easy Pointe, Grandview Beach, KY, 40928-9539, US, (502) 548-0956',
+            '6683 Colonial Street, Swan River, BC, V1A-9I8, CA, (778) 014-4257',
+            '960 Gentle Oak Lane, Shakopee, ND, 58618-6277, US, (701) 327-1219',
+            '6918 Cotton Pine Corner, Kenaston, IA, 52165-3975, US, (515) 906-7427',
+            '2368 Burning Woods, Ernfold, NY, 11879-9186, US, (646) 819-0355',
+            '5646 Quiet Shadow Chase, Tiger Tail, IA, 52283-5537, US, (712) 375-9225',
+            '5466 Foggy Mountain Dale, Sweet Home, MT, 59738-0251, US, (406) 881-1706',
+            '5313 Clear Willow Route, Amazon, BC, V0S-2S6, CA, (604) 340-7596',
+            '7000 Pleasant Autoroute, Spaceport City, UT, 84749-2448, US, (435) 154-3360',
+            '8359 Quaking Anchor Road, Gross, BC, V9O-0H5, CA, (250) 985-3859',
+            '5143 Amber Deer Hollow, New Deal, ND, 58446-0853, US, (701) 927-0322',
+            '6230 Jagged Bear Key, Young, AR, 72337-3811, US, (501) 805-7239',
+            '7207 Heather Vista, Devon, WY, 82520-1771, US, (307) 358-7092',
+            '9416 Red Rise Place, Spraytown, OK, 73809-4766, US, (580) 867-1973',
+            '3770 Golden Horse Diversion, Yelland, IL, 60471-1487, US, (224) 717-9349',
+            '4819 Honey Treasure Park, Alaska, NB, E1U-3I0, CA, (506) 656-9138',
+            '6187 Round Front, Land O Lakes, AK, 99873-6403, US, (907) 853-9063',
+            '9218 Crystal Highway, Pickelville, MT, 59847-9299, US, (406) 076-0024',
+            '6737 Bright Quay, Lazy Mountain, KY, 42390-4772, US, (606) 256-7288',
+            '237 Merry Campus, Twentysix, SC, 29330-4909, US, (864) 945-0157',
+            '446 Fallen Gate Rise, Petrolia, SC, 29959-9527, US, (864) 826-0553',
+            '2347 Indian Boulevard, Frisbee, VA, 23797-6458, US, (703) 656-8445',
+            '365 Emerald Grove Line, Level, NC, 28381-1514, US, (919) 976-7958',
+            '1207 Iron Extension, Klickitat, SC, 29197-8571, US, (803) 535-7888',
+            '6770 Cinder Glen, Caronport, OH, 45053-5002, US, (440) 369-4018',
+            '7619 Tawny Carrefour, Senlac, NV, 89529-9876, US, (775) 901-6433'
+        ];
+        return RefData;
+    }());
+    exports.default = RefData;
+});
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('editors/mood-editor',["require", "exports", "aurelia-framework", "ag-grid-aurelia"], function (require, exports, aurelia_framework_1, ag_grid_aurelia_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var MoodEditor = (function (_super) {
+        __extends(MoodEditor, _super);
+        function MoodEditor(element) {
+            var _this = _super.call(this) || this;
+            _this.happy = false;
+            _this.hasFocus = false;
+            _this.element = element;
+            return _this;
+        }
+        MoodEditor.prototype.attached = function () {
+            this.setHappy(this.params.value === "Happy");
+            this.hasFocus = true;
+        };
+        MoodEditor.prototype.getValue = function () {
+            return this.happy ? "Happy" : "Sad";
+        };
+        MoodEditor.prototype.isPopup = function () {
+            return true;
+        };
+        MoodEditor.prototype.setHappy = function (happy) {
+            this.happy = happy;
+        };
+        MoodEditor.prototype.toggleMood = function () {
+            this.setHappy(!this.happy);
+        };
+        MoodEditor.prototype.onKeyDown = function (event) {
+            var key = event.which || event.keyCode;
+            if (key == 37 ||
+                key == 39) {
+                this.toggleMood();
+                event.stopPropagation();
+            }
+        };
+        __decorate([
+            aurelia_framework_1.bindable(),
+            __metadata("design:type", Boolean)
+        ], MoodEditor.prototype, "happy", void 0);
+        __decorate([
+            aurelia_framework_1.bindable(),
+            __metadata("design:type", Boolean)
+        ], MoodEditor.prototype, "hasFocus", void 0);
+        MoodEditor = __decorate([
+            aurelia_framework_1.customElement('ag-mood-editor'),
+            aurelia_framework_1.inject(Element),
+            __metadata("design:paramtypes", [Object])
+        ], MoodEditor);
+        return MoodEditor;
+    }(ag_grid_aurelia_1.BaseAureliaEditor));
+    exports.MoodEditor = MoodEditor;
+});
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('editors/numeric-editor',["require", "exports", "aurelia-framework", "ag-grid-aurelia"], function (require, exports, aurelia_framework_1, ag_grid_aurelia_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var NumericEditor = (function (_super) {
+        __extends(NumericEditor, _super);
+        function NumericEditor(element) {
+            var _this = _super.call(this) || this;
+            _this.hasFocus = false;
+            _this.element = element;
+            return _this;
+        }
+        NumericEditor_1 = NumericEditor;
+        NumericEditor.prototype.attached = function () {
+            this.hasFocus = true;
+            this.element.addEventListener('keydown', this.onKeyDown);
+        };
+        NumericEditor.prototype.detached = function () {
+            this.element.removeEventListener('keydown', this.onKeyDown);
+        };
+        NumericEditor.prototype.getValue = function () {
+            return this.params.value;
+        };
+        NumericEditor.prototype.isCancelBeforeStart = function () {
+            if (!this.params.charPress) {
+                return false;
+            }
+            return '1234567890'.indexOf(this.params.charPress) < 0;
+        };
+        NumericEditor.prototype.isCancelAfterEnd = function () {
+            return this.params.value > 1000000;
+        };
+        ;
+        NumericEditor.prototype.onKeyDown = function (event) {
+            if (!NumericEditor_1.isKeyPressedNumeric(event)) {
+                if (event.preventDefault)
+                    event.preventDefault();
+            }
+        };
+        NumericEditor.getCharCodeFromEvent = function (event) {
+            event = event || window.event;
+            return (typeof event.which == "undefined") ? event.keyCode : event.which;
+        };
+        NumericEditor.isCharNumeric = function (charStr) {
+            return !!/\d/.test(charStr);
+        };
+        NumericEditor.isKeyPressedNumeric = function (event) {
+            var charCode = NumericEditor_1.getCharCodeFromEvent(event);
+            var charStr = String.fromCharCode(charCode);
+            return NumericEditor_1.isCharNumeric(charStr);
+        };
+        __decorate([
+            aurelia_framework_1.bindable(),
+            __metadata("design:type", Boolean)
+        ], NumericEditor.prototype, "hasFocus", void 0);
+        NumericEditor = NumericEditor_1 = __decorate([
+            aurelia_framework_1.customElement('ag-numeric-editor'),
+            aurelia_framework_1.inject(Element),
+            __metadata("design:paramtypes", [Object])
+        ], NumericEditor);
+        return NumericEditor;
+        var NumericEditor_1;
+    }(ag_grid_aurelia_1.BaseAureliaEditor));
+    exports.NumericEditor = NumericEditor;
+});
+
+define('filters/partialMatch',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var PartialMatchFilter = (function () {
+        function PartialMatchFilter() {
+        }
+        PartialMatchFilter.prototype.init = function (params) {
+            this.params = params;
+            this.filterText = null;
+            this.valueGetter = params.valueGetter;
+        };
+        ;
+        PartialMatchFilter.prototype.getGui = function () {
+            this.eGui = document.createElement('div');
+            this.eGui.innerHTML =
+                '<input style="margin: 4px 0px 4px 0px;" type="text" id="filterText" placeholder="Full name search..."/>';
+            this.eFilterText = this.eGui.querySelector('#filterText');
+            this.eFilterText.addEventListener("changed", listener);
+            this.eFilterText.addEventListener("paste", listener);
+            this.eFilterText.addEventListener("input", listener);
+            this.eFilterText.addEventListener("keydown", listener);
+            this.eFilterText.addEventListener("keyup", listener);
+            var that = this;
+            function listener(event) {
+                that.filterText = event.target.value;
+                that.params.filterChangedCallback();
+            }
+            return this.eGui;
+        };
+        ;
+        PartialMatchFilter.prototype.isFilterActive = function () {
+            return this.filterText !== null && this.filterText !== undefined && this.filterText !== '';
+        };
+        PartialMatchFilter.prototype.doesFilterPass = function (params) {
+            var _this = this;
+            var passed = true;
+            this.filterText.toLowerCase().split(" ").forEach(function (filterWord) {
+                var value = _this.valueGetter(params);
+                if (value.toString().toLowerCase().indexOf(filterWord) < 0) {
+                    passed = false;
+                }
+            });
+            return passed;
+        };
+        PartialMatchFilter.prototype.getModel = function () {
+            var model = { value: this.filterText.value };
+            return model;
+        };
+        PartialMatchFilter.prototype.setModel = function (model) {
+            this.eFilterText.value = model ? model.value : '';
+        };
+        PartialMatchFilter.prototype.afterGuiAttached = function (params) {
+            this.eGui.focus();
+        };
+        return PartialMatchFilter;
+    }());
+    exports.default = PartialMatchFilter;
+});
+
+define('filters/proficiencyFilter',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var FILTER_TITLE = '<div style="text-align: center; background: lightgray; width: 100%; display: block; border-bottom: 1px solid grey;">' +
+        '<b>TITLE_NAME</b>' +
+        '</div>';
+    var PROFICIENCY_TEMPLATE = '<label style="padding-left: 4px;">' +
+        '<input type="radio" name="RANDOM"/>' +
+        'PROFICIENCY_NAME' +
+        '</label>';
+    var PROFICIENCY_NONE = 'none';
+    var PROFICIENCY_ABOVE40 = 'above40';
+    var PROFICIENCY_ABOVE60 = 'above60';
+    var PROFICIENCY_ABOVE80 = 'above80';
+    var PROFICIENCY_NAMES = ['No Filter', 'Above 40%', 'Above 60%', 'Above 80%'];
+    var PROFICIENCY_VALUES = [PROFICIENCY_NONE, PROFICIENCY_ABOVE40, PROFICIENCY_ABOVE60, PROFICIENCY_ABOVE80];
+    var ProficiencyFilter = (function () {
+        function ProficiencyFilter() {
+        }
+        ProficiencyFilter.prototype.init = function (params) {
+            this.filterChangedCallback = params.filterChangedCallback;
+            this.selected = PROFICIENCY_NONE;
+            this.valueGetter = params.valueGetter;
+        };
+        ProficiencyFilter.prototype.getGui = function () {
+            var eGui = document.createElement('div');
+            var eInstructions = document.createElement('div');
+            eInstructions.innerHTML = FILTER_TITLE.replace('TITLE_NAME', 'Custom Proficiency Filter');
+            eGui.appendChild(eInstructions);
+            var random = '' + Math.random();
+            var that = this;
+            PROFICIENCY_NAMES.forEach(function (name, index) {
+                var eFilter = document.createElement('div');
+                var html = PROFICIENCY_TEMPLATE.replace('PROFICIENCY_NAME', name).replace('RANDOM', random);
+                eFilter.innerHTML = html;
+                var eRadio = eFilter.querySelector('input');
+                if (index === 0) {
+                    eRadio.checked = true;
+                }
+                eGui.appendChild(eFilter);
+                eRadio.addEventListener('click', function () {
+                    that.selected = PROFICIENCY_VALUES[index];
+                    that.filterChangedCallback();
+                });
+            });
+            return eGui;
+        };
+        ProficiencyFilter.prototype.doesFilterPass = function (params) {
+            var value = this.valueGetter(params);
+            var valueAsNumber = parseFloat(value);
+            switch (this.selected) {
+                case PROFICIENCY_ABOVE40:
+                    return valueAsNumber >= 40;
+                case PROFICIENCY_ABOVE60:
+                    return valueAsNumber >= 60;
+                case PROFICIENCY_ABOVE80:
+                    return valueAsNumber >= 80;
+                default:
+                    return true;
+            }
+        };
+        ProficiencyFilter.prototype.isFilterActive = function () {
+            return this.selected !== PROFICIENCY_NONE;
+        };
+        ProficiencyFilter.prototype.getModel = function () {
+            return undefined;
+        };
+        ProficiencyFilter.prototype.setModel = function (model) {
+        };
+        return ProficiencyFilter;
+    }());
+    exports.default = ProficiencyFilter;
+});
+
+define('filters/skillFilter',["require", "exports", "../data/refData"], function (require, exports, refData_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var SKILL_TEMPLATE = '<label style="border: 1px solid lightgrey; margin: 4px; padding: 4px; display: inline-block;">' +
+        '  <span>' +
+        '    <div style="text-align: center;">SKILL_NAME</div>' +
+        '    <div>' +
+        '      <input type="checkbox"/>' +
+        '      <img src="/images/skills/SKILL.png" width="30px"/>' +
+        '    </div>' +
+        '  </span>' +
+        '</label>';
+    var FILTER_TITLE = '<div style="text-align: center; background: lightgray; width: 100%; display: block; border-bottom: 1px solid grey;">' +
+        '<b>TITLE_NAME</b>' +
+        '</div>';
+    var SkillFilter = (function () {
+        function SkillFilter() {
+        }
+        SkillFilter.prototype.init = function (params) {
+            this.filterChangedCallback = params.filterChangedCallback;
+            this.model = {
+                android: false,
+                css: false,
+                html5: false,
+                mac: false,
+                windows: false
+            };
+        };
+        ;
+        SkillFilter.prototype.getGui = function () {
+            var eGui = document.createElement('div');
+            eGui.style.width = '380px';
+            var eInstructions = document.createElement('div');
+            eInstructions.innerHTML = FILTER_TITLE.replace('TITLE_NAME', 'Custom Skills Filter');
+            eGui.appendChild(eInstructions);
+            var that = this;
+            refData_1.default.IT_SKILLS.forEach(function (skill, index) {
+                var skillName = refData_1.default.IT_SKILLS_NAMES[index];
+                var eSpan = document.createElement('span');
+                var html = SKILL_TEMPLATE.replace("SKILL_NAME", skillName).replace("SKILL", skill);
+                eSpan.innerHTML = html;
+                var eCheckbox = eSpan.querySelector('input');
+                eCheckbox.addEventListener('click', function () {
+                    that.model[skill] = eCheckbox.checked;
+                    that.filterChangedCallback();
+                });
+                eGui.appendChild(eSpan);
+            });
+            return eGui;
+        };
+        ;
+        SkillFilter.prototype.doesFilterPass = function (params) {
+            var rowSkills = params.data.skills;
+            var model = this.model;
+            var passed = true;
+            refData_1.default.IT_SKILLS.forEach(function (skill) {
+                if (model[skill]) {
+                    if (!rowSkills[skill]) {
+                        passed = false;
+                    }
+                }
+            });
+            return passed;
+        };
+        ;
+        SkillFilter.prototype.isFilterActive = function () {
+            var model = this.model;
+            var somethingSelected = model.android || model.css || model.html5 || model.mac || model.windows;
+            return somethingSelected;
+        };
+        ;
+        SkillFilter.prototype.getModel = function () {
+            return undefined;
+        };
+        SkillFilter.prototype.setModel = function (model) {
+        };
+        return SkillFilter;
+    }());
+    exports.default = SkillFilter;
+});
+
+define('jsDateComponent/dateComponent',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    function DateComponent() {
+    }
+    DateComponent.prototype.init = function (params) {
+        this.params = params;
+        this.eGui = document.createElement('div');
+        this.eGui.innerHTML = '' +
+            '<div class="filter">' +
+            '<span class="reset">x</span>' +
+            '<input class="dd" placeholder="dd" maxLength="2"/>/' +
+            '<input class="mm" placeholder="mm" maxLength="2"/>/' +
+            '<input class="yyyy" placeholder="yyyy" maxLength="4"/>' +
+            '</div>';
+        this.eReset = this.eGui.querySelector('.reset');
+        this.onResetDate = this.onResetDate.bind(this);
+        this.eReset.addEventListener('click', this.onResetDate);
+        this.eDD = this.eGui.querySelector('.dd');
+        this.eMM = this.eGui.querySelector('.mm');
+        this.eYYYY = this.eGui.querySelector('.yyyy');
+        this.onDateChanged = this.onDateChanged.bind(this);
+        this.eDD.addEventListener('change', this.onDateChanged);
+        this.eMM.addEventListener('change', this.onDateChanged);
+        this.eYYYY.addEventListener('change', this.onDateChanged);
+    };
+    DateComponent.prototype.getGui = function () {
+        return this.eGui;
+    };
+    DateComponent.prototype.onDateChanged = function (event) {
+        var targetClass = event.target.classList[0];
+        var targetValue = event.target.value;
+        this.date = this.parseDate(targetClass === 'dd' ? targetValue : this.eDD.value, targetClass === 'mm' ? targetValue : this.eMM.value, targetClass === 'yyyy' ? targetValue : this.eYYYY.value);
+        this.params.onDateChanged();
+    };
+    DateComponent.prototype.onResetDate = function () {
+        this.dd = '';
+        this.mm = '';
+        this.yyyy = '';
+        this.date = null;
+        this.params.onDateChanged();
+    };
+    DateComponent.prototype.getDate = function () {
+        return this.date;
+    };
+    DateComponent.prototype.setDate = function (date) {
+        if (!date)
+            return;
+        this.dd = date.getDate() + '';
+        this.mm = (date.getMonth() + 1) + '';
+        this.yyyy = date.getFullYear() + '';
+        this.date = date;
+        this.params.onDateChanged();
+    };
+    DateComponent.prototype.parseDate = function (dd, mm, yyyy) {
+        if (dd.trim() === '' || mm.trim() === '' || yyyy.trim() === '') {
+            return null;
+        }
+        var day = Number(dd);
+        var month = Number(mm);
+        var year = Number(yyyy);
+        var date = new Date(year, month - 1, day);
+        if (isNaN(date.getTime())) {
+            return null;
+        }
+        if (date.getDate() != day || date.getMonth() + 1 != month || date.getFullYear() != year) {
+            return null;
+        }
+        return date;
+    };
+    exports.default = DateComponent;
+});
+
+define('jsHeaderComponent/headerComponent',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    function HeaderComponent() {
+    }
+    HeaderComponent.prototype.init = function (agParams) {
+        this.agParams = agParams;
+        this.eGui = document.createElement('div');
+        this.eGui.className = "headerComponent";
+        this.eGui.innerHTML = '' +
+            '<div class="customHeaderMenuButton"><i class="fa ' + this.agParams.menuIcon + '"></i></div>' +
+            '<div class="customHeaderLabel">' + this.agParams.displayName + '</div>' +
+            '<div class="customSortDownLabel inactive"><i class="fa fa-long-arrow-down"></i></div>' +
+            '<div class="customSortUpLabel inactive"><i class="fa fa-long-arrow-up"></i></div>' +
+            '<div class="customSortRemoveLabel inactive"><i class="fa fa-times"></i></div>';
+        this.eMenuButton = this.eGui.querySelector(".customHeaderMenuButton");
+        this.eSortDownButton = this.eGui.querySelector(".customSortDownLabel");
+        this.eSortUpButton = this.eGui.querySelector(".customSortUpLabel");
+        this.eSortRemoveButton = this.eGui.querySelector(".customSortRemoveLabel");
+        if (this.agParams.enableMenu) {
+            this.onMenuClickListener = this.onMenuClick.bind(this);
+            this.eMenuButton.addEventListener('click', this.onMenuClickListener);
+        }
+        else {
+            this.eGui.removeChild(this.eMenuButton);
+        }
+        if (this.agParams.enableSorting) {
+            this.onSortAscRequestedListener = this.onSortRequested.bind(this, 'asc');
+            this.eSortDownButton.addEventListener('click', this.onSortAscRequestedListener);
+            this.onSortDescRequestedListener = this.onSortRequested.bind(this, 'desc');
+            this.eSortUpButton.addEventListener('click', this.onSortDescRequestedListener);
+            this.onRemoveSortListener = this.onSortRequested.bind(this, '');
+            this.eSortRemoveButton.addEventListener('click', this.onRemoveSortListener);
+            this.onSortChangedListener = this.onSortChanged.bind(this);
+            this.agParams.column.addEventListener('sortChanged', this.onSortChangedListener);
+            this.onSortChanged();
+        }
+        else {
+            this.eGui.removeChild(this.eSortDownButton);
+            this.eGui.removeChild(this.eSortUpButton);
+            this.eGui.removeChild(this.eSortRemoveButton);
+        }
+    };
+    HeaderComponent.prototype.onSortChanged = function () {
+        function deactivate(toDeactivateItems) {
+            toDeactivateItems.forEach(function (toDeactivate) { toDeactivate.className = toDeactivate.className.split(' ')[0]; });
+        }
+        function activate(toActivate) {
+            toActivate.className = toActivate.className + " active";
+        }
+        if (this.agParams.column.isSortAscending()) {
+            deactivate([this.eSortUpButton, this.eSortRemoveButton]);
+            activate(this.eSortDownButton);
+        }
+        else if (this.agParams.column.isSortDescending()) {
+            deactivate([this.eSortDownButton, this.eSortRemoveButton]);
+            activate(this.eSortUpButton);
+        }
+        else {
+            deactivate([this.eSortUpButton, this.eSortDownButton]);
+            activate(this.eSortRemoveButton);
+        }
+    };
+    HeaderComponent.prototype.getGui = function () {
+        return this.eGui;
+    };
+    HeaderComponent.prototype.onMenuClick = function () {
+        this.agParams.showColumnMenu(this.eMenuButton);
+    };
+    HeaderComponent.prototype.onSortRequested = function (order, event) {
+        this.agParams.setSort(order, event.shiftKey);
+    };
+    HeaderComponent.prototype.destroy = function () {
+        if (this.onMenuClickListener) {
+            this.eMenuButton.removeEventListener('click', this.onMenuClickListener);
+        }
+        this.eSortDownButton.removeEventListener('click', this.onSortRequestedListener);
+        this.eSortUpButton.removeEventListener('click', this.onSortRequestedListener);
+        this.eSortRemoveButton.removeEventListener('click', this.onSortRequestedListener);
+        this.agParams.column.removeEventListener('sortChanged', this.onSortChangedListener);
+    };
+    exports.default = HeaderComponent;
+});
+
+define('jsHeaderComponent/headerGroupComponent',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    function HeaderGroupComponent() {
+    }
+    HeaderGroupComponent.prototype.init = function (params) {
+        this.params = params;
+        this.eGui = document.createElement('div');
+        this.eGui.className = 'ag-header-group-cell-label';
+        this.eGui.innerHTML = '' +
+            '<div class="customHeaderLabel">' + this.params.displayName + '</div>' +
+            '<div class="customExpandButton"><i class="fa fa-arrow-right"></i></div>';
+        this.onExpandButtonClickedListener = this.expandOrCollapse.bind(this);
+        this.eExpandButton = this.eGui.querySelector(".customExpandButton");
+        this.eExpandButton.addEventListener('click', this.onExpandButtonClickedListener);
+        this.onExpandChangedListener = this.syncExpandButtons.bind(this);
+        this.params.columnGroup.getOriginalColumnGroup().addEventListener('expandedChanged', this.onExpandChangedListener);
+        this.syncExpandButtons();
+    };
+    HeaderGroupComponent.prototype.getGui = function () {
+        return this.eGui;
+    };
+    HeaderGroupComponent.prototype.expandOrCollapse = function () {
+        var currentState = this.params.columnGroup.getOriginalColumnGroup().isExpanded();
+        this.params.setExpanded(!currentState);
+    };
+    HeaderGroupComponent.prototype.syncExpandButtons = function () {
+        function collapsed(toDeactivate) {
+            toDeactivate.className = toDeactivate.className.split(' ')[0] + ' collapsed';
+        }
+        function expanded(toActivate) {
+            toActivate.className = toActivate.className.split(' ')[0] + ' expanded';
+        }
+        if (this.params.columnGroup.getOriginalColumnGroup().isExpanded()) {
+            expanded(this.eExpandButton);
+        }
+        else {
+            collapsed(this.eExpandButton);
+        }
+    };
+    HeaderGroupComponent.prototype.destroy = function () {
+        this.eExpandButton.removeEventListener('click', this.onExpandButtonClickedListener);
+    };
+    exports.default = HeaderGroupComponent;
+});
+
+define('jsRenderers/MedalRenderer',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var MedalRenderer = (function () {
+        function MedalRenderer() {
+        }
+        MedalRenderer.prototype.init = function (params) {
+            this.params = params;
+            this.eGui = document.createElement('span');
+            var text = document.createTextNode(params.node.key + " Gold: " + params.node.aggData.gold + ", Silver: " + params.node.aggData.silver + ", Bronze: " + params.node.aggData.bronze);
+            this.eGui.appendChild(text);
+        };
+        MedalRenderer.prototype.getGui = function () {
+            return this.eGui;
+        };
+        MedalRenderer.prototype.refresh = function (params) {
+            return false;
+        };
+        return MedalRenderer;
+    }());
+    exports.default = MedalRenderer;
+});
+
+define('jsRenderers/NameAndAgeRenderer',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var NameAndAgeRenderer = (function () {
+        function NameAndAgeRenderer() {
+        }
+        NameAndAgeRenderer.prototype.init = function (params) {
+            this.params = params;
+            this.eGui = document.createElement('span');
+            var text = document.createTextNode("Name: " + params.data.name + ", Age: " + params.data.age);
+            this.eGui.appendChild(text);
+        };
+        NameAndAgeRenderer.prototype.getGui = function () {
+            return this.eGui;
+        };
+        NameAndAgeRenderer.prototype.refresh = function (params) {
+            return false;
+        };
+        return NameAndAgeRenderer;
+    }());
+    exports.default = NameAndAgeRenderer;
+});
+
+define('resources/index',["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    function configure(config) {
+    }
+    exports.configure = configure;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+define('components/blank/blank',["require", "exports", "aurelia-framework"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var Blank = (function () {
+        function Blank() {
+        }
+        Blank = __decorate([
+            aurelia_framework_1.autoinject()
+        ], Blank);
+        return Blank;
+    }());
+    exports.Blank = Blank;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('components/editor-example/editor-example',["require", "exports", "aurelia-framework", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var EditorExample = (function () {
+        function EditorExample() {
+            this.gridOptions = {};
+            this.gridOptions.rowData = this.createRowData();
+        }
+        EditorExample.prototype.createRowData = function () {
+            return [
+                { name: "Bob", mood: "Happy", number: 10 },
+                { name: "Harry", mood: "Sad", number: 3 },
+                { name: "Sally", mood: "Happy", number: 20 },
+                { name: "Mary", mood: "Sad", number: 5 },
+                { name: "John", mood: "Happy", number: 15 },
+                { name: "Jack", mood: "Happy", number: 25 },
+                { name: "Sue", mood: "Sad", number: 43 },
+                { name: "Sean", mood: "Sad", number: 1335 },
+                { name: "Niall", mood: "Happy", number: 2 },
+                { name: "Alberto", mood: "Happy", number: 123 },
+                { name: "Fred", mood: "Sad", number: 532 },
+                { name: "Jenny", mood: "Happy", number: 34 },
+                { name: "Larry", mood: "Happy", number: 13 },
+            ];
+        };
+        EditorExample = __decorate([
+            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.customElement('editor-example'),
+            __metadata("design:paramtypes", [])
+        ], EditorExample);
+        return EditorExample;
+    }());
+    exports.EditorExample = EditorExample;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('components/filter-example/filter-example',["require", "exports", "aurelia-framework", "../../filters/partialMatch", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1, partialMatch_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var FilterExample = (function () {
+        function FilterExample() {
+            this.gridOptions = {};
+            this.gridOptions.rowData = this.createRowData();
+            this.gridOptions.enableFilter = true;
+            this.gridOptions.defaultColDef = {
+                menuTabs: ['filterMenuTab']
+            };
+        }
+        FilterExample.prototype.createRowData = function () {
+            return [
+                { "row": "Row 1", "name": "Michael Phelps" },
+                { "row": "Row 2", "name": "Natalie Coughlin" },
+                { "row": "Row 3", "name": "Aleksey Nemov" },
+                { "row": "Row 4", "name": "Alicia Coutts" },
+                { "row": "Row 5", "name": "Missy Franklin" },
+                { "row": "Row 6", "name": "Ryan Lochte" },
+                { "row": "Row 7", "name": "Allison Schmitt" },
+                { "row": "Row 8", "name": "Natalie Coughlin" },
+                { "row": "Row 9", "name": "Ian Thorpe" },
+                { "row": "Row 10", "name": "Bob Mill" },
+                { "row": "Row 11", "name": "Willy Walsh" },
+                { "row": "Row 12", "name": "Sarah McCoy" },
+                { "row": "Row 13", "name": "Jane Jack" },
+                { "row": "Row 14", "name": "Tina Wills" }
+            ];
+        };
+        FilterExample.prototype.getPartialMatchFilter = function () {
+            return partialMatch_1.default;
+        };
+        FilterExample = __decorate([
+            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.customElement('filter-example'),
+            __metadata("design:paramtypes", [])
+        ], FilterExample);
+        return FilterExample;
+    }());
+    exports.FilterExample = FilterExample;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('components/full-width-example/full-width-example',["require", "exports", "aurelia-framework", "../../jsRenderers/NameAndAgeRenderer", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1, NameAndAgeRenderer_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var FloatingRowExample = (function () {
+        function FloatingRowExample() {
+            this.gridOptions = {};
+            this.gridOptions.rowData = this.createRowData();
+            this.gridOptions.isFullWidthCell = function (rowNode) {
+                return (rowNode.id === "0") || (parseInt(rowNode.id) % 2 === 0);
+            };
+            this.gridOptions.fullWidthCellRenderer = NameAndAgeRenderer_1.default;
+        }
+        FloatingRowExample.prototype.createRowData = function () {
+            return [
+                { name: "Bob", age: 10 },
+                { name: "Harry", age: 3 },
+                { name: "Sally", age: 20 },
+                { name: "Mary", age: 5 },
+                { name: "John", age: 15 },
+                { name: "Bob", age: 10 },
+                { name: "Harry", age: 3 },
+                { name: "Sally", age: 20 },
+                { name: "Mary", age: 5 },
+                { name: "John", age: 15 },
+                { name: "Jack", age: 25 },
+                { name: "Sue", age: 43 },
+                { name: "Sean", age: 44 },
+                { name: "Niall", age: 2 },
+                { name: "Alberto", age: 32 },
+                { name: "Fred", age: 53 },
+                { name: "Jenny", age: 34 },
+                { name: "Larry", age: 13 },
+            ];
+        };
+        FloatingRowExample = __decorate([
+            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.customElement('full-width-example'),
+            __metadata("design:paramtypes", [])
+        ], FloatingRowExample);
+        return FloatingRowExample;
+    }());
+    exports.FloatingRowExample = FloatingRowExample;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('components/group-row-example/group-row-example',["require", "exports", "aurelia-framework", "../../jsRenderers/MedalRenderer", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1, MedalRenderer_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var GroupRowExample = (function () {
+        function GroupRowExample() {
+            var _this = this;
+            this.gridOptions = {};
+            this.gridOptions.rowData = this.createRowData();
+            this.gridOptions.groupUseEntireRow = true;
+            this.gridOptions.groupRowInnerRenderer = MedalRenderer_1.default;
+            this.gridOptions.onGridReady = function () {
+                _this.gridOptions.api.sizeColumnsToFit();
+            };
+        }
+        GroupRowExample.prototype.createRowData = function () {
+            return [
+                { country: "United States", name: "Bob", gold: 1, silver: 0, bronze: 0 },
+                { country: "United States", name: "Jack", gold: 0, silver: 1, bronze: 1 },
+                { country: "United States", name: "Sue", gold: 1, silver: 0, bronze: 1 },
+                { country: "United Kingdom", name: "Mary", gold: 1, silver: 1, bronze: 0 },
+                { country: "United Kingdom", name: "Tess", gold: 0, silver: 1, bronze: 1 },
+                { country: "United Kingdom", name: "John", gold: 0, silver: 2, bronze: 1 },
+                { country: "Jamaica", name: "Bob", gold: 1, silver: 1, bronze: 0 },
+                { country: "Jamaica", name: "Jack", gold: 1, silver: 1, bronze: 0 },
+                { country: "Jamaica", name: "Mary", gold: 1, silver: 1, bronze: 0 },
+                { country: "South Africa", name: "Bob", gold: 1, silver: 0, bronze: 1 },
+                { country: "South Africa", name: "Jack", gold: 1, silver: 0, bronze: 1 },
+                { country: "South Africa", name: "Mary", gold: 1, silver: 0, bronze: 1 },
+                { country: "South Africa", name: "John", gold: 1, silver: 0, bronze: 1 },
+                { country: "New Zealand", name: "Bob", gold: 1, silver: 0, bronze: 0 },
+                { country: "New Zealand", name: "Jack", gold: 0, silver: 1, bronze: 1 },
+                { country: "New Zealand", name: "Sue", gold: 1, silver: 0, bronze: 1 },
+                { country: "Australia", name: "Mary", gold: 1, silver: 1, bronze: 0 },
+                { country: "Australia", name: "Tess", gold: 0, silver: 1, bronze: 1 },
+                { country: "Australia", name: "John", gold: 0, silver: 2, bronze: 1 },
+                { country: "Canada", name: "Bob", gold: 1, silver: 1, bronze: 0 },
+                { country: "Canada", name: "Jack", gold: 1, silver: 1, bronze: 0 },
+                { country: "Canada", name: "Mary", gold: 1, silver: 1, bronze: 0 },
+                { country: "Switzerland", name: "Bob", gold: 1, silver: 0, bronze: 1 },
+                { country: "Switzerland", name: "Jack", gold: 1, silver: 0, bronze: 1 },
+                { country: "Switzerland", name: "Mary", gold: 1, silver: 0, bronze: 1 },
+                { country: "Switzerland", name: "John", gold: 1, silver: 0, bronze: 1 },
+                { country: "Spain", name: "Bob", gold: 1, silver: 0, bronze: 0 },
+                { country: "Spain", name: "Jack", gold: 0, silver: 1, bronze: 1 },
+                { country: "Spain", name: "Sue", gold: 1, silver: 0, bronze: 1 },
+                { country: "Portugal", name: "Mary", gold: 1, silver: 1, bronze: 0 },
+                { country: "Portugal", name: "Tess", gold: 0, silver: 1, bronze: 1 },
+                { country: "Portugal", name: "John", gold: 0, silver: 2, bronze: 1 },
+                { country: "Zimbabwe", name: "Bob", gold: 1, silver: 1, bronze: 0 },
+                { country: "Zimbabwe", name: "Jack", gold: 1, silver: 1, bronze: 0 },
+                { country: "Zimbabwe", name: "Mary", gold: 1, silver: 1, bronze: 0 },
+                { country: "Brazil", name: "Bob", gold: 1, silver: 0, bronze: 1 },
+                { country: "Brazil", name: "Jack", gold: 1, silver: 0, bronze: 1 },
+                { country: "Brazil", name: "Mary", gold: 1, silver: 0, bronze: 1 },
+                { country: "Brazil", name: "John", gold: 1, silver: 0, bronze: 1 }
+            ];
+        };
+        GroupRowExample = __decorate([
+            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.customElement('group-row-example'),
+            __metadata("design:paramtypes", [])
+        ], GroupRowExample);
+        return GroupRowExample;
+    }());
+    exports.GroupRowExample = GroupRowExample;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('components/pinned-row-example/pinned-row-example',["require", "exports", "aurelia-framework", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var FloatingRowExample = (function () {
+        function FloatingRowExample() {
+            this.gridOptions = {};
+            this.gridOptions.rowData = this.createRowData();
+            this.gridOptions.pinnedTopRowData = [
+                { row: "Top Row", number: "Top Number" }
+            ];
+            this.gridOptions.pinnedBottomRowData = [
+                { row: "Bottom Row", number: "Bottom Number" }
+            ];
+        }
+        FloatingRowExample.prototype.createRowData = function () {
+            var rowData = [];
+            for (var i = 0; i < 15; i++) {
+                rowData.push({
+                    row: "Row " + i,
+                    number: Math.round(Math.random() * 100)
+                });
+            }
+            return rowData;
+        };
+        FloatingRowExample = __decorate([
+            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.customElement('floating-row-example'),
+            __metadata("design:paramtypes", [])
+        ], FloatingRowExample);
+        return FloatingRowExample;
+    }());
+    exports.FloatingRowExample = FloatingRowExample;
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('components/rich-grid-declarative-example/rich-grid-declarative-example',["require", "exports", "aurelia-framework", "../../data/refData", "../../filters/skillFilter", "../../filters/proficiencyFilter", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1, refData_1, skillFilter_1, proficiencyFilter_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var RichGridDeclarative = (function () {
+        function RichGridDeclarative() {
+            var _this = this;
+            this.gridOptions = {};
+            var that = this;
+            this.createRowData();
+            this.showGrid = true;
+            this.gridOptions.onGridReady = function () {
+                _this.api = _this.gridOptions.api;
+                _this.columnApi = _this.gridOptions.columnApi;
+            };
+        }
+        RichGridDeclarative.prototype.createRowData = function () {
+            var rowData = [];
+            for (var i = 0; i < 10000; i++) {
+                var countryData = refData_1.default.countries[i % refData_1.default.countries.length];
+                rowData.push({
+                    name: refData_1.default.firstNames[i % refData_1.default.firstNames.length] + ' ' + refData_1.default.lastNames[i % refData_1.default.lastNames.length],
+                    skills: {
+                        android: Math.random() < 0.4,
+                        html5: Math.random() < 0.4,
+                        mac: Math.random() < 0.4,
+                        windows: Math.random() < 0.4,
+                        css: Math.random() < 0.4
+                    },
+                    dob: refData_1.default.DOBs[i % refData_1.default.DOBs.length],
+                    address: refData_1.default.addresses[i % refData_1.default.addresses.length],
+                    years: Math.round(Math.random() * 100),
+                    proficiency: Math.round(Math.random() * 100),
+                    country: countryData.country,
+                    continent: countryData.continent,
+                    language: countryData.language,
+                    mobile: this.createRandomPhoneNumber(),
+                    landline: this.createRandomPhoneNumber()
+                });
+            }
+            this.rowData = rowData;
+        };
+        RichGridDeclarative.prototype.calculateRowCount = function () {
+            if (this.gridOptions.api && this.rowData) {
+                var model = this.gridOptions.api.getModel();
+                var totalRows = this.rowData.length;
+                var processedRows = model.getRowCount();
+                this.rowCount = processedRows.toLocaleString() + ' / ' + totalRows.toLocaleString();
+            }
+        };
+        RichGridDeclarative.prototype.onModelUpdated = function () {
+            console.log('onModelUpdated');
+            this.calculateRowCount();
+        };
+        RichGridDeclarative.prototype.onReady = function () {
+            console.log('onReady');
+            this.calculateRowCount();
+        };
+        RichGridDeclarative.prototype.onCellClicked = function ($event) {
+            console.log('onCellClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        };
+        RichGridDeclarative.prototype.onCellValueChanged = function ($event) {
+            console.log('onCellValueChanged: ' + $event.oldValue + ' to ' + $event.newValue);
+        };
+        RichGridDeclarative.prototype.onCellDoubleClicked = function ($event) {
+            console.log('onCellDoubleClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        };
+        RichGridDeclarative.prototype.onCellContextMenu = function ($event) {
+            console.log('onCellContextMenu: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        };
+        RichGridDeclarative.prototype.onCellFocused = function ($event) {
+            if ($event.rowIndex !== null) {
+                console.log('onCellFocused: (' + $event.rowIndex + ',' + ($event.column ? $event.column.colId : '') + ')');
+            }
+        };
+        RichGridDeclarative.prototype.onRowSelected = function ($event) {
+        };
+        RichGridDeclarative.prototype.onSelectionChanged = function () {
+            console.log('selectionChanged');
+        };
+        RichGridDeclarative.prototype.onBeforeFilterChanged = function () {
+            console.log('beforeFilterChanged');
+        };
+        RichGridDeclarative.prototype.onAfterFilterChanged = function () {
+            console.log('afterFilterChanged');
+        };
+        RichGridDeclarative.prototype.onFilterModified = function () {
+            console.log('onFilterModified');
+        };
+        RichGridDeclarative.prototype.onBeforeSortChanged = function () {
+            console.log('onBeforeSortChanged');
+        };
+        RichGridDeclarative.prototype.onAfterSortChanged = function () {
+            console.log('onAfterSortChanged');
+        };
+        RichGridDeclarative.prototype.onVirtualRowRemoved = function ($event) {
+        };
+        RichGridDeclarative.prototype.onRowClicked = function ($event) {
+            console.log('onRowClicked: ' + $event.node.data.name);
+        };
+        RichGridDeclarative.prototype.onQuickFilterChanged = function ($event) {
+            this.gridOptions.api.setQuickFilter($event.target.value);
+        };
+        RichGridDeclarative.prototype.onColumnEvent = function ($event) {
+            console.log('onColumnEvent: ' + $event);
+        };
+        RichGridDeclarative.prototype.onIdClicked = function (row) {
+            console.log('id clicked ' + row.id);
+        };
+        RichGridDeclarative.prototype.dobCellRenderer = function (params) {
+            return pad(params.value.getDate(), 2) + '/' +
+                pad(params.value.getMonth() + 1, 2) + '/' +
+                params.value.getFullYear();
+        };
+        RichGridDeclarative.prototype.countryCellRenderer = function (params) {
+            var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='/images/flags/" + refData_1.default.COUNTRY_CODES[params.value] + ".png'>";
+            return flag + " " + params.value;
+        };
+        RichGridDeclarative.prototype.skillsCellRenderer = function (params) {
+            var data = params.data;
+            var skills = [];
+            refData_1.default.IT_SKILLS.forEach(function (skill) {
+                if (data && data.skills && data.skills[skill]) {
+                    skills.push('<img src="/images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
+                }
+            });
+            return skills.join(' ');
+        };
+        RichGridDeclarative.prototype.percentCellRenderer = function (params) {
+            var value = params.value;
+            var eDivPercentBar = document.createElement('div');
+            eDivPercentBar.className = 'div-percent-bar';
+            eDivPercentBar.style.width = value + '%';
+            if (value < 20) {
+                eDivPercentBar.style.backgroundColor = 'red';
+            }
+            else if (value < 60) {
+                eDivPercentBar.style.backgroundColor = '#ff9900';
+            }
+            else {
+                eDivPercentBar.style.backgroundColor = '#00A000';
+            }
+            var eValue = document.createElement('div');
+            eValue.className = 'div-percent-value';
+            eValue.innerHTML = value + '%';
+            var eOuterDiv = document.createElement('div');
+            eOuterDiv.className = 'div-outer-div';
+            eOuterDiv.appendChild(eValue);
+            eOuterDiv.appendChild(eDivPercentBar);
+            return eOuterDiv;
+        };
+        RichGridDeclarative.prototype.getSkillFilter = function () {
+            return skillFilter_1.default;
+        };
+        RichGridDeclarative.prototype.getProficiencyFilter = function () {
+            return proficiencyFilter_1.default;
+        };
+        RichGridDeclarative.prototype.getCountryFilterParams = function () {
+            return {
+                cellRenderer: this.countryCellRenderer,
+                cellHeight: 20
+            };
+        };
+        RichGridDeclarative.prototype.createRandomPhoneNumber = function () {
+            var result = '+';
+            for (var i = 0; i < 12; i++) {
+                result += Math.round(Math.random() * 10);
+                if (i === 2 || i === 5 || i === 8) {
+                    result += ' ';
+                }
+            }
+            return result;
+        };
+        RichGridDeclarative = __decorate([
+            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.customElement('rich-grid-declarative'),
+            __metadata("design:paramtypes", [])
+        ], RichGridDeclarative);
+        return RichGridDeclarative;
+    }());
+    exports.RichGridDeclarative = RichGridDeclarative;
+    function pad(num, totalStringSize) {
+        var asString = num + "";
+        while (asString.length < totalStringSize)
+            asString = "0" + asString;
+        return asString;
+    }
+});
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+define('components/rich-grid-example/rich-grid-example',["require", "exports", "aurelia-framework", "../../data/refData", "../../filters/skillFilter", "../../filters/proficiencyFilter", "../../jsHeaderComponent/headerComponent", "../../jsHeaderComponent/headerGroupComponent", "../../jsDateComponent/dateComponent", "ag-grid-enterprise/main"], function (require, exports, aurelia_framework_1, refData_1, skillFilter_1, proficiencyFilter_1, headerComponent_1, headerGroupComponent_1, dateComponent_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var RichGrid = (function () {
+        function RichGrid() {
+            var _this = this;
+            this.gridOptions = {};
+            this.createRowData();
+            this.createColumnDefs();
+            this.gridOptions.dateComponent = dateComponent_1.default;
+            this.gridOptions.defaultColDef = {
+                headerComponent: headerComponent_1.default,
+                headerComponentParams: {
+                    menuIcon: 'fa-bars'
+                }
+            };
+            this.showGrid = true;
+            this.gridOptions.onGridReady = function () {
+                _this.api = _this.gridOptions.api;
+                _this.columnApi = _this.gridOptions.columnApi;
+            };
+        }
+        RichGrid.prototype.createRowData = function () {
+            var rowData = [];
+            for (var i = 0; i < 200; i++) {
+                var countryData = refData_1.default.countries[i % refData_1.default.countries.length];
+                rowData.push({
+                    name: refData_1.default.firstNames[i % refData_1.default.firstNames.length] + ' ' + refData_1.default.lastNames[i % refData_1.default.lastNames.length],
+                    skills: {
+                        android: Math.random() < 0.4,
+                        html5: Math.random() < 0.4,
+                        mac: Math.random() < 0.4,
+                        windows: Math.random() < 0.4,
+                        css: Math.random() < 0.4
+                    },
+                    dob: refData_1.default.DOBs[i % refData_1.default.DOBs.length],
+                    address: refData_1.default.addresses[i % refData_1.default.addresses.length],
+                    years: Math.round(Math.random() * 100),
+                    proficiency: Math.round(Math.random() * 100),
+                    country: countryData.country,
+                    continent: countryData.continent,
+                    language: countryData.language,
+                    mobile: createRandomPhoneNumber(),
+                    landline: createRandomPhoneNumber()
+                });
+            }
+            this.rowData = rowData;
+        };
+        RichGrid.prototype.createColumnDefs = function () {
+            this.columnDefs = [
+                {
+                    headerName: '#', width: 30, checkboxSelection: true, suppressSorting: true,
+                    suppressMenu: true, pinned: true
+                },
+                {
+                    headerName: 'Employee',
+                    headerGroupComponent: headerGroupComponent_1.default,
+                    children: [
+                        {
+                            headerName: "Name", field: "name",
+                            width: 150, pinned: true
+                        },
+                        {
+                            headerName: "Country", field: "country", width: 150,
+                            cellRenderer: countryCellRenderer, pinned: true,
+                            filterParams: { cellRenderer: countryCellRenderer, cellHeight: 20 }
+                        },
+                        {
+                            headerName: "DOB", field: "dob", width: 120, pinned: true,
+                            cellRenderer: function (params) {
+                                return pad(params.value.getDate(), 2) + ' /' +
+                                    pad(params.value.getMonth() + 1, 2) + '/' +
+                                    params.value.getFullYear();
+                            },
+                            filter: 'agDateColumnFilter',
+                            columnGroupShow: 'open'
+                        }
+                    ]
+                },
+                {
+                    headerName: 'IT Skills',
+                    children: [
+                        {
+                            headerName: "Skills",
+                            width: 125,
+                            suppressSorting: true,
+                            cellRenderer: skillsCellRenderer,
+                            filter: skillFilter_1.default
+                        },
+                        {
+                            headerName: "Proficiency",
+                            field: "proficiency",
+                            width: 120,
+                            cellRenderer: percentCellRenderer,
+                            filter: proficiencyFilter_1.default
+                        },
+                    ]
+                },
+                {
+                    headerName: 'Contact',
+                    children: [
+                        { headerName: "Mobile", field: "mobile", width: 150, filter: 'text' },
+                        { headerName: "Land-line", field: "landline", width: 150, filter: 'text' },
+                        { headerName: "Address", field: "address", width: 500, filter: 'text' }
+                    ]
+                }
+            ];
+        };
+        RichGrid.prototype.calculateRowCount = function () {
+            if (this.gridOptions.api && this.rowData) {
+                var model = this.gridOptions.api.getModel();
+                var totalRows = this.rowData.length;
+                var processedRows = model.getRowCount();
+                this.rowCount = processedRows.toLocaleString() + ' / ' + totalRows.toLocaleString();
+            }
+        };
+        RichGrid.prototype.onModelUpdated = function () {
+            console.log('onModelUpdated');
+            this.calculateRowCount();
+        };
+        RichGrid.prototype.onReady = function () {
+            console.log('onReady');
+            this.calculateRowCount();
+        };
+        RichGrid.prototype.onCellClicked = function ($event) {
+            console.log('onCellClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        };
+        RichGrid.prototype.onCellValueChanged = function ($event) {
+            console.log('onCellValueChanged: ' + $event.oldValue + ' to ' + $event.newValue);
+        };
+        RichGrid.prototype.onCellDoubleClicked = function ($event) {
+            console.log('onCellDoubleClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        };
+        RichGrid.prototype.onCellContextMenu = function ($event) {
+            console.log('onCellContextMenu: ' + $event.rowIndex + ' ' + $event.colDef.field);
+        };
+        RichGrid.prototype.onCellFocused = function ($event) {
+            console.log('onCellFocused: (' + $event.rowIndex + ',' + ($event.column ? $event.column.colId : '') + ')');
+        };
+        RichGrid.prototype.onRowSelected = function ($event) {
+        };
+        RichGrid.prototype.onSelectionChanged = function () {
+            console.log('selectionChanged');
+        };
+        RichGrid.prototype.onBeforeFilterChanged = function () {
+            console.log('beforeFilterChanged');
+        };
+        RichGrid.prototype.onAfterFilterChanged = function () {
+            console.log('afterFilterChanged');
+        };
+        RichGrid.prototype.onFilterModified = function () {
+            console.log('onFilterModified');
+        };
+        RichGrid.prototype.onBeforeSortChanged = function () {
+            console.log('onBeforeSortChanged');
+        };
+        RichGrid.prototype.onAfterSortChanged = function () {
+            console.log('onAfterSortChanged');
+        };
+        RichGrid.prototype.onVirtualRowRemoved = function ($event) {
+        };
+        RichGrid.prototype.onRowClicked = function ($event) {
+            console.log('onRowClicked: ' + $event.node.data.name);
+        };
+        RichGrid.prototype.onQuickFilterChanged = function ($event) {
+            this.gridOptions.api.setQuickFilter($event.target.value);
+        };
+        RichGrid.prototype.onColumnEvent = function ($event) {
+            console.log('onColumnEvent: ' + $event);
+        };
+        RichGrid = __decorate([
+            aurelia_framework_1.autoinject(),
+            aurelia_framework_1.customElement('rich-grid'),
+            __metadata("design:paramtypes", [])
+        ], RichGrid);
+        return RichGrid;
+    }());
+    exports.RichGrid = RichGrid;
+    function skillsCellRenderer(params) {
+        var data = params.data;
+        var skills = [];
+        refData_1.default.IT_SKILLS.forEach(function (skill) {
+            if (data && data.skills && data.skills[skill]) {
+                skills.push('<img src="/images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
+            }
+        });
+        return skills.join(' ');
+    }
+    function countryCellRenderer(params) {
+        var flag = "<img border='0' width='15' height='10' style='margin-bottom: 2px' src='/images/flags/" + refData_1.default.COUNTRY_CODES[params.value] + ".png'>";
+        return flag + " " + params.value;
+    }
+    function createRandomPhoneNumber() {
+        var result = '+';
+        for (var i = 0; i < 12; i++) {
+            result += Math.round(Math.random() * 10);
+            if (i === 2 || i === 5 || i === 8) {
+                result += ' ';
+            }
+        }
+        return result;
+    }
+    function percentCellRenderer(params) {
+        var value = params.value;
+        var eDivPercentBar = document.createElement('div');
+        eDivPercentBar.className = 'div-percent-bar';
+        eDivPercentBar.style.width = value + '%';
+        if (value < 20) {
+            eDivPercentBar.style.backgroundColor = 'red';
+        }
+        else if (value < 60) {
+            eDivPercentBar.style.backgroundColor = '#ff9900';
+        }
+        else {
+            eDivPercentBar.style.backgroundColor = '#00A000';
+        }
+        var eValue = document.createElement('div');
+        eValue.className = 'div-percent-value';
+        eValue.innerHTML = value + '%';
+        var eOuterDiv = document.createElement('div');
+        eOuterDiv.className = 'div-outer-div';
+        eOuterDiv.appendChild(eValue);
+        eOuterDiv.appendChild(eDivPercentBar);
+        return eOuterDiv;
+    }
+    function pad(num, totalStringSize) {
+        var asString = num + "";
+        while (asString.length < totalStringSize)
+            asString = "0" + asString;
+        return asString;
+    }
+});
+
+define('text!app.html', ['module'], function(module) { module.exports = "<template>\n  <require from=\"bootstrap/css/bootstrap.css\"></require>\n  <require from=\"ag-grid/dist/styles/ag-grid.css\"></require>\n  <require from=\"ag-grid/dist/styles/theme-fresh.css\"></require>\n  <ul if.bind=\"!router.currentInstruction.queryParams.route\" class=\"nav nav-pills\" style=\"margin-bottom: 20px\">\n    <li role=\"presentation\" class.bind=\"row.isActive ? 'active' : ''\" repeat.for=\"row of router.navigation\">\n      <a href.bind=\"row.href\">${row.title}</a>\n    </li>\n  </ul>\n\n  <router-view></router-view>\n</template>\n"; });
+define('text!auDateComponents/date.component.css', ['module'], function(module) { module.exports = ".dd {\n    width: 30px\n}\n\n.mm {\n    width: 30px\n}\n\n.yyyy {\n    width: 40px\n}\n\n.reset {\n    padding: 2px;\n    background-color: red;\n    border-radius: 3px;\n    font-size: 10px;\n    color: white\n}"; });
+define('text!auDateComponents/date-component.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"./date.component.css\"></require>\n\n    <div class=\"filter\">\n        <span class=\"reset\" click.delegate=\"onResetDate()\">x</span>\n        <input class=\"dd\" value.bind=\"dd\" change.delegate=\"onDateChanged('dd', $event.target.value)\" maxLength=\"2\">\n        <span>/</span>\n        <input class=\"mm\" value.bind=\"mm\" change.delegate=\"onDateChanged('mm', $event.target.value)\" maxLength=\"2\">\n        <span>/</span>\n        <input class=\"yyyy\" value.bind=\"yyyy\" change.delegate=\"onDateChanged('yyyy', $event.target.value)\" maxLength=\"4\">\n    </div>\n</template>"; });
+define('text!auHeaderComponents/header-component.css', ['module'], function(module) { module.exports = ".headerComponent {\n    position:relative;\n    top: -5px\n}\n\n.customHeaderMenuButton {\n    margin-top: 5px;\n    margin-left: 4px;\n    float: left;\n}\n\n.customHeaderLabel {\n    margin-left: 5px;\n    margin-top: 3px;\n    float: left;\n}\n\n.customSortDownLabel {\n    float: left;\n    margin-left: 10px;\n    margin-top: 5px;\n}\n\n.customSortUpLabel {\n    float: left;\n    margin-left: 3px;\n    margin-top: 4px;\n}\n\n.customSortRemoveLabel {\n    float: left;\n    font-size: 11px;\n    margin-left: 3px;\n    margin-top: 6px;\n}\n\n.active {\n    color: cornflowerblue;\n}\n\n.hidden {\n    display: none;\n}\n"; });
+define('text!auHeaderComponents/header-component.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"./header-component.css\"></require>\n\n    <div class=\"headerComponent\">\n        <div hidden.bind=\"!params.enableMenu\"\n             class=\"customHeaderMenuButton\"\n             click.delegate=\"onMenuClick()\">\n            <i class=\"${'fa ' + params.menuIcon}\"></i>\n        </div>\n        <div class=\"customHeaderLabel\">${params.displayName}</div>\n        <div hidden.bind=\"!params.enableSorting\"\n             class=\"${'customSortDownLabel'+ (sorted === 'desc' ? ' active' : '') }\"\n             click.delegate=\"onSortRequested('desc', $event)\">\n            <i class=\"fa fa-long-arrow-down\"></i>\n        </div>\n        <div hidden.bind=\"!params.enableSorting\"\n             class=\"${'customSortUpLabel'+ (sorted === 'asc' ? ' active' : '') }\"\n             click.delegate=\"onSortRequested('asc', $event)\">\n            <i class=\"fa fa-long-arrow-up\"></i>\n        </div>\n        <div hidden.bind=\"!params.enableSorting\"\n             class=\"${'customSortRemoveLabel'+ (sorted === '' ? ' active' : '') }\"\n             click.delegate=\"onSortRequested('', $event)\">\n            <i class=\"fa fa-times\"></i>\n        </div>\n    </div>\n</template>\n"; });
+define('text!auHeaderComponents/header-group-component.css', ['module'], function(module) { module.exports = ".customHeaderLabel {\n    margin-left: 5px;\n    margin-top: 3px;\n    float: left;\n}\n\n.customExpandButton {\n    float: right;\n    margin-top: 5px;\n    margin-left: 3px;\n}\n\n.expanded {\n    animation-name: toExpanded;\n    animation-duration: 1s;\n    -ms-transform: rotate(180deg); /* IE 9 */\n    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */\n    transform: rotate(180deg);\n}\n\n.collapsed {\n    color: cornflowerblue;\n    animation-name: toCollapsed;\n    animation-duration: 1s;\n    -ms-transform: rotate(0deg); /* IE 9 */\n    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */\n    transform: rotate(0deg);\n}\n\n@keyframes toExpanded {\n    from {\n        color: cornflowerblue;\n        -ms-transform: rotate(0deg); /* IE 9 */\n        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */\n        transform: rotate(0deg);\n    }\n    to {\n        color: black;\n        -ms-transform: rotate(180deg); /* IE 9 */\n        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */\n        transform: rotate(180deg);\n    }\n}\n\n@keyframes toCollapsed {\n    from {\n        color: black;\n        -ms-transform: rotate(180deg); /* IE 9 */\n        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */\n        transform: rotate(180deg);\n    }\n    to {\n        color: cornflowerblue;\n        -ms-transform: rotate(0deg); /* IE 9 */\n        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */\n        transform: rotate(0deg);\n    }\n}"; });
+define('text!auHeaderComponents/header-group-component.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"./header-group-component.css\"></require>\n\n    <div >\n        <div class=\"customHeaderLabel\"> ${params.displayName}</div>\n        <div click.delegate=\"expandOrCollapse()\" class=\"${'customExpandButton' + (expanded ?  ' expanded': ' collapsed')}\">\n            <i class=\"fa fa-arrow-right\"></i>\n        </div>\n    </div>\n</template>\n"; });
+define('text!editors/mood-editor.css', ['module'], function(module) { module.exports = ".mood {\n  border-radius: 15px;\n  border: 1px solid grey;\n  background: #e6e6e6;\n  padding: 15px;\n  text-align: center;\n  display: inline-block;\n  outline: none\n}\n\n.default {\n  padding-left: 10px;\n  padding-right: 10px;\n  border: 1px solid transparent !important;\n}\n\n.selected {\n  padding-left: 10px;\n  padding-right: 10px;\n  border: 1px solid lightgreen !important;\n}\n"; });
+define('text!auRenderers/styled-renderer.html', ['module'], function(module) { module.exports = "<template>\n    <span css.bind=\"params.style\">${params.value}</span>\n</template>\n"; });
+define('text!jsHeaderComponent/headerComponent.css', ['module'], function(module) { module.exports = ".headerComponent {\n    position:relative;\n    top: -5px\n}\n\n.customHeaderMenuButton {\n    margin-top: 5px;\n    margin-left: 4px;\n    float: left;\n}\n\n.customHeaderLabel {\n    margin-left: 5px;\n    margin-top: 3px;\n    float: left;\n}\n\n.customSortDownLabel {\n    float: left;\n    margin-left: 10px;\n    margin-top: 5px;\n}\n\n.customSortUpLabel {\n    float: left;\n    margin-left: 3px;\n    margin-top: 4px;\n}\n\n.customSortRemoveLabel {\n    float: left;\n    font-size: 11px;\n    margin-left: 3px;\n    margin-top: 6px;\n}\n\n.active {\n    color: cornflowerblue;\n}"; });
+define('text!editors/mood-editor.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"./mood-editor.css\"></require>\n\n    <div class.bind=\"'mood'\" tabindex=\"0\" focus.bind=\"hasFocus\" keydown.trigger=\"onKeyDown($event)\">\n        <img src=\"/images/smiley.png\" click.delegate=\"setHappy(true)\" class.bind=\"happy ? 'selected' : 'default'\">\n        <img src=\"/images/smiley-sad.png\" click.delegate=\"setHappy(false)\" class.bind=\"!happy ? 'selected' : 'default'\">\n    </div>\n</template>\n"; });
+define('text!jsHeaderComponent/headerGroup.css', ['module'], function(module) { module.exports = ".customHeaderLabel{\n    margin-left: 5px;\n    margin-top: 3px;\n    float: left;\n}\n\n.customExpandButton{\n    float:right;\n    margin-top: 5px;\n    margin-left: 3px;\n}\n\n.expanded {\n    animation-name: toExpanded;\n    animation-duration: 1s;\n    -ms-transform: rotate(180deg); /* IE 9 */\n    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */\n    transform: rotate(180deg);\n}\n\n.collapsed {\n    color: cornflowerblue;\n    animation-name: toCollapsed;\n    animation-duration: 1s;\n    -ms-transform: rotate(0deg); /* IE 9 */\n    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */\n    transform: rotate(0deg);\n}\n\n\n\n@keyframes  toExpanded{\n    from {\n        color: cornflowerblue;\n        -ms-transform: rotate(0deg); /* IE 9 */\n        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */\n        transform: rotate(0deg);\n    }\n    to {\n        color: black;\n        -ms-transform: rotate(180deg); /* IE 9 */\n        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */\n        transform: rotate(180deg);\n    }\n}\n\n@keyframes toCollapsed{\n    from {\n        color: black;\n        -ms-transform: rotate(180deg); /* IE 9 */\n        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */\n        transform: rotate(180deg);\n    }\n    to {\n        color: cornflowerblue;\n        -ms-transform: rotate(0deg); /* IE 9 */\n        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */\n        transform: rotate(0deg);\n    }\n}"; });
+define('text!editors/numeric-editor.html', ['module'], function(module) { module.exports = "<template>\n  <input focus.bind=\"hasFocus\" value.bind=\"params.value\">\n</template>\n"; });
+define('text!components/rich-grid-example/rich-grid-example.css', ['module'], function(module) { module.exports = ".filter {\n    margin: 2px\n}\n\n.dd {\n    width: 30px\n}\n\n.mm {\n    width: 30px\n}\n\n.yyyy {\n    width: 60px\n}\n\n.reset {\n    padding: 2px;\n    background-color: red;\n    border-radius: 3px;\n    font-size: 10px;\n    margin-right: 5px;\n    color: white\n}"; });
+define('text!components/blank/blank.html', ['module'], function(module) { module.exports = "<template>\n    <div>\n    </div>\n</template>\n"; });
+define('text!components/editor-example/editor-example.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"../../editors/numeric-editor\"></require>\n    <require from=\"../../editors/mood-editor\"></require>\n    <div style=\"width: 900px;\">\n        <div style=\"width: 100%; height: 350px;\">\n            <ag-grid-aurelia #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\"\n                             grid-options.bind=\"gridOptions\">\n\n                <ag-grid-column header-name=\"Name\" field=\"name\" width.bind=\"300\"></ag-grid-column>\n                <ag-grid-column header-name=\"Mood\" field=\"mood\" width.bind=\"300\" editable.bind=\"true\">\n                    <ag-cell-template>\n                        <img width=\"20px\" if.bind=\"params.value === 'Happy'\" src=\"/images/smiley.png\"/>\n                        <img width=\"20px\" if.bind=\"params.value !== 'Happy'\" src=\"/images/smiley-sad.png\"/>\n                    </ag-cell-template>\n                    <ag-editor-template>\n                        <ag-mood-editor></ag-mood-editor>\n                    </ag-editor-template>\n                </ag-grid-column>\n                <ag-grid-column header-name=\"Numeric\" field=\"number\" width.bind=\"280\" editable.bind=\"true\">\n                    <ag-editor-template>\n                        <ag-numeric-editor></ag-numeric-editor>\n                    </ag-editor-template>\n                </ag-grid-column>\n            </ag-grid-aurelia>\n        </div>\n    </div>\n</template>\n"; });
+define('text!components/filter-example/filter-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 900px;\">\n    <div style=\"width: 100%; height: 350px;\">\n      <ag-grid-aurelia #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\"\n                       grid-options.bind=\"gridOptions\">\n        <ag-grid-column header-name=\"Row\" field=\"row\" width.bind=\"450\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Filter Component\" field=\"name\" width.bind=\"430\" filter.bind=\"getPartialMatchFilter()\">\n        </ag-grid-column>\n      </ag-grid-aurelia>\n    </div>\n  </div>\n  </div>\n</template>\n"; });
+define('text!components/full-width-example/full-width-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 900px;\">\n      <div style=\"width: 100%; height: 350px;\">\n        <ag-grid-aurelia #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\"\n                         grid-options.bind=\"gridOptions\">\n            <ag-grid-column header-name=\"Name\" field=\"name\" width.bind=\"450\">\n            </ag-grid-column>\n            <ag-grid-column header-name=\"Age\" field=\"age\" width.bind=\"430\">\n            </ag-grid-column>\n        </ag-grid-aurelia>\n      </div>\n    </div>\n  </div>\n</template>\n"; });
+define('text!components/group-row-example/group-row-example.html', ['module'], function(module) { module.exports = "<template>\n  <div style=\"width: 900px;\">\n    <div style=\"width: 100%; height: 350px;\">\n      <ag-grid-aurelia #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\"\n                       grid-options.bind=\"gridOptions\">\n        <ag-grid-column header-name=\"Country\" field=\"country\" width.bind=\"100\" row-group-index.bind=\"0\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Name\" field=\"name\" width.bind=\"100\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Gold\" field=\"gold\" width.bind=\"100\" agg-func=\"sum\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Silver\" field=\"silver\" width.bind=\"100\" agg-func=\"sum\">\n        </ag-grid-column>\n        <ag-grid-column header-name=\"Bronze\" field=\"bronze\" width.bind=\"100\" agg-func=\"sum\">\n        </ag-grid-column>\n      </ag-grid-aurelia>\n    </div>\n  </div>\n  </div>\n</template>\n"; });
+define('text!components/pinned-row-example/pinned-row-example.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"../../auRenderers/styled-renderer\"></require>\n    <div style=\"width: 900px;\">\n        <div style=\"width: 100%; height: 350px;\">\n            <ag-grid-aurelia #agGrid style=\"width: 100%; height: 100%;\" class=\"ag-fresh\"\n                             grid-options.bind=\"gridOptions\">\n                <ag-grid-column header-name=\"Row\" field=\"row\" width.bind=\"450\" pinned-row-cell-renderer-params.bind=\"{style: {'fontWeight': 'bold'}}\">\n                    <ag-pinned-row-template>\n                        <ag-styled-renderer></ag-styled-renderer>\n                    </ag-pinned-row-template>\n                </ag-grid-column>\n                <ag-grid-column header-name=\"Number\" field=\"number\" width.bind=\"430\" pinned-row-cell-renderer-params.bind=\"{style: {'fontStyle': 'italic'}}\">\n                    <ag-pinned-row-template>\n                        <ag-styled-renderer></ag-styled-renderer>\n                    </ag-pinned-row-template>\n                </ag-grid-column>\n            </ag-grid-aurelia>\n        </div>\n    </div>\n    </div>\n</template>\n"; });
+define('text!components/rich-grid-declarative-example/rich-grid-declarative-example.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"../../auHeaderComponents/header-component\"></require>\n    <require from=\"../../auHeaderComponents/header-group-component\"></require>\n    <require from=\"../../auDateComponents/date-component\"></require>\n\n    <div style=\"width: 900px;\">\n        <div style=\"padding: 4px;\">\n            <div style=\"float: right;\">\n                <input keyup.delegate=\"onQuickFilterChanged($event)\" type=\"text\" id=\"quickFilterInput\"\n                       placeholder=\"Type text to filter...\"/>\n                <button disabled.bind=\"!showGrid\" click.delegate=\"showGrid=false\">Destroy Grid</button>\n                <button disabled.bind=\"showGrid\" click.delegate=\"showGrid=true\">Create Grid</button>\n            </div>\n            <div>\n                <b>Employees Skills and Contact Details</b>\n                ${rowCount}\n            </div>\n        </div>\n        <div style=\"clear: both;\"></div>\n\n        <div if.bind=\"showGrid\">\n\n            <!-- Because we are using the Angular ID (ie #ag-grid marker), we have to have all the items that use\n                 that marker inside the same ng-if as the grid -->\n\n            <div style=\"padding: 4px;\" class=\"toolbar\">\n            <span>\n                Grid API:\n                <button click.delegate=\"api.selectAll()\">Select All</button>\n                <button click.delegate=\"api.deselectAll()\">Clear Selection</button>\n            </span>\n                <span style=\"margin-left: 20px;\">\n                Column API:\n                <button click.delegate=\"columnApi.setColumnVisible('country', false)\">Hide Country Column</button>\n                <button click.delegate=\"columnApi.setColumnVisible('country', true)\">Show Country Column</button>\n            </span>\n            </div>\n            <div style=\"clear: both;\"></div>\n            <div style=\"padding: 4px;\" class=\"toolbar\">\n                <label>\n                    <input type=\"checkbox\" change.delegate=\"showToolPanel=$event.target.checked\"/>\n                    Show Tool Panel\n                </label>\n                <button click.delegate=\"createRowData()\">Refresh Data</button>\n            </div>\n            <div style=\"clear: both;\"></div>\n\n            <div style=\"width: 100%; height: 350px;\">\n                <ag-grid-aurelia #agGrid style=\"width: 100%; height: 350px;\" class=\"ag-fresh\"\n                                 context.bind=\"$this\"\n                                 grid-options.bind=\"gridOptions\"\n                                 column-defs.bind=\"columnDefs\"\n                                 show-tool-panel.bind=\"showToolPanel\"\n                                 row-data.bind=\"rowData\"\n\n                                 enable-col-resize\n                                 enable-sorting\n                                 enable-filter\n                                 group-headers\n                                 suppress-row-click-selection\n                                 tool-panel-suppress-groups\n                                 tool-panel-suppress-values\n                                 row-height=\"22\"\n                                 row-selection=\"multiple\"\n\n                                 model-updated.call=\"onModelUpdated()\"\n                                 cell-clicked.call=\"onCellClicked($event)\"\n                                 cell-double-clicked.call=\"onCellDoubleClicked($event)\"\n                                 cell-context-menu.call=\"onCellContextMenu($event)\"\n                                 cell-value-changed.call=\"onCellValueChanged($event)\"\n                                 cell-focused.call=\"onCellFocused($event)\"\n                                 row-selected.call=\"onRowSelected($event)\"\n                                 selection-changed.call=\"onSelectionChanged()\"\n                                 before-filter-changed.call=\"onBeforeFilterChanged()\"\n                                 after-filter-changed.call=\"onAfterFilterChanged()\"\n                                 filter-modified.call=\"onFilterModified()\"\n                                 before-sort-changed.call=\"onBeforeSortChanged()\"\n                                 after-sort-changed.call=\"onAfterSortChanged()\"\n                                 virtual-row-removed.call=\"onVirtualRowRemoved($event)\"\n                                 row-clicked.call=\"onRowClicked($event)\"\n                                 grid-ready.call=\"onReady($event)\"\n\n                                 column-everything-changed.call=\"onColumnEvent($event)\"\n                                 column-row-group-changed.call=\"onColumnEvent($event)\"\n                                 column-value-changed.call=\"onColumnEvent($event)\"\n                                 column-moved.call=\"onColumnEvent($event)\"\n                                 column-visible.call=\"onColumnEvent($event)\"\n                                 column-group-opened.call=\"onColumnEvent($event)\"\n                                 column-resized.call=\"onColumnEvent($event)\"\n                                 column-pinned-count-changed.call=\"onColumnEvent($event)\">\n                    <ag-date-template>\n                        <ag-date-component></ag-date-component>\n                    </ag-date-template>\n                    <ag-grid-column header-name=\"#\" width.bind=\"30\" checkbox-selection.bind=\"true\"\n                                    suppress-sorting.bind=\"true\" suppress-menu.bind=\"true\"\n                                    pinned.bind=\"true\"></ag-grid-column>\n                    <ag-grid-column header-name=\"Employee\">\n                        <ag-header-group-template>\n                            <ag-header-group-component></ag-header-group-component>\n                        </ag-header-group-template>\n                        <ag-grid-column header-name=\"Name\" field=\"name\" width.bind=\"150\" pinned.bind=\"true\"\n                                        header-component-params.bind=\"{ menuIcon: 'fa-bars' }\">\n                            <ag-header-template>\n                                <ag-header-component></ag-header-component>\n                            </ag-header-template>\n                        </ag-grid-column>\n                        <ag-grid-column header-name=\"Country\" field=\"country\" width.bind=\"150\"\n                                        cell-renderer.bind=\"countryCellRenderer\" pinned.bind=\"true\"\n                                        filter-params.bind=\"getCountryFilterParams()\"\n                                        header-component-params.bind=\"{ menuIcon: 'fa-bars' }\">\n                            <ag-header-template>\n                                <ag-header-component></ag-header-component>\n                            </ag-header-template>\n                        </ag-grid-column>\n                        <ag-grid-column header-name=\"DOB\" field=\"dob\" width.bind=\"150\"\n                                        cell-renderer.bind=\"dobCellRenderer\" pinned.bind=\"true\"\n                                        filter=\"agDateColumnFilter\" column-group-show=\"open\"\n                                        header-component-params.bind=\"{ menuIcon: 'fa-bars' }\">\n                            <ag-header-template>\n                                <ag-header-component></ag-header-component>\n                            </ag-header-template>\n                        </ag-grid-column>\n                    </ag-grid-column>\n                    <ag-grid-column header-name=\"IT Skills\">\n                        <ag-grid-column header-name=\"Skills\" width.bind=\"125\" suppress-sorting.bind=\"true\"\n                                        cell-renderer.bind=\"skillsCellRenderer\"\n                                        filter.bind=\"getSkillFilter()\"\n                                        header-component-params.bind=\"{ menuIcon: 'fa-bars' }\">\n                            <ag-header-template>\n                                <ag-header-component></ag-header-component>\n                            </ag-header-template>\n                        </ag-grid-column>\n                        <ag-grid-column header-name=\"Proficiency\" field=\"proficiency\" width.bind=\"120\"\n                                        cell-renderer.bind=\"percentCellRenderer\"\n                                        filter.bind=\"getProficiencyFilter()\"\n                                        header-component-params.bind=\"{ menuIcon: 'fa-bars' }\">\n                            <ag-header-template>\n                                <ag-header-component></ag-header-component>\n                            </ag-header-template>\n                        </ag-grid-column>\n                    </ag-grid-column>\n                    <ag-grid-column header-name=\"Contact\">\n                        <ag-grid-column header-name=\"Mobile\" field=\"mobile\" width.bind=\"150\"\n                                        filter=\"text\"\n                                        header-component-params.bind=\"{ menuIcon: 'fa-bars' }\">\n                            <ag-header-template>\n                                <ag-header-component></ag-header-component>\n                            </ag-header-template>\n                        </ag-grid-column>\n                        <ag-grid-column header-name=\"Land-line\" field=\"landline\" width.bind=\"150\"\n                                        filter=\"text\"\n                                        header-component-params.bind=\"{ menuIcon: 'fa-bars' }\">\n                            <ag-header-template>\n                                <ag-header-component></ag-header-component>\n                            </ag-header-template>\n                        </ag-grid-column>\n                        <ag-grid-column header-name=\"Address\" field=\"address\" width.bind=\"500\"\n                                        filter=\"text\"\n                                        header-component-params.bind=\"{ menuIcon: 'fa-bars' }\">\n                            <ag-header-template>\n                                <ag-header-component></ag-header-component>\n                            </ag-header-template>\n                        </ag-grid-column>\n                    </ag-grid-column>\n                </ag-grid-aurelia>\n            </div>\n        </div>\n    </div>\n</template>\n"; });
+define('text!components/rich-grid-example/rich-grid-example.html', ['module'], function(module) { module.exports = "<template>\n    <require from=\"./rich-grid-example.css\"></require>\n    <require from=\"../../jsHeaderComponent/headerGroup.css\"></require>\n    <require from=\"../../jsHeaderComponent/headerComponent.css\"></require>\n\n    <div style=\"width: 900px;\">\n        <div style=\"padding: 4px;\">\n            <div style=\"float: right;\">\n                <input keyup.delegate=\"onQuickFilterChanged($event)\" type=\"text\" id=\"quickFilterInput\"\n                       placeholder=\"Type text to filter...\"/>\n                <button disabled.bind=\"!showGrid\" click.delegate=\"showGrid=false\">Destroy Grid</button>\n                <button disabled.bind=\"showGrid\" click.delegate=\"showGrid=true\">Create Grid</button>\n            </div>\n            <div>\n                <b>Employees Skills and Contact Details</b>\n                ${rowCount}\n            </div>\n        </div>\n        <div style=\"clear: both;\"></div>\n\n        <div if.bind=\"showGrid\">\n\n            <!-- Because we are using the Angular ID (ie #ag-grid marker), we have to have all the items that use\n                 that marker inside the same ng-if as the grid -->\n\n            <div style=\"padding: 4px;\" class=\"toolbar\">\n            <span>\n                Grid API:\n                <button click.delegate=\"api.selectAll()\">Select All</button>\n                <button click.delegate=\"api.deselectAll()\">Clear Selection</button>\n            </span>\n                <span style=\"margin-left: 20px;\">\n                Column API:\n                <button click.delegate=\"columnApi.setColumnVisible('country', false)\">Hide Country Column</button>\n                <button click.delegate=\"columnApi.setColumnVisible('country', true)\">Show Country Column</button>\n            </span>\n            </div>\n            <div style=\"clear: both;\"></div>\n            <div style=\"padding: 4px;\" class=\"toolbar\">\n                <label>\n                    <input type=\"checkbox\" change.delegate=\"showToolPanel=$event.target.checked\"/>\n                    Show Tool Panel\n                </label>\n                <button click.delegate=\"createRowData()\">Refresh Data</button>\n            </div>\n            <div style=\"clear: both;\"></div>\n\n            <div style=\"width: 100%; height: 350px;\">\n                <ag-grid-aurelia #agGrid class=\"ag-fresh\"\n                                 style=\"width: 100%; height: 350px;\"\n                                 grid-options.bind=\"gridOptions\"\n                                 column-defs.bind=\"columnDefs\"\n                                 show-tool-panel.bind=\"showToolPanel\"\n                                 row-data.bind=\"rowData\"\n\n                                 enable-col-resize\n                                 enable-sorting\n                                 enable-filter\n                                 group-headers\n                                 suppress-row-click-selection\n                                 tool-panel-suppress-groups\n                                 tool-panel-suppress-values\n                                 row-height.bind=\"22\"\n                                 row-selection=\"multiple\"\n\n                                 model-updated.call=\"onModelUpdated()\"\n                                 cell-clicked.call=\"onCellClicked($event)\"\n                                 cell-double-clicked.call=\"onCellDoubleClicked($event)\"\n                                 cell-context-menu.call=\"onCellContextMenu($event)\"\n                                 cell-value-changed.call=\"onCellValueChanged($event)\"\n                                 cell-focused.call=\"onCellFocused($event)\"\n                                 row-selected.call=\"onRowSelected($event)\"\n                                 selection-changed.call=\"onSelectionChanged()\"\n                                 before-filter-changed.call=\"onBeforeFilterChanged()\"\n                                 after-filter-changed.call=\"onAfterFilterChanged()\"\n                                 filter-modified.call=\"onFilterModified()\"\n                                 before-sort-changed.call=\"onBeforeSortChanged()\"\n                                 after-sort-changed.call=\"onAfterSortChanged()\"\n                                 virtual-row-removed.call=\"onVirtualRowRemoved($event)\"\n                                 row-clicked.call=\"onRowClicked($event)\"\n                                 ready.call=\"onReady($event)\"\n\n                                 column-everything-changed.call=\"onColumnEvent($event)\"\n                                 column-row-group-changed.call=\"onColumnEvent($event)\"\n                                 column-value-changed.call=\"onColumnEvent($event)\"\n                                 column-moved.call=\"onColumnEvent($event)\"\n                                 column-visible.call=\"onColumnEvent($event)\"\n                                 column-group-opened.call=\"onColumnEvent($event)\"\n                                 column-resized.call=\"onColumnEvent($event)\"\n                                 column-pinned-count-changed.call=\"onColumnEvent($event)\">\n                </ag-grid-aurelia>\n            </div>\n        </div>\n\n    </div>\n</template>\n"; });
 /*! jQuery v3.1.1 | (c) jQuery Foundation | jquery.org/license */
 !function(a,b){"use strict";"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){"use strict";var c=[],d=a.document,e=Object.getPrototypeOf,f=c.slice,g=c.concat,h=c.push,i=c.indexOf,j={},k=j.toString,l=j.hasOwnProperty,m=l.toString,n=m.call(Object),o={};function p(a,b){b=b||d;var c=b.createElement("script");c.text=a,b.head.appendChild(c).parentNode.removeChild(c)}var q="3.1.1",r=function(a,b){return new r.fn.init(a,b)},s=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,t=/^-ms-/,u=/-([a-z])/g,v=function(a,b){return b.toUpperCase()};r.fn=r.prototype={jquery:q,constructor:r,length:0,toArray:function(){return f.call(this)},get:function(a){return null==a?f.call(this):a<0?this[a+this.length]:this[a]},pushStack:function(a){var b=r.merge(this.constructor(),a);return b.prevObject=this,b},each:function(a){return r.each(this,a)},map:function(a){return this.pushStack(r.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(f.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(a<0?b:0);return this.pushStack(c>=0&&c<b?[this[c]]:[])},end:function(){return this.prevObject||this.constructor()},push:h,sort:c.sort,splice:c.splice},r.extend=r.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||r.isFunction(g)||(g={}),h===i&&(g=this,h--);h<i;h++)if(null!=(a=arguments[h]))for(b in a)c=g[b],d=a[b],g!==d&&(j&&d&&(r.isPlainObject(d)||(e=r.isArray(d)))?(e?(e=!1,f=c&&r.isArray(c)?c:[]):f=c&&r.isPlainObject(c)?c:{},g[b]=r.extend(j,f,d)):void 0!==d&&(g[b]=d));return g},r.extend({expando:"jQuery"+(q+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===r.type(a)},isArray:Array.isArray,isWindow:function(a){return null!=a&&a===a.window},isNumeric:function(a){var b=r.type(a);return("number"===b||"string"===b)&&!isNaN(a-parseFloat(a))},isPlainObject:function(a){var b,c;return!(!a||"[object Object]"!==k.call(a))&&(!(b=e(a))||(c=l.call(b,"constructor")&&b.constructor,"function"==typeof c&&m.call(c)===n))},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?j[k.call(a)]||"object":typeof a},globalEval:function(a){p(a)},camelCase:function(a){return a.replace(t,"ms-").replace(u,v)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b){var c,d=0;if(w(a)){for(c=a.length;d<c;d++)if(b.call(a[d],d,a[d])===!1)break}else for(d in a)if(b.call(a[d],d,a[d])===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(s,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(w(Object(a))?r.merge(c,"string"==typeof a?[a]:a):h.call(c,a)),c},inArray:function(a,b,c){return null==b?-1:i.call(b,a,c)},merge:function(a,b){for(var c=+b.length,d=0,e=a.length;d<c;d++)a[e++]=b[d];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;f<g;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,e,f=0,h=[];if(w(a))for(d=a.length;f<d;f++)e=b(a[f],f,c),null!=e&&h.push(e);else for(f in a)e=b(a[f],f,c),null!=e&&h.push(e);return g.apply([],h)},guid:1,proxy:function(a,b){var c,d,e;if("string"==typeof b&&(c=a[b],b=a,a=c),r.isFunction(a))return d=f.call(arguments,2),e=function(){return a.apply(b||this,d.concat(f.call(arguments)))},e.guid=a.guid=a.guid||r.guid++,e},now:Date.now,support:o}),"function"==typeof Symbol&&(r.fn[Symbol.iterator]=c[Symbol.iterator]),r.each("Boolean Number String Function Array Date RegExp Object Error Symbol".split(" "),function(a,b){j["[object "+b+"]"]=b.toLowerCase()});function w(a){var b=!!a&&"length"in a&&a.length,c=r.type(a);return"function"!==c&&!r.isWindow(a)&&("array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a)}var x=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C={}.hasOwnProperty,D=[],E=D.pop,F=D.push,G=D.push,H=D.slice,I=function(a,b){for(var c=0,d=a.length;c<d;c++)if(a[c]===b)return c;return-1},J="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",K="[\\x20\\t\\r\\n\\f]",L="(?:\\\\.|[\\w-]|[^\0-\\xa0])+",M="\\["+K+"*("+L+")(?:"+K+"*([*^$|!~]?=)"+K+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+L+"))|)"+K+"*\\]",N=":("+L+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+M+")*)|.*)\\)|)",O=new RegExp(K+"+","g"),P=new RegExp("^"+K+"+|((?:^|[^\\\\])(?:\\\\.)*)"+K+"+$","g"),Q=new RegExp("^"+K+"*,"+K+"*"),R=new RegExp("^"+K+"*([>+~]|"+K+")"+K+"*"),S=new RegExp("="+K+"*([^\\]'\"]*?)"+K+"*\\]","g"),T=new RegExp(N),U=new RegExp("^"+L+"$"),V={ID:new RegExp("^#("+L+")"),CLASS:new RegExp("^\\.("+L+")"),TAG:new RegExp("^("+L+"|[*])"),ATTR:new RegExp("^"+M),PSEUDO:new RegExp("^"+N),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+K+"*(even|odd|(([+-]|)(\\d*)n|)"+K+"*(?:([+-]|)"+K+"*(\\d+)|))"+K+"*\\)|)","i"),bool:new RegExp("^(?:"+J+")$","i"),needsContext:new RegExp("^"+K+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+K+"*((?:-\\d)?\\d*)"+K+"*\\)|)(?=[^-]|$)","i")},W=/^(?:input|select|textarea|button)$/i,X=/^h\d$/i,Y=/^[^{]+\{\s*\[native \w/,Z=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,$=/[+~]/,_=new RegExp("\\\\([\\da-f]{1,6}"+K+"?|("+K+")|.)","ig"),aa=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:d<0?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ba=/([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g,ca=function(a,b){return b?"\0"===a?"\ufffd":a.slice(0,-1)+"\\"+a.charCodeAt(a.length-1).toString(16)+" ":"\\"+a},da=function(){m()},ea=ta(function(a){return a.disabled===!0&&("form"in a||"label"in a)},{dir:"parentNode",next:"legend"});try{G.apply(D=H.call(v.childNodes),v.childNodes),D[v.childNodes.length].nodeType}catch(fa){G={apply:D.length?function(a,b){F.apply(a,H.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s=b&&b.ownerDocument,w=b?b.nodeType:9;if(d=d||[],"string"!=typeof a||!a||1!==w&&9!==w&&11!==w)return d;if(!e&&((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,p)){if(11!==w&&(l=Z.exec(a)))if(f=l[1]){if(9===w){if(!(j=b.getElementById(f)))return d;if(j.id===f)return d.push(j),d}else if(s&&(j=s.getElementById(f))&&t(b,j)&&j.id===f)return d.push(j),d}else{if(l[2])return G.apply(d,b.getElementsByTagName(a)),d;if((f=l[3])&&c.getElementsByClassName&&b.getElementsByClassName)return G.apply(d,b.getElementsByClassName(f)),d}if(c.qsa&&!A[a+" "]&&(!q||!q.test(a))){if(1!==w)s=b,r=a;else if("object"!==b.nodeName.toLowerCase()){(k=b.getAttribute("id"))?k=k.replace(ba,ca):b.setAttribute("id",k=u),o=g(a),h=o.length;while(h--)o[h]="#"+k+" "+sa(o[h]);r=o.join(","),s=$.test(a)&&qa(b.parentNode)||b}if(r)try{return G.apply(d,s.querySelectorAll(r)),d}catch(x){}finally{k===u&&b.removeAttribute("id")}}}return i(a.replace(P,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("fieldset");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=c.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&a.sourceIndex-b.sourceIndex;if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return function(b){return"form"in b?b.parentNode&&b.disabled===!1?"label"in b?"label"in b.parentNode?b.parentNode.disabled===a:b.disabled===a:b.isDisabled===a||b.isDisabled!==!a&&ea(b)===a:b.disabled===a:"label"in b&&b.disabled===a}}function pa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function qa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return!!b&&"HTML"!==b.nodeName},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=n.documentElement,p=!f(n),v!==n&&(e=n.defaultView)&&e.top!==e&&(e.addEventListener?e.addEventListener("unload",da,!1):e.attachEvent&&e.attachEvent("onunload",da)),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(n.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=Y.test(n.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!n.getElementsByName||!n.getElementsByName(u).length}),c.getById?(d.filter.ID=function(a){var b=a.replace(_,aa);return function(a){return a.getAttribute("id")===b}},d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c?[c]:[]}}):(d.filter.ID=function(a){var b=a.replace(_,aa);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}},d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c,d,e,f=b.getElementById(a);if(f){if(c=f.getAttributeNode("id"),c&&c.value===a)return[f];e=b.getElementsByName(a),d=0;while(f=e[d++])if(c=f.getAttributeNode("id"),c&&c.value===a)return[f]}return[]}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){if("undefined"!=typeof b.getElementsByClassName&&p)return b.getElementsByClassName(a)},r=[],q=[],(c.qsa=Y.test(n.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\r\\' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+K+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+K+"*(?:value|"+J+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){a.innerHTML="<a href='' disabled='disabled'></a><select disabled='disabled'><option/></select>";var b=n.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+K+"*[*^$|!~]?="),2!==a.querySelectorAll(":enabled").length&&q.push(":enabled",":disabled"),o.appendChild(a).disabled=!0,2!==a.querySelectorAll(":disabled").length&&q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=Y.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"*"),s.call(a,"[s!='']:x"),r.push("!=",N)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=Y.test(o.compareDocumentPosition),t=b||Y.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===n||a.ownerDocument===v&&t(v,a)?-1:b===n||b.ownerDocument===v&&t(v,b)?1:k?I(k,a)-I(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,g=[a],h=[b];if(!e||!f)return a===n?-1:b===n?1:e?-1:f?1:k?I(k,a)-I(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)g.unshift(c);c=b;while(c=c.parentNode)h.unshift(c);while(g[d]===h[d])d++;return d?la(g[d],h[d]):g[d]===v?-1:h[d]===v?1:0},n):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(S,"='$1']"),c.matchesSelector&&p&&!A[b+" "]&&(!r||!r.test(b))&&(!q||!q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&C.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.escape=function(a){return(a+"").replace(ba,ca)},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:V,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(_,aa),a[3]=(a[3]||a[4]||a[5]||"").replace(_,aa),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return V.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&T.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(_,aa).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+K+")"+a+"("+K+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:!b||(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(O," ")+" ").indexOf(c)>-1:"|="===b&&(e===c||e.slice(0,c.length+1)===c+"-"))}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h,t=!1;if(q){if(f){while(p){m=b;while(m=m[p])if(h?m.nodeName.toLowerCase()===r:1===m.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){m=q,l=m[u]||(m[u]={}),k=l[m.uniqueID]||(l[m.uniqueID]={}),j=k[a]||[],n=j[0]===w&&j[1],t=n&&j[2],m=n&&q.childNodes[n];while(m=++n&&m&&m[p]||(t=n=0)||o.pop())if(1===m.nodeType&&++t&&m===b){k[a]=[w,n,t];break}}else if(s&&(m=b,l=m[u]||(m[u]={}),k=l[m.uniqueID]||(l[m.uniqueID]={}),j=k[a]||[],n=j[0]===w&&j[1],t=n),t===!1)while(m=++n&&m&&m[p]||(t=n=0)||o.pop())if((h?m.nodeName.toLowerCase()===r:1===m.nodeType)&&++t&&(s&&(l=m[u]||(m[u]={}),k=l[m.uniqueID]||(l[m.uniqueID]={}),k[a]=[w,t]),m===b))break;return t-=e,t===d||t%d===0&&t/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=I(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(P,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(_,aa),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return U.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(_,aa).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:oa(!1),disabled:oa(!0),checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return X.test(a.nodeName)},input:function(a){return W.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:pa(function(){return[0]}),last:pa(function(a,b){return[b-1]}),eq:pa(function(a,b,c){return[c<0?c+b:c]}),even:pa(function(a,b){for(var c=0;c<b;c+=2)a.push(c);return a}),odd:pa(function(a,b){for(var c=1;c<b;c+=2)a.push(c);return a}),lt:pa(function(a,b,c){for(var d=c<0?c+b:c;--d>=0;)a.push(d);return a}),gt:pa(function(a,b,c){for(var d=c<0?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function ra(){}ra.prototype=d.filters=d.pseudos,d.setFilters=new ra,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){c&&!(e=Q.exec(h))||(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=R.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(P," ")}),h=h.slice(c.length));for(g in d.filter)!(e=V[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function sa(a){for(var b=0,c=a.length,d="";b<c;b++)d+=a[b].value;return d}function ta(a,b,c){var d=b.dir,e=b.next,f=e||d,g=c&&"parentNode"===f,h=x++;return b.first?function(b,c,e){while(b=b[d])if(1===b.nodeType||g)return a(b,c,e);return!1}:function(b,c,i){var j,k,l,m=[w,h];if(i){while(b=b[d])if((1===b.nodeType||g)&&a(b,c,i))return!0}else while(b=b[d])if(1===b.nodeType||g)if(l=b[u]||(b[u]={}),k=l[b.uniqueID]||(l[b.uniqueID]={}),e&&e===b.nodeName.toLowerCase())b=b[d]||b;else{if((j=k[f])&&j[0]===w&&j[1]===h)return m[2]=j[2];if(k[f]=m,m[2]=a(b,c,i))return!0}return!1}}function ua(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function va(a,b,c){for(var d=0,e=b.length;d<e;d++)ga(a,b[d],c);return c}function wa(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;h<i;h++)(f=a[h])&&(c&&!c(f,d,e)||(g.push(f),j&&b.push(h)));return g}function xa(a,b,c,d,e,f){return d&&!d[u]&&(d=xa(d)),e&&!e[u]&&(e=xa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||va(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:wa(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=wa(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?I(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=wa(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):G.apply(g,r)})}function ya(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=ta(function(a){return a===b},h,!0),l=ta(function(a){return I(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];i<f;i++)if(c=d.relative[a[i].type])m=[ta(ua(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;e<f;e++)if(d.relative[a[e].type])break;return xa(i>1&&ua(m),i>1&&sa(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(P,"$1"),c,i<e&&ya(a.slice(i,e)),e<f&&ya(a=a.slice(e)),e<f&&sa(a))}m.push(c)}return ua(m)}function za(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,o,q,r=0,s="0",t=f&&[],u=[],v=j,x=f||e&&d.find.TAG("*",k),y=w+=null==v?1:Math.random()||.1,z=x.length;for(k&&(j=g===n||g||k);s!==z&&null!=(l=x[s]);s++){if(e&&l){o=0,g||l.ownerDocument===n||(m(l),h=!p);while(q=a[o++])if(q(l,g||n,h)){i.push(l);break}k&&(w=y)}c&&((l=!q&&l)&&r--,f&&t.push(l))}if(r+=s,c&&s!==r){o=0;while(q=b[o++])q(t,u,g,h);if(f){if(r>0)while(s--)t[s]||u[s]||(u[s]=E.call(i));u=wa(u)}G.apply(i,u),k&&!f&&u.length>0&&r+b.length>1&&ga.uniqueSort(i)}return k&&(w=y,j=v),t};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=ya(b[c]),f[u]?d.push(f):e.push(f);f=A(a,za(e,d)),f.selector=a}return f},i=ga.select=function(a,b,c,e){var f,i,j,k,l,m="function"==typeof a&&a,n=!e&&g(a=m.selector||a);if(c=c||[],1===n.length){if(i=n[0]=n[0].slice(0),i.length>2&&"ID"===(j=i[0]).type&&9===b.nodeType&&p&&d.relative[i[1].type]){if(b=(d.find.ID(j.matches[0].replace(_,aa),b)||[])[0],!b)return c;m&&(b=b.parentNode),a=a.slice(i.shift().value.length)}f=V.needsContext.test(a)?0:i.length;while(f--){if(j=i[f],d.relative[k=j.type])break;if((l=d.find[k])&&(e=l(j.matches[0].replace(_,aa),$.test(i[0].type)&&qa(b.parentNode)||b))){if(i.splice(f,1),a=e.length&&sa(i),!a)return G.apply(c,e),c;break}}}return(m||h(a,n))(e,b,!p,c,!b||$.test(a)&&qa(b.parentNode)||b),c},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("fieldset"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){if(!c)return a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){if(!c&&"input"===a.nodeName.toLowerCase())return a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(J,function(a,b,c){var d;if(!c)return a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);r.find=x,r.expr=x.selectors,r.expr[":"]=r.expr.pseudos,r.uniqueSort=r.unique=x.uniqueSort,r.text=x.getText,r.isXMLDoc=x.isXML,r.contains=x.contains,r.escapeSelector=x.escape;var y=function(a,b,c){var d=[],e=void 0!==c;while((a=a[b])&&9!==a.nodeType)if(1===a.nodeType){if(e&&r(a).is(c))break;d.push(a)}return d},z=function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c},A=r.expr.match.needsContext,B=/^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i,C=/^.[^:#\[\.,]*$/;function D(a,b,c){return r.isFunction(b)?r.grep(a,function(a,d){return!!b.call(a,d,a)!==c}):b.nodeType?r.grep(a,function(a){return a===b!==c}):"string"!=typeof b?r.grep(a,function(a){return i.call(b,a)>-1!==c}):C.test(b)?r.filter(b,a,c):(b=r.filter(b,a),r.grep(a,function(a){return i.call(b,a)>-1!==c&&1===a.nodeType}))}r.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?r.find.matchesSelector(d,a)?[d]:[]:r.find.matches(a,r.grep(b,function(a){return 1===a.nodeType}))},r.fn.extend({find:function(a){var b,c,d=this.length,e=this;if("string"!=typeof a)return this.pushStack(r(a).filter(function(){for(b=0;b<d;b++)if(r.contains(e[b],this))return!0}));for(c=this.pushStack([]),b=0;b<d;b++)r.find(a,e[b],c);return d>1?r.uniqueSort(c):c},filter:function(a){return this.pushStack(D(this,a||[],!1))},not:function(a){return this.pushStack(D(this,a||[],!0))},is:function(a){return!!D(this,"string"==typeof a&&A.test(a)?r(a):a||[],!1).length}});var E,F=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/,G=r.fn.init=function(a,b,c){var e,f;if(!a)return this;if(c=c||E,"string"==typeof a){if(e="<"===a[0]&&">"===a[a.length-1]&&a.length>=3?[null,a,null]:F.exec(a),!e||!e[1]&&b)return!b||b.jquery?(b||c).find(a):this.constructor(b).find(a);if(e[1]){if(b=b instanceof r?b[0]:b,r.merge(this,r.parseHTML(e[1],b&&b.nodeType?b.ownerDocument||b:d,!0)),B.test(e[1])&&r.isPlainObject(b))for(e in b)r.isFunction(this[e])?this[e](b[e]):this.attr(e,b[e]);return this}return f=d.getElementById(e[2]),f&&(this[0]=f,this.length=1),this}return a.nodeType?(this[0]=a,this.length=1,this):r.isFunction(a)?void 0!==c.ready?c.ready(a):a(r):r.makeArray(a,this)};G.prototype=r.fn,E=r(d);var H=/^(?:parents|prev(?:Until|All))/,I={children:!0,contents:!0,next:!0,prev:!0};r.fn.extend({has:function(a){var b=r(a,this),c=b.length;return this.filter(function(){for(var a=0;a<c;a++)if(r.contains(this,b[a]))return!0})},closest:function(a,b){var c,d=0,e=this.length,f=[],g="string"!=typeof a&&r(a);if(!A.test(a))for(;d<e;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&r.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?r.uniqueSort(f):f)},index:function(a){return a?"string"==typeof a?i.call(r(a),this[0]):i.call(this,a.jquery?a[0]:a):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(r.uniqueSort(r.merge(this.get(),r(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function J(a,b){while((a=a[b])&&1!==a.nodeType);return a}r.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return y(a,"parentNode")},parentsUntil:function(a,b,c){return y(a,"parentNode",c)},next:function(a){return J(a,"nextSibling")},prev:function(a){return J(a,"previousSibling")},nextAll:function(a){return y(a,"nextSibling")},prevAll:function(a){return y(a,"previousSibling")},nextUntil:function(a,b,c){return y(a,"nextSibling",c)},prevUntil:function(a,b,c){return y(a,"previousSibling",c)},siblings:function(a){return z((a.parentNode||{}).firstChild,a)},children:function(a){return z(a.firstChild)},contents:function(a){return a.contentDocument||r.merge([],a.childNodes)}},function(a,b){r.fn[a]=function(c,d){var e=r.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=r.filter(d,e)),this.length>1&&(I[a]||r.uniqueSort(e),H.test(a)&&e.reverse()),this.pushStack(e)}});var K=/[^\x20\t\r\n\f]+/g;function L(a){var b={};return r.each(a.match(K)||[],function(a,c){b[c]=!0}),b}r.Callbacks=function(a){a="string"==typeof a?L(a):r.extend({},a);var b,c,d,e,f=[],g=[],h=-1,i=function(){for(e=a.once,d=b=!0;g.length;h=-1){c=g.shift();while(++h<f.length)f[h].apply(c[0],c[1])===!1&&a.stopOnFalse&&(h=f.length,c=!1)}a.memory||(c=!1),b=!1,e&&(f=c?[]:"")},j={add:function(){return f&&(c&&!b&&(h=f.length-1,g.push(c)),function d(b){r.each(b,function(b,c){r.isFunction(c)?a.unique&&j.has(c)||f.push(c):c&&c.length&&"string"!==r.type(c)&&d(c)})}(arguments),c&&!b&&i()),this},remove:function(){return r.each(arguments,function(a,b){var c;while((c=r.inArray(b,f,c))>-1)f.splice(c,1),c<=h&&h--}),this},has:function(a){return a?r.inArray(a,f)>-1:f.length>0},empty:function(){return f&&(f=[]),this},disable:function(){return e=g=[],f=c="",this},disabled:function(){return!f},lock:function(){return e=g=[],c||b||(f=c=""),this},locked:function(){return!!e},fireWith:function(a,c){return e||(c=c||[],c=[a,c.slice?c.slice():c],g.push(c),b||i()),this},fire:function(){return j.fireWith(this,arguments),this},fired:function(){return!!d}};return j};function M(a){return a}function N(a){throw a}function O(a,b,c){var d;try{a&&r.isFunction(d=a.promise)?d.call(a).done(b).fail(c):a&&r.isFunction(d=a.then)?d.call(a,b,c):b.call(void 0,a)}catch(a){c.call(void 0,a)}}r.extend({Deferred:function(b){var c=[["notify","progress",r.Callbacks("memory"),r.Callbacks("memory"),2],["resolve","done",r.Callbacks("once memory"),r.Callbacks("once memory"),0,"resolved"],["reject","fail",r.Callbacks("once memory"),r.Callbacks("once memory"),1,"rejected"]],d="pending",e={state:function(){return d},always:function(){return f.done(arguments).fail(arguments),this},"catch":function(a){return e.then(null,a)},pipe:function(){var a=arguments;return r.Deferred(function(b){r.each(c,function(c,d){var e=r.isFunction(a[d[4]])&&a[d[4]];f[d[1]](function(){var a=e&&e.apply(this,arguments);a&&r.isFunction(a.promise)?a.promise().progress(b.notify).done(b.resolve).fail(b.reject):b[d[0]+"With"](this,e?[a]:arguments)})}),a=null}).promise()},then:function(b,d,e){var f=0;function g(b,c,d,e){return function(){var h=this,i=arguments,j=function(){var a,j;if(!(b<f)){if(a=d.apply(h,i),a===c.promise())throw new TypeError("Thenable self-resolution");j=a&&("object"==typeof a||"function"==typeof a)&&a.then,r.isFunction(j)?e?j.call(a,g(f,c,M,e),g(f,c,N,e)):(f++,j.call(a,g(f,c,M,e),g(f,c,N,e),g(f,c,M,c.notifyWith))):(d!==M&&(h=void 0,i=[a]),(e||c.resolveWith)(h,i))}},k=e?j:function(){try{j()}catch(a){r.Deferred.exceptionHook&&r.Deferred.exceptionHook(a,k.stackTrace),b+1>=f&&(d!==N&&(h=void 0,i=[a]),c.rejectWith(h,i))}};b?k():(r.Deferred.getStackHook&&(k.stackTrace=r.Deferred.getStackHook()),a.setTimeout(k))}}return r.Deferred(function(a){c[0][3].add(g(0,a,r.isFunction(e)?e:M,a.notifyWith)),c[1][3].add(g(0,a,r.isFunction(b)?b:M)),c[2][3].add(g(0,a,r.isFunction(d)?d:N))}).promise()},promise:function(a){return null!=a?r.extend(a,e):e}},f={};return r.each(c,function(a,b){var g=b[2],h=b[5];e[b[1]]=g.add,h&&g.add(function(){d=h},c[3-a][2].disable,c[0][2].lock),g.add(b[3].fire),f[b[0]]=function(){return f[b[0]+"With"](this===f?void 0:this,arguments),this},f[b[0]+"With"]=g.fireWith}),e.promise(f),b&&b.call(f,f),f},when:function(a){var b=arguments.length,c=b,d=Array(c),e=f.call(arguments),g=r.Deferred(),h=function(a){return function(c){d[a]=this,e[a]=arguments.length>1?f.call(arguments):c,--b||g.resolveWith(d,e)}};if(b<=1&&(O(a,g.done(h(c)).resolve,g.reject),"pending"===g.state()||r.isFunction(e[c]&&e[c].then)))return g.then();while(c--)O(e[c],h(c),g.reject);return g.promise()}});var P=/^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;r.Deferred.exceptionHook=function(b,c){a.console&&a.console.warn&&b&&P.test(b.name)&&a.console.warn("jQuery.Deferred exception: "+b.message,b.stack,c)},r.readyException=function(b){a.setTimeout(function(){throw b})};var Q=r.Deferred();r.fn.ready=function(a){return Q.then(a)["catch"](function(a){r.readyException(a)}),this},r.extend({isReady:!1,readyWait:1,holdReady:function(a){a?r.readyWait++:r.ready(!0)},ready:function(a){(a===!0?--r.readyWait:r.isReady)||(r.isReady=!0,a!==!0&&--r.readyWait>0||Q.resolveWith(d,[r]))}}),r.ready.then=Q.then;function R(){d.removeEventListener("DOMContentLoaded",R),
 a.removeEventListener("load",R),r.ready()}"complete"===d.readyState||"loading"!==d.readyState&&!d.documentElement.doScroll?a.setTimeout(r.ready):(d.addEventListener("DOMContentLoaded",R),a.addEventListener("load",R));var S=function(a,b,c,d,e,f,g){var h=0,i=a.length,j=null==c;if("object"===r.type(c)){e=!0;for(h in c)S(a,b,h,c[h],!0,f,g)}else if(void 0!==d&&(e=!0,r.isFunction(d)||(g=!0),j&&(g?(b.call(a,d),b=null):(j=b,b=function(a,b,c){return j.call(r(a),c)})),b))for(;h<i;h++)b(a[h],c,g?d:d.call(a[h],h,b(a[h],c)));return e?a:j?b.call(a):i?b(a[0],c):f},T=function(a){return 1===a.nodeType||9===a.nodeType||!+a.nodeType};function U(){this.expando=r.expando+U.uid++}U.uid=1,U.prototype={cache:function(a){var b=a[this.expando];return b||(b={},T(a)&&(a.nodeType?a[this.expando]=b:Object.defineProperty(a,this.expando,{value:b,configurable:!0}))),b},set:function(a,b,c){var d,e=this.cache(a);if("string"==typeof b)e[r.camelCase(b)]=c;else for(d in b)e[r.camelCase(d)]=b[d];return e},get:function(a,b){return void 0===b?this.cache(a):a[this.expando]&&a[this.expando][r.camelCase(b)]},access:function(a,b,c){return void 0===b||b&&"string"==typeof b&&void 0===c?this.get(a,b):(this.set(a,b,c),void 0!==c?c:b)},remove:function(a,b){var c,d=a[this.expando];if(void 0!==d){if(void 0!==b){r.isArray(b)?b=b.map(r.camelCase):(b=r.camelCase(b),b=b in d?[b]:b.match(K)||[]),c=b.length;while(c--)delete d[b[c]]}(void 0===b||r.isEmptyObject(d))&&(a.nodeType?a[this.expando]=void 0:delete a[this.expando])}},hasData:function(a){var b=a[this.expando];return void 0!==b&&!r.isEmptyObject(b)}};var V=new U,W=new U,X=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,Y=/[A-Z]/g;function Z(a){return"true"===a||"false"!==a&&("null"===a?null:a===+a+""?+a:X.test(a)?JSON.parse(a):a)}function $(a,b,c){var d;if(void 0===c&&1===a.nodeType)if(d="data-"+b.replace(Y,"-$&").toLowerCase(),c=a.getAttribute(d),"string"==typeof c){try{c=Z(c)}catch(e){}W.set(a,b,c)}else c=void 0;return c}r.extend({hasData:function(a){return W.hasData(a)||V.hasData(a)},data:function(a,b,c){return W.access(a,b,c)},removeData:function(a,b){W.remove(a,b)},_data:function(a,b,c){return V.access(a,b,c)},_removeData:function(a,b){V.remove(a,b)}}),r.fn.extend({data:function(a,b){var c,d,e,f=this[0],g=f&&f.attributes;if(void 0===a){if(this.length&&(e=W.get(f),1===f.nodeType&&!V.get(f,"hasDataAttrs"))){c=g.length;while(c--)g[c]&&(d=g[c].name,0===d.indexOf("data-")&&(d=r.camelCase(d.slice(5)),$(f,d,e[d])));V.set(f,"hasDataAttrs",!0)}return e}return"object"==typeof a?this.each(function(){W.set(this,a)}):S(this,function(b){var c;if(f&&void 0===b){if(c=W.get(f,a),void 0!==c)return c;if(c=$(f,a),void 0!==c)return c}else this.each(function(){W.set(this,a,b)})},null,b,arguments.length>1,null,!0)},removeData:function(a){return this.each(function(){W.remove(this,a)})}}),r.extend({queue:function(a,b,c){var d;if(a)return b=(b||"fx")+"queue",d=V.get(a,b),c&&(!d||r.isArray(c)?d=V.access(a,b,r.makeArray(c)):d.push(c)),d||[]},dequeue:function(a,b){b=b||"fx";var c=r.queue(a,b),d=c.length,e=c.shift(),f=r._queueHooks(a,b),g=function(){r.dequeue(a,b)};"inprogress"===e&&(e=c.shift(),d--),e&&("fx"===b&&c.unshift("inprogress"),delete f.stop,e.call(a,g,f)),!d&&f&&f.empty.fire()},_queueHooks:function(a,b){var c=b+"queueHooks";return V.get(a,c)||V.access(a,c,{empty:r.Callbacks("once memory").add(function(){V.remove(a,[b+"queue",c])})})}}),r.fn.extend({queue:function(a,b){var c=2;return"string"!=typeof a&&(b=a,a="fx",c--),arguments.length<c?r.queue(this[0],a):void 0===b?this:this.each(function(){var c=r.queue(this,a,b);r._queueHooks(this,a),"fx"===a&&"inprogress"!==c[0]&&r.dequeue(this,a)})},dequeue:function(a){return this.each(function(){r.dequeue(this,a)})},clearQueue:function(a){return this.queue(a||"fx",[])},promise:function(a,b){var c,d=1,e=r.Deferred(),f=this,g=this.length,h=function(){--d||e.resolveWith(f,[f])};"string"!=typeof a&&(b=a,a=void 0),a=a||"fx";while(g--)c=V.get(f[g],a+"queueHooks"),c&&c.empty&&(d++,c.empty.add(h));return h(),e.promise(b)}});var _=/[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,aa=new RegExp("^(?:([+-])=|)("+_+")([a-z%]*)$","i"),ba=["Top","Right","Bottom","Left"],ca=function(a,b){return a=b||a,"none"===a.style.display||""===a.style.display&&r.contains(a.ownerDocument,a)&&"none"===r.css(a,"display")},da=function(a,b,c,d){var e,f,g={};for(f in b)g[f]=a.style[f],a.style[f]=b[f];e=c.apply(a,d||[]);for(f in b)a.style[f]=g[f];return e};function ea(a,b,c,d){var e,f=1,g=20,h=d?function(){return d.cur()}:function(){return r.css(a,b,"")},i=h(),j=c&&c[3]||(r.cssNumber[b]?"":"px"),k=(r.cssNumber[b]||"px"!==j&&+i)&&aa.exec(r.css(a,b));if(k&&k[3]!==j){j=j||k[3],c=c||[],k=+i||1;do f=f||".5",k/=f,r.style(a,b,k+j);while(f!==(f=h()/i)&&1!==f&&--g)}return c&&(k=+k||+i||0,e=c[1]?k+(c[1]+1)*c[2]:+c[2],d&&(d.unit=j,d.start=k,d.end=e)),e}var fa={};function ga(a){var b,c=a.ownerDocument,d=a.nodeName,e=fa[d];return e?e:(b=c.body.appendChild(c.createElement(d)),e=r.css(b,"display"),b.parentNode.removeChild(b),"none"===e&&(e="block"),fa[d]=e,e)}function ha(a,b){for(var c,d,e=[],f=0,g=a.length;f<g;f++)d=a[f],d.style&&(c=d.style.display,b?("none"===c&&(e[f]=V.get(d,"display")||null,e[f]||(d.style.display="")),""===d.style.display&&ca(d)&&(e[f]=ga(d))):"none"!==c&&(e[f]="none",V.set(d,"display",c)));for(f=0;f<g;f++)null!=e[f]&&(a[f].style.display=e[f]);return a}r.fn.extend({show:function(){return ha(this,!0)},hide:function(){return ha(this)},toggle:function(a){return"boolean"==typeof a?a?this.show():this.hide():this.each(function(){ca(this)?r(this).show():r(this).hide()})}});var ia=/^(?:checkbox|radio)$/i,ja=/<([a-z][^\/\0>\x20\t\r\n\f]+)/i,ka=/^$|\/(?:java|ecma)script/i,la={option:[1,"<select multiple='multiple'>","</select>"],thead:[1,"<table>","</table>"],col:[2,"<table><colgroup>","</colgroup></table>"],tr:[2,"<table><tbody>","</tbody></table>"],td:[3,"<table><tbody><tr>","</tr></tbody></table>"],_default:[0,"",""]};la.optgroup=la.option,la.tbody=la.tfoot=la.colgroup=la.caption=la.thead,la.th=la.td;function ma(a,b){var c;return c="undefined"!=typeof a.getElementsByTagName?a.getElementsByTagName(b||"*"):"undefined"!=typeof a.querySelectorAll?a.querySelectorAll(b||"*"):[],void 0===b||b&&r.nodeName(a,b)?r.merge([a],c):c}function na(a,b){for(var c=0,d=a.length;c<d;c++)V.set(a[c],"globalEval",!b||V.get(b[c],"globalEval"))}var oa=/<|&#?\w+;/;function pa(a,b,c,d,e){for(var f,g,h,i,j,k,l=b.createDocumentFragment(),m=[],n=0,o=a.length;n<o;n++)if(f=a[n],f||0===f)if("object"===r.type(f))r.merge(m,f.nodeType?[f]:f);else if(oa.test(f)){g=g||l.appendChild(b.createElement("div")),h=(ja.exec(f)||["",""])[1].toLowerCase(),i=la[h]||la._default,g.innerHTML=i[1]+r.htmlPrefilter(f)+i[2],k=i[0];while(k--)g=g.lastChild;r.merge(m,g.childNodes),g=l.firstChild,g.textContent=""}else m.push(b.createTextNode(f));l.textContent="",n=0;while(f=m[n++])if(d&&r.inArray(f,d)>-1)e&&e.push(f);else if(j=r.contains(f.ownerDocument,f),g=ma(l.appendChild(f),"script"),j&&na(g),c){k=0;while(f=g[k++])ka.test(f.type||"")&&c.push(f)}return l}!function(){var a=d.createDocumentFragment(),b=a.appendChild(d.createElement("div")),c=d.createElement("input");c.setAttribute("type","radio"),c.setAttribute("checked","checked"),c.setAttribute("name","t"),b.appendChild(c),o.checkClone=b.cloneNode(!0).cloneNode(!0).lastChild.checked,b.innerHTML="<textarea>x</textarea>",o.noCloneChecked=!!b.cloneNode(!0).lastChild.defaultValue}();var qa=d.documentElement,ra=/^key/,sa=/^(?:mouse|pointer|contextmenu|drag|drop)|click/,ta=/^([^.]*)(?:\.(.+)|)/;function ua(){return!0}function va(){return!1}function wa(){try{return d.activeElement}catch(a){}}function xa(a,b,c,d,e,f){var g,h;if("object"==typeof b){"string"!=typeof c&&(d=d||c,c=void 0);for(h in b)xa(a,h,c,d,b[h],f);return a}if(null==d&&null==e?(e=c,d=c=void 0):null==e&&("string"==typeof c?(e=d,d=void 0):(e=d,d=c,c=void 0)),e===!1)e=va;else if(!e)return a;return 1===f&&(g=e,e=function(a){return r().off(a),g.apply(this,arguments)},e.guid=g.guid||(g.guid=r.guid++)),a.each(function(){r.event.add(this,b,e,d,c)})}r.event={global:{},add:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,n,o,p,q=V.get(a);if(q){c.handler&&(f=c,c=f.handler,e=f.selector),e&&r.find.matchesSelector(qa,e),c.guid||(c.guid=r.guid++),(i=q.events)||(i=q.events={}),(g=q.handle)||(g=q.handle=function(b){return"undefined"!=typeof r&&r.event.triggered!==b.type?r.event.dispatch.apply(a,arguments):void 0}),b=(b||"").match(K)||[""],j=b.length;while(j--)h=ta.exec(b[j])||[],n=p=h[1],o=(h[2]||"").split(".").sort(),n&&(l=r.event.special[n]||{},n=(e?l.delegateType:l.bindType)||n,l=r.event.special[n]||{},k=r.extend({type:n,origType:p,data:d,handler:c,guid:c.guid,selector:e,needsContext:e&&r.expr.match.needsContext.test(e),namespace:o.join(".")},f),(m=i[n])||(m=i[n]=[],m.delegateCount=0,l.setup&&l.setup.call(a,d,o,g)!==!1||a.addEventListener&&a.addEventListener(n,g)),l.add&&(l.add.call(a,k),k.handler.guid||(k.handler.guid=c.guid)),e?m.splice(m.delegateCount++,0,k):m.push(k),r.event.global[n]=!0)}},remove:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,n,o,p,q=V.hasData(a)&&V.get(a);if(q&&(i=q.events)){b=(b||"").match(K)||[""],j=b.length;while(j--)if(h=ta.exec(b[j])||[],n=p=h[1],o=(h[2]||"").split(".").sort(),n){l=r.event.special[n]||{},n=(d?l.delegateType:l.bindType)||n,m=i[n]||[],h=h[2]&&new RegExp("(^|\\.)"+o.join("\\.(?:.*\\.|)")+"(\\.|$)"),g=f=m.length;while(f--)k=m[f],!e&&p!==k.origType||c&&c.guid!==k.guid||h&&!h.test(k.namespace)||d&&d!==k.selector&&("**"!==d||!k.selector)||(m.splice(f,1),k.selector&&m.delegateCount--,l.remove&&l.remove.call(a,k));g&&!m.length&&(l.teardown&&l.teardown.call(a,o,q.handle)!==!1||r.removeEvent(a,n,q.handle),delete i[n])}else for(n in i)r.event.remove(a,n+b[j],c,d,!0);r.isEmptyObject(i)&&V.remove(a,"handle events")}},dispatch:function(a){var b=r.event.fix(a),c,d,e,f,g,h,i=new Array(arguments.length),j=(V.get(this,"events")||{})[b.type]||[],k=r.event.special[b.type]||{};for(i[0]=b,c=1;c<arguments.length;c++)i[c]=arguments[c];if(b.delegateTarget=this,!k.preDispatch||k.preDispatch.call(this,b)!==!1){h=r.event.handlers.call(this,b,j),c=0;while((f=h[c++])&&!b.isPropagationStopped()){b.currentTarget=f.elem,d=0;while((g=f.handlers[d++])&&!b.isImmediatePropagationStopped())b.rnamespace&&!b.rnamespace.test(g.namespace)||(b.handleObj=g,b.data=g.data,e=((r.event.special[g.origType]||{}).handle||g.handler).apply(f.elem,i),void 0!==e&&(b.result=e)===!1&&(b.preventDefault(),b.stopPropagation()))}return k.postDispatch&&k.postDispatch.call(this,b),b.result}},handlers:function(a,b){var c,d,e,f,g,h=[],i=b.delegateCount,j=a.target;if(i&&j.nodeType&&!("click"===a.type&&a.button>=1))for(;j!==this;j=j.parentNode||this)if(1===j.nodeType&&("click"!==a.type||j.disabled!==!0)){for(f=[],g={},c=0;c<i;c++)d=b[c],e=d.selector+" ",void 0===g[e]&&(g[e]=d.needsContext?r(e,this).index(j)>-1:r.find(e,this,null,[j]).length),g[e]&&f.push(d);f.length&&h.push({elem:j,handlers:f})}return j=this,i<b.length&&h.push({elem:j,handlers:b.slice(i)}),h},addProp:function(a,b){Object.defineProperty(r.Event.prototype,a,{enumerable:!0,configurable:!0,get:r.isFunction(b)?function(){if(this.originalEvent)return b(this.originalEvent)}:function(){if(this.originalEvent)return this.originalEvent[a]},set:function(b){Object.defineProperty(this,a,{enumerable:!0,configurable:!0,writable:!0,value:b})}})},fix:function(a){return a[r.expando]?a:new r.Event(a)},special:{load:{noBubble:!0},focus:{trigger:function(){if(this!==wa()&&this.focus)return this.focus(),!1},delegateType:"focusin"},blur:{trigger:function(){if(this===wa()&&this.blur)return this.blur(),!1},delegateType:"focusout"},click:{trigger:function(){if("checkbox"===this.type&&this.click&&r.nodeName(this,"input"))return this.click(),!1},_default:function(a){return r.nodeName(a.target,"a")}},beforeunload:{postDispatch:function(a){void 0!==a.result&&a.originalEvent&&(a.originalEvent.returnValue=a.result)}}}},r.removeEvent=function(a,b,c){a.removeEventListener&&a.removeEventListener(b,c)},r.Event=function(a,b){return this instanceof r.Event?(a&&a.type?(this.originalEvent=a,this.type=a.type,this.isDefaultPrevented=a.defaultPrevented||void 0===a.defaultPrevented&&a.returnValue===!1?ua:va,this.target=a.target&&3===a.target.nodeType?a.target.parentNode:a.target,this.currentTarget=a.currentTarget,this.relatedTarget=a.relatedTarget):this.type=a,b&&r.extend(this,b),this.timeStamp=a&&a.timeStamp||r.now(),void(this[r.expando]=!0)):new r.Event(a,b)},r.Event.prototype={constructor:r.Event,isDefaultPrevented:va,isPropagationStopped:va,isImmediatePropagationStopped:va,isSimulated:!1,preventDefault:function(){var a=this.originalEvent;this.isDefaultPrevented=ua,a&&!this.isSimulated&&a.preventDefault()},stopPropagation:function(){var a=this.originalEvent;this.isPropagationStopped=ua,a&&!this.isSimulated&&a.stopPropagation()},stopImmediatePropagation:function(){var a=this.originalEvent;this.isImmediatePropagationStopped=ua,a&&!this.isSimulated&&a.stopImmediatePropagation(),this.stopPropagation()}},r.each({altKey:!0,bubbles:!0,cancelable:!0,changedTouches:!0,ctrlKey:!0,detail:!0,eventPhase:!0,metaKey:!0,pageX:!0,pageY:!0,shiftKey:!0,view:!0,"char":!0,charCode:!0,key:!0,keyCode:!0,button:!0,buttons:!0,clientX:!0,clientY:!0,offsetX:!0,offsetY:!0,pointerId:!0,pointerType:!0,screenX:!0,screenY:!0,targetTouches:!0,toElement:!0,touches:!0,which:function(a){var b=a.button;return null==a.which&&ra.test(a.type)?null!=a.charCode?a.charCode:a.keyCode:!a.which&&void 0!==b&&sa.test(a.type)?1&b?1:2&b?3:4&b?2:0:a.which}},r.event.addProp),r.each({mouseenter:"mouseover",mouseleave:"mouseout",pointerenter:"pointerover",pointerleave:"pointerout"},function(a,b){r.event.special[a]={delegateType:b,bindType:b,handle:function(a){var c,d=this,e=a.relatedTarget,f=a.handleObj;return e&&(e===d||r.contains(d,e))||(a.type=f.origType,c=f.handler.apply(this,arguments),a.type=b),c}}}),r.fn.extend({on:function(a,b,c,d){return xa(this,a,b,c,d)},one:function(a,b,c,d){return xa(this,a,b,c,d,1)},off:function(a,b,c){var d,e;if(a&&a.preventDefault&&a.handleObj)return d=a.handleObj,r(a.delegateTarget).off(d.namespace?d.origType+"."+d.namespace:d.origType,d.selector,d.handler),this;if("object"==typeof a){for(e in a)this.off(e,b,a[e]);return this}return b!==!1&&"function"!=typeof b||(c=b,b=void 0),c===!1&&(c=va),this.each(function(){r.event.remove(this,a,c,b)})}});var ya=/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi,za=/<script|<style|<link/i,Aa=/checked\s*(?:[^=]|=\s*.checked.)/i,Ba=/^true\/(.*)/,Ca=/^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;function Da(a,b){return r.nodeName(a,"table")&&r.nodeName(11!==b.nodeType?b:b.firstChild,"tr")?a.getElementsByTagName("tbody")[0]||a:a}function Ea(a){return a.type=(null!==a.getAttribute("type"))+"/"+a.type,a}function Fa(a){var b=Ba.exec(a.type);return b?a.type=b[1]:a.removeAttribute("type"),a}function Ga(a,b){var c,d,e,f,g,h,i,j;if(1===b.nodeType){if(V.hasData(a)&&(f=V.access(a),g=V.set(b,f),j=f.events)){delete g.handle,g.events={};for(e in j)for(c=0,d=j[e].length;c<d;c++)r.event.add(b,e,j[e][c])}W.hasData(a)&&(h=W.access(a),i=r.extend({},h),W.set(b,i))}}function Ha(a,b){var c=b.nodeName.toLowerCase();"input"===c&&ia.test(a.type)?b.checked=a.checked:"input"!==c&&"textarea"!==c||(b.defaultValue=a.defaultValue)}function Ia(a,b,c,d){b=g.apply([],b);var e,f,h,i,j,k,l=0,m=a.length,n=m-1,q=b[0],s=r.isFunction(q);if(s||m>1&&"string"==typeof q&&!o.checkClone&&Aa.test(q))return a.each(function(e){var f=a.eq(e);s&&(b[0]=q.call(this,e,f.html())),Ia(f,b,c,d)});if(m&&(e=pa(b,a[0].ownerDocument,!1,a,d),f=e.firstChild,1===e.childNodes.length&&(e=f),f||d)){for(h=r.map(ma(e,"script"),Ea),i=h.length;l<m;l++)j=e,l!==n&&(j=r.clone(j,!0,!0),i&&r.merge(h,ma(j,"script"))),c.call(a[l],j,l);if(i)for(k=h[h.length-1].ownerDocument,r.map(h,Fa),l=0;l<i;l++)j=h[l],ka.test(j.type||"")&&!V.access(j,"globalEval")&&r.contains(k,j)&&(j.src?r._evalUrl&&r._evalUrl(j.src):p(j.textContent.replace(Ca,""),k))}return a}function Ja(a,b,c){for(var d,e=b?r.filter(b,a):a,f=0;null!=(d=e[f]);f++)c||1!==d.nodeType||r.cleanData(ma(d)),d.parentNode&&(c&&r.contains(d.ownerDocument,d)&&na(ma(d,"script")),d.parentNode.removeChild(d));return a}r.extend({htmlPrefilter:function(a){return a.replace(ya,"<$1></$2>")},clone:function(a,b,c){var d,e,f,g,h=a.cloneNode(!0),i=r.contains(a.ownerDocument,a);if(!(o.noCloneChecked||1!==a.nodeType&&11!==a.nodeType||r.isXMLDoc(a)))for(g=ma(h),f=ma(a),d=0,e=f.length;d<e;d++)Ha(f[d],g[d]);if(b)if(c)for(f=f||ma(a),g=g||ma(h),d=0,e=f.length;d<e;d++)Ga(f[d],g[d]);else Ga(a,h);return g=ma(h,"script"),g.length>0&&na(g,!i&&ma(a,"script")),h},cleanData:function(a){for(var b,c,d,e=r.event.special,f=0;void 0!==(c=a[f]);f++)if(T(c)){if(b=c[V.expando]){if(b.events)for(d in b.events)e[d]?r.event.remove(c,d):r.removeEvent(c,d,b.handle);c[V.expando]=void 0}c[W.expando]&&(c[W.expando]=void 0)}}}),r.fn.extend({detach:function(a){return Ja(this,a,!0)},remove:function(a){return Ja(this,a)},text:function(a){return S(this,function(a){return void 0===a?r.text(this):this.empty().each(function(){1!==this.nodeType&&11!==this.nodeType&&9!==this.nodeType||(this.textContent=a)})},null,a,arguments.length)},append:function(){return Ia(this,arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=Da(this,a);b.appendChild(a)}})},prepend:function(){return Ia(this,arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=Da(this,a);b.insertBefore(a,b.firstChild)}})},before:function(){return Ia(this,arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this)})},after:function(){return Ia(this,arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this.nextSibling)})},empty:function(){for(var a,b=0;null!=(a=this[b]);b++)1===a.nodeType&&(r.cleanData(ma(a,!1)),a.textContent="");return this},clone:function(a,b){return a=null!=a&&a,b=null==b?a:b,this.map(function(){return r.clone(this,a,b)})},html:function(a){return S(this,function(a){var b=this[0]||{},c=0,d=this.length;if(void 0===a&&1===b.nodeType)return b.innerHTML;if("string"==typeof a&&!za.test(a)&&!la[(ja.exec(a)||["",""])[1].toLowerCase()]){a=r.htmlPrefilter(a);try{for(;c<d;c++)b=this[c]||{},1===b.nodeType&&(r.cleanData(ma(b,!1)),b.innerHTML=a);b=0}catch(e){}}b&&this.empty().append(a)},null,a,arguments.length)},replaceWith:function(){var a=[];return Ia(this,arguments,function(b){var c=this.parentNode;r.inArray(this,a)<0&&(r.cleanData(ma(this)),c&&c.replaceChild(b,this))},a)}}),r.each({appendTo:"append",prependTo:"prepend",insertBefore:"before",insertAfter:"after",replaceAll:"replaceWith"},function(a,b){r.fn[a]=function(a){for(var c,d=[],e=r(a),f=e.length-1,g=0;g<=f;g++)c=g===f?this:this.clone(!0),r(e[g])[b](c),h.apply(d,c.get());return this.pushStack(d)}});var Ka=/^margin/,La=new RegExp("^("+_+")(?!px)[a-z%]+$","i"),Ma=function(b){var c=b.ownerDocument.defaultView;return c&&c.opener||(c=a),c.getComputedStyle(b)};!function(){function b(){if(i){i.style.cssText="box-sizing:border-box;position:relative;display:block;margin:auto;border:1px;padding:1px;top:1%;width:50%",i.innerHTML="",qa.appendChild(h);var b=a.getComputedStyle(i);c="1%"!==b.top,g="2px"===b.marginLeft,e="4px"===b.width,i.style.marginRight="50%",f="4px"===b.marginRight,qa.removeChild(h),i=null}}var c,e,f,g,h=d.createElement("div"),i=d.createElement("div");i.style&&(i.style.backgroundClip="content-box",i.cloneNode(!0).style.backgroundClip="",o.clearCloneStyle="content-box"===i.style.backgroundClip,h.style.cssText="border:0;width:8px;height:0;top:0;left:-9999px;padding:0;margin-top:1px;position:absolute",h.appendChild(i),r.extend(o,{pixelPosition:function(){return b(),c},boxSizingReliable:function(){return b(),e},pixelMarginRight:function(){return b(),f},reliableMarginLeft:function(){return b(),g}}))}();function Na(a,b,c){var d,e,f,g,h=a.style;return c=c||Ma(a),c&&(g=c.getPropertyValue(b)||c[b],""!==g||r.contains(a.ownerDocument,a)||(g=r.style(a,b)),!o.pixelMarginRight()&&La.test(g)&&Ka.test(b)&&(d=h.width,e=h.minWidth,f=h.maxWidth,h.minWidth=h.maxWidth=h.width=g,g=c.width,h.width=d,h.minWidth=e,h.maxWidth=f)),void 0!==g?g+"":g}function Oa(a,b){return{get:function(){return a()?void delete this.get:(this.get=b).apply(this,arguments)}}}var Pa=/^(none|table(?!-c[ea]).+)/,Qa={position:"absolute",visibility:"hidden",display:"block"},Ra={letterSpacing:"0",fontWeight:"400"},Sa=["Webkit","Moz","ms"],Ta=d.createElement("div").style;function Ua(a){if(a in Ta)return a;var b=a[0].toUpperCase()+a.slice(1),c=Sa.length;while(c--)if(a=Sa[c]+b,a in Ta)return a}function Va(a,b,c){var d=aa.exec(b);return d?Math.max(0,d[2]-(c||0))+(d[3]||"px"):b}function Wa(a,b,c,d,e){var f,g=0;for(f=c===(d?"border":"content")?4:"width"===b?1:0;f<4;f+=2)"margin"===c&&(g+=r.css(a,c+ba[f],!0,e)),d?("content"===c&&(g-=r.css(a,"padding"+ba[f],!0,e)),"margin"!==c&&(g-=r.css(a,"border"+ba[f]+"Width",!0,e))):(g+=r.css(a,"padding"+ba[f],!0,e),"padding"!==c&&(g+=r.css(a,"border"+ba[f]+"Width",!0,e)));return g}function Xa(a,b,c){var d,e=!0,f=Ma(a),g="border-box"===r.css(a,"boxSizing",!1,f);if(a.getClientRects().length&&(d=a.getBoundingClientRect()[b]),d<=0||null==d){if(d=Na(a,b,f),(d<0||null==d)&&(d=a.style[b]),La.test(d))return d;e=g&&(o.boxSizingReliable()||d===a.style[b]),d=parseFloat(d)||0}return d+Wa(a,b,c||(g?"border":"content"),e,f)+"px"}r.extend({cssHooks:{opacity:{get:function(a,b){if(b){var c=Na(a,"opacity");return""===c?"1":c}}}},cssNumber:{animationIterationCount:!0,columnCount:!0,fillOpacity:!0,flexGrow:!0,flexShrink:!0,fontWeight:!0,lineHeight:!0,opacity:!0,order:!0,orphans:!0,widows:!0,zIndex:!0,zoom:!0},cssProps:{"float":"cssFloat"},style:function(a,b,c,d){if(a&&3!==a.nodeType&&8!==a.nodeType&&a.style){var e,f,g,h=r.camelCase(b),i=a.style;return b=r.cssProps[h]||(r.cssProps[h]=Ua(h)||h),g=r.cssHooks[b]||r.cssHooks[h],void 0===c?g&&"get"in g&&void 0!==(e=g.get(a,!1,d))?e:i[b]:(f=typeof c,"string"===f&&(e=aa.exec(c))&&e[1]&&(c=ea(a,b,e),f="number"),null!=c&&c===c&&("number"===f&&(c+=e&&e[3]||(r.cssNumber[h]?"":"px")),o.clearCloneStyle||""!==c||0!==b.indexOf("background")||(i[b]="inherit"),g&&"set"in g&&void 0===(c=g.set(a,c,d))||(i[b]=c)),void 0)}},css:function(a,b,c,d){var e,f,g,h=r.camelCase(b);return b=r.cssProps[h]||(r.cssProps[h]=Ua(h)||h),g=r.cssHooks[b]||r.cssHooks[h],g&&"get"in g&&(e=g.get(a,!0,c)),void 0===e&&(e=Na(a,b,d)),"normal"===e&&b in Ra&&(e=Ra[b]),""===c||c?(f=parseFloat(e),c===!0||isFinite(f)?f||0:e):e}}),r.each(["height","width"],function(a,b){r.cssHooks[b]={get:function(a,c,d){if(c)return!Pa.test(r.css(a,"display"))||a.getClientRects().length&&a.getBoundingClientRect().width?Xa(a,b,d):da(a,Qa,function(){return Xa(a,b,d)})},set:function(a,c,d){var e,f=d&&Ma(a),g=d&&Wa(a,b,d,"border-box"===r.css(a,"boxSizing",!1,f),f);return g&&(e=aa.exec(c))&&"px"!==(e[3]||"px")&&(a.style[b]=c,c=r.css(a,b)),Va(a,c,g)}}}),r.cssHooks.marginLeft=Oa(o.reliableMarginLeft,function(a,b){if(b)return(parseFloat(Na(a,"marginLeft"))||a.getBoundingClientRect().left-da(a,{marginLeft:0},function(){return a.getBoundingClientRect().left}))+"px"}),r.each({margin:"",padding:"",border:"Width"},function(a,b){r.cssHooks[a+b]={expand:function(c){for(var d=0,e={},f="string"==typeof c?c.split(" "):[c];d<4;d++)e[a+ba[d]+b]=f[d]||f[d-2]||f[0];return e}},Ka.test(a)||(r.cssHooks[a+b].set=Va)}),r.fn.extend({css:function(a,b){return S(this,function(a,b,c){var d,e,f={},g=0;if(r.isArray(b)){for(d=Ma(a),e=b.length;g<e;g++)f[b[g]]=r.css(a,b[g],!1,d);return f}return void 0!==c?r.style(a,b,c):r.css(a,b)},a,b,arguments.length>1)}});function Ya(a,b,c,d,e){return new Ya.prototype.init(a,b,c,d,e)}r.Tween=Ya,Ya.prototype={constructor:Ya,init:function(a,b,c,d,e,f){this.elem=a,this.prop=c,this.easing=e||r.easing._default,this.options=b,this.start=this.now=this.cur(),this.end=d,this.unit=f||(r.cssNumber[c]?"":"px")},cur:function(){var a=Ya.propHooks[this.prop];return a&&a.get?a.get(this):Ya.propHooks._default.get(this)},run:function(a){var b,c=Ya.propHooks[this.prop];return this.options.duration?this.pos=b=r.easing[this.easing](a,this.options.duration*a,0,1,this.options.duration):this.pos=b=a,this.now=(this.end-this.start)*b+this.start,this.options.step&&this.options.step.call(this.elem,this.now,this),c&&c.set?c.set(this):Ya.propHooks._default.set(this),this}},Ya.prototype.init.prototype=Ya.prototype,Ya.propHooks={_default:{get:function(a){var b;return 1!==a.elem.nodeType||null!=a.elem[a.prop]&&null==a.elem.style[a.prop]?a.elem[a.prop]:(b=r.css(a.elem,a.prop,""),b&&"auto"!==b?b:0)},set:function(a){r.fx.step[a.prop]?r.fx.step[a.prop](a):1!==a.elem.nodeType||null==a.elem.style[r.cssProps[a.prop]]&&!r.cssHooks[a.prop]?a.elem[a.prop]=a.now:r.style(a.elem,a.prop,a.now+a.unit)}}},Ya.propHooks.scrollTop=Ya.propHooks.scrollLeft={set:function(a){a.elem.nodeType&&a.elem.parentNode&&(a.elem[a.prop]=a.now)}},r.easing={linear:function(a){return a},swing:function(a){return.5-Math.cos(a*Math.PI)/2},_default:"swing"},r.fx=Ya.prototype.init,r.fx.step={};var Za,$a,_a=/^(?:toggle|show|hide)$/,ab=/queueHooks$/;function bb(){$a&&(a.requestAnimationFrame(bb),r.fx.tick())}function cb(){return a.setTimeout(function(){Za=void 0}),Za=r.now()}function db(a,b){var c,d=0,e={height:a};for(b=b?1:0;d<4;d+=2-b)c=ba[d],e["margin"+c]=e["padding"+c]=a;return b&&(e.opacity=e.width=a),e}function eb(a,b,c){for(var d,e=(hb.tweeners[b]||[]).concat(hb.tweeners["*"]),f=0,g=e.length;f<g;f++)if(d=e[f].call(c,b,a))return d}function fb(a,b,c){var d,e,f,g,h,i,j,k,l="width"in b||"height"in b,m=this,n={},o=a.style,p=a.nodeType&&ca(a),q=V.get(a,"fxshow");c.queue||(g=r._queueHooks(a,"fx"),null==g.unqueued&&(g.unqueued=0,h=g.empty.fire,g.empty.fire=function(){g.unqueued||h()}),g.unqueued++,m.always(function(){m.always(function(){g.unqueued--,r.queue(a,"fx").length||g.empty.fire()})}));for(d in b)if(e=b[d],_a.test(e)){if(delete b[d],f=f||"toggle"===e,e===(p?"hide":"show")){if("show"!==e||!q||void 0===q[d])continue;p=!0}n[d]=q&&q[d]||r.style(a,d)}if(i=!r.isEmptyObject(b),i||!r.isEmptyObject(n)){l&&1===a.nodeType&&(c.overflow=[o.overflow,o.overflowX,o.overflowY],j=q&&q.display,null==j&&(j=V.get(a,"display")),k=r.css(a,"display"),"none"===k&&(j?k=j:(ha([a],!0),j=a.style.display||j,k=r.css(a,"display"),ha([a]))),("inline"===k||"inline-block"===k&&null!=j)&&"none"===r.css(a,"float")&&(i||(m.done(function(){o.display=j}),null==j&&(k=o.display,j="none"===k?"":k)),o.display="inline-block")),c.overflow&&(o.overflow="hidden",m.always(function(){o.overflow=c.overflow[0],o.overflowX=c.overflow[1],o.overflowY=c.overflow[2]})),i=!1;for(d in n)i||(q?"hidden"in q&&(p=q.hidden):q=V.access(a,"fxshow",{display:j}),f&&(q.hidden=!p),p&&ha([a],!0),m.done(function(){p||ha([a]),V.remove(a,"fxshow");for(d in n)r.style(a,d,n[d])})),i=eb(p?q[d]:0,d,m),d in q||(q[d]=i.start,p&&(i.end=i.start,i.start=0))}}function gb(a,b){var c,d,e,f,g;for(c in a)if(d=r.camelCase(c),e=b[d],f=a[c],r.isArray(f)&&(e=f[1],f=a[c]=f[0]),c!==d&&(a[d]=f,delete a[c]),g=r.cssHooks[d],g&&"expand"in g){f=g.expand(f),delete a[d];for(c in f)c in a||(a[c]=f[c],b[c]=e)}else b[d]=e}function hb(a,b,c){var d,e,f=0,g=hb.prefilters.length,h=r.Deferred().always(function(){delete i.elem}),i=function(){if(e)return!1;for(var b=Za||cb(),c=Math.max(0,j.startTime+j.duration-b),d=c/j.duration||0,f=1-d,g=0,i=j.tweens.length;g<i;g++)j.tweens[g].run(f);return h.notifyWith(a,[j,f,c]),f<1&&i?c:(h.resolveWith(a,[j]),!1)},j=h.promise({elem:a,props:r.extend({},b),opts:r.extend(!0,{specialEasing:{},easing:r.easing._default},c),originalProperties:b,originalOptions:c,startTime:Za||cb(),duration:c.duration,tweens:[],createTween:function(b,c){var d=r.Tween(a,j.opts,b,c,j.opts.specialEasing[b]||j.opts.easing);return j.tweens.push(d),d},stop:function(b){var c=0,d=b?j.tweens.length:0;if(e)return this;for(e=!0;c<d;c++)j.tweens[c].run(1);return b?(h.notifyWith(a,[j,1,0]),h.resolveWith(a,[j,b])):h.rejectWith(a,[j,b]),this}}),k=j.props;for(gb(k,j.opts.specialEasing);f<g;f++)if(d=hb.prefilters[f].call(j,a,k,j.opts))return r.isFunction(d.stop)&&(r._queueHooks(j.elem,j.opts.queue).stop=r.proxy(d.stop,d)),d;return r.map(k,eb,j),r.isFunction(j.opts.start)&&j.opts.start.call(a,j),r.fx.timer(r.extend(i,{elem:a,anim:j,queue:j.opts.queue})),j.progress(j.opts.progress).done(j.opts.done,j.opts.complete).fail(j.opts.fail).always(j.opts.always)}r.Animation=r.extend(hb,{tweeners:{"*":[function(a,b){var c=this.createTween(a,b);return ea(c.elem,a,aa.exec(b),c),c}]},tweener:function(a,b){r.isFunction(a)?(b=a,a=["*"]):a=a.match(K);for(var c,d=0,e=a.length;d<e;d++)c=a[d],hb.tweeners[c]=hb.tweeners[c]||[],hb.tweeners[c].unshift(b)},prefilters:[fb],prefilter:function(a,b){b?hb.prefilters.unshift(a):hb.prefilters.push(a)}}),r.speed=function(a,b,c){var e=a&&"object"==typeof a?r.extend({},a):{complete:c||!c&&b||r.isFunction(a)&&a,duration:a,easing:c&&b||b&&!r.isFunction(b)&&b};return r.fx.off||d.hidden?e.duration=0:"number"!=typeof e.duration&&(e.duration in r.fx.speeds?e.duration=r.fx.speeds[e.duration]:e.duration=r.fx.speeds._default),null!=e.queue&&e.queue!==!0||(e.queue="fx"),e.old=e.complete,e.complete=function(){r.isFunction(e.old)&&e.old.call(this),e.queue&&r.dequeue(this,e.queue)},e},r.fn.extend({fadeTo:function(a,b,c,d){return this.filter(ca).css("opacity",0).show().end().animate({opacity:b},a,c,d)},animate:function(a,b,c,d){var e=r.isEmptyObject(a),f=r.speed(b,c,d),g=function(){var b=hb(this,r.extend({},a),f);(e||V.get(this,"finish"))&&b.stop(!0)};return g.finish=g,e||f.queue===!1?this.each(g):this.queue(f.queue,g)},stop:function(a,b,c){var d=function(a){var b=a.stop;delete a.stop,b(c)};return"string"!=typeof a&&(c=b,b=a,a=void 0),b&&a!==!1&&this.queue(a||"fx",[]),this.each(function(){var b=!0,e=null!=a&&a+"queueHooks",f=r.timers,g=V.get(this);if(e)g[e]&&g[e].stop&&d(g[e]);else for(e in g)g[e]&&g[e].stop&&ab.test(e)&&d(g[e]);for(e=f.length;e--;)f[e].elem!==this||null!=a&&f[e].queue!==a||(f[e].anim.stop(c),b=!1,f.splice(e,1));!b&&c||r.dequeue(this,a)})},finish:function(a){return a!==!1&&(a=a||"fx"),this.each(function(){var b,c=V.get(this),d=c[a+"queue"],e=c[a+"queueHooks"],f=r.timers,g=d?d.length:0;for(c.finish=!0,r.queue(this,a,[]),e&&e.stop&&e.stop.call(this,!0),b=f.length;b--;)f[b].elem===this&&f[b].queue===a&&(f[b].anim.stop(!0),f.splice(b,1));for(b=0;b<g;b++)d[b]&&d[b].finish&&d[b].finish.call(this);delete c.finish})}}),r.each(["toggle","show","hide"],function(a,b){var c=r.fn[b];r.fn[b]=function(a,d,e){return null==a||"boolean"==typeof a?c.apply(this,arguments):this.animate(db(b,!0),a,d,e)}}),r.each({slideDown:db("show"),slideUp:db("hide"),slideToggle:db("toggle"),fadeIn:{opacity:"show"},fadeOut:{opacity:"hide"},fadeToggle:{opacity:"toggle"}},function(a,b){r.fn[a]=function(a,c,d){return this.animate(b,a,c,d)}}),r.timers=[],r.fx.tick=function(){var a,b=0,c=r.timers;for(Za=r.now();b<c.length;b++)a=c[b],a()||c[b]!==a||c.splice(b--,1);c.length||r.fx.stop(),Za=void 0},r.fx.timer=function(a){r.timers.push(a),a()?r.fx.start():r.timers.pop()},r.fx.interval=13,r.fx.start=function(){$a||($a=a.requestAnimationFrame?a.requestAnimationFrame(bb):a.setInterval(r.fx.tick,r.fx.interval))},r.fx.stop=function(){a.cancelAnimationFrame?a.cancelAnimationFrame($a):a.clearInterval($a),$a=null},r.fx.speeds={slow:600,fast:200,_default:400},r.fn.delay=function(b,c){return b=r.fx?r.fx.speeds[b]||b:b,c=c||"fx",this.queue(c,function(c,d){var e=a.setTimeout(c,b);d.stop=function(){a.clearTimeout(e)}})},function(){var a=d.createElement("input"),b=d.createElement("select"),c=b.appendChild(d.createElement("option"));a.type="checkbox",o.checkOn=""!==a.value,o.optSelected=c.selected,a=d.createElement("input"),a.value="t",a.type="radio",o.radioValue="t"===a.value}();var ib,jb=r.expr.attrHandle;r.fn.extend({attr:function(a,b){return S(this,r.attr,a,b,arguments.length>1)},removeAttr:function(a){return this.each(function(){r.removeAttr(this,a)})}}),r.extend({attr:function(a,b,c){var d,e,f=a.nodeType;if(3!==f&&8!==f&&2!==f)return"undefined"==typeof a.getAttribute?r.prop(a,b,c):(1===f&&r.isXMLDoc(a)||(e=r.attrHooks[b.toLowerCase()]||(r.expr.match.bool.test(b)?ib:void 0)),
@@ -11915,6 +13730,10 @@ define('aurelia-logging',['exports'], function (exports) {
   exports.getLogger = getLogger;
   exports.addAppender = addAppender;
   exports.removeAppender = removeAppender;
+  exports.getAppenders = getAppenders;
+  exports.clearAppenders = clearAppenders;
+  exports.addCustomLevel = addCustomLevel;
+  exports.removeCustomLevel = removeCustomLevel;
   exports.setLevel = setLevel;
   exports.getLevel = getLevel;
 
@@ -11922,15 +13741,22 @@ define('aurelia-logging',['exports'], function (exports) {
 
   var logLevel = exports.logLevel = {
     none: 0,
-    error: 1,
-    warn: 2,
-    info: 3,
-    debug: 4
+    error: 10,
+    warn: 20,
+    info: 30,
+    debug: 40
   };
 
   var loggers = {};
   var appenders = [];
   var globalDefaultLevel = logLevel.none;
+
+  var standardLevels = ['none', 'error', 'warn', 'info', 'debug'];
+  function isStandardLevel(level) {
+    return standardLevels.filter(function (l) {
+      return l === level;
+    }).length > 0;
+  }
 
   function appendArgs() {
     return [this].concat(Array.prototype.slice.call(arguments));
@@ -11953,12 +13779,44 @@ define('aurelia-logging',['exports'], function (exports) {
     };
   }
 
+  function logFactoryCustom(level) {
+    var threshold = logLevel[level];
+    return function () {
+      if (this.level < threshold) {
+        return;
+      }
+
+      var args = appendArgs.apply(this, arguments);
+      var i = appenders.length;
+      while (i--) {
+        var appender = appenders[i];
+        if (appender[level] !== undefined) {
+          appender[level].apply(appender, args);
+        }
+      }
+    };
+  }
+
   function connectLoggers() {
     var proto = Logger.prototype;
-    proto.debug = logFactory('debug');
-    proto.info = logFactory('info');
-    proto.warn = logFactory('warn');
-    proto.error = logFactory('error');
+    for (var _level in logLevel) {
+      if (isStandardLevel(_level)) {
+        if (_level !== 'none') {
+          proto[_level] = logFactory(_level);
+        }
+      } else {
+        proto[_level] = logFactoryCustom(_level);
+      }
+    }
+  }
+
+  function disconnectLoggers() {
+    var proto = Logger.prototype;
+    for (var _level2 in logLevel) {
+      if (_level2 !== 'none') {
+        proto[_level2] = function () {};
+      }
+    }
   }
 
   function getLogger(id) {
@@ -11975,6 +13833,46 @@ define('aurelia-logging',['exports'], function (exports) {
     appenders = appenders.filter(function (a) {
       return a !== appender;
     });
+  }
+
+  function getAppenders() {
+    return [].concat(appenders);
+  }
+
+  function clearAppenders() {
+    appenders = [];
+    disconnectLoggers();
+  }
+
+  function addCustomLevel(name, value) {
+    if (logLevel[name] !== undefined) {
+      throw Error('Log level "' + name + '" already exists.');
+    }
+
+    if (isNaN(value)) {
+      throw Error('Value must be a number.');
+    }
+
+    logLevel[name] = value;
+
+    if (appenders.length > 0) {
+      connectLoggers();
+    } else {
+      Logger.prototype[name] = function () {};
+    }
+  }
+
+  function removeCustomLevel(name) {
+    if (logLevel[name] === undefined) {
+      return;
+    }
+
+    if (isStandardLevel(name)) {
+      throw Error('Built-in log level "' + name + '" cannot be removed.');
+    }
+
+    delete logLevel[name];
+    delete Logger.prototype[name];
   }
 
   function setLevel(level) {
@@ -12739,7 +14637,11 @@ define('aurelia-pal-browser',['exports', 'aurelia-pal'], function (exports, _aur
   var _FEATURE = exports._FEATURE = {
     shadowDOM: !!HTMLElement.prototype.attachShadow,
     scopedCSS: 'scoped' in document.createElement('style'),
-    htmlTemplateElement: 'content' in document.createElement('template'),
+    htmlTemplateElement: function () {
+      var d = document.createElement('div');
+      d.innerHTML = '<template></template>';
+      return 'content' in d.children[0];
+    }(),
     mutationObserver: !!(window.MutationObserver || window.WebKitMutationObserver),
     ensureHTMLTemplateElement: function ensureHTMLTemplateElement(t) {
       return t;
@@ -68350,4 +70252,5 @@ exports.configure = configure;
 
 ;define('ag-grid-aurelia', ['ag-grid-aurelia/main'], function (main) { return main; });
 
-function _aureliaConfigureModuleLoader(){requirejs.config({"baseUrl":"src/","paths":{"root":"src","resources":"resources","elements":"resources/elements","attributes":"resources/attributes","valueConverters":"resources/value-converters","bindingBehaviors":"resources/binding-behaviors","aurelia-binding":"../node_modules/aurelia-binding/dist/amd/aurelia-binding","aurelia-bootstrapper":"../node_modules/aurelia-bootstrapper/dist/amd/aurelia-bootstrapper","aurelia-dependency-injection":"../node_modules/aurelia-dependency-injection/dist/amd/aurelia-dependency-injection","aurelia-event-aggregator":"../node_modules/aurelia-event-aggregator/dist/amd/aurelia-event-aggregator","aurelia-framework":"../node_modules/aurelia-framework/dist/amd/aurelia-framework","aurelia-history":"../node_modules/aurelia-history/dist/amd/aurelia-history","aurelia-history-browser":"../node_modules/aurelia-history-browser/dist/amd/aurelia-history-browser","aurelia-loader":"../node_modules/aurelia-loader/dist/amd/aurelia-loader","aurelia-loader-default":"../node_modules/aurelia-loader-default/dist/amd/aurelia-loader-default","aurelia-logging":"../node_modules/aurelia-logging/dist/amd/aurelia-logging","aurelia-logging-console":"../node_modules/aurelia-logging-console/dist/amd/aurelia-logging-console","aurelia-metadata":"../node_modules/aurelia-metadata/dist/amd/aurelia-metadata","aurelia-pal":"../node_modules/aurelia-pal/dist/amd/aurelia-pal","aurelia-pal-browser":"../node_modules/aurelia-pal-browser/dist/amd/aurelia-pal-browser","aurelia-path":"../node_modules/aurelia-path/dist/amd/aurelia-path","aurelia-polyfills":"../node_modules/aurelia-polyfills/dist/amd/aurelia-polyfills","aurelia-route-recognizer":"../node_modules/aurelia-route-recognizer/dist/amd/aurelia-route-recognizer","aurelia-router":"../node_modules/aurelia-router/dist/amd/aurelia-router","aurelia-task-queue":"../node_modules/aurelia-task-queue/dist/amd/aurelia-task-queue","aurelia-templating":"../node_modules/aurelia-templating/dist/amd/aurelia-templating","aurelia-templating-binding":"../node_modules/aurelia-templating-binding/dist/amd/aurelia-templating-binding","text":"../scripts/text","app-bundle":"../scripts/app-bundle"},"packages":[{"name":"jquery","location":"../node_modules/jquery/dist","main":"jquery.min"},{"name":"bootstrap","location":"../node_modules/bootstrap/dist","main":"js/bootstrap.min"},{"name":"aurelia-templating-resources","location":"../node_modules/aurelia-templating-resources/dist/amd","main":"aurelia-templating-resources"},{"name":"aurelia-templating-router","location":"../node_modules/aurelia-templating-router/dist/amd","main":"aurelia-templating-router"},{"name":"aurelia-testing","location":"../node_modules/aurelia-testing/dist/amd","main":"aurelia-testing"},{"name":"ag-grid","location":"../node_modules/ag-grid","main":"main"},{"name":"ag-grid-enterprise","location":"../node_modules/ag-grid-enterprise","main":"main"},{"name":"ag-grid-aurelia","location":"../node_modules/ag-grid-aurelia","main":"main"}],"stubModules":["text"],"shim":{"bootstrap":{"deps":["jquery"]}},"bundles":{"app-bundle":["app","environment","main","auDateComponents/date-component","auHeaderComponents/header-component","auHeaderComponents/header-group-component","auRenderers/styled-renderer","data/refData","editors/mood-editor","editors/numeric-editor","filters/partialMatch","filters/proficiencyFilter","filters/skillFilter","jsDateComponent/dateComponent","jsHeaderComponent/headerComponent","jsHeaderComponent/headerGroupComponent","jsRenderers/MedalRenderer","jsRenderers/NameAndAgeRenderer","resources/index","components/filter-example/filter-example","components/editor-example/editor-example","components/floating-row-example/floating-row-example","components/full-width-example/full-width-example","components/group-row-example/group-row-example","components/rich-grid-declarative-example/rich-grid-declarative-example","components/rich-grid-example/rich-grid-example","auDateComponents/date.component","jsHeaderComponent/headerGroup"]}})}
+function _aureliaConfigureModuleLoader(){requirejs.config({"baseUrl":"src/","paths":{"root":"src","resources":"resources","elements":"resources/elements","attributes":"resources/attributes","valueConverters":"resources/value-converters","bindingBehaviors":"resources/binding-behaviors","aurelia-binding":"../node_modules/aurelia-binding/dist/amd/aurelia-binding","aurelia-bootstrapper":"../node_modules/aurelia-bootstrapper/dist/amd/aurelia-bootstrapper","aurelia-dependency-injection":"../node_modules/aurelia-dependency-injection/dist/amd/aurelia-dependency-injection","aurelia-event-aggregator":"../node_modules/aurelia-event-aggregator/dist/amd/aurelia-event-aggregator","aurelia-framework":"../node_modules/aurelia-framework/dist/amd/aurelia-framework","aurelia-history":"../node_modules/aurelia-history/dist/amd/aurelia-history","aurelia-history-browser":"../node_modules/aurelia-history-browser/dist/amd/aurelia-history-browser","aurelia-loader":"../node_modules/aurelia-loader/dist/amd/aurelia-loader","aurelia-loader-default":"../node_modules/aurelia-loader-default/dist/amd/aurelia-loader-default","aurelia-logging":"../node_modules/aurelia-logging/dist/amd/aurelia-logging","aurelia-logging-console":"../node_modules/aurelia-logging-console/dist/amd/aurelia-logging-console","aurelia-metadata":"../node_modules/aurelia-metadata/dist/amd/aurelia-metadata","aurelia-pal":"../node_modules/aurelia-pal/dist/amd/aurelia-pal","aurelia-pal-browser":"../node_modules/aurelia-pal-browser/dist/amd/aurelia-pal-browser","aurelia-path":"../node_modules/aurelia-path/dist/amd/aurelia-path","aurelia-polyfills":"../node_modules/aurelia-polyfills/dist/amd/aurelia-polyfills","aurelia-route-recognizer":"../node_modules/aurelia-route-recognizer/dist/amd/aurelia-route-recognizer","aurelia-router":"../node_modules/aurelia-router/dist/amd/aurelia-router","aurelia-task-queue":"../node_modules/aurelia-task-queue/dist/amd/aurelia-task-queue","aurelia-templating":"../node_modules/aurelia-templating/dist/amd/aurelia-templating","aurelia-templating-binding":"../node_modules/aurelia-templating-binding/dist/amd/aurelia-templating-binding","text":"../scripts/text"},"packages":[{"name":"jquery","location":"../node_modules/jquery/dist","main":"jquery.min"},{"name":"bootstrap","location":"../node_modules/bootstrap/dist","main":"js/bootstrap.min"},{"name":"aurelia-templating-resources","location":"../node_modules/aurelia-templating-resources/dist/amd","main":"aurelia-templating-resources"},{"name":"aurelia-templating-router","location":"../node_modules/aurelia-templating-router/dist/amd","main":"aurelia-templating-router"},{"name":"aurelia-testing","location":"../node_modules/aurelia-testing/dist/amd","main":"aurelia-testing"},{"name":"ag-grid","location":"../node_modules/ag-grid","main":"main"},{"name":"ag-grid-enterprise","location":"../node_modules/ag-grid-enterprise","main":"main"},{"name":"ag-grid-aurelia","location":"../node_modules/ag-grid-aurelia","main":"main"}],"stubModules":["text"],"shim":{"bootstrap":{"deps":["jquery"]}}})}
+//# sourceMappingURL=vendor-bundle.js.map

@@ -1,7 +1,7 @@
 <template>
   <require from="bootstrap/css/bootstrap.css"></require>
   <require from="ag-grid/dist/styles/ag-grid.css"></require>
-  <require from="ag-grid/dist/styles/theme-fresh.css"></require>
+  <require from="ag-grid/dist/styles/ag-theme-balham.css"></require>
   <ul if.bind="!router.currentInstruction.queryParams.route" class="nav nav-pills" style="margin-bottom: 20px">
     <li role="presentation" class.bind="row.isActive ? 'active' : ''" repeat.for="row of router.navigation">
       <a href.bind="row.href">${row.title}</a>

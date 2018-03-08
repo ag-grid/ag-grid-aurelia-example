@@ -3,7 +3,7 @@
     <require from="../../auHeaderComponents/header-group-component"></require>
     <require from="../../auDateComponents/date-component"></require>
 
-    <div style="width: 900px;">
+    <div style="width: 740px;">
         <div style="padding: 4px;">
             <div style="float: right;">
                 <input keyup.delegate="onQuickFilterChanged($event)" type="text" id="quickFilterInput"
@@ -46,7 +46,7 @@
             <div style="clear: both;"></div>
 
             <div style="width: 100%; height: 350px;">
-                <ag-grid-aurelia #agGrid style="width: 100%; height: 350px;" class="ag-fresh"
+                <ag-grid-aurelia #agGrid style="width: 100%; height: 350px;" class="ag-theme-balham"
                                  context.bind="$this"
                                  grid-options.bind="gridOptions"
                                  column-defs.bind="columnDefs"

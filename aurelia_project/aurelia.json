@@ -139,7 +139,7 @@
             "main": "main",
             "resources": [
               "dist/styles/ag-grid.css",
-              "dist/styles/theme-fresh.css"
+              "dist/styles/ag-theme-balham.css"
             ]
           },
           {

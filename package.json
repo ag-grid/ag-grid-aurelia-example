@@ -14,6 +14,7 @@
     "url": "https://github.com/ag-grid/ag-grid-aurelia-example.git"
   },
   "license": "MIT",
+  "private": true,
   "dependencies": {
     "ag-grid": "^18.0.0",
     "ag-grid-enterprise": "^18.0.0",

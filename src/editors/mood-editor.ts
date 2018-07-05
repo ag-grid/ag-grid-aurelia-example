@@ -1,10 +1,8 @@
 import {bindable, customElement, inject} from "aurelia-framework";
 
-import {BaseAureliaEditor} from "ag-grid-aurelia";
-
 @customElement('ag-mood-editor')
 @inject(Element)
-export class MoodEditor extends BaseAureliaEditor {
+export class MoodEditor {
     params: any;
 
     @bindable() happy: boolean = false;
@@ -13,8 +11,6 @@ export class MoodEditor extends BaseAureliaEditor {
     element: any;
 
     constructor(element) {
-        super();
-
         this.element = element;
     }
 

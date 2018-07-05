@@ -1,10 +1,8 @@
 import {bindable, customElement, inject} from "aurelia-framework";
 
-import {BaseAureliaEditor} from "ag-grid-aurelia";
-
 @customElement('ag-numeric-editor')
 @inject(Element)
-export class NumericEditor extends BaseAureliaEditor {
+export class NumericEditor {
     params: any;
 
     @bindable() hasFocus: boolean = false;
@@ -12,8 +10,6 @@ export class NumericEditor extends BaseAureliaEditor {
     element: any;
 
     constructor(element) {
-        super();
-
         this.element = element;
     }
 

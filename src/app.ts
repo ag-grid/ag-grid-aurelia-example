@@ -40,30 +40,6 @@ export class App {
                 href: '#/editor'
             },
             {
-                route: 'pinned-row',
-                name: 'pinned-row',
-                nav: true,
-                moduleId: 'components/pinned-row-example/pinned-row-example',
-                title: 'Pinned Row Example',
-                href: '#/pinned-row'
-            },
-            {
-                route: 'full-width',
-                name: 'full-width',
-                nav: true,
-                moduleId: 'components/full-width-example/full-width-example',
-                title: 'Full Width Example',
-                href: '#/full-width'
-            },
-            {
-                route: 'group-row',
-                name: 'group-row',
-                nav: true,
-                moduleId: 'components/group-row-example/group-row-example',
-                title: 'Group Row Example',
-                href: '#/group-row'
-            },
-            {
                 route: 'filter',
                 name: 'filter',
                 nav: true,

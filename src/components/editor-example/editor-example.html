@@ -9,8 +9,8 @@
                 <ag-grid-column header-name="Name" field="name" width.bind="300"></ag-grid-column>
                 <ag-grid-column header-name="Mood" field="mood" width.bind="300" editable.bind="true">
                     <ag-cell-template>
-                        <img width="20px" if.bind="params.value === 'Happy'" src="https://raw.githubusercontent.com/ag-grid/ag-grid-docs/master/src/images/smiley.png"/>
-                        <img width="20px" if.bind="params.value !== 'Happy'" src="https://raw.githubusercontent.com/ag-grid/ag-grid-docs/master/src/images/smiley-sad.png"/>
+                        <img width="19px" if.bind="params.value === 'Happy'" src="https://raw.githubusercontent.com/ag-grid/ag-grid-docs/master/src/images/smiley.png"/>
+                        <img width="19px" if.bind="params.value !== 'Happy'" src="https://raw.githubusercontent.com/ag-grid/ag-grid-docs/master/src/images/smiley-sad.png"/>
                     </ag-cell-template>
                     <ag-editor-template>
                         <ag-mood-editor></ag-mood-editor>

@@ -134,8 +134,8 @@
             "env": "dev"
           },
           {
-            "name": "ag-grid",
-            "path": "../node_modules/ag-grid",
+            "name": "ag-grid-community",
+            "path": "../node_modules/ag-grid-community",
             "main": "main",
             "resources": [
               "dist/styles/ag-grid.css",

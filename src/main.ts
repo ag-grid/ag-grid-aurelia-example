@@ -2,7 +2,7 @@ import {Aurelia} from 'aurelia-framework'
 import environment from './environment';
 
 // enterprise users uncomment this
-// import { LicenseManager } from 'ag-grid-enterprise/main';
+// import { LicenseManager } from 'ag-grid-enterprise';
 
 //Configure Bluebird Promises.
 //Note: You may want to use environment-specific configuration.

@@ -1,4 +1,4 @@
-import {ICellRenderer} from "ag-grid/main";
+import {ICellRenderer} from "ag-grid-community";
 
 export default class MedalRenderer implements ICellRenderer {
   params:any;

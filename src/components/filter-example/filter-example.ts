@@ -15,8 +15,8 @@ export class FilterExample {
     constructor() {
         this.gridOptions = <GridOptions>{};
         this.gridOptions.rowData = this.createRowData();
-        this.gridOptions.enableFilter = true;
         this.gridOptions.defaultColDef = {
+            filter: true,
             menuTabs: ['filterMenuTab']
         }
     }

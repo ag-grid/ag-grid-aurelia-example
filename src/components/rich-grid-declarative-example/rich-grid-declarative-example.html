@@ -53,10 +53,8 @@
                                  column-defs.bind="columnDefs"
                                  show-tool-panel.bind="showToolPanel"
                                  row-data.bind="rowData"
+                                 default-col-def.bind="defaultColDef"
 
-                                 enable-col-resize
-                                 enable-sorting
-                                 enable-filter
                                  group-headers
                                  suppress-row-click-selection
                                  tool-panel-suppress-groups
@@ -92,7 +90,7 @@
                         <ag-date-component></ag-date-component>
                     </ag-date-template>
                     <ag-grid-column header-name="#" width.bind="30" checkbox-selection.bind="true"
-                                    suppress-sorting.bind="true" suppress-menu.bind="true"
+                                    sotable.bind="false" suppress-menu.bind="true"
                                     pinned.bind="true"></ag-grid-column>
                     <ag-grid-column header-name="Employee">
                         <ag-header-group-template>
@@ -122,7 +120,7 @@
                         </ag-grid-column>
                     </ag-grid-column>
                     <ag-grid-column header-name="IT Skills">
-                        <ag-grid-column header-name="Skills" width.bind="125" suppress-sorting.bind="true"
+                        <ag-grid-column header-name="Skills" width.bind="125" sortable.bind="false"
                                         cell-renderer.bind="skillsCellRenderer"
                                         filter.bind="getSkillFilter()"
                                         header-component-params.bind="{ menuIcon: 'fa-bars' }">

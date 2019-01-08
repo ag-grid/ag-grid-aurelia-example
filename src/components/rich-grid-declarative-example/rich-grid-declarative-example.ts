@@ -1,10 +1,10 @@
-import {autoinject, customElement} from 'aurelia-framework'
+import { autoinject, customElement } from 'aurelia-framework'
 
 import RefData from '../../data/refData';
 import SkillFilter from '../../filters/skillFilter';
 import ProficiencyFilter from '../../filters/proficiencyFilter';
 
-import {ColumnApi, GridApi, GridOptions} from 'ag-grid-community';
+import { ColumnApi, GridApi, GridOptions } from 'ag-grid-community';
 // only import this if you are using the ag-Grid-Enterprise
 import 'ag-grid-enterprise';
 
@@ -21,9 +21,15 @@ export class RichGridDeclarative {
 
     constructor() {
         // we pass an empty gridOptions in, so we can grab the api out
-        this.gridOptions = <GridOptions>{};
+        this.gridOptions = <GridOptions>{
+            defaultColDef: {
+                resizable: true,
+                sortable: true,
+                filter: true,
 
-        let that = this;
+            }
+        };
+
         this.createRowData();
         this.showGrid = true;
 
@@ -170,7 +176,7 @@ export class RichGridDeclarative {
     private skillsCellRenderer(params) {
         const data = params.data;
         const skills = [];
-        RefData.IT_SKILLS.forEach(function (skill) {
+        RefData.IT_SKILLS.forEach(function(skill) {
             if (data && data.skills && data.skills[skill]) {
                 skills.push('<img src="https://raw.githubusercontent.com/ag-grid/ag-grid-docs/master/src/images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
             }

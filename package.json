@@ -15,9 +15,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "ag-grid-community": "^19.1.0",
-    "ag-grid-aurelia": "^19.1.0",
-    "ag-grid-enterprise": "^19.1.0",
+    "ag-grid-community": "^20.0.0",
+    "ag-grid-aurelia": "^20.0.0",
+    "ag-grid-enterprise": "^20.0.0",
     "aurelia-animator-css": "1.0.4",
     "aurelia-bootstrapper": "2.3.0",
     "aurelia-fetch-client": "1.4.0",

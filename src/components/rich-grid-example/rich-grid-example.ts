@@ -1,5 +1,5 @@
-import {autoinject, customElement} from "aurelia-framework";
-import {GridOptions, GridApi, ColumnApi} from "ag-grid-community";
+import { autoinject, customElement } from "aurelia-framework";
+import { ColumnApi, GridApi, GridOptions } from "ag-grid-community";
 import "ag-grid-enterprise";
 import RefData from "../../data/refData";
 import SkillFilter from "../../filters/skillFilter";
@@ -27,6 +27,9 @@ export class RichGrid {
         this.createColumnDefs();
         this.gridOptions.dateComponent = <any>DateComponent;
         this.gridOptions.defaultColDef = {
+            resizable: true,
+            sortable: true,
+            filter: true,
             headerComponent: <any>HeaderComponent,
             headerComponentParams: {
                 menuIcon: 'fa-bars'
@@ -74,7 +77,7 @@ export class RichGrid {
     private createColumnDefs() {
         this.columnDefs = [
             {
-                headerName: '#', width: 30, checkboxSelection: true, suppressSorting: true,
+                headerName: '#', width: 30, checkboxSelection: true, sortable: false,
                 suppressMenu: true, pinned: true
             },
             {
@@ -92,7 +95,7 @@ export class RichGrid {
                     },
                     {
                         headerName: "DOB", field: "dob", width: 120, pinned: true,
-                        cellRenderer: function (params) {
+                        cellRenderer: function(params) {
                             return pad(params.value.getDate(), 2) + ' /' +
                                 pad(params.value.getMonth() + 1, 2) + '/' +
                                 params.value.getFullYear();
@@ -108,7 +111,7 @@ export class RichGrid {
                     {
                         headerName: "Skills",
                         width: 125,
-                        suppressSorting: true,
+                        sortable: false,
                         cellRenderer: skillsCellRenderer,
                         filter: SkillFilter
                     },
@@ -225,7 +228,7 @@ export class RichGrid {
 function skillsCellRenderer(params) {
     const data = params.data;
     const skills = [];
-    RefData.IT_SKILLS.forEach(function (skill) {
+    RefData.IT_SKILLS.forEach(function(skill) {
         if (data && data.skills && data.skills[skill]) {
             skills.push('<img src="https://raw.githubusercontent.com/ag-grid/ag-grid-docs/master/src/images/skills/' + skill + '.png" width="16px" title="' + skill + '" />');
         }

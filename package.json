@@ -1,7 +1,7 @@
 {
   "name": "ag-grid-aurelia-example",
   "description": "An Aurelia client application.",
-  "version": "19.1.2",
+  "version": "20.2.0",
   "scripts": {
     "build": "au build",
     "copy-to-docs": "copyfiles index.html docs/ && ncp scripts/ docs/scripts/ && ncp src/components docs/components && ncp images/ docs/images/ && mkdir -p docs/node_modules/bootstrap/dist && mkdir -p docs/node_modules/jquery/dist && ncp node_modules/bootstrap/dist docs/node_modules/bootstrap/dist && ncp node_modules/bootstrap/dist docs/node_modules/jquery/dist",
@@ -15,9 +15,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "ag-grid-community": "^20.0.0",
-    "ag-grid-aurelia": "^20.0.0",
-    "ag-grid-enterprise": "^20.0.0",
+    "ag-grid-community": "^20.2.0",
+    "ag-grid-aurelia": "^20.2.0",
+    "ag-grid-enterprise": "^20.2.0",
     "aurelia-animator-css": "1.0.4",
     "aurelia-bootstrapper": "2.3.2",
     "aurelia-fetch-client": "1.8.2",

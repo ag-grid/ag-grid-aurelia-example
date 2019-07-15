@@ -1,7 +1,7 @@
 {
   "name": "ag-grid-aurelia-example",
   "description": "An Aurelia client application.",
-  "version": "21.0.0",
+  "version": "21.1.0",
   "scripts": {
     "build": "au build",
     "copy-to-docs": "copyfiles index.html docs/ && ncp scripts/ docs/scripts/ && ncp src/components docs/components && ncp images/ docs/images/ && mkdir -p docs/node_modules/bootstrap/dist && mkdir -p docs/node_modules/jquery/dist && ncp node_modules/bootstrap/dist docs/node_modules/bootstrap/dist && ncp node_modules/bootstrap/dist docs/node_modules/jquery/dist",

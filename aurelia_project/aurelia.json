@@ -1,41 +1,6 @@
 {
-  "name": "ag-grid-aurelia-example",
+  "name": "ag",
   "type": "project:application",
-  "platform": {
-    "id": "web",
-    "displayName": "Web",
-    "output": "scripts"
-  },
-  "transpiler": {
-    "id": "typescript",
-    "displayName": "TypeScript",
-    "fileExtension": ".ts",
-    "dtsSource": [
-      "./typings/**/*.d.ts",
-      "./custom_typings/**/*.d.ts"
-    ],
-    "source": "src/**/*.ts"
-  },
-  "markupProcessor": {
-    "id": "none",
-    "displayName": "None",
-    "fileExtension": ".html",
-    "source": "src/**/*.html"
-  },
-  "cssProcessor": {
-    "id": "none",
-    "displayName": "None",
-    "fileExtension": ".css",
-    "source": "src/**/*.css"
-  },
-  "editor": {
-    "id": "webstorm",
-    "displayName": "WebStorm"
-  },
-  "unitTestRunner": {
-    "id": "none",
-    "displayName": "None"
-  },
   "paths": {
     "root": "src",
     "resources": "resources",
@@ -44,120 +9,23 @@
     "valueConverters": "resources/value-converters",
     "bindingBehaviors": "resources/binding-behaviors"
   },
+  "transpiler": {
+    "id": "typescript",
+    "fileExtension": ".ts"
+  },
   "build": {
-    "targets": [
-      {
-        "id": "web",
-        "displayName": "Web",
-        "output": "scripts"
-      }
-    ],
-    "loader": {
-      "type": "require",
-      "configTarget": "vendor-bundle.js",
-      "includeBundleMetadataInConfig": "auto",
-      "plugins": [
-        {
-          "name": "text",
-          "extensions": [
-            ".html",
-            ".css"
-          ],
-          "stub": true
-        }
-      ]
-    },
-    "bundles": [
-      {
-        "name": "vendor-bundle.js",
-        "prepend": [
-          "node_modules/bluebird/js/browser/bluebird.core.js",
-          "scripts/require.js"
-        ],
-        "dependencies": [
-          {
-            "name": "jquery",
-            "path": "../node_modules/jquery/dist",
-            "main": "jquery.min",
-            "export": "$"
-          },
-          {
-            "name": "bootstrap",
-            "path": "../node_modules/bootstrap/dist",
-            "main": "js/bootstrap.min",
-            "deps": [
-              "jquery"
-            ],
-            "resources": [
-              "css/bootstrap.css"
-            ]
-          },
-          "aurelia-binding",
-          "aurelia-bootstrapper",
-          "aurelia-dependency-injection",
-          "aurelia-event-aggregator",
-          "aurelia-framework",
-          "aurelia-history",
-          "aurelia-history-browser",
-          "aurelia-loader",
-          "aurelia-loader-default",
-          "aurelia-logging",
-          "aurelia-logging-console",
-          "aurelia-metadata",
-          "aurelia-pal",
-          "aurelia-pal-browser",
-          "aurelia-path",
-          "aurelia-polyfills",
-          "aurelia-route-recognizer",
-          "aurelia-router",
-          "aurelia-task-queue",
-          "aurelia-templating",
-          "aurelia-templating-binding",
-          {
-            "name": "text",
-            "path": "../scripts/text"
-          },
-          {
-            "name": "aurelia-templating-resources",
-            "path": "../node_modules/aurelia-templating-resources/dist/amd",
-            "main": "aurelia-templating-resources"
-          },
-          {
-            "name": "aurelia-templating-router",
-            "path": "../node_modules/aurelia-templating-router/dist/amd",
-            "main": "aurelia-templating-router"
-          },
-          {
-            "name": "aurelia-testing",
-            "path": "../node_modules/aurelia-testing/dist/amd",
-            "main": "aurelia-testing",
-            "env": "dev"
-          },
-          {
-            "name": "ag-grid-community",
-            "path": "../node_modules/ag-grid-community",
-            "main": "main",
-            "resources": [
-              "dist/styles/ag-grid.css",
-              "dist/styles/ag-theme-balham.css"
-            ]
-          },
-          {
-            "name": "ag-grid-enterprise",
-            "path": "../node_modules/ag-grid-enterprise",
-            "main": "main"
-          },
-          {
-            "name": "ag-grid-aurelia",
-            "path": "../node_modules/ag-grid-aurelia",
-            "main": "main"
-          }
-        ],
-        "source": [
-          "[**/*.js]",
-          "**/*.{css,html}"
-        ]
-      }
-    ]
-  }
+    "options": {
+      "server": "dev",
+      "extractCss": "prod",
+      "coverage": false
+    }
+  },
+  "platform": {
+    "hmr": false,
+    "open": false,
+    "port": 8080,
+    "host": "localhost",
+    "output": "dist"
+  },
+  "packageManager": "yarn"
 }

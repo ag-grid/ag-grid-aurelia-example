@@ -1,63 +1,37 @@
-import * as gulp from 'gulp';
-import * as browserSync from 'browser-sync';
-import * as historyApiFallback from 'connect-history-api-fallback/lib';
-import * as project from '../aurelia.json';
-import build from './build';
-import {CLIOptions} from 'aurelia-cli';
+import { NPM } from 'aurelia-cli';
+import * as kill from 'tree-kill';
 
-function onChange(path) {
-  console.log(`File Changed: ${path}`);
+const npm =  new NPM();
+
+function run() {
+  console.log('`au run` is an alias of the `npm start`, you may use either of those; see README for more details.');
+  const args = process.argv.slice(3);
+  return npm.run('start', ['--', ... cleanArgs(args)]);
 }
 
-function reload(done) {
-  browserSync.reload();
-  done();
-}
-
-let serve = gulp.series(
-  build,
-  done => {
-    browserSync({
-      online: false,
-      open: false,
-      port: 8080,
-      logLevel: 'silent',
-      server: {
-        baseDir: ['.'],
-        middleware: [historyApiFallback(), function(req, res, next) {
-          res.setHeader('Access-Control-Allow-Origin', '*');
-          next();
-        }]
+// Cleanup --env prod to --env.production
+// for backwards compatibility
+function cleanArgs(args) {
+  const cleaned = [];
+  for (let i = 0, ii = args.length; i < ii; i++) {
+    if (args[i] === '--env' && i < ii - 1) {
+      const env = args[++i].toLowerCase();
+      if (env.startsWith('prod')) {
+        cleaned.push('--env.production');
+      } else if (env.startsWith('test')) {
+        cleaned.push('--tests');
       }
-    }, function (err, bs) {
-      let urls = bs.options.get('urls').toJS();
-      console.log(`Application Available At: ${urls.local}`);
-      console.log(`BrowserSync Available At: ${urls.ui}`);
-      done();
-    });
+    } else {
+      cleaned.push(args[i]);
+    }
   }
-);
-
-let refresh = gulp.series(
-  build,
-  reload
-);
-
-let watch = function() {
-  gulp.watch(project.transpiler.source, refresh).on('change', onChange);
-  gulp.watch(project.markupProcessor.source, refresh).on('change', onChange);
-  gulp.watch(project.cssProcessor.source, refresh).on('change', onChange);
+  return cleaned;
 }
 
-let run;
+const shutdownAppServer = () => {
+  if (npm && npm.proc) {
+    kill(npm.proc.pid);
+  }
+};
 
-if (CLIOptions.hasFlag('watch')) {
-  run = gulp.series(
-    serve,
-    watch
-  );
-} else {
-  run = serve;
-}
-
-export default run;
+export { run as default, shutdownAppServer };

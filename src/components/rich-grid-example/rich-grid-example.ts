@@ -8,7 +8,7 @@ import HeaderComponent from "../../jsHeaderComponent/headerComponent";
 import HeaderGroupComponent from "../../jsHeaderComponent/headerGroupComponent";
 import DateComponent from "../../jsDateComponent/dateComponent";
 
-@autoinject()
+@autoinject
 @customElement('rich-grid')
 export class RichGrid {
 

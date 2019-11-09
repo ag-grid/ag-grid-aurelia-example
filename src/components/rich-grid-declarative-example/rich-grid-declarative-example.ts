@@ -8,7 +8,7 @@ import { ColumnApi, GridApi, GridOptions } from 'ag-grid-community';
 // only import this if you are using the ag-Grid-Enterprise
 import 'ag-grid-enterprise';
 
-@autoinject()
+@autoinject
 @customElement('rich-grid-declarative')
 export class RichGridDeclarative {
 

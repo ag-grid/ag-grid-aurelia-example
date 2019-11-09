@@ -1,34 +1,18 @@
 import {Aurelia} from 'aurelia-framework'
-import environment from './environment';
-
-// enterprise users uncomment this
-// import { LicenseManager } from 'ag-grid-enterprise';
-
-//Configure Bluebird Promises.
-//Note: You may want to use environment-specific configuration.
-(<any>Promise).config({
-  warnings: {
-    wForgottenReturn: false
-  }
-});
+import * as environment from '../config/environment.json';
+import {PLATFORM} from 'aurelia-pal';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    .plugin('ag-grid-aurelia')
-    .feature('resources');
+    .plugin(PLATFORM.moduleName('ag-grid-aurelia'))
+    .feature(PLATFORM.moduleName('resources/index'));
 
-  // enterprise uncomment and set licence key here
-  // LicenseManager.setLicenseKey('LICENSE KEY');
-
-  if (environment.debug) {
-    aurelia.use.developmentLogging();
-  }
-
+  aurelia.use.developmentLogging(environment.debug ? 'debug' : 'warn');
 
   if (environment.testing) {
-    aurelia.use.plugin('aurelia-testing');
+    aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
   }
 
-  aurelia.start().then(() => aurelia.setRoot());
+  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }

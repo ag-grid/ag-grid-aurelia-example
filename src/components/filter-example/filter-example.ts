@@ -6,7 +6,7 @@ import "ag-grid-enterprise";
 
 import PartialMatchFilter from "../../filters/partialMatch";
 
-@autoinject()
+@autoinject
 @customElement('filter-example')
 export class FilterExample {
 

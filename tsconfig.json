@@ -1,25 +1,29 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "sourceMap": true,
-    "target": "es5",
-    "module": "amd",
-    "declaration": false,
-    "noImplicitAny": false,
+    "module": "esnext",
+    "skipLibCheck": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "sourceMap": true,
+    "target": "es5",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "moduleResolution": "node",
-    "lib": ["es2015", "dom"]
+    "baseUrl": "src",
+    "resolveJsonModule": true,
+    "allowJs": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "filesGlob": [
+  "include": [
     "./src/**/*.ts",
     "./test/**/*.ts",
-    "./typings/index.d.ts",
-    "./custom_typings/**/*.d.ts"
+    "./types/**/*.d.ts"
   ],
   "atom": {
     "rewriteTsconfig": false

@@ -1,4 +1,8 @@
 import {Router, RouterConfiguration} from "aurelia-router";
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import $ from 'jquery';
+import { PLATFORM } from 'aurelia-pal';
 
 export class App {
     router: Router;
@@ -13,13 +17,13 @@ export class App {
                 route: '',
                 name: 'blank',
                 nav: true,
-                moduleId: 'components/blank/blank'
+                moduleId: PLATFORM.moduleName('./components/blank/blank')
             },
             {
                 route: 'rich-grid',
                 name: 'rich-grid',
                 nav: true,
-                moduleId: 'components/rich-grid-example/rich-grid-example',
+                moduleId: PLATFORM.moduleName('./components/rich-grid-example/rich-grid-example'),
                 title: 'Rich Grid with pure JavaScript',
                 href: '#/rich-grid'
             },
@@ -27,7 +31,7 @@ export class App {
                 route: 'richgrid-declarative',
                 name: 'richgrid-declarative',
                 nav: true,
-                moduleId: 'components/rich-grid-declarative-example/rich-grid-declarative-example',
+                moduleId: PLATFORM.moduleName('./components/rich-grid-declarative-example/rich-grid-declarative-example'),
                 title: 'Rich Grid with Declarative Markup',
                 href: '#/richgrid-declarative'
             },
@@ -35,7 +39,7 @@ export class App {
                 route: 'editor',
                 name: 'editor',
                 nav: true,
-                moduleId: 'components/editor-example/editor-example',
+                moduleId: PLATFORM.moduleName('./components/editor-example/editor-example'),
                 title: 'Editor Example',
                 href: '#/editor'
             },
@@ -43,7 +47,7 @@ export class App {
                 route: 'filter',
                 name: 'filter',
                 nav: true,
-                moduleId: 'components/filter-example/filter-example',
+                moduleId: PLATFORM.moduleName('./components/filter-example/filter-example'),
                 title: 'Filter Example',
                 href: '#/filter'
             }
@@ -52,6 +56,8 @@ export class App {
 
     attached(argument) {
         // for deployment to ag-grid.com only
+      $('[data-toggle="tooltip"]').tooltip();
+
         let route = this.router.currentInstruction.queryParams.route ? this.router.currentInstruction.queryParams.route : 'rich-grid';
         this.router.navigateToRoute(route, this.router.currentInstruction.queryParams);
     }
